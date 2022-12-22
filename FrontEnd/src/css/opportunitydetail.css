@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins';
+}
+
+.single-opportunity-requirement {
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.single-opportunity-container {
+    margin-top: 40px
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(1) .single-opportunity-requirement {
+    background: rgb(103 135 254 / 20%);
+
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(2) .single-opportunity-requirement {
+    background: rgb(0 233 185 / 20%);
+
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(3) .single-opportunity-requirement {
+    background: rgb(255 187 0 / 20%);
+
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(4) .single-opportunity-requirement {
+    background: rgb(255 0 122 / 20%);
+
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(5) .single-opportunity-requirement {
+    background: rgb(153 129 251 / 20%);
+
+}
+
+.single-opportunity-detail .col-xl-4:nth-child(6) .single-opportunity-requirement {
+    background: rgb(129 215 66 / 20%);
+
+}
+
+.single-opportunity-requirement i {
+    font-size: 36px;
+    margin-right: 15px;
+
+}
+
+.single-opportunity-requirement h6 {
+    margin-bottom: 0;
+}
+
+.single-opportunity-sidebar-part {
+    border-radius: 20px;
+    margin-left: 20px;
+    background: #f8fafb;
+    margin-bottom: 30px;
+    padding: 30px 0;
+}
+
+
+.single-opportunity-submit-proposal {
+    border: 0;
+    background: #6787FE;
+    padding: 10px 50px;
+    color: white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .3s ease 0s;
+    vertical-align: middle;
+    margin-top: 1rem;
+}
+
+.single-opportunity-wishlist-proposal {
+    border: 0;
+    color: #6787FE;
+    padding: 10px 65px;
+    background-color: rgb(103 135 254 / 10%);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .3s ease 0s;
+    vertical-align: middle;
+    margin-top: 1rem;
+}
+
+.single-opportunity-sidebar-requirements {
+    border-radius: 20px;
+    background: white;
+    padding: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.single-opportunity-sidebar-requirements li {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.single-opportunity-content h4 {
+    font-weight: 600;
+}
+
+.single-opportunity-content {
+    margin-bottom: 30px;
+}
+
+.single-opportunity-skills-required>div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.single-opportunity-skills-required .skills {
+    background: #f8fafb;
+    color: gray;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin-right: 10px;
+    line-height: 45px;
+}
+
+.single-opportunity-proposal-form input,
+.single-opportunity-proposal-form select {
+    width: 100%;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    height: 40px;
+    padding: 0 15px;
+}
+
+.single-opportunity-proposal-form textarea {
+    margin-top: 20px;
+}
+
+.suggested-projects-featured {
+    position: absolute;
+    content: '';
+    top: 15px;
+    left: -30px;
+    padding: 0 26px;
+    border-top: none;
+    color: #fff;
+    transform: rotate(-45deg);
+    font-size: 12px;
+}
+
+.suggested-projects-parent-container .row {
+
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    flex-wrap: nowrap;
+}
+
+.suggested-project-item {
+    position: relative;
+    background: #f8fafb;
+    padding: 50px 20px 45px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.suggested-project-featured-post {
+    position: absolute;
+    content: '';
+    top: 15px;
+    left: -30px;
+    padding: 6px 26px;
+    border-top: none;
+    color: #fff;
+    transform: rotate(-45deg);
+    font-size: 15px;
+    background: #6787FE;
+}
+
+.suggested-project-profile-image-container img {
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.suggested-project-profile-image-container,
+.suggested-project-profile-title {
+
+    color: #333333;
+    text-decoration: none;
+}
+
+.suggested-project-profile-image-container h5 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #333333;
+
+}
+
+.suggested-project-profile-title h5 {
+    font-weight: 600;
+    font-size: 20px;
+    color: #333333;
+    line-break: auto;
+    white-space: break-spaces;
+
+}
+
+.suggested-project-profile-detail {
+    display: flex;
+    font-weight: 600;
+    color: #333333;
+    flex-direction: column;
+    align-items: center;
+}
+
+.suggested-project-profile-detail li {
+    background: rgb(103 135 254 / 10%);
+    width: fit-content;
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    border-radius: 10px;
+    color: #4A6375;
+    ;
+
+}
