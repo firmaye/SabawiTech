@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
             updatedAt: Date,
         }
     ],
-    Education: [
+    education: [
         {
             id: mongoose.ObjectId,
             schoolName: String,
