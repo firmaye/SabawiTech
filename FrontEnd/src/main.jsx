@@ -9,6 +9,8 @@ import "./index.css";
 import OpportunityPage from "./OpportunityPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OpportunityDetailPage from "./OpportunityDetailPage";
+import Profile from "./Profile";
+import AddPortifolio from "./AddPortifolio";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/opportunitydetail",
     element: <OpportunityDetailPage />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/addportifolio",
+    element: <AddPortifolio />,
   },
 ]);
 
