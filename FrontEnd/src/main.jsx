@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     element: <OpportunityPage />,
   },
   {
-    path: "/opportunitydetail",
+    path: "/opportunitydetail/:id",
     element: <OpportunityDetailPage />,
   },
   {

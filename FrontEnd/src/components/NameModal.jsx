@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import "../css/namemodal.css"
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 const NameModal = () => {
     let modalStyle = {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     }
-
+    const [country, setcountry] = useState("")
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -17,6 +18,7 @@ const NameModal = () => {
             display: "none"
         })
     }
+
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -40,14 +42,17 @@ const NameModal = () => {
                                             </div>
                                             <div class="row ">
                                                 <div class="col-12 name-modal-dropdown">
-                                                    <div class="dropdown__skeleton">
+                                                    <div class="">
                                                         <label>Location</label>
-                                                        <div class="dropdown__selected dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-kingdom_1f1ec-1f1e7.png" alt="United Kingdom" /><span>United Kingdom</span></div>
-
-                                                        <div class="dropdown__arrow"></div>
+                                                        <div>
+                                                            <CountryDropdown
+                                                                value={country}
+                                                                onChange={(val) => setcountry(val)} />
+                                                            {/* <ReactCountryDropdown /> */}
+                                                        </div>
                                                     </div>
 
-                                                    <div class="dropdown__options">
+                                                    {/* <div class="dropdown__options">
                                                         <div class="dropdown__option dropdown__option--selected"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-kingdom_1f1ec-1f1e7.png" alt="United Kingdom" /><span>United Kingdom</span></div>
 
                                                         <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-states_1f1fa-1f1f8.png" alt="U.S." /><span>U.S.</span></div>
@@ -57,7 +62,7 @@ const NameModal = () => {
                                                         <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-spain_1f1ea-1f1f8.png" alt="Spain" /><span>Spain</span></div>
 
                                                         <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-germany_1f1e9-1f1ea.png" alt="Germany" /><span>Germany</span></div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                                 <div class="col-12 name-modal-col-12">
                                                     <div class="name-modal-input-group">

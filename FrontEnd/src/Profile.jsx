@@ -7,12 +7,18 @@ import Navbar from './components/Navbar';
 import Modal from './components/Modal';
 import NameModal from './components/NameModal';
 import TitleModal from './components/TitleModal';
+import { useState } from 'react';
+import SkillModal from './components/SkillModal';
 const Profile = () => {
-
+    const [selectedmodal, setselectedmodal] = useState("")
+    console.log(selectedmodal)
     return (
         <main>
-            {/* <NameModal /> */}
-            <TitleModal />
+            {
+                selectedmodal == "" ? <></> : selectedmodal == "name" ? <NameModal /> : selectedmodal == "title" ? <TitleModal /> : selectedmodal == "skill" ? <SkillModal /> : <></>
+            }
+
+            {/*  */}
             <Navbar />
             <Header title={"Profile"} />
             <div className="">
@@ -39,12 +45,12 @@ const Profile = () => {
                                             </div>
                                         </div>
                                         <div className="profile-buttons">
-                                            <button className="see-public">Edit </button>
-                                            <button className="setting">Edit Profile Name And Location</button>
+                                            {/* <button className="see-public">Edit </button> */}
+                                            <button onClick={() => { setselectedmodal("name") }} className="setting">Edit Profile Name And Location</button>
                                         </div>
                                         <div className="profile-buttons-mobile">
                                             <div className="col col-auto">
-                                                <button className="profile-edit-btn">
+                                                <button onClick={() => { setselectedmodal("name") }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -106,7 +112,7 @@ const Profile = () => {
                                         <h2>React/PHP Full Stack Web Developer</h2>
                                     </div>
                                     <div className="col col-auto">
-                                        <button className="profile-edit-btn">
+                                        <button onClick={() => { setselectedmodal("title") }} className="profile-edit-btn">
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -189,7 +195,7 @@ const Profile = () => {
 
                                     </div>
                                     <div className="col col-auto">
-                                        <button className="profile-edit-btn">
+                                        <button onClick={() => { setselectedmodal("skill") }} className="profile-edit-btn">
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                     </div>
