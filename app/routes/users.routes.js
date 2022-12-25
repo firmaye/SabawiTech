@@ -161,6 +161,31 @@ router.patch("/previousWork/:id/:id1", getUser, async (req,res) => {
 
 // ======================= skill ==================================
 
+//get all skills 
+router.get("/skill/:id", getUser, async (req,res) => {
+  let userId = req.params.id
+  try{
+    const prevSkill = await user.findById(userId,{skill:1})
+    res.json(prevSkill)
+  }catch(err){
+    res.status(400).json({message: err.message})
+  }
+})
+
+// creation and deletion for skills are handeled from the frontend side 
+//create skill
+router.patch("/skill/:id", getUser , async (req,res) => {
+  let userId = req.params.id
+  let skills = req.body.skill
+  
+  try{
+    const addedSkill = await user.updateOne({_id:userId},{skill: skills})  
+    res.status(201).json(addedSkill)
+  }
+    catch(err){
+    res.status(400).json({message: err.message})
+  }
+})
 
 // ======================= language ==================================
 
