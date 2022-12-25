@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    --card-padding-y: 30px;
+    --card-padding-x: 30px;
+    font-family: "Poppins";
+}
+
+.edit-portifolio-card {
+    position: relative;
+    background: white;
+    margin: 30px 0px;
+    border-radius: 10px;
+    /* border: 1px solid #d5e0d5; */
+}
+
+.edit-portifolio-banner {
+    background: #1d4354;
+    border-color: #1d4354;
+    color: white;
+    position: relative;
+    padding: var(--card-padding-y);
+    border-radius: 16px;
+    font-family: "Poppins";
+    margin-bottom: 30px;
+}
+
+.edit-portifolio-identity-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-portifolio-banner-btn {
+    border: none;
+    background: #6787FE;
+    color: white;
+    padding: 2px 15px;
+    margin: 10px 0px;
+    border-radius: 10px;
+}
+
+.edit-portifolio-container {
+    margin: 0 45px;
+    margin-top: 95px;
+    border: 1px solid #d5e0d5;
+    border-radius: 10px;
+}
+
+.edit-portifolio-card {
+    margin-left: 20px;
+}
+
+
+
+.edit-portifolio-identity {
+    display: flex;
+    align-items: center;
+}
+
+.edit-portifolio-img-container {
+    position: relative;
+    display: inline-flex;
+}
+
+.edit-portifolio-img-container img {
+    display: inline-flex;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.edit-portifolio-identity-detail {
+    margin-left: 10px;
+}
+
+.edit-portifolio-identity-detail h1 {
+    font-size: 28px;
+}
+
+.edit-portifolio-location {
+    display: flex;
+}
+
+.edit-portifolio-buttons {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.edit-portifolio-buttons .see-public {
+    color: #6787FE;
+    background: white;
+    margin: 0 20px 30px 0;
+    padding: 10px 30px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+}
+
+.edit-portifolio-buttons .setting {
+    background: #6787FE;
+    color: white;
+    margin: 0 20px 30px 0;
+    padding: 10px 30px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+}
+
+.edit-portifolio-sidebar-container {
+
+    margin-top: 52px;
+}
+
+.edit-portifolio-edit-add-portifolio {
+    margin-left: 28px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.edit-portifolio-edit-add-portifolio button {
+    background: #6787FE;
+    color: white;
+    margin: 0 20px 30px 0;
+    padding: 0px 6px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+}
+
+.edit-portifolio-edit-btn {
+    background: #6787FE;
+    color: white;
+    margin: 0 20px 10px 0;
+    padding: 0px 6px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+
+}
+
+.edit-portifolio-personal-description {
+    max-width: 70%;
+}
+
+.edit-portifolio-personal-description,
+.edit-portifolio-portifolio-description,
+.edit-portifolio-skill-list {
+    padding: 24px;
+    padding-top: 44px;
+    border-bottom: 1px solid #d5e0d5;
+    border-left: 1px solid #d5e0d5;
+}
+
+.poritfolio-title {
+    text-align: center;
+    font-size: 15px;
+    margin-top: 10px;
+    color: #6787FE
+}
+
+
+.edit-portifolio-personal-description-title h2,
+.edit-portifolio-portifolio-description-title h2,
+.edit-portifolio-skill-list h2 {
+    font-size: 25px;
+    text-align: start;
+}
+
+.edit-portifolio-personal-description-details,
+.edit-portifolio-portifolio-description-details {
+    margin-top: 28px !important;
+    line-height: 21px;
+    font-size: 14px;
+}
+
+.edit-portifolio-personal-description-container,
+.edit-portifolio-portifolio-description-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.edit-portifolio-skill-list>.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.edit-portifolio-skill-list .skills {
+    background: #f8fafb;
+    color: gray;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin-right: 10px;
+    line-height: 45px;
+}
+
+.edit-portifolio-employment-history-container {
+    border-radius: 16px;
+    border: 1px solid #d5e0d5;
+    margin: 0 45px;
+    margin-top: 25px;
+}
+
+.edit-portifolio-buttons-mobile {
+    display: none;
+}
+
+
+.edit-portifolio-employment-title {
+    padding: 30px;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-portifolio-employment-history-detail-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit-portifolio-employment-history-details {
+    padding: 30px;
+}
+
+.edit-portifolio-personal-description-container-parent {
+    margin: 0 !important;
+}
+
+.edit-portifolio-label-input-container input {
+    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px 10px;
+    margin-top: 15px;
+    border-radius: 7px;
+}
+
+.edit-portifolio-label {
+    font-size: 18px;
+}
+
+.edit-portifolio-input-parent-container {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+/* start of image input css */
+
+.edit-portifolio-modal-image-container .image-upload {
+    position: relative;
+    /* max-width: 360px; */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.edit-portifolio-modal-image-container .image-upload input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+.edit-portifolio-modal-image-container .upload-field {
+    display: block;
+    background: #F4FAFE;
+    padding: 12px;
+    border-radius: 11px;
+
+}
+
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail {
+    cursor: pointer;
+    border: 1px dashed #BBD9EC;
+    border-radius: 11px;
+    text-align: center;
+    padding: 20px;
+}
+
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail img {
+    width: 100%;
+}
+
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail h3 {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail p {
+    font-size: 12px;
+    color: #9ABCD1;
+    margin-bottom: 0;
+}
+
+.edit-portifolio-modal-image-container .addproducts {
+    padding: 4vw;
+    margin: 4vw;
+    background-color: #F8F9FA;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+/* end of image input css */
+@media (max-width: 992px) {
+
+    .edit-portifolio-identity-container-parent,
+    .edit-portifolio-personal-description-container-parent {
+        border: 1px solid #d5e0d5;
+        margin-left: 0;
+        margin-bottom: 20px !important;
+        border-radius: 10px;
+    }
+
+    .edit-portifolio-container {
+        border: none;
+    }
+
+    .edit-portifolio-personal-description-container {
+        flex-direction: column-reverse;
+    }
+
+}

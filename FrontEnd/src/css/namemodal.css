@@ -1,0 +1,138 @@
+.name-modal-close {
+    border: 0;
+    background: white;
+
+}
+
+.name-modal-close svg {
+    width:
+        40px;
+    height: auto;
+}
+
+
+.name-modal-col-2 {
+    width: -webkit-calc((100% - 60px) / 2);
+    width: -moz-calc((100% - 60px) / 2);
+    width: calc((100% - 60px) / 2);
+}
+
+/* start of image input css */
+
+.name-modal-image-container .image-upload {
+    position: relative;
+    /* max-width: 360px; */
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.name-modal-image-container .image-upload input {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+}
+
+.name-modal-image-container .upload-field {
+    display: block;
+    background: #F4FAFE;
+    padding: 12px;
+    border-radius: 11px;
+
+}
+
+.name-modal-image-container .upload-field .file-thumbnail {
+    cursor: pointer;
+    border: 1px dashed #BBD9EC;
+    border-radius: 11px;
+    text-align: center;
+    padding: 20px;
+}
+
+.name-modal-image-container .upload-field .file-thumbnail img {
+    width: 100%;
+}
+
+.name-modal-image-container .upload-field .file-thumbnail h3 {
+    font-size: 12px;
+    color: #000000;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.name-modal-image-container .upload-field .file-thumbnail p {
+    font-size: 12px;
+    color: #9ABCD1;
+    margin-bottom: 0;
+}
+
+.name-modal-image-container .addproducts {
+    padding: 4vw;
+    margin: 4vw;
+    background-color: #F8F9FA;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+/* end of image input css */
+@media (max-width: 767px) {
+    .name-modal-col-2 {
+        width: 100%;
+    }
+}
+
+
+
+
+/* ==========================================================================
+     #FORM
+     ========================================================================== */
+.name-modal-page-wrapper input {
+    outline: none;
+    margin: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+
+}
+
+.name-modal-input-group {
+    position: relative;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    margin: 30px 20px;
+}
+
+
+.name-modal-title {
+    margin-bottom: 37px;
+}
+
+/* start of country dropdown css */
+
+.name-modal-dropdown select {
+    border: 0;
+    border-bottom: 2px solid #ccc;
+    margin-top: 10px;
+
+    margin-bottom: 10px;
+}
+
+.name-modal-dropdown select:focus-visible {
+    outline: white;
+
+}
+
+.name-modal-dropdown {
+    margin-left: 20px;
+}
+
+
+/* end of country dropdown css */
