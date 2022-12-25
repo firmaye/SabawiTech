@@ -115,13 +115,29 @@
     justify-content: space-between;
 }
 
+.profile-edit-profile-container {
+    margin-bottom: 20px;
+}
+
 .profile-edit-profile button {
     background: #6787FE;
     color: white;
-    margin: 0 20px 30px 0;
+    margin: 0 20px 10px 0;
     padding: 0px 6px;
     border: 2px solid #6787FE;
     border-radius: 10rem;
+}
+
+.profile-edit-profile button:hover {
+    background: white;
+    color: #6787FE;
+    border: 2px solid #6787FE;
+}
+
+.profile-edit-btn:hover {
+    background: white;
+    color: #6787FE;
+    border: 2px solid #6787FE;
 }
 
 .profile-edit-btn {
@@ -132,6 +148,10 @@
     border: 2px solid #6787FE;
     border-radius: 10rem;
 
+}
+
+.profile-edit-description {
+    margin-left: 40px;
 }
 
 .profile-personal-description,
@@ -215,6 +235,24 @@
 
 .profile-personal-description-container-parent {
     margin: 0 !important;
+}
+
+.profile-portifolio-description-details>div {
+    margin-bottom: 25px;
+}
+
+.portifolio-image-container {
+    position: relative;
+}
+
+.portifolio-image-container-icons {
+    position: absolute;
+    top: 45%;
+    left: 33%;
+}
+
+.profile-employment-history-detail-content {
+    margin-top: 20px;
 }
 
 @media (max-width: 992px) {

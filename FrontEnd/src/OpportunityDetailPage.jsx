@@ -234,10 +234,10 @@ const OpportunityDetailPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="pt-120">
+                    {/* <div className="pt-120">
                         <h2 className="mb-5">Suggested projects</h2>
                         <div className="suggested-projects-content">
-                            {/* <div className="suggested-projects-featured">
+                            <div className="suggested-projects-featured">
                                 Featured
                             </div>
                             <div className="suggested-projects-profile text-center">
@@ -259,10 +259,10 @@ const OpportunityDetailPage = () => {
                                         <div>Hourly</div>
                                     </li>
                                 </ul>
-                            </div> */}
+                            </div>
                         </div>
-                    </div>
-                    <div className="suggested-projects-parent-container">
+                    </div> */}
+                    {/* <div className="suggested-projects-parent-container">
 
                         <div className="row" >
 
@@ -372,7 +372,7 @@ const OpportunityDetailPage = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
 

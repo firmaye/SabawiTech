@@ -9,16 +9,33 @@ import NameModal from './components/NameModal';
 import TitleModal from './components/TitleModal';
 import { useState } from 'react';
 import SkillModal from './components/SkillModal';
+import { useEffect } from 'react';
+import EmploymentModal from './components/EmploymentAddModal';
+import EducationModal from './components/EducationAddModal';
+import LanguageModal from './components/LanguageAddModal';
 const Profile = () => {
     const [selectedmodal, setselectedmodal] = useState("")
+    const [profileinfo, setprofileinfo] = useState({})
+    const [language, setlanguage] = useState([])
+    const [previouswork, setpreviouswork] = useState([])
+    const [skilllist, setskilllist] = useState([])
+    const [employmenthistory, setemploymenthistory] = useState([])
     console.log(selectedmodal)
+    useEffect(() => {
+        fetch("user.json").then(res => res.json()).then(result => {
+            setprofileinfo(result)
+            setlanguage(result.language)
+            setskilllist(result.skill)
+            setpreviouswork(result.previousWork)
+            setemploymenthistory(result.employmentHistory)
+        }).catch((error) => { console.log(error) });
+    }, [])
+
     return (
         <main>
             {
-                selectedmodal == "" ? <></> : selectedmodal == "name" ? <NameModal /> : selectedmodal == "title" ? <TitleModal /> : selectedmodal == "skill" ? <SkillModal /> : <></>
+                selectedmodal == "" ? <></> : selectedmodal == "name" ? <NameModal /> : selectedmodal == "title" ? <TitleModal /> : selectedmodal == "skill" ? <SkillModal skilllist={skilllist} /> : selectedmodal == "employmentadd" ? <EmploymentModal /> : selectedmodal == "educationadd" ? <EducationModal /> : selectedmodal == "languagesadd" ? <LanguageModal /> : <></>
             }
-
-            {/*  */}
             <Navbar />
             <Header title={"Profile"} />
             <div className="">
@@ -36,7 +53,7 @@ const Profile = () => {
                                             </div>
                                             <div className="profile-identity-detail ">
                                                 <div className=" d-flex align-items-center">
-                                                    <h1>Profile Name</h1>
+                                                    <h1>{profileinfo.firstName + " " + profileinfo.lastName}</h1>
                                                 </div>
                                                 <div className="profile-location">
                                                     <div className="profile-location-city">Addis Ababa</div>,
@@ -66,41 +83,90 @@ const Profile = () => {
                     <div className="profile-personal-description-container-parent row" >
                         <div className=" col-lg-4">
                             <div className="profile-sidebar-container">
-                                <div className="profile-edit-profile">
-                                    <div>
-                                        Languages
-                                    </div>
-                                    <button>
-                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                <div className="profile-edit-profile-container">
 
-                                    </button>
+                                    <div className="profile-edit-profile">
+                                        <div>
+                                            Languages
+                                        </div>
+                                        <button onClick={() => { setselectedmodal("languagesadd") }} >
+                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+
+                                        </button>
+                                    </div>
+                                    <div className="profile-edit-description">
+                                        {language.map((element) => {
+                                            return (<div>
+                                                {element.languageName}
+                                            </div>)
+                                        })}
+                                    </div>
                                 </div>
-                                <div className="profile-edit-profile">
-                                    <div>
-                                        Education
-                                    </div>
-                                    <button>
-                                        <i className="fa fa-pencil" aria-hidden="true"></i>
 
-                                    </button>
+                            </div>
+                            <div className="profile-sidebar-container">
+                                <div className="profile-edit-profile-container">
+
+                                    <div className="profile-edit-profile">
+                                        <div>
+                                            Education
+                                        </div>
+                                        <button onClick={() => { setselectedmodal("educationadd") }} >
+                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+
+                                        </button>
+                                    </div>
+                                    <div className="profile-edit-description">
+                                        {language.map((element) => {
+                                            return (<div>
+                                                {element.languageName}
+                                            </div>)
+                                        })}
+                                    </div>
                                 </div>
-                                <div className="profile-edit-profile">
-                                    <div>
-                                        Edit Profile
-                                    </div>
-                                    <button>
-                                        <i className="fa fa-pencil" aria-hidden="true"></i>
 
-                                    </button>
+                            </div>
+                            <div className="profile-sidebar-container">
+                                <div className="profile-edit-profile-container">
+
+                                    <div className="profile-edit-profile">
+                                        <div>
+                                            Email
+                                        </div>
+                                        <button>
+                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+
+                                        </button>
+                                    </div>
+                                    <div className="profile-edit-description">
+                                        {language.map((element) => {
+                                            return (<div>
+                                                {element.languageName}
+                                            </div>)
+                                        })}
+                                    </div>
                                 </div>
-                                <div className="profile-edit-profile">
-                                    <div>
-                                        Edit Profile
-                                    </div>
-                                    <button>
-                                        <i className="fa fa-pencil" aria-hidden="true"></i>
 
-                                    </button>
+                            </div>
+                            <div className="profile-sidebar-container">
+                                <div className="profile-edit-profile-container">
+
+                                    <div className="profile-edit-profile">
+                                        <div>
+                                            Phone Number
+                                        </div>
+                                        <button>
+                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+
+                                        </button>
+                                    </div>
+                                    <div className="profile-edit-description">
+                                        {language.map((element) => {
+                                            return (<div>
+                                                {element.languageName}
+                                            </div>)
+                                        })}
+                                    </div>
                                 </div>
 
                             </div>
@@ -109,7 +175,7 @@ const Profile = () => {
                             <div className="profile-personal-description">
                                 <div className=" profile-personal-description-title row">
                                     <div className="col">
-                                        <h2>React/PHP Full Stack Web Developer</h2>
+                                        <h2>{profileinfo.title}</h2>
                                     </div>
                                     <div className="col col-auto">
                                         <button onClick={() => { setselectedmodal("title") }} className="profile-edit-btn">
@@ -119,15 +185,7 @@ const Profile = () => {
                                 </div>
                                 <div className="row profile-personal-description-details">
                                     <div className="col">
-
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, optio! Aliquid
-                                        consequatur
-                                        libero cumque temporibus, enim perferendis praesentium ipsa nihil beatae id maiores
-                                        consectetur asperiores? Perferendis eos sit illum temporibus.
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque vitae dolores
-                                        corrupti,
-                                        corporis enim totam vero beatae soluta quam facere praesentium minus reprehenderit
-                                        nostrum? Veritatis dolor accusantium veniam distinctio harum!
+                                        {profileinfo.titleOverview}
                                     </div>
                                 </div>
                             </div>
@@ -156,36 +214,35 @@ const Profile = () => {
                                         <h2>Portifolio</h2>
                                     </div>
                                     <div className="col col-auto">
-                                        <button className="profile-edit-btn">
-                                            <i className="fa fa-pencil" aria-hidden="true"></i>
-                                        </button>
+                                        <a href='/addportifolio' className="profile-edit-btn">
+                                            <i className="fa fa-plus" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="row profile-portifolio-description-details">
-                                    <div className="col-6 col-md-4">
-                                        <div className="portifolio-image-container">
-                                            <img className="col-12" src={ProfileImg} alt="" />
-                                        </div>
-                                        <div className="poritfolio-title">
-                                            Landing Page
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-4">
-                                        <div className="portifolio-image-container">
-                                            <img className="col-12" src={ProfileImg} alt="" />
-                                        </div>
-                                        <div className="poritfolio-title">
-                                            Landing Page
-                                        </div>
-                                    </div>
-                                    <div className="col-6 col-md-4">
-                                        <div className="portifolio-image-container">
-                                            <img className="col-12" src={ProfileImg} alt="" />
-                                        </div>
-                                        <div className="poritfolio-title">
-                                            Landing Page
-                                        </div>
-                                    </div>
+                                    {
+                                        previouswork.map((element) => {
+                                            return (
+                                                <div className="col-6 col-md-4">
+                                                    <div className="portifolio-image-container">
+                                                        <img className="col-12" src={ProfileImg} alt="" />
+                                                        <div className="portifolio-image-container-icons">
+                                                            <a href={`editportifolio/${element.id}`} className="profile-edit-btn">
+                                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                            </a>
+                                                            <a className="profile-edit-btn">
+                                                                <i className="fa fa-trash" aria-hidden="true"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div className="poritfolio-title">
+                                                        {element.workTitle}
+                                                    </div>
+                                                </div>
+                                            )
+
+                                        })
+                                    }
                                 </div>
                             </div>
                             <div className="profile-skill-list">
@@ -201,37 +258,13 @@ const Profile = () => {
                                     </div>
                                 </div>
                                 <div className="skill-list">
-
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div className="skills">
-                                        QA Specialist
-                                    </div>
+                                    {
+                                        skilllist.map((element) => {
+                                            return (<div className="skills">
+                                                {element.skillName}
+                                            </div>)
+                                        })
+                                    }
                                 </div>
 
                             </div>
@@ -243,6 +276,47 @@ const Profile = () => {
                         <div className="profile-employment-title">
                             <div className="">
                                 <h2>Employment History</h2>
+                            </div>
+                            <div className="">
+                                <button onClick={() => { setselectedmodal("employmentadd") }} className="profile-edit-btn">
+                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        {employmenthistory.map((element) => {
+
+                            return (<div className="profile-employment-history-details">
+                                <div className="profile-employment-history-detail">
+                                    <div className=" profile-employment-history-detail-title">
+                                        <div className="">
+                                            {element.empRole} | {element.empLocation}
+                                        </div>
+                                        <div className="">
+                                            <button className="profile-edit-btn">
+                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="row profile-employment-history-detail-description">
+
+                                        <div className="profile-employment-history-detail-date">
+                                            {element.empPeriod}
+                                        </div>
+                                        <div className="profile-employment-history-detail-content">
+                                            {element.empDescription}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>)
+                        })}
+                    </div>
+                </div>
+                <div className=" profile-employment-history-container">
+                    <div className=" profile-employment-history">
+                        <div className="profile-employment-title">
+                            <div className="">
+                                <h2>Certification</h2>
                             </div>
                             <div className="">
                                 <button className="profile-edit-btn">

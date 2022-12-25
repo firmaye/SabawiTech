@@ -18,7 +18,19 @@ const NameModal = () => {
             display: "none"
         })
     }
-
+    function fileValue(value) {
+        var path = value.value;
+        console.log(path)
+        var extenstion = path.split('.').pop();
+        console.log(value.files[0])
+        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            alert("File not supported. Kindly Upload the Image of below given extension ")
+        }
+    }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -37,6 +49,20 @@ const NameModal = () => {
                                     <div class="">
                                         <h2 class="name-modal-title"></h2>
                                         <form method="">
+                                            <div className="name-modal-image-container">
+                                                <div className="image-upload">
+                                                    <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
+                                                    <label htmlFor="logo" className="upload-field" id="file-label">
+                                                        <div className="file-thumbnail">
+                                                            <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" />
+                                                            <h3 id="filename">
+                                                                Drag and Drop
+                                                            </h3>
+                                                            <p >Supports JPG, PNG, SVG</p>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
                                             <div class="name-modal-input-group">
                                                 <input class="" type="text" placeholder="NAME" name="" />
                                             </div>

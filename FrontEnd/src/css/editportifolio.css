@@ -8,7 +8,7 @@
     font-family: "Poppins";
 }
 
-.add-portifolio-card {
+.edit-portifolio-card {
     position: relative;
     background: white;
     margin: 30px 0px;
@@ -16,7 +16,7 @@
     /* border: 1px solid #d5e0d5; */
 }
 
-.add-portifolio-banner {
+.edit-portifolio-banner {
     background: #1d4354;
     border-color: #1d4354;
     color: white;
@@ -27,12 +27,12 @@
     margin-bottom: 30px;
 }
 
-.add-portifolio-identity-container {
+.edit-portifolio-identity-container {
     display: flex;
     justify-content: space-between;
 }
 
-.add-portifolio-banner-btn {
+.edit-portifolio-banner-btn {
     border: none;
     background: #6787FE;
     color: white;
@@ -41,30 +41,30 @@
     border-radius: 10px;
 }
 
-.add-portifolio-container {
+.edit-portifolio-container {
     margin: 0 45px;
     margin-top: 95px;
     border: 1px solid #d5e0d5;
     border-radius: 10px;
 }
 
-.add-portifolio-card {
+.edit-portifolio-card {
     margin-left: 20px;
 }
 
 
 
-.add-portifolio-identity {
+.edit-portifolio-identity {
     display: flex;
     align-items: center;
 }
 
-.add-portifolio-img-container {
+.edit-portifolio-img-container {
     position: relative;
     display: inline-flex;
 }
 
-.add-portifolio-img-container img {
+.edit-portifolio-img-container img {
     display: inline-flex;
     width: 80px;
     height: 80px;
@@ -72,24 +72,24 @@
     border-radius: 50%;
 }
 
-.add-portifolio-identity-detail {
+.edit-portifolio-identity-detail {
     margin-left: 10px;
 }
 
-.add-portifolio-identity-detail h1 {
+.edit-portifolio-identity-detail h1 {
     font-size: 28px;
 }
 
-.add-portifolio-location {
+.edit-portifolio-location {
     display: flex;
 }
 
-.add-portifolio-buttons {
+.edit-portifolio-buttons {
     margin-top: 20px;
     margin-left: 10px;
 }
 
-.add-portifolio-buttons .see-public {
+.edit-portifolio-buttons .see-public {
     color: #6787FE;
     background: white;
     margin: 0 20px 30px 0;
@@ -98,7 +98,7 @@
     border-radius: 10rem;
 }
 
-.add-portifolio-buttons .setting {
+.edit-portifolio-buttons .setting {
     background: #6787FE;
     color: white;
     margin: 0 20px 30px 0;
@@ -107,12 +107,12 @@
     border-radius: 10rem;
 }
 
-.add-portifolio-sidebar-container {
+.edit-portifolio-sidebar-container {
 
     margin-top: 52px;
 }
 
-.add-portifolio-edit-add-portifolio {
+.edit-portifolio-edit-add-portifolio {
     margin-left: 28px;
     font-size: 18px;
     display: flex;
@@ -120,7 +120,7 @@
     justify-content: space-between;
 }
 
-.add-portifolio-edit-add-portifolio button {
+.edit-portifolio-edit-add-portifolio button {
     background: #6787FE;
     color: white;
     margin: 0 20px 30px 0;
@@ -129,7 +129,7 @@
     border-radius: 10rem;
 }
 
-.add-portifolio-edit-btn {
+.edit-portifolio-edit-btn {
     background: #6787FE;
     color: white;
     margin: 0 20px 10px 0;
@@ -139,13 +139,13 @@
 
 }
 
-.add-portifolio-personal-description {
+.edit-portifolio-personal-description {
     max-width: 70%;
 }
 
-.add-portifolio-personal-description,
-.add-portifolio-portifolio-description,
-.add-portifolio-skill-list {
+.edit-portifolio-personal-description,
+.edit-portifolio-portifolio-description,
+.edit-portifolio-skill-list {
     padding: 24px;
     padding-top: 44px;
     border-bottom: 1px solid #d5e0d5;
@@ -160,32 +160,32 @@
 }
 
 
-.add-portifolio-personal-description-title h2,
-.add-portifolio-portifolio-description-title h2,
-.add-portifolio-skill-list h2 {
+.edit-portifolio-personal-description-title h2,
+.edit-portifolio-portifolio-description-title h2,
+.edit-portifolio-skill-list h2 {
     font-size: 25px;
     text-align: start;
 }
 
-.add-portifolio-personal-description-details,
-.add-portifolio-portifolio-description-details {
+.edit-portifolio-personal-description-details,
+.edit-portifolio-portifolio-description-details {
     margin-top: 28px !important;
     line-height: 21px;
     font-size: 14px;
 }
 
-.add-portifolio-personal-description-container,
-.add-portifolio-portifolio-description-container {
+.edit-portifolio-personal-description-container,
+.edit-portifolio-portifolio-description-container {
     margin: 0 !important;
     padding: 0 !important;
 }
 
-.add-portifolio-skill-list>.skill-list {
+.edit-portifolio-skill-list>.skill-list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.add-portifolio-skill-list .skills {
+.edit-portifolio-skill-list .skills {
     background: #f8fafb;
     color: gray;
     border-radius: 50px;
@@ -194,39 +194,39 @@
     line-height: 45px;
 }
 
-.add-portifolio-employment-history-container {
+.edit-portifolio-employment-history-container {
     border-radius: 16px;
     border: 1px solid #d5e0d5;
     margin: 0 45px;
     margin-top: 25px;
 }
 
-.add-portifolio-buttons-mobile {
+.edit-portifolio-buttons-mobile {
     display: none;
 }
 
 
-.add-portifolio-employment-title {
+.edit-portifolio-employment-title {
     padding: 30px;
     padding: 30px;
     display: flex;
     justify-content: space-between;
 }
 
-.add-portifolio-employment-history-detail-title {
+.edit-portifolio-employment-history-detail-title {
     display: flex;
     justify-content: space-between;
 }
 
-.add-portifolio-employment-history-details {
+.edit-portifolio-employment-history-details {
     padding: 30px;
 }
 
-.add-portifolio-personal-description-container-parent {
+.edit-portifolio-personal-description-container-parent {
     margin: 0 !important;
 }
 
-.add-portifolio-label-input-container input {
+.edit-portifolio-label-input-container input {
     border: 1px solid #ccc;
     width: 100%;
     padding: 10px 10px;
@@ -234,25 +234,25 @@
     border-radius: 7px;
 }
 
-.add-portifolio-label {
+.edit-portifolio-label {
     font-size: 18px;
 }
 
-.add-portifolio-input-parent-container {
+.edit-portifolio-input-parent-container {
     margin-top: 20px;
     margin-left: 10px;
 }
 
 /* start of image input css */
 
-.add-portifolio-modal-image-container .image-upload {
+.edit-portifolio-modal-image-container .image-upload {
     position: relative;
     /* max-width: 360px; */
     margin: 0 auto;
     overflow: hidden;
 }
 
-.add-portifolio-modal-image-container .image-upload input {
+.edit-portifolio-modal-image-container .image-upload input {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -261,7 +261,7 @@
     opacity: 0;
 }
 
-.add-portifolio-modal-image-container .upload-field {
+.edit-portifolio-modal-image-container .upload-field {
     display: block;
     background: #F4FAFE;
     padding: 12px;
@@ -269,7 +269,7 @@
 
 }
 
-.add-portifolio-modal-image-container .upload-field .file-thumbnail {
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail {
     cursor: pointer;
     border: 1px dashed #BBD9EC;
     border-radius: 11px;
@@ -277,24 +277,24 @@
     padding: 20px;
 }
 
-.add-portifolio-modal-image-container .upload-field .file-thumbnail img {
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail img {
     width: 100%;
 }
 
-.add-portifolio-modal-image-container .upload-field .file-thumbnail h3 {
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail h3 {
     font-size: 12px;
     color: #000000;
     font-weight: 600;
     margin-bottom: 4px;
 }
 
-.add-portifolio-modal-image-container .upload-field .file-thumbnail p {
+.edit-portifolio-modal-image-container .upload-field .file-thumbnail p {
     font-size: 12px;
     color: #9ABCD1;
     margin-bottom: 0;
 }
 
-.add-portifolio-modal-image-container .addproducts {
+.edit-portifolio-modal-image-container .addproducts {
     padding: 4vw;
     margin: 4vw;
     background-color: #F8F9FA;
@@ -306,19 +306,19 @@
 /* end of image input css */
 @media (max-width: 992px) {
 
-    .add-portifolio-identity-container-parent,
-    .add-portifolio-personal-description-container-parent {
+    .edit-portifolio-identity-container-parent,
+    .edit-portifolio-personal-description-container-parent {
         border: 1px solid #d5e0d5;
         margin-left: 0;
         margin-bottom: 20px !important;
         border-radius: 10px;
     }
 
-    .add-portifolio-container {
+    .edit-portifolio-container {
         border: none;
     }
 
-    .add-portifolio-personal-description-container {
+    .edit-portifolio-personal-description-container {
         flex-direction: column-reverse;
     }
 

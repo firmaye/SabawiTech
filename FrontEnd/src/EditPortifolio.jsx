@@ -1,30 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './components/Sidebar'
-import "./css/addportifolio.css"
+import "./css/editportifolio.css"
 import ProfileImg from "./assets/profile.jpg"
+import { useParams } from 'react-router-dom'
+import { useState } from 'react'
 
-const AddPortifolio = () => {
+const EditPortifolio = () => {
+    const params = useParams()
+    const paramsid = params.id
+    const [previouswork, setpreviouswork] = useState([])
+
+    useEffect(() => {
+
+        fetch("../user.json").then(res => res.json()).then(result => {
+            const found = result.previousWork.find(element => element.id == paramsid);
+            setpreviouswork(found)
+            // setpreviouswork(result.previousWork)
+        }).catch((error) => { console.log(error) });
+    }, [])
     return (
         <main>
 
             <div className="">
-                <div className="add-portifolio-container">
-                    <div className="add-portifolio-card add-portifolio-identity-container-parent  d-lg-block">
+                <div className="edit-portifolio-container">
+                    <div className="edit-portifolio-card edit-portifolio-identity-container-parent  d-lg-block">
 
                     </div>
-                    <div className="add-portifolio-personal-description-container-parent row" >
+                    <div className="edit-portifolio-personal-description-container-parent row" >
                         <div className=" col-lg-4">
-                            <div className="add-portifolio-sidebar-container">
-                                <div className="add-portifolio-edit-add-portifolio">
+                            <div className="edit-portifolio-sidebar-container">
+                                <div className="edit-portifolio-edit-add-portifolio">
                                     <div>
-                                        Add Project
+                                        Edit Project
                                     </div>
                                     <button>
                                         <i className="fa fa-check" aria-hidden="true"></i>
 
                                     </button>
                                 </div>
-                                {/* <div className="add-portifolio-edit-add-portifolio">
+                                {/* <div className="edit-portifolio-edit-edit-portifolio">
                                     <div>
                                         Select Template
                                     </div>
@@ -33,7 +47,7 @@ const AddPortifolio = () => {
 
                                     </button>
                                 </div>
-                                <div className="add-portifolio-edit-add-portifolio">
+                                <div className="edit-portifolio-edit-edit-portifolio">
                                     <div>
                                         Add details
                                     </div>
@@ -42,7 +56,7 @@ const AddPortifolio = () => {
 
                                     </button>
                                 </div>
-                                <div className="add-portifolio-edit-add-portifolio">
+                                <div className="edit-portifolio-edit-edit-portifolio">
                                     <div>
                                         Preview
                                     </div>
@@ -54,20 +68,20 @@ const AddPortifolio = () => {
 
                             </div>
                         </div>
-                        <div className=" add-portifolio-personal-description-container col min-width-0">
-                            <div className="add-portifolio-personal-description">
-                                <div className=" add-portifolio-personal-description-title row">
+                        <div className=" edit-portifolio-personal-description-container col min-width-0">
+                            <div className="edit-portifolio-personal-description">
+                                <div className=" edit-portifolio-personal-description-title row">
                                     <div className="col">
-                                        <h2>Add Portifolio Project</h2>
+                                        <h2>Edit Portifolio Project</h2>
                                     </div>
 
                                 </div>
-                                <div className="row add-portifolio-personal-description-details">
-                                    <div className="col-12 add-portifolio-input-parent-container">
-                                        <div className="add-portifolio-label">
+                                <div className="row edit-portifolio-personal-description-details">
+                                    <div className="col-12 edit-portifolio-input-parent-container">
+                                        <div className="edit-portifolio-label">
                                             Work Image
                                         </div>
-                                        <div className="add-portifolio-modal-image-container">
+                                        <div className="edit-portifolio-modal-image-container">
                                             <div className="image-upload">
                                                 <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
                                                 <label htmlFor="logo" className="upload-field" id="file-label">
@@ -83,38 +97,38 @@ const AddPortifolio = () => {
                                         </div>
 
                                     </div>
-                                    <div className="col-12 add-portifolio-input-parent-container">
-                                        <div className="add-portifolio-label">
+                                    <div className="col-12 edit-portifolio-input-parent-container">
+                                        <div className="edit-portifolio-label">
                                             Work Title
                                         </div>
-                                        <div className="add-portifolio-label-input-container">
-                                            <input type="text" />
+                                        <div className="edit-portifolio-label-input-container">
+                                            <input type="text" value={previouswork.workTitle} />
                                         </div>
 
                                     </div>
-                                    <div className="col-12 add-portifolio-input-parent-container">
-                                        <div className="add-portifolio-label">
+                                    <div className="col-12 edit-portifolio-input-parent-container">
+                                        <div className="edit-portifolio-label">
                                             Work Link
                                         </div>
-                                        <div className="add-portifolio-label-input-container">
-                                            <input type="text" />
+                                        <div className="edit-portifolio-label-input-container">
+                                            <input type="text" value={previouswork.workLink} />
                                         </div>
 
                                     </div>
-                                    <div className="col-12 add-portifolio-input-parent-container">
-                                        <div className="add-portifolio-label">
+                                    <div className="col-12 edit-portifolio-input-parent-container">
+                                        <div className="edit-portifolio-label">
                                             Work Skill
                                         </div>
-                                        <div className="add-portifolio-label-input-container">
+                                        <div className="edit-portifolio-label-input-container">
                                             <input type="text" />
                                         </div>
 
                                     </div>
                                 </div>
                                 <div className="row">
-                                    <div className="add-portifolio-buttons ">
+                                    <div className="edit-portifolio-buttons ">
                                         <button className="see-public">Close </button>
-                                        <button className="setting">Add</button>
+                                        <button className="setting">Edit</button>
                                     </div>
                                 </div>
                             </div>
@@ -127,4 +141,4 @@ const AddPortifolio = () => {
     )
 }
 
-export default AddPortifolio
+export default EditPortifolio
