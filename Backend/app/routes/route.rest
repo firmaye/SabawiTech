@@ -1,1 +1,234 @@
-GET http://localhost:3000/users 
+GET http://localhost:8080/api/users 
+
+### Get single user 
+GET http://localhost:8080/api/users/63a94d230006c22f57a64ec7
+
+### create single user 
+
+POST http://localhost:8080/api/users/
+Content-Type: application/json
+
+
+{
+  "firstName": "Fekede",
+  "lastName": "moges",
+  "userName": "philica21",
+  "password": "sabina12",
+  "email": "sabamoges@gmail.com",
+  "phoneNo": 912345678,
+  "gender": "F",
+  "profilePhoto": "https://www.asxbcty.com",
+  "location": "addis ababa",
+  "title": "Full stack Web developer | Node | React | JavaScript | Html | CSS",
+  "titleOverview": "Hello 👋 , I'm saba moges motivated Full-stack web developer  with 2+ years of experience. with excellent customer care, outstanding interpersonal communication and multitasking abilities.  Prepared to deliver first-rate results to clients on the allocated time and finish tasks before deadlines ⏰. 🏆  I am a young talented African sustaining strong motivation for work, and has skills with best practices. I can work collaboratively in different working environments and team compositions. also can work on modifying existing or adding new requirements to existing systems.",
+  "previousWork": [
+    {
+      "workTitle": "Guzo : Ridesharing Platform",
+      "workThumbnail": "",
+      "workDescription": "Guzo is a ridesharing platform made by a team of 3 talented students",
+      "workLink": "https://github.com/philica/Guzo-ridesharingPlatform",
+      "workSkill": ["React", "CSS", "Js", "Node"],
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.605Z",
+      "createdAt": "2022-12-15T18:35:56.606Z",
+      "updatedAt": "2022-12-15T18:35:56.606Z"
+    }
+  ],
+  "skill": [
+    {
+      
+      "skillName": "React",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.607Z",
+      "createdAt": "2022-12-15T18:35:56.608Z",
+      "updatedAt": "2022-12-15T18:35:56.609Z"
+    },
+    {
+     
+      "skillName": "CSS",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.609Z",
+      "createdAt": "2022-12-15T18:35:56.610Z",
+      "updatedAt": "2022-12-15T18:35:56.610Z"
+    },
+    {
+      
+      "skillName": "Node",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.612Z",
+      "createdAt": "2022-12-15T18:35:56.612Z",
+      "updatedAt": "2022-12-15T18:35:56.612Z"
+    }
+  ],
+  "language": [
+    {
+     
+      "languageName": "Amharic",
+      "languageProficiency": "Native",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.614Z",
+      "createdAt": "2022-12-15T18:35:56.614Z",
+      "updatedAt": "2022-12-15T18:35:56.615Z"
+    },
+    {
+     
+      "languageName": "oromifa",
+      "languageProficiency": "basic",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.617Z",
+      "createdAt": "2022-12-15T18:35:56.617Z",
+      "updatedAt": "2022-12-15T18:35:56.618Z"
+    }
+  ],
+  "education": [
+    {
+      
+      "schoolName": "Addis Ketema Preparatory School",
+      "dateAttended": "2022-12-15T18:35:56.619Z",
+      "areaOfStudy": "computerscience",
+      "eduDescription": "",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.619Z",
+      "createdAt": "2022-12-15T18:35:56.619Z",
+      "updatedAt": "2022-12-15T18:35:56.620Z"
+    }
+  ],
+  "certification": [
+    {
+     
+      "certPhoto": "https://asdfesd.com",
+      "certTitle": "International Collegiate Programming Contest",
+      "certProvider": "Icpc.foundation",
+      "certLink": "",
+      "dateIssued": "2022-12-15T18:35:56.622Z",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.622Z",
+      "createdAt": "2022-12-15T18:35:56.622Z",
+      "updatedAt": "2022-12-15T18:35:56.623Z"
+    },
+    {
+      
+      "certPhoto": "https://asdfesd.com",
+      "certTitle": "CSS completion",
+      "certProvider": "Icpc.foundation",
+      "certLink": "",
+      "dateIssued": "2022-12-15T18:35:56.627Z",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.627Z",
+      "createdAt": "2022-12-15T18:35:56.627Z",
+      "updatedAt": "2022-12-15T18:35:56.628Z"
+    }
+  ],
+  "employmentHistory": [
+    {
+     
+      "empAt": "",
+      "empLocation": "",
+      "empRole": "",
+      "empPeriod": "",
+      "empDescription": "",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.629Z",
+      "createdAt": "2022-12-15T18:35:56.630Z",
+      "updatedAt": "2022-12-15T18:35:56.630Z"
+    }
+  ],
+  "otherExperience": [
+    {
+      
+      "expSubject": "Seminar Subdivision Head",
+      "expDescription": "I'm also currently serving as Seminar subdivision Head in our computer science and engineering club inside our college campus, we now have launched the first successful live seminar in different platforms like Zoom, YouTube and Telegram live",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.631Z",
+      "createdAt": "2022-12-15T18:35:56.631Z",
+      "updatedAt": "2022-12-15T18:35:56.632Z"
+    },
+    {
+      
+      "expSubject": "Podcast Production",
+      "expDescription": "I am currently part of podcast subdivision in computer science and engineering club located in adama science and technology university  and also done 1 production level podcast as host with the great Mukerem Ali who is now  post graduate student and finished his undergraduate degree with CGPA of 4.0",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.633Z",
+      "createdAt": "2022-12-15T18:35:56.634Z",
+      "updatedAt": "2022-12-15T18:35:56.634Z"
+    }
+  ]
+}
+
+
+### Delete single user 
+
+DELETE http://localhost:8080/api/users/63a93c88f7859fc076961bff
+
+//check update route
+
+### Get all previous work history
+
+GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
+
+### Get single previous work history
+
+GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978/63a60fb23cfbc37ddfacc979
+
+### create new prevous work history
+
+POST http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
+Content-Type: application/json
+
+{
+  "workTitle": "spidy blogs ",
+  "workThumbnail": "",
+  "workDescription": "Spider is a blogging platform made by a team of 3 talented students",
+  "workLink": "https://github.com/philica/Guzo-ridesharingPlatform",
+  "workSkill": ["React", "CSS", "Js", "Node"],
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.605Z",
+  "createdAt": "2022-12-15T18:35:56.606Z",
+  "updatedAt": "2022-12-15T18:35:56.606Z"
+}
+
+### delete a single previous work history 
+
+DELETE http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135/63a52c96b67a7cb24e1a8d72
+
+### update previous work  history 
+
+PATCH http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135/63a5f04bc4da69af17e737b9
+Content-Type: application/json
+
+{
+  "workTitle": "Second updated blog ",
+  "workThumbnail": "",
+  "workDescription": "borggy is a blogging platform made by a team of 3 talented students",
+  "workLink": "https://github.com/philica/Guzo-ridesharingPlatform",
+  "workSkill": ["React", "CSS", "Js", "Node"],
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.605Z",
+  "createdAt": "2022-12-15T18:35:56.606Z",
+  "updatedAt": "2022-12-15T18:35:56.606Z"
+}
+
+
+### get all skill
+GET http://localhost:8080/api/users/skill/63a60fb23cfbc37ddfacc978
+
+### create a skill
+PATCH  http://localhost:8080/api/users/skill/63a60fb23cfbc37ddfacc978
+Content-Type: application/json
+
+{
+  "skill":[
+    {
+      "skillName": "React"  
+    },
+    {
+      "skillName": "NodeJs" 
+    },
+    {
+      "skillName": "MongoDB" 
+    },
+    {
+      "skillName": "Frappe" 
+    }
+  ]
+}
