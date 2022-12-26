@@ -1,28 +1,35 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
+const db = require("./app/models");
 
-//remove deprecation error 
-mongoose.set('strictQuery', true)
+db.mongoose
+  .connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Connected to the database!");
+  })
+  .catch(err => {
+    console.log("Cannot connect to the database!", err);
+    process.exit();
+  });
 
-//connnect to database 
-mongoose.connect("mongodb+srv://philica:sabifithawok@cluster0.1c5jn.mongodb.net/Sabawi?retryWrites=true&w=majority",{useNewUrlParser: true},{useUnifiedTopology: true})
-
-
-//create to databse instance 
-const db = mongoose.connection
-db.on('error', (error) => console.error)
-db.once('open', () => console.log("connected to database"))
 
 //enale sever accept json 
 app.use(express.json())
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 
-//set routes 
-const userRouter = require('./app/routes/users.routes')
 
-//apply routes
-app.use("/users", userRouter)
+require("./app/routes/userRoutes/users.routes")(app);
+require("./app/routes/userRoutes/previousWork.routes")(app);
 
-app.listen(3000, () => {
-    console.log("server started")
-})
+// require("./app/routes/internship.routes")(app);
+
+
+// set port, listen for requests
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});

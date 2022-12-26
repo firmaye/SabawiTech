@@ -1,17 +1,17 @@
-GET http://localhost:3000/users 
+GET http://localhost:8080/api/users 
 
 ### Get single user 
-
-GET http://localhost:3000/users/639c7340147554b3db7db359
+//check here single retriaval is not working
+GET http://localhost:8080/api/users/639c7340147554b3db7db359
 
 ### create single user 
 
-POST http://localhost:3000/users/
+POST http://localhost:8080/api/users/
 Content-Type: application/json
 
 
 {
-  "firstName": "philica",
+  "firstName": "Fikremariam",
   "lastName": "moges",
   "userName": "philica21",
   "password": "sabina12",
@@ -159,17 +159,17 @@ Content-Type: application/json
 
 ### Delete single user 
 
-DELETE http://localhost:3000/users/63a4ee908bc253b3856a0135
+DELETE http://localhost:8080/api/users/63a93c88f7859fc076961bff
 
-
+//check update route
 
 ### Get all previous work history
 
-GET http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135
+GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
 
 ### Get single previous work history
 
-GET http://localhost:3000/users/previousWork/63a4f35f8abe46c36e110b52/63a4f35f8abe46c36e110b53
+GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978/63a60fb23cfbc37ddfacc979
 
 ### create new prevous work history
 
