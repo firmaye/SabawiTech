@@ -8,7 +8,8 @@
     "phoneNo": 912345678,
     "gender": "F",
     "profilePhoto": "https://www.asxbcty.com",
-    "location": "addis ababa",
+    "country": "Ethiopia",
+    "state": "addis ababa",
     "title": "Full stack Web developer | Node | React | JavaScript | Html | CSS",
     "titleOverview": "Hello 👋 , I'm saba moges motivated Full-stack web developer  with 2+ years of experience. with excellent customer care, outstanding interpersonal communication and multitasking abilities.  Prepared to deliver first-rate results to clients on the allocated time and finish tasks before deadlines ⏰. 🏆  I am a young talented African sustaining strong motivation for work, and has skills with best practices. I can work collaboratively in different working environments and team compositions. also can work on modifying existing or adding new requirements to existing systems.",
     "previousWork": [
@@ -135,7 +136,7 @@
             "updatedAt": "2022-12-15T18:35:56.615Z"
         },
         {
-            "id": 5678654567,
+            "id": 5678654568,
             "languageName": "oromifa",
             "languageProficiency": "basic",
             "isDeleted": 0,
@@ -148,6 +149,28 @@
         {
             "id": 545678987654,
             "schoolName": "Addis Ketema Preparatory School",
+            "dateAttended": "2022-12-15T18:35:56.619Z",
+            "areaOfStudy": "computerscience",
+            "eduDescription": "",
+            "isDeleted": 0,
+            "deletedAt": "2022-12-15T18:35:56.619Z",
+            "createdAt": "2022-12-15T18:35:56.619Z",
+            "updatedAt": "2022-12-15T18:35:56.620Z"
+        },
+        {
+            "id": 545678987654,
+            "schoolName": "new Preparatory School",
+            "dateAttended": "2022-12-15T18:35:56.619Z",
+            "areaOfStudy": "computerscience",
+            "eduDescription": "",
+            "isDeleted": 0,
+            "deletedAt": "2022-12-15T18:35:56.619Z",
+            "createdAt": "2022-12-15T18:35:56.619Z",
+            "updatedAt": "2022-12-15T18:35:56.620Z"
+        },
+        {
+            "id": 545678987654,
+            "schoolName": "oldPreparatory School",
             "dateAttended": "2022-12-15T18:35:56.619Z",
             "areaOfStudy": "computerscience",
             "eduDescription": "",

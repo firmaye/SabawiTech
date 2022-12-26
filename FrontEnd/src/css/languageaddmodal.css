@@ -68,3 +68,21 @@
 .language-modal-location-container {
     display: flex;
 }
+
+.language-modal-existing-group-container {}
+
+.language-modal-existing-input-group {
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+
+.language-edit-btn {
+    background: #6787FE;
+    color: white;
+    padding: 0px 6px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+}

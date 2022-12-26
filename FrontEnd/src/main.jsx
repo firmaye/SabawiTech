@@ -12,6 +12,8 @@ import OpportunityDetailPage from "./OpportunityDetailPage";
 import Profile from "./Profile";
 import AddPortifolio from "./AddPortifolio";
 import EditPortifolio from "./EditPortifolio";
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -39,7 +41,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+
+    <React.StrictMode>
+
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>,
 );

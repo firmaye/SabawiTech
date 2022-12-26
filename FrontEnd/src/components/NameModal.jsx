@@ -2,25 +2,26 @@ import React from 'react'
 import { useState } from 'react'
 import "../css/namemodal.css"
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-const NameModal = () => {
-    let modalStyle = {
-        display: "block",
-        backgroundColor: "rgba(0,0,0,0.8)"
-    }
-    const [country, setcountry] = useState("")
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../redux/profilemodal';
+
+const NameModal = ({ profileinfo }) => {
+    const dispatch = useDispatch()
+
+    const [country, setcountry] = useState(profileinfo.country)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
 
     let closeNameModal = () => {
+        dispatch(setModal(""))
         setmodalstyle({
             display: "none"
         })
     }
     function fileValue(value) {
         var path = value.value;
-        console.log(path)
         var extenstion = path.split('.').pop();
         console.log(value.files[0])
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
@@ -54,7 +55,7 @@ const NameModal = () => {
                                                     <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" />
+                                                            <img id="image-preview" src={profileinfo.profilePhoto} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>
@@ -63,8 +64,14 @@ const NameModal = () => {
                                                     </label>
                                                 </div>
                                             </div>
-                                            <div class="name-modal-input-group">
-                                                <input class="" type="text" placeholder="NAME" name="" />
+                                            <div className='d-flex'>
+
+                                                <div class="col-5 name-modal-input-group">
+                                                    <input class="" value={profileinfo.firstName} type="text" placeholder="NAME" name="" />
+                                                </div>
+                                                <div class="col-5 name-modal-input-group">
+                                                    <input class="" value={profileinfo.lastName} type="text" placeholder="NAME" name="" />
+                                                </div>
                                             </div>
                                             <div class="row ">
                                                 <div class="col-12 name-modal-dropdown">
@@ -92,7 +99,7 @@ const NameModal = () => {
                                                 </div>
                                                 <div class="col-12 name-modal-col-12">
                                                     <div class="name-modal-input-group">
-                                                        <input class="" type="text" placeholder="State" name="" />
+                                                        <input class="" value={profileinfo.state} type="text" placeholder="State" name="" />
                                                     </div>
                                                 </div>
 

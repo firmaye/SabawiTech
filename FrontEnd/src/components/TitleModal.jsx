@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import "../css/titlemodal.css"
-const TitleModal = () => {
-    let modalStyle = {
-        display: "block",
-        backgroundColor: "rgba(0,0,0,0.8)"
-    }
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../redux/profilemodal';
+
+const TitleModal = ({ profileinfo }) => {
+    const dispatch = useDispatch()
+
 
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -13,6 +14,7 @@ const TitleModal = () => {
     })
 
     let closeTitleModal = () => {
+        dispatch(setModal(""))
         setmodalstyle({
             display: "none"
         })
@@ -36,12 +38,12 @@ const TitleModal = () => {
                                         <h2 class="title-modal-title"></h2>
                                         <form method="">
                                             <div class="title-modal-input-group">
-                                                <input class="" type="text" placeholder="Title Name" name="" />
+                                                <input value={profileinfo.title} class="" type="text" placeholder="Title Name" name="" />
                                             </div>
                                             <div class="row ">
                                                 <div class="col-12 title-modal-col-12">
                                                     <div class="title-modal-description-input">
-                                                        <input class="" type="text" placeholder="Description" name="" />
+                                                        <textarea value={profileinfo.description} class="" type="text" placeholder="Description" name="" />
                                                     </div>
                                                 </div>
 

@@ -13,6 +13,10 @@ import { useEffect } from 'react';
 import EmploymentModal from './components/EmploymentAddModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { current } from '@reduxjs/toolkit';
+import { setModal } from './redux/profilemodal';
+
 const Profile = () => {
     const [selectedmodal, setselectedmodal] = useState("")
     const [profileinfo, setprofileinfo] = useState({})
@@ -20,6 +24,7 @@ const Profile = () => {
     const [previouswork, setpreviouswork] = useState([])
     const [skilllist, setskilllist] = useState([])
     const [employmenthistory, setemploymenthistory] = useState([])
+    const [education, seteducation] = useState([])
     console.log(selectedmodal)
     useEffect(() => {
         fetch("user.json").then(res => res.json()).then(result => {
@@ -28,13 +33,15 @@ const Profile = () => {
             setskilllist(result.skill)
             setpreviouswork(result.previousWork)
             setemploymenthistory(result.employmentHistory)
+            seteducation(result.Education)
         }).catch((error) => { console.log(error) });
     }, [])
-
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
+    const dispatch = useDispatch()
     return (
         <main>
             {
-                selectedmodal == "" ? <></> : selectedmodal == "name" ? <NameModal /> : selectedmodal == "title" ? <TitleModal /> : selectedmodal == "skill" ? <SkillModal skilllist={skilllist} /> : selectedmodal == "employmentadd" ? <EmploymentModal /> : selectedmodal == "educationadd" ? <EducationModal /> : selectedmodal == "languagesadd" ? <LanguageModal /> : <></>
+                currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} /> : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} /> : currentModal == "skill" ? <SkillModal skilllist={skilllist} /> : currentModal == "employmentadd" ? <EmploymentModal /> : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} /> : <></>
             }
             <Navbar />
             <Header title={"Profile"} />
@@ -56,18 +63,18 @@ const Profile = () => {
                                                     <h1>{profileinfo.firstName + " " + profileinfo.lastName}</h1>
                                                 </div>
                                                 <div className="profile-location">
-                                                    <div className="profile-location-city">Addis Ababa</div>,
-                                                    <div className="profile-location-Country">Ethiopia</div>
+                                                    <div className="profile-location-city">{profileinfo.state}</div>,
+                                                    <div className="profile-location-Country">{profileinfo.country}</div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="profile-buttons">
                                             {/* <button className="see-public">Edit </button> */}
-                                            <button onClick={() => { setselectedmodal("name") }} className="setting">Edit Profile Name And Location</button>
+                                            <button onClick={() => { dispatch(setModal("name")) }} className="setting">Edit Profile Name And Location</button>
                                         </div>
                                         <div className="profile-buttons-mobile">
                                             <div className="col col-auto">
-                                                <button onClick={() => { setselectedmodal("name") }} className="profile-edit-btn">
+                                                <button onClick={() => { dispatch(setModal("name")) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -89,7 +96,7 @@ const Profile = () => {
                                         <div>
                                             Languages
                                         </div>
-                                        <button onClick={() => { setselectedmodal("languagesadd") }} >
+                                        <button onClick={() => { dispatch(setModal(("languagesadd"))) }} >
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                         </button>
@@ -111,15 +118,21 @@ const Profile = () => {
                                         <div>
                                             Education
                                         </div>
-                                        <button onClick={() => { setselectedmodal("educationadd") }} >
+                                        <button onClick={() => { dispatch(setModal(("educationadd"))) }} >
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                         </button>
                                     </div>
-                                    <div className="profile-edit-description">
-                                        {language.map((element) => {
-                                            return (<div>
-                                                {element.languageName}
+                                    <div className="profile-edit-description ">
+                                        {education.map((element) => {
+                                            return (<div className='flex-column mb-4'>
+                                                <div>
+
+                                                    {element.schoolName}
+                                                </div>
+                                                <div>
+                                                    {element.dateAttended}
+                                                </div>
                                             </div>)
                                         })}
                                     </div>
@@ -139,11 +152,7 @@ const Profile = () => {
                                         </button>
                                     </div>
                                     <div className="profile-edit-description">
-                                        {language.map((element) => {
-                                            return (<div>
-                                                {element.languageName}
-                                            </div>)
-                                        })}
+                                        {profileinfo.email}
                                     </div>
                                 </div>
 
@@ -161,11 +170,7 @@ const Profile = () => {
                                         </button>
                                     </div>
                                     <div className="profile-edit-description">
-                                        {language.map((element) => {
-                                            return (<div>
-                                                {element.languageName}
-                                            </div>)
-                                        })}
+                                        {profileinfo.phoneNo}
                                     </div>
                                 </div>
 
@@ -178,7 +183,7 @@ const Profile = () => {
                                         <h2>{profileinfo.title}</h2>
                                     </div>
                                     <div className="col col-auto">
-                                        <button onClick={() => { setselectedmodal("title") }} className="profile-edit-btn">
+                                        <button onClick={() => { dispatch(setModal(("title"))) }} className="profile-edit-btn">
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -252,7 +257,7 @@ const Profile = () => {
 
                                     </div>
                                     <div className="col col-auto">
-                                        <button onClick={() => { setselectedmodal("skill") }} className="profile-edit-btn">
+                                        <button onClick={() => { dispatch(setModal(("skill"))) }} className="profile-edit-btn">
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -278,7 +283,7 @@ const Profile = () => {
                                 <h2>Employment History</h2>
                             </div>
                             <div className="">
-                                <button onClick={() => { setselectedmodal("employmentadd") }} className="profile-edit-btn">
+                                <button onClick={() => { dispatch(setModal(("employmentadd"))) }} className="profile-edit-btn">
                                     <i className="fa fa-plus" aria-hidden="true"></i>
                                 </button>
                             </div>
