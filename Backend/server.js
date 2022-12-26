@@ -25,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 require("./app/routes/userRoutes/users.routes")(app);
 require("./app/routes/userRoutes/previousWork.routes")(app);
 require("./app/routes/userRoutes/skill.routes")(app);
+require("./app/routes/userRoutes/language.routes")(app);
 
 // require("./app/routes/internship.routes")(app);
 
