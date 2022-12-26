@@ -12,5 +12,17 @@ exports.getAll = async (req,res) => {
   }
 };
 
-// Retri
 
+// Retrieve all Users from the database.
+exports.create = async (req,res) => {
+  let userId = req.params.id
+  let skills = req.body.skill
+  
+  try{
+    const addedSkill = await user.updateOne({_id:userId},{skill: skills})  
+    res.status(201).json(addedSkill)
+  }
+    catch(err){
+    res.status(400).json({message: err.message})
+  }
+};

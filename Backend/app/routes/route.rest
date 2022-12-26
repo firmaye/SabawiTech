@@ -1,8 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-//check here single retriaval is not working
-GET http://localhost:8080/api/users/639c7340147554b3db7db359
+GET http://localhost:8080/api/users/63a94d230006c22f57a64ec7
 
 ### create single user 
 
@@ -11,7 +10,7 @@ Content-Type: application/json
 
 
 {
-  "firstName": "Fikremariam",
+  "firstName": "Fekede",
   "lastName": "moges",
   "userName": "philica21",
   "password": "sabina12",
@@ -173,7 +172,7 @@ GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978/63a60f
 
 ### create new prevous work history
 
-POST http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135
+POST http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
 Content-Type: application/json
 
 {
@@ -211,10 +210,10 @@ Content-Type: application/json
 
 
 ### get all skill
-GET http://localhost:3000/users/skill/63a60fb23cfbc37ddfacc978
+GET http://localhost:8080/api/users/skill/63a60fb23cfbc37ddfacc978
 
 ### create a skill
-PATCH  http://localhost:3000/users/skill/63a60fb23cfbc37ddfacc978
+PATCH  http://localhost:8080/api/users/skill/63a60fb23cfbc37ddfacc978
 Content-Type: application/json
 
 {
