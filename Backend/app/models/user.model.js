@@ -54,7 +54,8 @@ const userSchema = new mongoose.Schema({
         {
             id: mongoose.ObjectId,
             schoolName: String,
-            dateAttended: Date,
+            dateAttendedFrom: Date,
+            dateAttendedTo: Date,
             areaOfStudy: String,
             eduDescription: String,
             isDeleted: Number,
