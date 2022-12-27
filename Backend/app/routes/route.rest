@@ -172,7 +172,7 @@ GET http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978/63a60f
 
 ### create new prevous work history
 
-POST http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
+POST  http://localhost:8080/api/users/previousWork/63a60fb23cfbc37ddfacc978
 Content-Type: application/json
 
 {
