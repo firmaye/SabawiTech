@@ -7,14 +7,21 @@ const Blog = ({ catagory }) => {
   // useEffect(()=>{
   //     setBlog(data.blogdata)
   // }, [])
-  console.log("catagories of a blog", catagory);
+  // console.log("catagories of a blog", catagory);
+  // console.log(data.blogdata)
   let sublist = data.blogdata.filter((elt) => {
-    if (elt.catagory == catagory) {
-      return setBlog(blog)
+    console.log(elt.catagory)
+    console.log(catagory)
+    if (catagory == "all") {
+      return elt
+    } else {
+
+      if (elt.catagory == catagory) {
+        return elt
+      }
     }
-    console.log(elt.catagory, catagory)
   })
-  console.log(sublist)
+  // console.log(sublist)
   return (
     <div class="blogcontainer">
       {sublist.map((blog) => {
