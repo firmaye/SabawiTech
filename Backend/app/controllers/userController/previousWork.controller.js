@@ -27,7 +27,7 @@ exports.create = async (req,res) => {
     let userId = req.params.id
     let newPrevWork = {
       workTitle: req.body.workTitle,
-      workThumbnail: req.body.workThumbnail,
+      workThumbnail: req.file.filename,
       workDescription: req.body.workDescription,
       workLink: req.body.workLink,
       workSkill: req.body.workSkill,
