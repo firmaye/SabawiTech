@@ -2,7 +2,7 @@
     "opportunities": [
         {
             "id": 22312123,
-            "intTitle": "Full stack developer",
+            "intTitle": "Full stack developer Remote",
             "companyName": "sabawi technologies",
             "intDescription": "We are looking for advanced level mobile app developer especially in bitrate streaming technique and socket programming , WebRTC , Secure Reliable Transport (SRT) and Real-Time Streaming Protocol (RTSP). We are looking for advanced level mobile app developer especially in bitrate streaming technique and socket programming , WebRTC , Secure Reliable Transport (SRT) and Real-Time Streaming Protocol (RTSP).",
             "intLocation": "remote",
@@ -10,7 +10,7 @@
             "intBenefit": "(salary + commission ) attractive if you are selected to work for our company as  a sales agent, you can make over 5,000 birr per month.",
             "intDuration": "3 month",
             "requiredSkill": "svelte,Mongo ,react ,Firebase , Node",
-            "intStatus": "active",
+            "intStatus": "closed",
             "attachment": {},
             "isDeleted": "2022-12-14T20:57:26.598Z",
             "deletedAt": "2022-12-14T20:57:26.600Z",
@@ -19,7 +19,7 @@
         },
         {
             "id": 22312123,
-            "intTitle": "Full stack developer",
+            "intTitle": "Full stack developer office",
             "companyName": "sabawi technologies",
             "intDescription": "We are looking for advanced level mobile app developer especially in bitrate streaming technique and socket programming , WebRTC , Secure Reliable Transport (SRT) and Real-Time Streaming Protocol (RTSP). We are looking for advanced level mobile app developer especially in bitrate streaming technique and socket programming , WebRTC , Secure Reliable Transport (SRT) and Real-Time Streaming Protocol (RTSP).",
             "intLocation": "office",
@@ -27,7 +27,7 @@
             "intBenefit": "(salary + commission ) attractive if you are selected to work for our company as  a sales agent, you can make over 5,000 birr per month.",
             "intDuration": "3 month",
             "requiredSkill": "svelte,Mongo ,react ,Firebase , Node",
-            "intStatus": "inactive",
+            "intStatus": "open",
             "attachment": {},
             "isDeleted": "2022-12-14T20:57:26.598Z",
             "deletedAt": "2022-12-14T20:57:26.600Z",

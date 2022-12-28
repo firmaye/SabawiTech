@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFilterLocation, setFilterLocation } from '../redux/filter'
+import { removeFilterLocation, removeFilterStatus, setFilterLocation, setFilterStatus } from '../redux/filter'
 
 const OpportunityFilter = () => {
     const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const OpportunityFilter = () => {
                     <div className="category-options">
                         <div className="category-option">
                             <div className="form-check form-switch">
-                                <input value={() => { }} onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("remote")) : dispatch(removeFilterLocation("remote")) }} className="form-check-input" type="checkbox" role="switch"
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("remote")) : dispatch(removeFilterLocation("remote")) }} className="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
                                 <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Remote</label>
                             </div>
@@ -38,15 +38,20 @@ const OpportunityFilter = () => {
                 </div>
                 <div className="seller-container">
                     <div className="seller-title">
-                        Seller
+                        Status
                     </div>
                     <div className="seller-options">
 
                         <div className="seller-option">
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("open")) : dispatch(removeFilterStatus("open")) }} className="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Open</label>
+                            </div>
+                            <div className="form-check form-switch">
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("closed")) : dispatch(removeFilterStatus("closed")) }} className="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" />
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Closed</label>
                             </div>
 
                         </div>

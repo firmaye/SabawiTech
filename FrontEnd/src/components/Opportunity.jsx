@@ -12,9 +12,9 @@ const Opportunity = ({ data }) => {
     }
     return (
         <div className="opportunities">
-            {data.intStatus == "active" ?
+            {data.intStatus == "open" ?
                 <div className="opportunity-featured">
-                    Opened
+                    Open
                     {/* <i className="fa fa-bolt"></i> */}
                 </div> : <div className="opportunity-featured opportunity-featured-inactive">
                     Closed
