@@ -4,9 +4,9 @@ import Profile from "../assets/profile.jpg"
 import OpportunityDetailPage from '../OpportunityDetailPage'
 
 const Opportunity = ({ data }) => {
-    console.log(data)
+
     const opendetails = (id) => {
-        console.log("clicked")
+        // console.log("clicked")
         // navigate({ pathname: "opportunitydetail", search: createSearchParams({ id: "id" }) })
 
     }
@@ -14,10 +14,10 @@ const Opportunity = ({ data }) => {
         <div className="opportunities">
             {data.intStatus == "active" ?
                 <div className="opportunity-featured">
-                    Active
+                    Opened
                     {/* <i className="fa fa-bolt"></i> */}
                 </div> : <div className="opportunity-featured opportunity-featured-inactive">
-                    InActive
+                    Closed
                     {/* <i className="fa fa-bolt"></i> */}
                 </div>}
 

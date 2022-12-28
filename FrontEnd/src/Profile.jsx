@@ -14,7 +14,6 @@ import EmploymentModal from './components/EmploymentAddModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
 import { setModal } from './redux/profilemodal';
 
 const Profile = () => {

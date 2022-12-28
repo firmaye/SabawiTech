@@ -13,7 +13,7 @@ const OpportunityPage = () => {
         // )
         fetch("opportunity.json").then(res => res.json()).then(result => {
             setloading(false)
-            console.log(result.opportunities)
+            // console.log(result.opportunities)
             setopportunitylist(result.opportunities)
         }).catch((error) => { console.log(error) });
         ;
