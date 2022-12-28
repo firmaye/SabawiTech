@@ -1,0 +1,30 @@
+{
+    "blogdata": [
+      {
+      "id": 4234212,
+      "blogTitle": "Test your front-end against a real API.",
+      "blogImage": "./Images/post1.jpg",
+      "blogDescription": "Short for database administrator, a DBA designs, implements, administers, and monitors data management systems and ensures design,Aug 16, 2021 — Short for database administrator, a DBA designs, implements, administers, and monitors data management systems and ensures design,v",
+      "author": "sabawi",
+      "blogTag": "development,frontend,api",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-14T20:44:41.007Z",
+      "createdAt": "2022-12-14T20:44:41.008Z",
+      "updatedAt": "2022-12-14T20:44:41.008Z",
+      "catagory": "webdevelopment"
+      },
+      {
+        "id": 4234212,
+        "blogTitle": "Test your front-end against a real API.",
+        "blogImage": "./Images/post2.jpg",
+        "blogDescription": "Short for database administrator, a DBA designs, implements, administers, and monitors data management systems and ensures design,Aug 16, 2021 — Short for database administrator, a DBA designs, implements, administers, and monitors data management systems and ensures design,v",
+        "author": "sabawi",
+        "blogTag": "development,frontend,api",
+        "isDeleted": 0,
+        "deletedAt": "2022-12-14T20:44:41.007Z",
+        "createdAt": "2022-12-14T20:44:41.008Z",
+        "updatedAt": "2022-12-14T20:44:41.008Z",
+        "catagory": "marketing"
+        }
+    ]
+  }

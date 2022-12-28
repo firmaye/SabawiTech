@@ -2,7 +2,12 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import "../css/skillmodal.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../redux/profilemodal';
+
 const SkillModal = ({ skilllist }) => {
+    const dispatch = useDispatch()
+
     console.log(skilllist)
     const [skilllistmodal, setskilllistmodal] = useState([])
     useEffect(() => {
@@ -17,6 +22,7 @@ const SkillModal = ({ skilllist }) => {
     })
 
     let closeSkillModal = () => {
+        dispatch(setModal(""))
         setmodalstyle({
             display: "none"
         })

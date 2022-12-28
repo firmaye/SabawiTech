@@ -11,7 +11,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import OpportunityDetailPage from "./OpportunityDetailPage";
 import Profile from "./Profile";
 import AddPortifolio from "./AddPortifolio";
+import BlogContainer from "./components/BlogContainer";
+import BlogdetailsContainer from "./components/BlogdetailsContainer";
 import EditPortifolio from "./EditPortifolio";
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,10 +40,23 @@ const router = createBrowserRouter([
     path: "/editportifolio/:id",
     element: <EditPortifolio />,
   },
+  {
+    path: "/blog",
+
+    element: <BlogContainer />,
+  },
+  {
+    path: "/blogdetails/:id",
+    element: <BlogdetailsContainer />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+
+    <React.StrictMode>
+
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>,
 );

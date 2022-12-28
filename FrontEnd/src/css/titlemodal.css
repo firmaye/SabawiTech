@@ -29,7 +29,8 @@
 /* ==========================================================================
      #FORM
      ========================================================================== */
-.title-modal-page-wrapper input {
+.title-modal-page-wrapper input,
+.title-modal-page-wrapper textarea {
     outline: none;
     margin: 0;
     border: none;
@@ -37,6 +38,7 @@
     -moz-box-shadow: none;
     box-shadow: none;
     width: 100%;
+    height: 100%;
     font-size: 14px;
     font-family: inherit;
 

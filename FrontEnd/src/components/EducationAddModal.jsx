@@ -1,7 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import "../css/educationaddmodal.css"
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from '../redux/profilemodal';
+
+
 const EducationModal = () => {
+    const dispatch = useDispatch()
 
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -9,6 +14,7 @@ const EducationModal = () => {
     })
 
     let closeEducationModal = () => {
+        dispatch(setModal(""))
         setmodalstyle({
             display: "none"
         })
