@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    openedmodal: "j"
+    openedmodal: ""
 }
 
 export const profileModalSlice = createSlice({
@@ -12,15 +12,6 @@ export const profileModalSlice = createSlice({
             console.log(action.payload)
             state.openedmodal = action.payload
         },
-        // increment: (state) => {
-
-        // },
-        // decrement: (state) => {
-        //   state.value -= 1
-        // },
-        // incrementByAmount: (state, action) => {
-        //   state.value += action.payload
-        // },
     },
 })
 
