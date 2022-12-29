@@ -14,6 +14,7 @@ exports.create = (req, res) => {
 			blogTitle:req.body.blogTitle,
 			blogImage:req.file.filename,
 			blogDescription:req.body.blogDescription,
+			blogCategory:req.body.blogCategory,
 			author:req.body.author,
 			blogTag:req.body.blogTag,
 			isDeleted:0,
