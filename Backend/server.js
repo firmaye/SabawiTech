@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
 const db = require("./app/models");
+const cors=require("cors")
+var corsOptions = {
+  origin: "http://127.0.0.1:8081"
+};
+app.use(cors(corsOptions));
 
 db.mongoose
   .connect(db.url, {
