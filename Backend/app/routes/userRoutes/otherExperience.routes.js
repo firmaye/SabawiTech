@@ -6,7 +6,9 @@ module.exports = app => {
 	//get all otherExperience 
 	router.get("/:id", getUser, otherExperience.getAll)
 	//get single otherExperience
-	router.get("/:id/:id1", getUser,otherExperience.getSingle)
+	
+	//=========== To be Implemented ==================
+	
 	//create otherExperience 
 	router.post("/:id", getUser, otherExperience.create )	
 	//update otherExperience

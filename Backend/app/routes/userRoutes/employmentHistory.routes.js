@@ -6,7 +6,9 @@ module.exports = app => {
 	//get all employmentHistory 
 	router.get("/:id", getUser, employmentHistory.getAll)
 	//get single employmentHistory
-	router.get("/:id/:id1", getUser,employmentHistory.getSingle)
+
+	//=========== To be Implemented ==================
+	
 	//create employmentHistory 
 	router.post("/:id", getUser, employmentHistory.create )	
 	//update employmentHistory
