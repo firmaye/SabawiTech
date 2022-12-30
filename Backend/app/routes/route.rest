@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-GET http://localhost:8080/api/users/63a94d230006c22f57a64ec7
+GET http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a
 
 ### create single user 
 
