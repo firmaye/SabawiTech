@@ -1,6 +1,11 @@
 const express = require('express')
 const app = express()
 const db = require("./app/models");
+const cors=require("cors")
+var corsOptions = {
+  origin: "*"
+};
+app.use(cors(corsOptions));
 
 db.mongoose
   .connect(db.url, {
@@ -25,10 +30,15 @@ app.use(express.urlencoded({ extended: true }));
 require("./app/routes/userRoutes/users.routes")(app);
 require("./app/routes/userRoutes/previousWork.routes")(app);
 require("./app/routes/userRoutes/skill.routes")(app);
+require("./app/routes/userRoutes/language.routes")(app);
+require("./app/routes/userRoutes/education.routes")(app);
+require("./app/routes/userRoutes/certification.routes")(app);
+require("./app/routes/userRoutes/employmentHistory.routes")(app);
+require("./app/routes/userRoutes/otherExperience.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
-require("./app/routes/userRoutes/language.routes")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

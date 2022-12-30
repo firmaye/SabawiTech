@@ -10,7 +10,7 @@ Content-Type: application/json
 
 
 {
-  "firstName": "Fekede",
+  "firstName": "malo",
   "lastName": "moges",
   "userName": "philica21",
   "password": "sabina12",
@@ -27,7 +27,7 @@ Content-Type: application/json
       "workThumbnail": "",
       "workDescription": "Guzo is a ridesharing platform made by a team of 3 talented students",
       "workLink": "https://github.com/philica/Guzo-ridesharingPlatform",
-      "workSkill": ["React", "CSS", "Js", "Node"],
+      "workSkill": ["React", "json", "Js", "Node"],
       "isDeleted": 0,
       "deletedAt": "2022-12-15T18:35:56.605Z",
       "createdAt": "2022-12-15T18:35:56.606Z",
