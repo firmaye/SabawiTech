@@ -6,7 +6,9 @@ module.exports = app => {
 	//get all education 
 	router.get("/:id", getUser, education.getAll)
 	//get single education
-	router.get("/:id/:id1", getUser,education.getSingle)
+	
+	//=========== To be Implemented ==================
+	
 	//create education 
 	router.post("/:id", getUser, education.create )	
 	//update education

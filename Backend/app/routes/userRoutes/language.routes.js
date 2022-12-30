@@ -6,7 +6,9 @@ module.exports = app => {
 	//get all language 
 	router.get("/:id", getUser, language.getAll)
 	//get single language
-	router.get("/:id/:id1", getUser,language.getSingle)
+	
+	//=========== To be Implemented ==================
+	
 	//create language 
 	router.post("/:id", getUser, language.create )	
 	//update language

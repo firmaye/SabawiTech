@@ -6,7 +6,9 @@ module.exports = app => {
 	//get all certification 
 	router.get("/:id", getUser, certification.getAll)
 	//get single certification
-	router.get("/:id/:id1", getUser,certification.getSingle)
+
+	//=========== To be Implemented ==================
+	
 	//create certification 
 	router.post("/:id", getUser, certification.create )	
 	//update certification
