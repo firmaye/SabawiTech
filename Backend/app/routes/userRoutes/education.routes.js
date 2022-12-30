@@ -6,7 +6,13 @@ module.exports = app => {
 	//get all education 
 	router.get("/:id", getUser, education.getAll)
 	//get single education
+<<<<<<< HEAD
 	router.get("/:id/:id1", getUser, education.getSingle)
+=======
+	
+	//=========== To be Implemented ==================
+	
+>>>>>>> f543332a2e384312ffb3b87d08062d37075e9c85
 	//create education 
 	router.post("/:id", getUser, education.create)
 	//update education
