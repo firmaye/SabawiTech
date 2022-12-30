@@ -13,7 +13,18 @@ exports.getAll = async(req,res) => {
 
 // Retrieve single user from the database.
 exports.getSingle = (req, res) => {
-    res.send(res.user.userName)
+  const id = req.params.id;
+  user.findById(id)
+    .then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found User with id " + id });
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving User with id=" + id });
+    });
   };
 
 // Create single user
