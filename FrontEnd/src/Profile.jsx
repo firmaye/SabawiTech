@@ -15,6 +15,10 @@ import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from './redux/profilemodal';
+import EmailAndPhoneModal from './components/EditEmailAndPhoneModal';
+import DeletePortifolioModal from './components/DeletePortifolioModal';
+import EmploymentEditModal from './components/EmploymentEditModal';
+
 
 const Profile = () => {
     const [selectedmodal, setselectedmodal] = useState("")
@@ -24,6 +28,7 @@ const Profile = () => {
     const [skilllist, setskilllist] = useState([])
     const [employmenthistory, setemploymenthistory] = useState([])
     const [education, seteducation] = useState([])
+    const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
     console.log(selectedmodal)
     useEffect(() => {
         fetch("user.json").then(res => res.json()).then(result => {
@@ -40,7 +45,14 @@ const Profile = () => {
     return (
         <main>
             {
-                currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} /> : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} /> : currentModal == "skill" ? <SkillModal skilllist={skilllist} /> : currentModal == "employmentadd" ? <EmploymentModal /> : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} /> : <></>
+                currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} />
+                    : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} />
+                        : currentModal == "skill" ? <SkillModal skilllist={skilllist} /> : currentModal == "employmentadd" ? <EmploymentModal />
+                            : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} />
+                                : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
+                                    : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
+                                        : currentModal == "employmentedit" ? <EmploymentEditModal />
+                                            : <></>
             }
             <Navbar />
             <Header title={"Profile"} />
@@ -143,30 +155,15 @@ const Profile = () => {
 
                                     <div className="profile-edit-profile">
                                         <div>
-                                            Email
+                                            Email And Phone Number
                                         </div>
-                                        <button>
+                                        <button onClick={() => { dispatch(setModal(("emailandphone"))) }}>
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                         </button>
                                     </div>
                                     <div className="profile-edit-description">
                                         {profileinfo.email}
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="profile-sidebar-container">
-                                <div className="profile-edit-profile-container">
-
-                                    <div className="profile-edit-profile">
-                                        <div>
-                                            Phone Number
-                                        </div>
-                                        <button>
-                                            <i className="fa fa-pencil" aria-hidden="true"></i>
-
-                                        </button>
                                     </div>
                                     <div className="profile-edit-description">
                                         {profileinfo.phoneNo}
@@ -234,7 +231,7 @@ const Profile = () => {
                                                             <a href={`editportifolio/${element.id}`} className="profile-edit-btn">
                                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                                             </a>
-                                                            <a className="profile-edit-btn">
+                                                            <a onClick={() => { setportifoliotobedeleted(element.id); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
                                                                 <i className="fa fa-trash" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
@@ -297,7 +294,7 @@ const Profile = () => {
                                             {element.empRole} | {element.empLocation}
                                         </div>
                                         <div className="">
-                                            <button className="profile-edit-btn">
+                                            <button onClick={() => { dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                         </div>
