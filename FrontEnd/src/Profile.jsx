@@ -21,7 +21,7 @@ import EmploymentEditModal from './components/EmploymentEditModal';
 
 
 const Profile = () => {
-    const [selectedmodal, setselectedmodal] = useState("")
+    const [selectedemployment, selselectedemployment] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
@@ -29,7 +29,7 @@ const Profile = () => {
     const [employmenthistory, setemploymenthistory] = useState([])
     const [education, seteducation] = useState([])
     const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
-    console.log(selectedmodal)
+    console.log(selectedemployment)
     useEffect(() => {
         fetch("user.json").then(res => res.json()).then(result => {
             setprofileinfo(result)
@@ -51,7 +51,7 @@ const Profile = () => {
                             : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} />
                                 : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
                                     : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
-                                        : currentModal == "employmentedit" ? <EmploymentEditModal />
+                                        : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
                                             : <></>
             }
             <Navbar />
@@ -294,7 +294,7 @@ const Profile = () => {
                                             {element.empRole} | {element.empLocation}
                                         </div>
                                         <div className="">
-                                            <button onClick={() => { dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                            <button onClick={() => { selselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                         </div>
