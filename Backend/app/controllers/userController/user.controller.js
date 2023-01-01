@@ -26,7 +26,7 @@ exports.create =async(req, res) => {
       email: req.body.email,
       phoneNo: req.body.phoneNo,
       gender: req.body.gender,
-      profilePhoto: req.file.filename,
+      profilePhoto: req.body.profilePhoto,
       location: req.body.location,
       title: req.body.title,
       titleOverview: req.body.titleOverview,
