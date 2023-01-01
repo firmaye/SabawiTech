@@ -26,23 +26,7 @@ exports.getSingle = async (req,res) => {
   }
 
 
-//Add new language 
-exports.create = async (req,res) => {
-let userId = req.params.id
-let newLanguage = {
-    languageName: req.body.languageName,
-    languageProficiency: req.body.languageProficiency
-}
 
-
-try{
-    const language = await user.updateOne({_id: userId}, {$push: {language: newLanguage}})
-    res.status(201).json(newLanguage)
-
-}catch(err){
-    res.status(400).json({message: err.message})
-}
-}
 
 //Update language 
 exports.update =  async (req,res) => {
