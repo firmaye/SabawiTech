@@ -29,13 +29,13 @@ module.exports = app => {
   router.get('/', user.getAll)
 
   //get single user 
-  router.get('/:id',user.getSingle )
-    
+  router.get('/:id', user.getSingle)
+
   //create a single user 
-  router.post('/',user.create)
+  router.post('/', user.create)
 
   //delete user 
-  router.delete('/:id', getUser,user.delete)
+  router.delete('/:id', getUser, user.delete)
 
   //update user 
   router.patch('/:id', getUser, user.update)
