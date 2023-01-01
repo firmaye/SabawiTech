@@ -34,8 +34,7 @@
 
 .logo img {
     width: 132px;
-    padding-top: 5px;
-    padding-left: 25px;
+    padding-top: 35px;
 }
 
 .intro-img {
@@ -159,7 +158,7 @@
     content: '';
     top: 0;
     left: 0;
-    padding: 6px 19px;
+    padding: 0 10px;
     border-top: none;
     color: #fff;
     font-size: 12px;

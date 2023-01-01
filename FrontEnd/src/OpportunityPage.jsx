@@ -15,7 +15,7 @@ const OpportunityPage = () => {
             setloading(false)
             console.log(result.opportunities)
             setopportunitylist(result.opportunities)
-        }).catch((error) => { console.log(error) });
+        }).catch(console.log);
         ;
     }
     useEffect(() => {

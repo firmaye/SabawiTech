@@ -14,17 +14,21 @@ const Blog = ({ catagory }) => {
     console.log(catagory)
     if (catagory == "all") {
       return elt
-    } else {
-
-      if (elt.catagory == catagory) {
+    }
+    else if (elt.catagory == catagory) {
         return elt
       }
-    }
   })
   // console.log(sublist)
   return (
     <div class="blogcontainer">
-      {sublist.map((blog) => {
+      {sublist.length == 0 ? 
+      <div class="noresultscont">
+        <img src="./Images/searchnotfound.png" alt="" />
+        <h3>No results found on the section</h3>
+        <p>Try again</p>
+      </div>: 
+      sublist.map((blog) => {
         return (
           <div class="col-lg-12 the_excerpt">
             <img class="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
@@ -33,17 +37,15 @@ const Blog = ({ catagory }) => {
               <div class="entry-meta">
                 <ul class="list-inline">
                   <li class="list-inline-item">
-                    <i class="fa fa-user"></i> by <a href="">{blog.author}</a>
+                    <i class="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
                   </li>
                   <li class="list-inline-item">
                     <i class="fa fa-comment"></i> <a href="">0 Comments</a>
                   </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-tags"></i> <a href="">Interview</a> </li>
                 </ul>
               </div>
-              <a class="blog_title" href="" rel="bookmark">{blog.blogTitle}</a>
-              <p class="card-text">{blog.blogDescription}</p>
+              <a class="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
+              <p class="card-text">{blog.blogDescription.substring(0,200)+' . . .'}</p>
 
               <a class="prolancer-rgb-btn" href={`blogdetails/${blog.id}`}>Read More</a>
             </div>
