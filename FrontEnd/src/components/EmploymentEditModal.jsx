@@ -4,9 +4,9 @@ import "../css/employmenteditmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 
-const EmploymentEditModal = () => {
+const EmploymentEditModal = ({ selected }) => {
     const dispatch = useDispatch()
-
+    console.log(selected)
 
     const [modalstyle, setmodalstyle] = useState({
         display: "block",

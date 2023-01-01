@@ -41,18 +41,6 @@ exports.create = async (req,res) => {
     }
   };
 
-// delete single PrevWork from the database.
-exports.delete = async (req,res) => {
-    let userId = req.params.id
-    let workId = req.params.id1
-    try{
-      const prevWork = await user.updateOne({_id: userId},{$pull: {"previousWork": {_id: workId}}})
-      res.status(201).json({message : "work deleted",prevWork})
-    }catch(err){
-      res.status(400).json({message: err.message})
-    }
-  };
-
 
 
   //update a single previous work
@@ -76,3 +64,16 @@ exports.delete = async (req,res) => {
       res.status(400).json({message: err.message})
     }
   };
+
+// delete single PrevWork from the database.
+exports.delete = async (req,res) => {
+  let userId = req.params.id
+  let workId = req.params.id1
+  try{
+    const prevWork = await user.updateOne({_id: userId},{$pull: {"previousWork": {_id: workId}}})
+    res.status(201).json({message : "work deleted",prevWork})
+  }catch(err){
+    res.status(400).json({message: err.message})
+  }
+};
+

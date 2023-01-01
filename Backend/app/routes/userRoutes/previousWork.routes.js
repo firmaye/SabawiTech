@@ -27,7 +27,9 @@ module.exports = app => {
 	//get all previousWork 
 	router.get("/:id", getUser, previousWork.getAll)
 	//get single previousWork
-	router.get("/:id/:id1", getUser,previousWork.getSingle)
+	
+	//=========== To be Implemented ==================
+	
 	//create previousWork 
 	router.post("/:id", getUser,upload.single('workThumbnail'), previousWork.create )
 	//delete previousWork

@@ -13,7 +13,7 @@ exports.getAll = async(req,res) => {
 
 // Retrieve single user from the database.
 exports.getSingle = (req, res) => {
-    res.send(res.user.userName)
+    res.json(res.user)
   };
 
 // Create single user
@@ -26,7 +26,7 @@ exports.create =async(req, res) => {
       email: req.body.email,
       phoneNo: req.body.phoneNo,
       gender: req.body.gender,
-      profilePhoto: req.file.filename,
+      profilePhoto: req.body.profilePhoto,
       location: req.body.location,
       title: req.body.title,
       titleOverview: req.body.titleOverview,
