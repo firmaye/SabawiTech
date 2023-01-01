@@ -10,7 +10,8 @@ module.exports = mongoose => {
     phoneNo:       {type: String, required: true},
     gender:        {type: String, required: false},
     profilePhoto:  {data:Buffer,type: String},
-    location:      {type: String, required: false},
+    country:      {type: String, required: false},
+    state:      {type: String, required: false},
     title:         {type: String, required: false},
     titleOverview: {type: String, required: false},
     previousWork: [
