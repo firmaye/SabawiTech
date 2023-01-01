@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeFilterLocation, removeFilterStatus, setFilterLocation, setFilterStatus } from '../redux/filter'
 
 const OpportunityFilter = () => {
+    const dispatch = useDispatch()
+    const currentFilter = useSelector((state) => state.filter.filterState)
+
+    console.log(currentFilter)
     return (
         <div className="filter-container col-xl-4">
             <div className="filter-box">
@@ -9,110 +15,22 @@ const OpportunityFilter = () => {
                 </h4>
                 <div className="category-container">
                     <div className="category-title">
-                        Category
+                        Location
                     </div>
                     <div className="category-options">
                         <div className="category-option">
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("remote")) : dispatch(removeFilterLocation("remote")) }} className="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Remote</label>
                             </div>
 
                         </div>
                         <div className="category-option">
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("office")) : dispatch(removeFilterLocation("office")) }} className="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
-                            </div>
-
-                        </div>
-                        <div className="category-option">
-                            <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Office</label>
                             </div>
 
                         </div>
@@ -120,15 +38,20 @@ const OpportunityFilter = () => {
                 </div>
                 <div className="seller-container">
                     <div className="seller-title">
-                        Seller
+                        Status
                     </div>
                     <div className="seller-options">
 
                         <div className="seller-option">
                             <div className="form-check form-switch">
-                                <input className="form-check-input" type="checkbox" role="switch"
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("open")) : dispatch(removeFilterStatus("open")) }} className="form-check-input" type="checkbox" role="switch"
                                     id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Android</label>
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Open</label>
+                            </div>
+                            <div className="form-check form-switch">
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("closed")) : dispatch(removeFilterStatus("closed")) }} className="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" />
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Closed</label>
                             </div>
 
                         </div>
