@@ -29,7 +29,7 @@ module.exports = app => {
   router.get('/', user.getAll)
 
   //get single user 
-  router.get('/:id', getUser,user.getSingle )
+  router.get('/:id',user.getSingle )
     
   //create a single user 
   router.post('/',user.create)

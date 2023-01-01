@@ -1,0 +1,70 @@
+.emailandphone-modal-close {
+    border: 0;
+    background: white;
+
+}
+
+.emailandphone-modal-close svg {
+    width:
+        40px;
+    height: auto;
+}
+
+
+.emailandphone-modal-col-2 {
+    width: -webkit-calc((100% - 60px) / 2);
+    width: -moz-calc((100% - 60px) / 2);
+    width: calc((100% - 60px) / 2);
+}
+
+@media (max-width: 767px) {
+    .emailandphone-modal-col-2 {
+        width: 100%;
+    }
+}
+
+
+
+
+/* ==========================================================================
+     #FORM
+     ========================================================================== */
+.emailandphone-modal-page-wrapper input {
+    outline: none;
+    margin: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+
+}
+
+.emailandphone-modal-input-group {
+    position: relative;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    margin: 30px 20px;
+}
+
+
+.emailandphone-modal-education {
+    margin-bottom: 37px;
+}
+
+.emailandphone-modal-description-input {
+    position: relative;
+    margin: 0 20px;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    border: 2px solid #ccc;
+    height: 200px;
+}
+
+.emailandphone-modal-period-container,
+.emailandphone-modal-location-container {
+    display: flex;
+}

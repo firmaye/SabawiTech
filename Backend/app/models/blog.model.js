@@ -18,8 +18,13 @@ module.exports = mongoose => {
                 type: String,
             },
             blogTag: {
-                type: String,
-            },
+               type: String,     
+            }
+           ,
+            blogCategory: 
+                {
+                    type: String,
+                },
             isDeleted: {
                 type: Number,
                 default: 0
