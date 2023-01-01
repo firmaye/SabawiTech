@@ -20,6 +20,7 @@ import DeletePortifolioModal from './components/DeletePortifolioModal';
 import EmploymentEditModal from './components/EmploymentEditModal';
 import EducationEditModal from './components/EducationEditModal';
 import ImageModal from './components/EditImageModal';
+import DeleteModal from './components/DeleteModal';
 
 
 const Profile = () => {
@@ -35,7 +36,7 @@ const Profile = () => {
     console.log(selectedemployment)
     useEffect(() => {
         fetch("http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a").then(res => res.json()).then(result => {
-            console.log(result.E)
+
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
@@ -60,6 +61,7 @@ const Profile = () => {
                                                 : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
                                                     : <></>
             }
+            {/* <DeleteModal /> */}
             <Navbar />
             <Header title={"Profile"} />
             <div className="">
