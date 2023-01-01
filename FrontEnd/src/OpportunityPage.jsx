@@ -12,10 +12,11 @@ const OpportunityPage = () => {
         // setloading(
         //     true
         // )
-        fetch("opportunity.json").then(res => res.json()).then(result => {
+        fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
             setloading(false)
+
             // console.log(result.opportunities)
-            setopportunitylist(result.opportunities)
+            setopportunitylist(result)
         }).catch((error) => { console.log(error) });
         ;
     }

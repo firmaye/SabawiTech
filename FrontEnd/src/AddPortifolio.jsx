@@ -7,7 +7,31 @@ import { useState } from 'react'
 const AddPortifolio = () => {
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
+    const [newportifolio, setnewportifolio] = useState({
+        workTitle: "",
+        workThumbnail: "",
+        workDescription: "",
+        workLink: "",
+        workSkill: "",
 
+    })
+    const createportifolio = () => {
+        console.log(newportifolio)
+        fetch('http://localhost:8080/api/coverLetters', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submittedproposal),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
     return (
         <main>
 
