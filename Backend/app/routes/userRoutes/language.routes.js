@@ -9,8 +9,7 @@ module.exports = app => {
 	
 	//=========== To be Implemented ==================
 	
-	//create language 
-	router.post("/:id", getUser, language.create )	
+	//no creation always updation occurs
 	//update language
 	router.patch("/:id/:id1", getUser,language.update)
   
