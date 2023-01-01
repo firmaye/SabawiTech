@@ -35,7 +35,7 @@ const Profile = () => {
     const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
     console.log(selectedemployment)
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a").then(res => res.json()).then(result => {
+        fetch("http://localhost:8080/api/users/63b13aceff389a0ced7f021a").then(res => res.json()).then(result => {
 
             setprofileinfo(result)
             setlanguage(result.language)
