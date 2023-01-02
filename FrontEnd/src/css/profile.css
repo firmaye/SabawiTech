@@ -255,6 +255,44 @@
     margin-top: 20px;
 }
 
+.profile-edit-description-name-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.profile-edit-description-name-container div {
+    /* width: 50%; */
+    word-break: break-all;
+
+}
+
+.profile-edit-description-name-container-child {
+    width: 80%;
+}
+
+.profile-edit-profile-education {
+    width: 10%;
+}
+
+.profile-photo {
+    position: relative;
+}
+
+.profile-photo button {
+    right: -30px;
+    position: absolute;
+}
+
+.profile-edit-profile-education button {
+    background: #6787FE;
+    color: white;
+    margin: 0 20px 30px 0;
+    padding: 0px 6px;
+    border: 2px solid #6787FE;
+    border-radius: 10rem;
+    height: fit-content;
+}
 
 @media (max-width: 992px) {
 

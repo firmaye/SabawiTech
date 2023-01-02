@@ -5,11 +5,6 @@ import OpportunityDetailPage from '../OpportunityDetailPage'
 
 const Opportunity = ({ data }) => {
 
-    const opendetails = (id) => {
-        // console.log("clicked")
-        // navigate({ pathname: "opportunitydetail", search: createSearchParams({ id: "id" }) })
-
-    }
     return (
         <div className="opportunities">
             {data.intStatus == "open" ?
@@ -47,7 +42,7 @@ const Opportunity = ({ data }) => {
                     {data.intType.toUpperCase()}
                 </div>
                 <div className="col-md-3 my-auto">
-                    <a onClick={() => { opendetails() }} href={"/opportunitydetail/" + data.id} className="opportunity-button">
+                    <a href={"/opportunitydetail/" + data._id} className="opportunity-button">
                         Detail
                     </a>
                 </div>

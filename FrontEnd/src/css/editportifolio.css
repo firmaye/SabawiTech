@@ -304,6 +304,34 @@
 }
 
 /* end of image input css */
+/* start of skills css  */
+.edit-portifolio-skills>.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.edit-portifolio-skills .skills {
+    background: #f8fafb;
+    color: gray;
+    border-radius: 50px;
+    padding: 5px 15px;
+    margin-right: 10px;
+    line-height: 45px;
+}
+
+.edit-portifolio-skills input {
+    margin-top: 0px;
+}
+
+.edit-portifolio-input {
+    margin-top: 0 !important
+}
+
+.edit-portifolio-skills svg {
+    color: #6787FE
+}
+
+/* end of skills css */
 @media (max-width: 992px) {
 
     .edit-portifolio-identity-container-parent,
