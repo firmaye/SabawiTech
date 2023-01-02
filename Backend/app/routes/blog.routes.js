@@ -27,6 +27,8 @@ module.exports = app => {
   router.post("/",upload.single('blogImage'), blog.create);
   // Retrieve all blog
   router.get("/", blog.findAll);
+  // Retrieve Recent blog
+  router.get("/recent", blog.findRecent);
   // Retrieve a single blog with id
   router.get("/:id", blog.findOne);
   // Update a blog with id
