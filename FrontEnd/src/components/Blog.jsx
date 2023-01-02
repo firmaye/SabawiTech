@@ -21,7 +21,7 @@ const Blog = ({ catagory }) => {
         return elt
       }
   })
-  const blogPerPage = 2
+  const blogPerPage = 1
   const pagination = sublist.length/blogPerPage;
   const pageNumbers = []
   for(var i=1; i<=pagination; i++){
@@ -81,7 +81,7 @@ const Blog = ({ catagory }) => {
         )
       })
       }
-      <a class="next page-numbers" href="">Next {'❯'}</a>
+      <a class="next page-numbers" href="javascript:void(0)" onClick={()=>{setStartPage(startPage+1)}}>Next {'❯'}</a>
       </div>
       </div>
   );
