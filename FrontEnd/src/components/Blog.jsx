@@ -5,14 +5,22 @@ import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
   const [startPage, setStartPage] = useState(1);
+
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/blogs/").then(res => res.json()).then(result => {
+        console.log(result)
+    }).catch((error) => { console.log(error) });
+}, [])
+
   // useEffect(async ()=>{
   //   const response = await api.get("/api/blogs");
   //   setBlog(response.data)
   //   console.log(response.data)
   // },[])
-  useEffect(()=>{
-      setBlog(data.blogdata)
-  }, [])
+  // useEffect(()=>{
+  //     setBlog(data.blogdata)
+  // }, [])
   let sublist = blog.filter((elt) => {
     if (catagory == "all") {
       return elt
@@ -45,7 +53,7 @@ const Blog = ({ catagory }) => {
         <img src="./Images/searchnotfound.png" alt="" />
         <h3>No results found on the section</h3>
         <p>Try again</p>
-      </div>: 
+      </div>:
       selectedbloglist.map((blog) => {
         return (
           <div class="col-lg-12 the_excerpt">
@@ -70,9 +78,8 @@ const Blog = ({ catagory }) => {
           </div>
         )
       })}
-
+      
       <div class="pagination nav-links">
-        {/* <span aria-current="page" class="page-numbers current">1</span> */}
       {pageNumbers.map((page)=>{
         return(
           <div>
@@ -81,7 +88,11 @@ const Blog = ({ catagory }) => {
         )
       })
       }
+      {startPage == "" ?
       <a class="next page-numbers" href="javascript:void(0)" onClick={()=>{setStartPage(startPage+1)}}>Next {'❯'}</a>
+      :
+      ""
+      }
       </div>
       </div>
   );

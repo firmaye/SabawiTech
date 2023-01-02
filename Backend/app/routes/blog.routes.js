@@ -1,4 +1,3 @@
-
 module.exports = app => {
   const blog = require("../controllers/blog.controller.js");
   var router = require("express").Router();
