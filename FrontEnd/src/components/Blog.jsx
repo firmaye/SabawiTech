@@ -46,6 +46,7 @@ const Blog = ({ catagory }) => {
     console.log(i);
   }
   console.log("start page", startPage)
+  console.log(blog)
 
   return (
     <div class="blogcontainer">
@@ -74,7 +75,7 @@ const Blog = ({ catagory }) => {
               <a class="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
               <p class="card-text">{blog.blogDescription.substring(0,200)+' . . .'}</p>
 
-              <a class="prolancer-rgb-btn" href={`blogdetails/${blog.id}`}>Read More</a>
+              <a class="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
             </div>
           </div>
         )

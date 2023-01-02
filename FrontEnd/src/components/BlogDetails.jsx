@@ -8,20 +8,24 @@ const BlogDetails = () => {
     useEffect(() => {
         
         
-        fetch(`http://localhost:8080/blogs/${params.id}`).then(res => res.json())
-        .then(result => {
-            console.log("results", result)
-        const found = result
-        setblog(found)
-        }).catch((error) => { console.log(error) });
+        fetch(`http://localhost:8080/api/blogs/${params.id}`).then(res => res.json())
+        .then(
+            // result => {
+            // const found = result.find(
+            //     element => element.id == params.id);
+            //     setblog(found)
+            result => {
+                setblog(result)
+            }
+        ).catch((error) => { console.log(error) });
 
         console.log("params", params.id)
-
         // const found = data.blogdata.find(
         //     element => element.id == params.id);
         //     setblog(found)
         //     console.log(blog)
     }, []);
+    console.log("blog detail page")
     console.log(blog)
     const splittag = (tag)=>{
         tag=String(blog.blogTag)
