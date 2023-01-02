@@ -9,13 +9,15 @@ const EditPortifolio = () => {
     const params = useParams()
     const paramsid = params.id
     const [previouswork, setpreviouswork] = useState([])
-
+    const [skills, setskills] = useState(["react", "node"])
+    const [newskills, setnewskills] = useState("")
+    console.log(skills)
     useEffect(() => {
 
         fetch("../user.json").then(res => res.json()).then(result => {
             const found = result.previousWork.find(element => element.id == paramsid);
+            setskills(found.workSkill)
             setpreviouswork(found)
-            // setpreviouswork(result.previousWork)
         }).catch((error) => { console.log(error) });
     }, [])
     return (
@@ -119,8 +121,37 @@ const EditPortifolio = () => {
                                         <div className="edit-portifolio-label">
                                             Work Skill
                                         </div>
-                                        <div className="edit-portifolio-label-input-container">
-                                            <input type="text" />
+                                        <div className="edit-portifolio-skills">
+
+                                            <div className="skill-list">
+                                                {
+                                                    skills.map((element) => {
+                                                        return (<div className="skills">
+                                                            {element}
+                                                            <button onClick={(data) => {
+                                                                let newskilllist = skills.filter((childelement) => {
+                                                                    if (childelement != element) {
+                                                                        return childelement
+                                                                    }
+                                                                })
+                                                                setskills(newskilllist)
+                                                            }} type="button" className="skill-list-modal-close" >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                                </svg>
+                                                            </button>
+                                                        </div>)
+                                                    })
+                                                }
+                                            </div>
+                                        </div>
+                                        <div className="edit-portifolio-label-input-container row">
+                                            <input onChange={(data) => { setnewskills(data.target.value) }} type="text" className='col edit-portifolio-input' />
+                                            <div className="col col-auto">
+                                                <button onClick={() => { setskills([...skills, newskills]) }} className="profile-edit-btn">
+                                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                                </button>
+                                            </div>
                                         </div>
 
                                     </div>

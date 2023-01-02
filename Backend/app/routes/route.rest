@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-GET http://localhost:8080/api/users/63a94d230006c22f57a64ec7
+GET http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a
 
 ### create single user 
 
@@ -10,15 +10,16 @@ Content-Type: application/json
 
 
 {
-  "firstName": "Fekede",
+  "firstName": "Ale",
   "lastName": "moges",
-  "userName": "philica21",
+  "userName": "ale21",
   "password": "sabina12",
   "email": "sabamoges@gmail.com",
   "phoneNo": 912345678,
   "gender": "F",
   "profilePhoto": "https://www.asxbcty.com",
-  "location": "addis ababa",
+  "country": "Ethiopia",
+  "state": "Addis Ababa",
   "title": "Full stack Web developer | Node | React | JavaScript | Html | CSS",
   "titleOverview": "Hello 👋 , I'm saba moges motivated Full-stack web developer  with 2+ years of experience. with excellent customer care, outstanding interpersonal communication and multitasking abilities.  Prepared to deliver first-rate results to clients on the allocated time and finish tasks before deadlines ⏰. 🏆  I am a young talented African sustaining strong motivation for work, and has skills with best practices. I can work collaboratively in different working environments and team compositions. also can work on modifying existing or adding new requirements to existing systems.",
   "previousWork": [
@@ -27,7 +28,7 @@ Content-Type: application/json
       "workThumbnail": "",
       "workDescription": "Guzo is a ridesharing platform made by a team of 3 talented students",
       "workLink": "https://github.com/philica/Guzo-ridesharingPlatform",
-      "workSkill": ["React", "CSS", "Js", "Node"],
+      "workSkill": ["React", "json", "Js", "Node"],
       "isDeleted": 0,
       "deletedAt": "2022-12-15T18:35:56.605Z",
       "createdAt": "2022-12-15T18:35:56.606Z",

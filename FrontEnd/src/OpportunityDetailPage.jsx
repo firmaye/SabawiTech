@@ -5,8 +5,66 @@ import Navbar from './components/Navbar'
 import "./css/opportunitydetail.css"
 
 const OpportunityDetailPage = () => {
-    const id = useParams()
-    console.log(id)
+    const [opportunity, setopportunity] = useState({})
+    const [requiredSkill, setrequiredskill] = useState([])
+    const params = useParams()
+    const [submittedproposal, setsubmittedproposal] = useState({
+    })
+    const changepropsaltext = (value) => {
+        let updatedValue = { "letterDescription": value }
+        setsubmittedproposal(previousState => ({
+            ...previousState,
+            ...updatedValue
+        }
+        )
+        );
+        console.log(submittedproposal)
+    }
+    const sendpropsal = () => {
+        console.log(submittedproposal)
+        fetch('http://localhost:8080/api/coverLetters', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(submittedproposal),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+    useEffect(() => {
+
+        let paramsid = params.id
+
+        fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
+
+
+            const found = result
+            console.log(found.requiredSkill)
+            let skillsarray = found.requiredSkill.split(",")
+            setopportunity(found)
+            setsubmittedproposal({
+
+                "sender": "currentperson",
+                "receiverCompany": found.companyName,
+                "letterDescription": "",
+                "intPostId": found._id,
+                "status": ""
+
+            })
+            console.log(skillsarray)
+            setrequiredskill(skillsarray)
+            // opportunity.requiredSkill.map((element) => {
+            //     console.log(element)
+            // })
+        }).catch((error) => { console.log(error) });
+
+    }, [])
     return (
         <main>
             <Navbar />
@@ -127,27 +185,35 @@ const OpportunityDetailPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div class="single-opportunity-proposal-form">
-                                <h2 class="mb-5">Send Proposal</h2>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <input type="number" class="form-control" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <select class="form-control">
+                            {opportunity.intStatus == "open" ?
+                                <div className="single-opportunity-proposal-form">
+                                    <h2 className="mb-4">Send Proposal</h2>
+                                    <div className="row">
+                                        {/* <div className="col-md-6">
+                                        <input type="number" className="form-control" />
+                                    </div> */}
+                                        {/* <div className="col-md-6">
+                                        <select className="form-control">
                                             <option value="">Options to select</option>
                                             <option value="">Options to select</option>
                                             <option value="">Options to select</option>
                                             <option value="">Options to select</option>
                                             <option value="">Options to select</option>
                                         </select>
+                                    </div> */}
+                                        <div className="col-md-12">
+                                            <textarea onChange={(data) => { changepropsaltext(data.target.value) }} className="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                            {/* <input type="number" className="form-control">  */}
+                                        </div>
+                                        <div className="col d-flex justify-content-center">
+
+                                            <button onClick={() => { sendpropsal() }} className=" single-opportunity-submit-proposal">
+                                                Submit a Proposal
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-md-12">
-                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
-                                        {/* <input type="number" class="form-control">  */}
-                                    </div>
-                                </div>
-                            </div>
+                                </div> : <></>}
+
                         </div>
                         <div class="col-lg-4 position-relative single-opportunity-description">
                             <div class="single-opportunity-sidebar">
@@ -155,12 +221,10 @@ const OpportunityDetailPage = () => {
                                     <div class="text-center">
                                         <h5>Budget</h5>
                                         <h1>$340</h1>
-                                        <span>Project type:Fixed</span>
-                                        <div class="single-opportunity-sidebar-buttons">
-                                            <button class="single-opportunity-submit-proposal">
-                                                Submit a Proposal
-                                            </button>
-                                            <button class="single-opportunity-wishlist-proposal">
+                                        <span>Project type:Fixed</span> */}
+                                        <div className="single-opportunity-sidebar-buttons">
+
+                                            {/* <button className="single-opportunity-wishlist-proposal">
                                                 Wishlist Project
                                             </button>
                                         </div>

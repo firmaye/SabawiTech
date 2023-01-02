@@ -4,20 +4,16 @@ import Profile from "../assets/profile.jpg"
 import OpportunityDetailPage from '../OpportunityDetailPage'
 
 const Opportunity = ({ data }) => {
-    console.log(data)
-    const navigate = useNavigate();
-    const opendetails = (id) => {
-        navigate({ pathname: "opportunitydetail", search: createSearchParams({ id: "id" }) })
-    }
+
     return (
         <div className="opportunities">
-            {data.intStatus == "active" ?
+            {data.intStatus == "open" ?
                 <div className="opportunity-featured">
-                    Active
-                    <i className="fa fa-bolt"></i>
+                    Open
+                    {/* <i className="fa fa-bolt"></i> */}
                 </div> : <div className="opportunity-featured opportunity-featured-inactive">
-                    InActive
-                    <i className="fa fa-bolt"></i>
+                    Closed
+                    {/* <i className="fa fa-bolt"></i> */}
                 </div>}
 
             <div className="opportunity-detail row">
@@ -46,7 +42,7 @@ const Opportunity = ({ data }) => {
                     {data.intType.toUpperCase()}
                 </div>
                 <div className="col-md-3 my-auto">
-                    <button onClick={() => { opendetails() }} href={"/opportunitydetail/" + data.id} className="opportunity-button">
+                    <a href={"/opportunitydetail/" + data._id} className="opportunity-button">
                         Detail
                     </button>
                 </div>

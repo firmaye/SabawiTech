@@ -1,0 +1,70 @@
+.delete-portifolio-modal-close {
+    border: 0;
+    background: white;
+
+}
+
+.delete-portifolio-modal-close svg {
+    width:
+        40px;
+    height: auto;
+}
+
+
+.delete-portifolio-modal-col-2 {
+    width: -webkit-calc((100% - 60px) / 2);
+    width: -moz-calc((100% - 60px) / 2);
+    width: calc((100% - 60px) / 2);
+}
+
+@media (max-width: 767px) {
+    .delete-portifolio-modal-col-2 {
+        width: 100%;
+    }
+}
+
+
+
+
+/* ==========================================================================
+     #FORM
+     ========================================================================== */
+.delete-portifolio-modal-page-wrapper input {
+    outline: none;
+    margin: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+
+}
+
+.delete-portifolio-modal-input-group {
+    position: relative;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    margin: 30px 20px;
+}
+
+
+.delete-portifolio-modal-education {
+    margin-bottom: 37px;
+}
+
+.delete-portifolio-modal-description-input {
+    position: relative;
+    margin: 0 20px;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    border: 2px solid #ccc;
+    height: 200px;
+}
+
+.delete-portifolio-modal-period-container,
+.delete-portifolio-modal-location-container {
+    display: flex;
+}

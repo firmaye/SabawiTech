@@ -14,26 +14,34 @@ import EmploymentModal from './components/EmploymentAddModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
 import { useDispatch, useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
 import { setModal } from './redux/profilemodal';
+import EmailAndPhoneModal from './components/EditEmailAndPhoneModal';
+import DeletePortifolioModal from './components/DeletePortifolioModal';
+import EmploymentEditModal from './components/EmploymentEditModal';
+import EducationEditModal from './components/EducationEditModal';
+import ImageModal from './components/EditImageModal';
+
 
 const Profile = () => {
-    const [selectedmodal, setselectedmodal] = useState("")
+    const [selectedemployment, selselectedemployment] = useState({})
+    const [selectededucation, selselectededucation] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
     const [skilllist, setskilllist] = useState([])
     const [employmenthistory, setemploymenthistory] = useState([])
     const [education, seteducation] = useState([])
-    console.log(selectedmodal)
+    const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
+    console.log(selectedemployment)
     useEffect(() => {
-        fetch("user.json").then(res => res.json()).then(result => {
+        fetch("http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a").then(res => res.json()).then(result => {
+            console.log(result.E)
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
             setpreviouswork(result.previousWork)
             setemploymenthistory(result.employmentHistory)
-            seteducation(result.Education)
+            seteducation(result.education)
         }).catch((error) => { console.log(error) });
     }, [])
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
@@ -41,7 +49,16 @@ const Profile = () => {
     return (
         <main>
             {
-                currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} /> : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} /> : currentModal == "skill" ? <SkillModal skilllist={skilllist} /> : currentModal == "employmentadd" ? <EmploymentModal /> : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} /> : <></>
+                currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} />
+                    : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} />
+                        : currentModal == "skill" ? <SkillModal skilllist={skilllist} /> : currentModal == "employmentadd" ? <EmploymentModal />
+                            : currentModal == "educationadd" ? <EducationModal /> : currentModal == "languagesadd" ? <LanguageModal language={language} />
+                                : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
+                                    : currentModal == "profileimage" ? <ImageModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
+                                        : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
+                                            : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
+                                                : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
+                                                    : <></>
             }
             <Navbar />
             <Header title={"Profile"} />
@@ -56,6 +73,9 @@ const Profile = () => {
                                             <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                 <div className="profile-photo">
                                                     <img src={ProfileImg} alt="" />
+                                                    <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
+                                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
                                                 </div>
                                             </div>
                                             <div className="profile-identity-detail ">
@@ -119,16 +139,33 @@ const Profile = () => {
                                             Education
                                         </div>
                                         <button onClick={() => { dispatch(setModal(("educationadd"))) }} >
-                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <i className="fa fa-plus" aria-hidden="true"></i>
 
                                         </button>
                                     </div>
                                     <div className="profile-edit-description ">
                                         {education.map((element) => {
                                             return (<div className='flex-column mb-4'>
-                                                <div>
+                                                <div className="profile-edit-description-name-container">
 
-                                                    {element.schoolName}
+                                                    <div className="profile-edit-description-name-container-child">
+
+                                                        {element.schoolName}
+                                                    </div>
+                                                    <div className="profile-edit-profile-education">
+
+                                                        <button onClick={() => { selselectededucation(element); dispatch(setModal(("educationedit"))) }} >
+                                                            <i className="fa fa-trash" aria-hidden="true"></i>
+
+                                                        </button>
+                                                    </div>
+                                                    <div className="profile-edit-profile-education">
+
+                                                        <button onClick={() => { selselectededucation(element); dispatch(setModal(("educationedit"))) }} >
+                                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+
+                                                        </button>
+                                                    </div>
                                                 </div>
                                                 <div>
                                                     {element.dateAttended}
@@ -144,30 +181,15 @@ const Profile = () => {
 
                                     <div className="profile-edit-profile">
                                         <div>
-                                            Email
+                                            Email And Phone Number
                                         </div>
-                                        <button>
+                                        <button onClick={() => { dispatch(setModal(("emailandphone"))) }}>
                                             <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                         </button>
                                     </div>
                                     <div className="profile-edit-description">
                                         {profileinfo.email}
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div className="profile-sidebar-container">
-                                <div className="profile-edit-profile-container">
-
-                                    <div className="profile-edit-profile">
-                                        <div>
-                                            Phone Number
-                                        </div>
-                                        <button>
-                                            <i className="fa fa-pencil" aria-hidden="true"></i>
-
-                                        </button>
                                     </div>
                                     <div className="profile-edit-description">
                                         {profileinfo.phoneNo}
@@ -235,7 +257,7 @@ const Profile = () => {
                                                             <a href={`editportifolio/${element.id}`} className="profile-edit-btn">
                                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                                             </a>
-                                                            <a className="profile-edit-btn">
+                                                            <a onClick={() => { setportifoliotobedeleted(element.id); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
                                                                 <i className="fa fa-trash" aria-hidden="true"></i>
                                                             </a>
                                                         </div>
@@ -298,7 +320,7 @@ const Profile = () => {
                                             {element.empRole} | {element.empLocation}
                                         </div>
                                         <div className="">
-                                            <button className="profile-edit-btn">
+                                            <button onClick={() => { selselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                         </div>

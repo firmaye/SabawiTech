@@ -6,9 +6,10 @@ module.exports = app => {
 	//get all language 
 	router.get("/:id", getUser, language.getAll)
 	//get single language
-	router.get("/:id/:id1", getUser,language.getSingle)
-	//create language 
-	router.post("/:id", getUser, language.create )	
+	
+	//=========== To be Implemented ==================
+	
+	//no creation always updation occurs
 	//update language
 	router.patch("/:id/:id1", getUser,language.update)
   

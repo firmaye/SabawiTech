@@ -151,11 +151,9 @@
             "schoolName": "Addis Ketema Preparatory School",
             "dateAttended": "2022-12-15T18:35:56.619Z",
             "areaOfStudy": "computerscience",
-            "eduDescription": "",
-            "isDeleted": 0,
-            "deletedAt": "2022-12-15T18:35:56.619Z",
-            "createdAt": "2022-12-15T18:35:56.619Z",
-            "updatedAt": "2022-12-15T18:35:56.620Z"
+            "attendedfrom": "",
+            "attendedto": "",
+            "eduDescription": ""
         },
         {
             "id": 545678987654,
@@ -187,11 +185,7 @@
             "certTitle": "International Collegiate Programming Contest",
             "certProvider": "Icpc.foundation",
             "certLink": "",
-            "dateIssued": "2022-12-15T18:35:56.622Z",
-            "isDeleted": 0,
-            "deletedAt": "2022-12-15T18:35:56.622Z",
-            "createdAt": "2022-12-15T18:35:56.622Z",
-            "updatedAt": "2022-12-15T18:35:56.623Z"
+            "dateIssued": "2022-12-15T18:35:56.622Z"
         },
         {
             "id": 876545678,
@@ -215,9 +209,8 @@
             "empPeriod": "4 month",
             "empDescription": "                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam dicta magnam exercitationem cumque fugiat a dolore numquam quisquam voluptatum ea placeat, est consectetur sit voluptates animi dolor, eius earum culpa.",
             "isDeleted": 0,
-            "deletedAt": "2022-12-15T18:35:56.629Z",
-            "createdAt": "2022-12-15T18:35:56.630Z",
-            "updatedAt": "2022-12-15T18:35:56.630Z"
+            "empFrom": "",
+            "empTo": ""
         },
         {
             "id": 0,
@@ -225,7 +218,7 @@
             "empLocation": "Location",
             "empRole": "Software Developer",
             "empPeriod": "4 month",
-            "empDescription": "                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam dicta magnam exercitationem cumque fugiat a dolore numquam quisquam voluptatum ea placeat, est consectetur sit voluptates animi dolor, eius earum culpa.",
+            "empDescription": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aperiam dicta magnam exercitationem cumque fugiat a dolore numquam quisquam voluptatum ea placeat, est consectetur sit voluptates animi dolor, eius earum culpa.",
             "isDeleted": 0,
             "deletedAt": "2022-12-15T18:35:56.629Z",
             "createdAt": "2022-12-15T18:35:56.630Z",
