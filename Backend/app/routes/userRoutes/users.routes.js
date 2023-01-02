@@ -40,6 +40,9 @@ module.exports = app => {
   //update user 
   router.patch('/:id', getUser, user.update)
 
+  //upload profile image
+  router.post('/upload/:id',getUser, user.upload)
+
   app.use('/api/users', router);
 
 }
