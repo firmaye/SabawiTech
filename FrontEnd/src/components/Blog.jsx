@@ -6,7 +6,6 @@ const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
   const [startPage, setStartPage] = useState(1);
 
-
   useEffect(() => {
     fetch("http://localhost:8080/api/blogs/").then(res => res.json()).then(result => {
         console.log(result)
@@ -26,7 +25,7 @@ const Blog = ({ catagory }) => {
     if (catagory == "all") {
       return elt
     }
-    else if (elt.catagory == catagory) {
+    else if (elt.blogCategory == catagory) {
         return elt
       }
   })
