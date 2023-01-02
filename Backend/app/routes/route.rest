@@ -242,9 +242,18 @@ GET http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978/63a60fb23cfbc3
 
 ### create new prevous work history
 
-POST http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978
+PATCH  http://localhost:8080/api/users/language/63b13cfd127ade2c12562493
 Content-Type: application/json
 
+{
+  "language":[{
+   "languageName":"Korean",
+   "languageProficiency":"Native",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+},
 {
    "languageName":"Korean",
    "languageProficiency":"Native",
@@ -252,7 +261,16 @@ Content-Type: application/json
    "deletedAt":"2022-12-15T18:35:56.614Z",
    "createdAt":"2022-12-15T18:35:56.614Z",
    "updatedAt":"2022-12-15T18:35:56.615Z"
-} 
+},
+{
+   "languageName":"Korean",
+   "languageProficiency":"Native",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+} ]
+}
 
 ### delete language 
 DELETE http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978/63a9562635f310076319d8ab

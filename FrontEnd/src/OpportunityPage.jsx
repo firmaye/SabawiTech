@@ -5,6 +5,12 @@ import OpportunityFilter from './components/OpportunityFilter'
 import Opportunity from './components/Opportunity'
 import Header from './components/Header'
 import { useDispatch, useSelector } from 'react-redux'
+import Loading from './components/Loading';
+
+import FadeIn from "react-fade-in";
+
+
+
 const OpportunityPage = () => {
     const [loading, setloading] = useState(true)
     const [opportunitylist, setopportunitylist] = useState([])
@@ -65,31 +71,33 @@ const OpportunityPage = () => {
         }
     })
     if (loading) {
-        return <div>Loading</div>
+        return (
+            <Loading />)
     } else {
 
         return (
+            <FadeIn>
+                <main>
+                    <Navbar />
+                    <Header title={"Projects"} />
+                    <div className="main-content-container container">
+                        <div className="main-content-container-child row">
 
-            <main>
-                <Navbar />
-                <Header title={"Projects"} />
-                <div className="main-content-container container">
-                    <div className="main-content-container-child row">
+                            <OpportunityFilter />
 
-                        <OpportunityFilter />
+                            <div className="opportunities-container  col-xl-8">
+                                {sublist.map((opportunity) => {
 
-                        <div className="opportunities-container  col-xl-8">
-                            {sublist.map((opportunity) => {
-
-                                return <Opportunity data={opportunity} />
-                            })}
+                                    return <Opportunity data={opportunity} />
+                                })}
 
 
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            </main>
+                    </div>
+                </main>
+            </FadeIn>
 
         )
     }
