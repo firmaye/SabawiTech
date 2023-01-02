@@ -20,7 +20,7 @@ import DeletePortifolioModal from './components/DeletePortifolioModal';
 import EmploymentEditModal from './components/EmploymentEditModal';
 import EducationEditModal from './components/EducationEditModal';
 import ImageModal from './components/EditImageModal';
-import DeleteModal from './components/DeleteModal';
+import SuccessModal from './components/SuccessModal';
 
 
 const Profile = () => {
@@ -33,9 +33,9 @@ const Profile = () => {
     const [employmenthistory, setemploymenthistory] = useState([])
     const [education, seteducation] = useState([])
     const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
-    console.log(selectedemployment)
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/63b13aceff389a0ced7f021a").then(res => res.json()).then(result => {
+        fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
+            console.log(result.language)
 
             setprofileinfo(result)
             setlanguage(result.language)
@@ -59,9 +59,9 @@ const Profile = () => {
                                         : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
                                             : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
                                                 : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
-                                                    : <></>
+                                                    : currentModal == "success" ? <SuccessModal />
+                                                        : <></>
             }
-            {/* <DeleteModal /> */}
             <Navbar />
             <Header title={"Profile"} />
             <div className="">

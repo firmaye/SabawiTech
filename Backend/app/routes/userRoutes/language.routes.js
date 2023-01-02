@@ -6,13 +6,13 @@ module.exports = app => {
 	//get all language 
 	router.get("/:id", getUser, language.getAll)
 	//get single language
-	
+
 	//=========== To be Implemented ==================
-	
+
 	//no creation always updation occurs
 	//update language
-	router.patch("/:id/:id1", getUser,language.update)
-  
-  app.use('/api/users/language', router);
+	router.patch("/:id", getUser, language.update)
+
+	app.use('/api/users/language', router);
 
 }
