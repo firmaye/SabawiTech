@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import data from './jsonapi/data.json'
 import { useParams } from 'react-router-dom';
 import '../css/blog.css'
-const BlogDetails = () => {
+const BlogDetails = ({authenticated}) => {
     const [blog, setblog] = useState([]);
     const params = useParams();
     useEffect(() => {
@@ -104,7 +104,12 @@ const BlogDetails = () => {
             <small>
             {/* <a rel="nofollow" id="cancel-comment-reply-link" href="">Cancel reply</a> */}
             </small></h3>
-            <p class="must-log-in">You must be <a href="">logged in</a> to post a comment.</p> </div>
+            {authenticated ?
+            <h4>disqus comment field</h4>
+            :
+            <p class="must-log-in">You must be <a href="">logged in</a> to post a comment.</p> 
+            }
+            </div>
         </div>
     </div>         
     );
