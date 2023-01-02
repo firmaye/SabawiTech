@@ -23,29 +23,29 @@ const Blog = ({ catagory }) => {
   })
   // console.log(sublist)
   return (
-    <div class="blogcontainer">
+    <div className="blogcontainer">
       {sublist.map((blog) => {
         return (
-          <div class="col-lg-12 the_excerpt">
-            <img class="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
+          <div className="col-lg-12 the_excerpt">
+            <img className="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
             {/* style="margin-top: 55px;" */}
-            <div class="card-body the_excerpt_content" >
-              <div class="entry-meta">
-                <ul class="list-inline">
-                  <li class="list-inline-item">
-                    <i class="fa fa-user"></i> by <a href="">{blog.author}</a>
+            <div className="card-body the_excerpt_content" >
+              <div className="entry-meta">
+                <ul className="list-inline">
+                  <li className="list-inline-item">
+                    <i className="fa fa-user"></i> by <a href="">{blog.author}</a>
                   </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-comment"></i> <a href="">0 Comments</a>
+                  <li className="list-inline-item">
+                    <i className="fa fa-comment"></i> <a href="">0 Comments</a>
                   </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-tags"></i> <a href="">Interview</a> </li>
+                  <li className="list-inline-item">
+                    <i className="fa fa-tags"></i> <a href="">Interview</a> </li>
                 </ul>
               </div>
-              <a class="blog_title" href="" rel="bookmark">{blog.blogTitle}</a>
-              <p class="card-text">{blog.blogDescription}</p>
+              <a className="blog_title" href="" rel="bookmark">{blog.blogTitle}</a>
+              <p className="card-text">{blog.blogDescription}</p>
 
-              <a class="prolancer-rgb-btn" href={`blogdetails/${blog.id}`}>Read More</a>
+              <a className="prolancer-rgb-btn" href={`blogdetails/${blog.id}`}>Read More</a>
             </div>
           </div>
         )
@@ -54,9 +54,9 @@ const Blog = ({ catagory }) => {
 
 
 
-      <div class="pagination nav-links"><span aria-current="page" class="page-numbers current">1</span>
-        <a class="page-numbers" href="">2</a>
-        <a class="next page-numbers" href="">Next {'❯'}</a></div>
+      <div className="pagination nav-links"><span aria-current="page" className="page-numbers current">1</span>
+        <a className="page-numbers" href="">2</a>
+        <a className="next page-numbers" href="">Next {'❯'}</a></div>
     </div>
   );
 }

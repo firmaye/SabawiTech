@@ -69,29 +69,29 @@ const NameModal = ({ profileinfo }) => {
                     <div className="modal-header">
                         <h5 className="modal-title" id="exampleModalLabel">Edit Name And Location</h5>
                         <button onClick={closeNameModal} type="button" className="name-modal-close" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                             </svg>                        </button>
                     </div>
                     <div className="modal-body">
-                        <div class="name-modal-page-wrapper ">
-                            <div class="">
-                                <div class="">
-                                    <div class="">
-                                        <h2 class="name-modal-title"></h2>
+                        <div className="name-modal-page-wrapper ">
+                            <div className="">
+                                <div className="">
+                                    <div className="">
+                                        <h2 className="name-modal-title"></h2>
                                         <form method="">
                                             <div className='d-flex'>
 
-                                                <div class="col-5 name-modal-input-group">
-                                                    <input class="" value={firstname} onChange={(data) => { setfirstname(data.target.value) }} type="text" name="firstName" />
+                                                <div className="col-5 name-modal-input-group">
+                                                    <input className="" value={firstname} onChange={(data) => { setfirstname(data.target.value) }} type="text" name="firstName" />
                                                 </div>
-                                                <div class="col-5 name-modal-input-group">
-                                                    <input class="" value={lastname} onChange={(data) => { setlastname(data.target.value) }} type="text" name="" />
+                                                <div className="col-5 name-modal-input-group">
+                                                    <input className="" value={lastname} onChange={(data) => { setlastname(data.target.value) }} type="text" name="" />
                                                 </div>
                                             </div>
-                                            <div class="row ">
-                                                <div class="col-12 name-modal-dropdown">
-                                                    <div class="">
+                                            <div className="row ">
+                                                <div className="col-12 name-modal-dropdown">
+                                                    <div className="">
                                                         <label>Location</label>
                                                         <div>
                                                             <CountryDropdown
@@ -101,21 +101,21 @@ const NameModal = ({ profileinfo }) => {
                                                         </div>
                                                     </div>
 
-                                                    {/* <div class="dropdown__options">
-                                                        <div class="dropdown__option dropdown__option--selected"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-kingdom_1f1ec-1f1e7.png" alt="United Kingdom" /><span>United Kingdom</span></div>
+                                                    {/* <div className="dropdown__options">
+                                                        <div className="dropdown__option dropdown__option--selected"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-kingdom_1f1ec-1f1e7.png" alt="United Kingdom" /><span>United Kingdom</span></div>
 
-                                                        <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-states_1f1fa-1f1f8.png" alt="U.S." /><span>U.S.</span></div>
+                                                        <div className="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-united-states_1f1fa-1f1f8.png" alt="U.S." /><span>U.S.</span></div>
 
-                                                        <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-france_1f1eb-1f1f7.png" alt="France" /><span>France</span></div>
+                                                        <div className="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-france_1f1eb-1f1f7.png" alt="France" /><span>France</span></div>
 
-                                                        <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-spain_1f1ea-1f1f8.png" alt="Spain" /><span>Spain</span></div>
+                                                        <div className="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-spain_1f1ea-1f1f8.png" alt="Spain" /><span>Spain</span></div>
 
-                                                        <div class="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-germany_1f1e9-1f1ea.png" alt="Germany" /><span>Germany</span></div>
+                                                        <div className="dropdown__option"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/237/flag-for-germany_1f1e9-1f1ea.png" alt="Germany" /><span>Germany</span></div>
                                                     </div> */}
                                                 </div>
-                                                <div class="col-12 name-modal-col-12">
-                                                    <div class="name-modal-input-group">
-                                                        <input class="" value={state} onChange={(data) => { setstate(data.target.value) }} type="text" placeholder="State" name="" />
+                                                <div className="col-12 name-modal-col-12">
+                                                    <div className="name-modal-input-group">
+                                                        <input className="" value={state} onChange={(data) => { setstate(data.target.value) }} type="text" placeholder="State" name="" />
                                                     </div>
                                                 </div>
 

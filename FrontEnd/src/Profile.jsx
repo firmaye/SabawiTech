@@ -27,11 +27,13 @@ import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
 import ErrorModal from './components/ErrorModal';
 import DeleteEducationModal from './components/DeleteEducationModal';
+import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
     const [selectedcertificate, setselectedcertificate] = useState({})
+    const [tobedeletedemployment, settobedeletedemployment] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
@@ -79,9 +81,10 @@ const Profile = () => {
                                                                 : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
                                                                     : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
                                                                         : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
-                                                                            : currentModal == "success" ? <SuccessModal />
-                                                                                : currentModal == "error" ? <ErrorModal />
-                                                                                    : <></>
+                                                                            : currentModal == "employmentdelete" ? <DeleteEmploymentModal tobedeleted={tobedeletedemployment} />
+                                                                                : currentModal == "success" ? <SuccessModal />
+                                                                                    : currentModal == "error" ? <ErrorModal />
+                                                                                        : <></>
                 }
                 <Navbar />
                 <Header title={"Profile"} />
@@ -346,7 +349,7 @@ const Profile = () => {
                                                 <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
-                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal(("employmentdelete"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </div>

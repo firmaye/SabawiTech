@@ -3,10 +3,10 @@ import "../css/loading.css"
 const Loading = () => {
     return (
 
-        <div class="load">
-            <div class="load-one"></div>
-            <div class="load-two"></div>
-            <div class="load-three"></div>
+        <div className="load">
+            <div className="load-one"></div>
+            <div className="load-two"></div>
+            <div className="load-three"></div>
         </div>
     )
 }
