@@ -79,7 +79,7 @@ exports.update = async (req, res) => {
 //image uploading
 //storage 
 const Storage = multer.diskStorage({
-  destination:'uploads/image',
+  destination:'uploads/images',
   filename:(req,file,cb) => {
      cb(null, Date.now() + file.originalname )
   }
@@ -106,7 +106,7 @@ exports.upload = (req,res) => {
           $set: { profilePhoto: profilePhoto }
         }
         ).then(() => {
-          res.send("succesfully sent")
+          res.send({success:true})
         }).catch((err) => console.log(err))
     }
    })

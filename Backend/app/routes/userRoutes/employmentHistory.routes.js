@@ -13,6 +13,8 @@ module.exports = app => {
 	router.post("/:id", getUser, employmentHistory.create )	
 	//update employmentHistory
 	router.patch("/:id/:id1", getUser,employmentHistory.update)
+	//delete employmentHistory
+	router.delete("/:id/:id1", getUser, employmentHistory.delete)
   
   app.use('/api/users/employmentHistory', router);
 

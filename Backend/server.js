@@ -40,6 +40,7 @@ require("./app/routes/userRoutes/otherExperience.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
+app.use("/uploads/image",express.static('uploads/image'))
 
 
 // set port, listen for requests
