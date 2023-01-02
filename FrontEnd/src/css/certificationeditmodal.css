@@ -1,31 +1,24 @@
-.education-modal-close {
+.certification-modal-close {
     border: 0;
     background: white;
 
 }
 
-.education-modal-close svg {
+.certification-modal-close svg {
     width:
         40px;
     height: auto;
 }
 
 
-.education-modal-col-2 {
+.certification-modal-col-2 {
     width: -webkit-calc((100% - 60px) / 2);
     width: -moz-calc((100% - 60px) / 2);
     width: calc((100% - 60px) / 2);
 }
 
-.education-modal-input-group .react-datepicker-wrapper input {
-    /* position: relative;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #ccc; */
-    margin-top: 20px;
-}
-
 @media (max-width: 767px) {
-    .education-modal-col-2 {
+    .certification-modal-col-2 {
         width: 100%;
     }
 }
@@ -36,7 +29,7 @@
 /* ==========================================================================
      #FORM
      ========================================================================== */
-.education-modal-page-wrapper input {
+.certification-modal-page-wrapper input {
     outline: none;
     margin: 0;
     border: none;
@@ -49,7 +42,7 @@
 
 }
 
-.education-modal-input-group {
+.certification-modal-input-group {
     position: relative;
     margin-bottom: 30px;
     border-bottom: 2px solid #ccc;
@@ -57,11 +50,11 @@
 }
 
 
-.education-modal-education {
+.certification-modal-certification {
     margin-bottom: 37px;
 }
 
-.education-modal-description-input {
+.certification-modal-description-input {
     position: relative;
     margin: 0 20px;
     padding: 5px 10px;
@@ -71,7 +64,7 @@
     height: 200px;
 }
 
-.education-modal-period-container,
-.education-modal-location-container {
+.certification-modal-period-container,
+.certification-modal-location-container {
     display: flex;
 }

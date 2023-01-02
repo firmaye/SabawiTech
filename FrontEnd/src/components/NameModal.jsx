@@ -28,6 +28,12 @@ const NameModal = ({ profileinfo }) => {
             display: "none"
         })
     }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
     let handleSubmit = (event) => {
         let body = {
             firstName: firstname,
@@ -51,6 +57,7 @@ const NameModal = ({ profileinfo }) => {
                 successModal()
             })
             .catch((error) => {
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });

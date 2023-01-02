@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
 
-#deleteModal p {
+#errorModal p {
     font-family: "Poppins" !important;
 
 }
 
-#deleteModal .delete-portifolio-modal-close {
+#errorModal .delete-portifolio-modal-close {
     position: absolute;
     top: 0;
     right: 0;
 }
 
-#deleteModal .modal-confirm {
+#errorModal .modal-confirm {
     color: #636363;
     width: 400px;
     margin-top: 100px;
 }
 
-#deleteModal .modal-confirm .modal-content {
+#errorModal .modal-confirm .modal-content {
     padding: 20px;
     border-radius: 5px;
     border: none;
@@ -25,28 +25,28 @@
     font-size: 14px;
 }
 
-#deleteModal .modal-confirm .modal-header {
+#errorModal .modal-confirm .modal-header {
     border-bottom: none;
     position: relative;
 }
 
-#deleteModal .modal-confirm h4 {
+#errorModal .modal-confirm h4 {
     text-align: center;
     font-size: 26px;
     margin: 30px 0 -10px;
 }
 
-#deleteModal .modal-confirm .close {
+#errorModal .modal-confirm .close {
     position: absolute;
     top: -5px;
     right: -2px;
 }
 
-#deleteModal .modal-confirm .modal-body {
+#errorModal .modal-confirm .modal-body {
     color: #999;
 }
 
-#deleteModal .modal-confirm .modal-footer {
+#errorModal .modal-confirm .modal-footer {
     border: none;
     text-align: center;
     border-radius: 5px;
@@ -54,29 +54,29 @@
     padding: 10px 15px 25px;
 }
 
-#deleteModal .modal-confirm .modal-footer a {
+#errorModal .modal-confirm .modal-footer a {
     color: #999;
 }
 
-#deleteModal .modal-confirm .icon-box {
+#errorModal .modal-confirm .icon-box {
     width: 80px;
     height: 80px;
     margin: 0 auto;
     border-radius: 50%;
     z-index: 9;
     text-align: center;
-    border: 3px solid #6787FE;
+    border: 3px solid red;
 }
 
-#deleteModal .modal-confirm .icon-box i {
-    color: #6787FE;
+#errorModal .modal-confirm .icon-box i {
+    color: red;
     font-size: 46px;
     display: inline-block;
     margin-top: 13px;
 }
 
-#deleteModal .modal-confirm .btn,
-#deleteModal .modal-confirm .btn:active {
+#errorModal .modal-confirm .btn,
+#errorModal .modal-confirm .btn:active {
     color: #fff;
     border-radius: 4px;
     background: #60c7c1;
@@ -90,29 +90,25 @@
     margin: 0 5px;
 }
 
-#deleteModal .modal-confirm .btn-secondary {
+#errorModal .modal-confirm .btn-secondary {
     background: #c1c1c1;
 }
 
-#deleteModal .modal-confirm .btn-secondary:hover,
-#deleteModal .modal-confirm .btn-secondary:focus {
+#errorModal .modal-confirm .btn-secondary:hover,
+#errorModal .modal-confirm .btn-secondary:focus {
     background: #a8a8a8;
 }
 
-#deleteModal .modal-confirm .btn-danger {
-    background: #6787FE;
+#errorModal .modal-confirm .btn-danger {
+    background: red;
 }
 
-#deleteModal .modal-confirm .btn-danger:hover,
-#deleteModal .modal-confirm .btn-danger:focus {
-    background: #6787FE;
+#errorModal .modal-confirm .btn-danger:hover,
+#errorModal .modal-confirm .btn-danger:focus {
+    background: red;
 }
 
-#deleteModal .trigger-btn {
+#errorModal .trigger-btn {
     display: inline-block;
     margin: 100px auto;
-}
-
-.modal-yes-btn {
-    background-color: red !important;
 }
