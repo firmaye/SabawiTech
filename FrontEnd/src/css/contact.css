@@ -1,0 +1,523 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+
+    font-family: "Poppins";
+}
+
+/* start of profile card css */
+
+
+/*Profile Card 3*/
+.profile-card-3 {
+    position: relative;
+    float: left;
+    overflow: hidden;
+    width: 100%;
+    text-align: center;
+    border: none;
+}
+
+.profile-card-3 .background-block {
+    float: left;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.profile-card-3 .card-content {
+    width: 100%;
+    padding: 15px 25px;
+    color: #232323;
+    float: left;
+    background: white;
+    height: 50%;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    z-index: 9999;
+}
+
+
+.profile-card-3 .profile {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    max-width: 100px;
+    opacity: 1;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 1);
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    z-index: 99999;
+}
+
+.profile-card-3 h2 {
+    margin: 0 0 5px;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.profile-card-3 h2 small {
+    display: block;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.profile-card-3 i {
+    display: inline-block;
+    font-size: 16px;
+    color: #232323;
+    text-align: center;
+    border: 1px solid #232323;
+    width: 45px;
+    line-height: 30px;
+    border-radius: 50%;
+    margin: 0 5px;
+    width: 45px;
+}
+
+.profile-card-3 .icon-block {
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.profile-card-3 .icon-block a {
+    text-decoration: none;
+}
+
+
+
+
+.profile-thumb-block i {
+    z-index: 10;
+    font-size: 45px;
+    border: 0;
+    width: 45px;
+}
+
+.profile-thumb-block {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-icon-container {
+    width: 68px;
+    height: 68px;
+    background: red;
+    line-height: 91px;
+    left: 10px;
+    border-radius: 50%;
+    background: #9951D01A;
+}
+
+.address-container i {
+    color: #9951D0
+}
+
+.mail-container i {
+    color: #1ABB69
+}
+
+.location-container i {
+    color: #F78F0E
+}
+
+.phone-container i {
+    color: #F5164A
+}
+
+.card-content-title {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card-content-description {
+    color: #4A6375;
+    font-family: "Rubik", Sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+.profile-card-container-parent {
+    margin-top: 100px;
+}
+
+/*end of profile card*/
+/* start of get in touch css */
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+
+
+
+
+/*---------------------------------------------*/
+
+
+.getintouch p {
+
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+    margin: 0px;
+}
+
+.getintouch ul,
+.getintouch li {
+    margin: 0px;
+    list-style-type: none;
+}
+
+
+/*---------------------------------------------*/
+.getintouch input {
+    outline: none;
+    border: none;
+}
+
+.getintouch textarea {
+    outline: none;
+    border: none;
+}
+
+.getintouch textarea:focus,
+.getintouch input:focus {
+    border-color: transparent !important;
+}
+
+
+
+/*---------------------------------------------*/
+.getintouch button {
+    outline: none !important;
+    border: none;
+    background: transparent;
+}
+
+.getintouch button:hover {
+    cursor: pointer;
+}
+
+.getintouch iframe {
+    border: none !important;
+}
+
+
+
+
+/*//////////////////////////////////////////////////////////////////
+  [ Contact 1 ]*/
+
+.getintouch .contact1 {
+    width: 100%;
+    min-height: 100%;
+    padding: 15px;
+
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.getintouch .container-contact1 {
+    width: 1163px;
+    background: #2261E81A;
+    border-radius: 10px;
+    overflow: hidden;
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 90px 130px 88px 148px;
+}
+
+/*------------------------------------------------------------------
+  [  ]*/
+.getintouch .contact1-pic {
+    width: 296px;
+}
+
+.getintouch .contact1-pic img {
+    max-width: 100%;
+}
+
+
+/*------------------------------------------------------------------
+  [  ]*/
+.getintouch .contact1-form {
+    width: 390px;
+}
+
+.getintouch .contact1-form-title {
+    display: block;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 44px;
+    color: #333333;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.getintouch input.input1 {
+    height: 50px;
+    border-radius: 25px;
+    padding: 0 30px;
+    color: white;
+}
+
+.getintouch input.input1+.shadow-input1 {
+    border-radius: 25px;
+}
+
+.getintouch textarea.input1 {
+    min-height: 150px;
+    border-radius: 25px;
+    padding: 12px 30px;
+}
+
+.getintouch textarea.input1+.shadow-input1 {
+    border-radius: 25px;
+}
+
+/*---------------------------------------------*/
+.getintouch .wrap-input1 {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    margin-bottom: 20px;
+}
+
+.getintouch .input1 {
+    display: block;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #666666;
+}
+
+.getintouch .shadow-input1 {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0px 0px 0px 0px;
+    color: rgba(87, 184, 70, 0.5);
+}
+
+.getintouch .input1:focus+.shadow-input1 {
+    -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
+    animation: anim-shadow 0.5s ease-in-out forwards;
+}
+
+@-webkit-keyframes anim-shadow {
+    to {
+        box-shadow: 0px 0px 80px 30px;
+        opacity: 0;
+    }
+}
+
+@keyframes anim-shadow {
+    to {
+        box-shadow: 0px 0px 80px 30px;
+        opacity: 0;
+    }
+}
+
+/*---------------------------------------------*/
+.getintouch .container-contact1-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.getintouch .contact1-form-btn {
+    min-width: 193px;
+    height: 50px;
+    border-radius: 25px;
+    background: #6787FE;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #fff;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 25px;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.getintouch .contact1-form-btn i {
+    margin-left: 7px;
+
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.getintouch .contact1-form-btn:hover {
+    background: #3f5091;
+}
+
+.getintouch .contact1-form-btn:hover i {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px);
+}
+
+
+
+
+/*------------------------------------------------------------------
+  [ Responsive ]*/
+
+@media (max-width: 1200px) {
+    .getintouch .contact1-pic {
+        width: 33.5%;
+    }
+
+    .getintouch .contact1-form {
+        width: 44%;
+    }
+}
+
+@media (max-width: 992px) {
+    .getintouch .container-contact1 {
+        padding: 90px 80px 88px 90px;
+    }
+
+    .getintouch .contact1-pic {
+        width: 35%;
+    }
+
+    .getintouch .contact1-form {
+        width: 55%;
+    }
+}
+
+@media (max-width: 768px) {
+    .getintouch .container-contact1 {
+        padding: 90px 80px 88px 80px;
+    }
+
+    .getintouch .contact1-pic {
+        display: none;
+    }
+
+    .getintouch .contact1-form {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .getintouch .container-contact1 {
+        padding: 90px 15px 88px 15px;
+    }
+}
+
+
+/*------------------------------------------------------------------
+  [ Alert validate ]*/
+
+.getintouch .validate-input {
+    position: relative;
+}
+
+.getintouch .alert-validate::before {
+    content: attr(data-validate);
+    position: absolute;
+    max-width: 70%;
+    background-color: white;
+    border: 1px solid #c80000;
+    border-radius: 13px;
+    padding: 4px 25px 4px 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 8px;
+    pointer-events: none;
+
+
+    color: #c80000;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+
+    visibility: hidden;
+    opacity: 0;
+
+    -webkit-transition: opacity 0.4s;
+    -o-transition: opacity 0.4s;
+    -moz-transition: opacity 0.4s;
+    transition: opacity 0.4s;
+}
+
+.getintouch .alert-validate::after {
+    content: "\f06a";
+    display: block;
+    position: absolute;
+    color: #c80000;
+    font-size: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 13px;
+}
+
+.getintouch .alert-validate:hover:before {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 992px) {
+    .getintouch .alert-validate::before {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* end of get in touch css */

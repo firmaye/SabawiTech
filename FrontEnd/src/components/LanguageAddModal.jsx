@@ -7,7 +7,18 @@ import uuid from 'react-uuid';
 const LanguageModal = ({ language }) => {
     const dispatch = useDispatch()
 
-
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -21,6 +32,32 @@ const LanguageModal = ({ language }) => {
         setmodalstyle({
             display: "none"
         })
+    }
+    let handleSubmit = (event) => {
+        let languageedited = languagelistmodal.map((element) => {
+            delete element._id
+            return element
+        })
+        let language = JSON.stringify({ language: languageedited })
+        console.log(language)
+        event.preventDefault()
+        fetch('http://localhost:8080/api/users/language/63b13cfd127ade2c12562493', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: language
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -121,9 +158,6 @@ const LanguageModal = ({ language }) => {
                                                                 "_id": uuid(),
                                                                 "languageName": langtobeadded,
                                                                 "languageProficiency": proficiencytobeadded,
-                                                                "deletedAt": "2022-12-15T18:35:56.614Z",
-                                                                "createdAt": "2022-12-15T18:35:56.614Z",
-                                                                "updatedAt": "2022-12-15T18:35:56.615Z"
                                                             }]
                                                             return newstate
                                                         })
@@ -143,7 +177,7 @@ const LanguageModal = ({ language }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeLanguageModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
