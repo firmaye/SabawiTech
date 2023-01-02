@@ -3,10 +3,17 @@ import { useState } from 'react'
 import "../css/employmentaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-
+import DatePicker from "react-datepicker"
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 const EmploymentModal = () => {
     const dispatch = useDispatch()
-
+    const [country, setcountry] = useState()
+    const [description, setdescription] = useState()
+    const [companyName, setcompanyName] = useState()
+    const [city, setcity] = useState()
+    const [title, settitle] = useState()
+    const [periodfrom, setperiodfrom] = useState(new Date())
+    const [periodto, setperiodto] = useState(new Date())
 
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -18,6 +25,49 @@ const EmploymentModal = () => {
         setmodalstyle({
             display: "none"
         })
+    }
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        let body = {
+            empAt: companyName,
+            empCountry: country,
+            empState: city,
+            empRole: title,
+            empFrom: periodfrom,
+            empTo: periodto,
+            empDescription: description
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        fetch(`http://localhost:8080/api/users/employmentHistory/63b13cfd127ade2c12562493`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                // console.log(error)
+                console.error('Error:', error);
+            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,27 +88,38 @@ const EmploymentModal = () => {
                                         <h2 class="employment-modal-employment"></h2>
                                         <form method="">
                                             <div class="employment-modal-input-group">
-                                                <input class="" type="text" placeholder="Company Name" name="" />
+                                                <input onChange={(data) => { setcompanyName(data.target.value) }} class="" type="text" placeholder="Company Name" name="" />
                                             </div>
-                                            <div className="employment-modal-location-container">
 
-                                                <div class="employment-modal-input-group">
-                                                    <input class="" type="text" placeholder="Country" name="" />
+                                            <div className="employment-modal-location-container">
+                                                <div class="employment-modal-input-group col-6 employment-modal-location-country">
+
+                                                    <CountryDropdown
+                                                        value={country}
+                                                        onChange={(val) => setcountry(val)} />
                                                 </div>
                                                 <div class="employment-modal-input-group">
-                                                    <input class="" type="text" placeholder="City" name="" />
+                                                    <input onChange={(data) => { setcity(data.target.value) }} class="" type="text" placeholder="City" name="" />
                                                 </div>
                                             </div>
                                             <div class="employment-modal-input-group">
-                                                <input class="" type="text" placeholder="Title" name="" />
+                                                <input onChange={(data) => { settitle(data.target.value) }} class="" type="text" placeholder="Title" name="" />
                                             </div>
-                                            <div class="employment-modal-period-container">
+                                            <div className="employment-modal-period-container">
 
                                                 <div class="employment-modal-input-group">
-                                                    <input class="" type="text" placeholder="Period From" name="" />
+                                                    <label>Period From</label>
+                                                    <DatePicker selected={periodfrom} onChange={(date) => setperiodfrom(date)} />
                                                 </div>
                                                 <div class="employment-modal-input-group">
-                                                    <input class="" type="text" placeholder="Period To" name="" />
+                                                    <label>Period To</label>
+                                                    <DatePicker selected={periodto} onChange={(date) => setperiodto(date)} />                                                </div>
+                                            </div>
+                                            <div className="employment-modal-period-container employment-textarea-container">
+
+                                                <div class="employment-modal-input-group">
+                                                    <label>Description</label>
+                                                    <textarea onChange={(data) => { setdescription(data.target.value) }} name="" id="" cols="30" rows="10"></textarea>
                                                 </div>
                                             </div>
 
@@ -71,11 +132,11 @@ const EmploymentModal = () => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeEmploymentModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

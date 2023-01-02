@@ -340,11 +340,14 @@ const Profile = () => {
                                     <div className="profile-employment-history-detail">
                                         <div className=" profile-employment-history-detail-title">
                                             <div className="">
-                                                {element.empRole} | {element.empLocation}
+                                                {element.empRole} | {element.empCountry} , {element.empState}
                                             </div>
                                             <div className="">
                                                 <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                </button>
+                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                                    <i className="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                         </div>
@@ -386,6 +389,9 @@ const Profile = () => {
                                                 <div className="">
                                                     <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
                                                         <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
+                                                        <i className="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
                                             </div>
