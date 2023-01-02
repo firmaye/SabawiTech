@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../css/blog.css'
-const Blogsidebar = ({ catagoryFiletering }) => {
+const Blogsidebar = ({ catagoryFiletering, display }) => {
   const [catagory, setCatagory] = useState("")
   return (
     <div class="col-lg-3 sidebar">
@@ -20,13 +20,13 @@ const Blogsidebar = ({ catagoryFiletering }) => {
         </div>
       </div>
 
-      <div class="sidebar-header widget">
+      <div class="sidebar-header widget" style={{display:display}}>
         <h4>Catagories</h4>
         <ul class="catlinks">
           <li onClick={() => {catagoryFiletering("all")}}>All</li>
-          <li onClick={() => { catagoryFiletering("webdevelopment") }}>Web-Developer</li>
-          <li onClick={() => { catagoryFiletering("marketing") }}>Marketing</li>
-          <li onClick={() => { catagoryFiletering("tech") }}>Technology</li>
+          <li onClick={() => {catagoryFiletering("webdevelopment") }}>Web-Developer</li>
+          <li onClick={() => {catagoryFiletering("marketing") }}>Marketing</li>
+          <li onClick={() => {catagoryFiletering("tech") }}>Technology</li>
         </ul>
       </div>
     </div>

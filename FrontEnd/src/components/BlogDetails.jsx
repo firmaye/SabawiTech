@@ -54,7 +54,7 @@ const BlogDetails = () => {
                 </div>
             </div>
             </div>
-            <div class="related-posts">
+            {/* <div class="related-posts">
                 <h4>Related Post</h4>
                 <div class="row">
                 <div class="col-md-12 col-xl-4">
@@ -92,7 +92,7 @@ const BlogDetails = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div> */}
         <div id="comments" class="comments-area">
             <div id="respond" class="comment-respond">
             <h3 id="reply-title" class="comment-reply-title">Leave a Reply 

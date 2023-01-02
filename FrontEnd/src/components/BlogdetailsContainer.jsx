@@ -15,7 +15,7 @@ const BlogdetailsContainer = (props) => {
                     <div class="container">
                         <div class="row blogmodification">
                             <BlogDetails />
-                            <Blogsidebar />
+                            <Blogsidebar display = "none"/>
                         </div>
                     </div>
                 </div>

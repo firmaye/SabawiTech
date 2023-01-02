@@ -4,14 +4,10 @@ import '../css/blog.css';
 import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
-  // useEffect(()=>{
-  //     setBlog(data.blogdata)
-  // }, [])
-  // console.log("catagories of a blog", catagory);
-  // console.log(data.blogdata)
-  let sublist = data.blogdata.filter((elt) => {
-    console.log(elt.catagory)
-    console.log(catagory)
+  useEffect(()=>{
+      setBlog(data.blogdata)
+  }, [])
+  let sublist = blog.filter((elt) => {
     if (catagory == "all") {
       return elt
     }
@@ -19,7 +15,23 @@ const Blog = ({ catagory }) => {
         return elt
       }
   })
-  // console.log(sublist)
+  const blogPerPage = 1
+  const pagination = sublist.length/blogPerPage;
+  const pageNumbers = []
+  for(var i=1; i<=pagination; i++){
+    pageNumbers.push(i)
+  }
+  // console.log("pagenumber", pageNumbers)
+  var start = 0
+  var end = 1
+  console.log("sublist", sublist.slice(start, end));
+
+
+  for(var i = 0; i <= blogPerPage; i++){
+    console.log(i);
+  }
+
+
   return (
     <div class="blogcontainer">
       {sublist.length == 0 ? 
@@ -53,13 +65,19 @@ const Blog = ({ catagory }) => {
         )
       })}
 
+      <div class="pagination nav-links">
+        {/* <span aria-current="page" class="page-numbers current">1</span> */}
+      {pageNumbers.map((page)=>{
+        return(
+          <a class="page-numbers" href="">{page}</a>
+        )
+      })
+      }
+      <a class="next page-numbers" href="">Next {'❯'}</a>
+      </div>
 
-
-
-      <div class="pagination nav-links"><span aria-current="page" class="page-numbers current">1</span>
         <a class="page-numbers" href="">2</a>
-        <a class="next page-numbers" href="">Next {'❯'}</a></div>
-    </div>
+        </div>
   );
 }
 
