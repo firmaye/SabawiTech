@@ -10,6 +10,7 @@ const Blog = ({ catagory }) => {
   useEffect(() => {
     fetch("http://localhost:8080/api/blogs/").then(res => res.json()).then(result => {
         console.log(result)
+        setBlog(result)
     }).catch((error) => { console.log(error) });
 }, [])
 
@@ -29,8 +30,8 @@ const Blog = ({ catagory }) => {
         return elt
       }
   })
-  const blogPerPage = 1
-  const pagination = sublist.length/blogPerPage;
+  const blogPerPage = 3
+  const pagination = Math.ceil(sublist.length/blogPerPage);
   const pageNumbers = []
   for(var i=1; i<=pagination; i++){
     pageNumbers.push(i)
@@ -88,8 +89,15 @@ const Blog = ({ catagory }) => {
         )
       })
       }
-      {startPage == "" ?
-      <a class="next page-numbers" href="javascript:void(0)" onClick={()=>{setStartPage(startPage+1)}}>Next {'❯'}</a>
+      {startPage != "" ?
+      <a class="next page-numbers" href="javascript:void(0)" 
+      onClick={()=>{
+        if(startPage<pagination){
+          setStartPage(startPage+1)
+        }else{
+          setStartPage(startPage)
+        }
+       }}>Next {'❯'}</a>
       :
       ""
       }

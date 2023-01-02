@@ -44,7 +44,7 @@ const Opportunity = ({ data }) => {
                 <div className="col-md-3 my-auto">
                     <a href={"/opportunitydetail/" + data._id} className="opportunity-button">
                         Detail
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

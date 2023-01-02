@@ -446,7 +446,11 @@ const OpportunityDetailPage = () => {
 
 
 
-            </section >
+            </div>
+            </div>
+            </div>
+            </div>
+            </section>
 
         </main >
     )

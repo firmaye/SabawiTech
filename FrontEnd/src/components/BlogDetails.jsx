@@ -3,14 +3,26 @@ import data from './jsonapi/data.json'
 import { useParams } from 'react-router-dom';
 import '../css/blog.css'
 const BlogDetails = () => {
-    const [blog, setblog] = useState({});
+    const [blog, setblog] = useState([]);
     const params = useParams();
     useEffect(() => {
-        const found = data.blogdata.find(element => element.id == params.id);
+        
+        
+        fetch(`http://localhost:8080/blogs/${params.id}`).then(res => res.json())
+        .then(result => {
+            console.log("results", result)
+        const found = result
         setblog(found)
-        console.log(blog)
-    }, []);
+        }).catch((error) => { console.log(error) });
 
+        console.log("params", params.id)
+
+        // const found = data.blogdata.find(
+        //     element => element.id == params.id);
+        //     setblog(found)
+        //     console.log(blog)
+    }, []);
+    console.log(blog)
     const splittag = (tag)=>{
         tag=String(blog.blogTag)
         var taglist = tag.split(',');
