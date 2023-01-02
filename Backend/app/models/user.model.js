@@ -83,7 +83,8 @@ module.exports = mongoose => {
         {
             id: mongoose.ObjectId,
             empAt: String,
-            empLocation: String,
+            empCountry: String,
+            empState: String,
             empRole: String,
             empFrom: String,
             empTo: String,
