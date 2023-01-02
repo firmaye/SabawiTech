@@ -23,7 +23,8 @@ exports.create = async (req, res) => {
     
     let newEmploymentHistory = {
       empAt: req.body.empAt,
-      empLocation: req.empLocation,
+      empCountry: req.body.empCountry,
+      empState: req.body.empState,
       empRole: req.body.empRole,
       empPeriod: req.body.empPeriod,
       empDescription: req.body.empDescription,
