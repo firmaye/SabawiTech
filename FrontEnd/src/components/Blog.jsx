@@ -4,6 +4,12 @@ import '../css/blog.css';
 import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
+  const [startPage, setStartPage] = useState(1);
+  // useEffect(async ()=>{
+  //   const response = await api.get("/api/blogs");
+  //   setBlog(response.data)
+  //   console.log(response.data)
+  // },[])
   useEffect(()=>{
       setBlog(data.blogdata)
   }, [])
@@ -15,22 +21,22 @@ const Blog = ({ catagory }) => {
         return elt
       }
   })
-  const blogPerPage = 1
+  const blogPerPage = 2
   const pagination = sublist.length/blogPerPage;
   const pageNumbers = []
   for(var i=1; i<=pagination; i++){
     pageNumbers.push(i)
   }
   // console.log("pagenumber", pageNumbers)
-  var start = 0
-  var end = 1
-  console.log("sublist", sublist.slice(start, end));
+  var start = (startPage * blogPerPage) - blogPerPage
+  var end = startPage * blogPerPage
+  const selectedbloglist = sublist.slice(start, end);
 
-
+  console.log("selected", selectedbloglist)
   for(var i = 0; i <= blogPerPage; i++){
     console.log(i);
   }
-
+  console.log("start page", startPage)
 
   return (
     <div class="blogcontainer">
@@ -40,7 +46,7 @@ const Blog = ({ catagory }) => {
         <h3>No results found on the section</h3>
         <p>Try again</p>
       </div>: 
-      sublist.map((blog) => {
+      selectedbloglist.map((blog) => {
         return (
           <div class="col-lg-12 the_excerpt">
             <img class="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
@@ -69,15 +75,15 @@ const Blog = ({ catagory }) => {
         {/* <span aria-current="page" class="page-numbers current">1</span> */}
       {pageNumbers.map((page)=>{
         return(
-          <a class="page-numbers" href="">{page}</a>
+          <div>
+            <a class="page-numbers" href="javascript:void(0)" onClick={()=>{setStartPage(page)}}>{page}</a>
+            </div>
         )
       })
       }
       <a class="next page-numbers" href="">Next {'❯'}</a>
       </div>
-
-        <a class="page-numbers" href="">2</a>
-        </div>
+      </div>
   );
 }
 
