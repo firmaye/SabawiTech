@@ -70,10 +70,10 @@ const NameModal = ({ }) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                // successModal()
+                successModal()
             })
             .catch((error) => {
-                // errorModal()
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });

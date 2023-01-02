@@ -10,7 +10,7 @@ const EmploymentEditModal = ({ selected }) => {
     const dispatch = useDispatch()
     console.log(selected)
     const [country, setcountry] = useState(selected.empCountry)
-    const [description, setdescription] = useState(selected.Description)
+    const [description, setdescription] = useState(selected.empDescription)
     const [companyName, setcompanyName] = useState(selected.empAt)
     const [city, setcity] = useState(selected.empState)
     const [title, settitle] = useState(selected.empRole)
@@ -26,6 +26,51 @@ const EmploymentEditModal = ({ selected }) => {
         setmodalstyle({
             display: "none"
         })
+    }
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        let body = {
+            empAt: companyName,
+            empCountry: country,
+            empState: city,
+            empRole: title,
+            empFrom: periodfrom,
+            empTo: periodto,
+            empDescription: description
+        }
+
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        console.log(`http://localhost:8080/api/users/employmentHistory/63b13cfd127ade2c12562493/${selected._id}`)
+        fetch(`http://localhost:8080/api/users/employmentHistory/63b13cfd127ade2c12562493/${selected._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                // console.log(error)
+                console.error('Error:', error);
+            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,7 +118,13 @@ const EmploymentEditModal = ({ selected }) => {
                                                     <label>Period To</label>
                                                     <DatePicker selected={periodto} onChange={(date) => setperiodto(date)} />                                                </div>
                                             </div>
+                                            <div className="employment-modal-period-container employment-textarea-container">
 
+                                                <div className="employment-modal-input-group employment-textarea-container-child">
+                                                    <label>Description</label>
+                                                    <textarea onChange={(data) => { setdescription(data.target.value) }} value={description} name="" id="" cols="30" rows="10"></textarea>
+                                                </div>
+                                            </div>
 
                                         </form>
                                     </div>
@@ -83,7 +134,7 @@ const EmploymentEditModal = ({ selected }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeEmploymentEditModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>

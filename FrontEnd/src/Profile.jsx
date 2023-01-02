@@ -357,7 +357,10 @@ const Profile = () => {
                                         <div className="row profile-employment-history-detail-description">
 
                                             <div className="profile-employment-history-detail-date">
-                                                {element.empPeriod}
+                                                {element.empAt}
+                                            </div>
+                                            <div className="profile-employment-history-detail-date">
+                                                {element.empFrom} - {element.empTo}
                                             </div>
                                             <div className="profile-employment-history-detail-content">
                                                 {element.empDescription}

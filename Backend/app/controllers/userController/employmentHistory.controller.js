@@ -51,7 +51,8 @@ exports.update = async (req, res) => {
   let employmentId = req.params.id1
   let updatedEmploymnetHistory = {
     empAt: req.body.empAt,
-    empLocation: req.empLocation,
+    empCountry: req.body.empCountry,
+    empState: req.body.empState,
     empRole: req.body.empRole,
     empPeriod: req.body.empPeriod,
     empDescription: req.body.empDescription,
@@ -59,6 +60,7 @@ exports.update = async (req, res) => {
     empTo: req.body.empTo,
     isDeleted: req.body.isDeleted,
     deletedAt: req.body.deletedAt,
+
   }
 
   try {

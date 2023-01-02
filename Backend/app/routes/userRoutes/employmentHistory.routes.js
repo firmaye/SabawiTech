@@ -8,12 +8,14 @@ module.exports = app => {
 	//get single employmentHistory
 
 	//=========== To be Implemented ==================
-	
+
 	//create employmentHistory 
-	router.post("/:id", getUser, employmentHistory.create )	
+	router.post("/:id", getUser, employmentHistory.create)
 	//update employmentHistory
-	router.patch("/:id/:id1", getUser,employmentHistory.update)
-  
-  app.use('/api/users/employmentHistory', router);
+	router.patch("/:id/:id1", getUser, employmentHistory.update)
+	// delte employment history
+	router.delete("/:id/:id1", getUser, employmentHistory.delete)
+
+	app.use('/api/users/employmentHistory', router);
 
 }
