@@ -32,6 +32,53 @@ const NameModal = ({ }) => {
             alert("File not supported. Kindly Upload the Image of below given extension ")
         }
     }
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let setImagePath = (e) => {
+        setSelectedImage(e.target.files[0])
+
+    }
+    let handleSubmit = (event) => {
+
+        console.log(selectedImage)
+        const formData = new FormData();
+        // Update the formData object
+        formData.append(
+            'profilePhoto',
+            selectedImage
+        );
+        // console.log(file)
+        // console.log({ profilePhoto: selectedImage })
+        // let body = JSON.stringify({ profilePhoto: selectedImage })
+        // console.log(body)
+        // event.preventDefault()
+        fetch('http://localhost:8080/api/users/upload/63b13cfd127ade2c12562493', {
+            method: 'POST',
+
+            body: formData
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                // successModal()
+            })
+            .catch((error) => {
+                // errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
+    }
+    // 
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -54,7 +101,7 @@ const NameModal = ({ }) => {
                                                 <div className="image-upload">
                                                     <input type="file" name="" id="logo" onChange={(value) => {
                                                         fileValue(value.target);
-                                                        setSelectedImage(value.target.files[0]);
+                                                        setImagePath(value);
                                                     }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
@@ -75,7 +122,7 @@ const NameModal = ({ }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Edit Image</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Edit Image</button>
                     </div>
                 </div>
             </div>
