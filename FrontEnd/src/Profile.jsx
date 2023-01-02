@@ -12,6 +12,7 @@ import SkillModal from './components/SkillModal';
 import { useEffect } from 'react';
 import EmploymentModal from './components/EmploymentAddModal';
 import CertificationModal from './components/CertificationAddModal';
+import CertificationEditModal from './components/CertificationEditModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,32 +23,34 @@ import EmploymentEditModal from './components/EmploymentEditModal';
 import EducationEditModal from './components/EducationEditModal';
 import ImageModal from './components/EditImageModal';
 import SuccessModal from './components/SuccessModal';
-import DeleteModal from './components/DeleteEducationModal';
 import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
 import ErrorModal from './components/ErrorModal';
 import DeleteEducationModal from './components/DeleteEducationModal';
 const Profile = () => {
-    const [selectedemployment, selselectedemployment] = useState({})
-    const [tobedeletededucation, seltobedeletededucation] = useState({})
-    const [selectededucation, selselectededucation] = useState({})
+    const [selectedemployment, setselectedemployment] = useState({})
+    const [tobedeletededucation, settobedeletededucation] = useState({})
+    const [selectededucation, setselectededucation] = useState({})
+    const [selectedcertificate, setselectedcertificate] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
     const [skilllist, setskilllist] = useState([])
     const [employmenthistory, setemploymenthistory] = useState([])
+    const [certification, setcertification] = useState([])
     const [education, seteducation] = useState([])
     const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
     const [loading, setloading] = useState(true)
     useEffect(() => {
         fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
-            console.log(result.language)
+            console.log(result.certification)
 
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
             setpreviouswork(result.previousWork)
             setemploymenthistory(result.employmentHistory)
+            setcertification(result.certification)
             seteducation(result.education)
             setloading(false)
         }).catch((error) => { console.log(error) });
@@ -73,11 +76,12 @@ const Profile = () => {
                                                     : currentModal == "profileimage" ? <ImageModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
                                                         : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
                                                             : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
-                                                                : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
-                                                                    : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
-                                                                        : currentModal == "success" ? <SuccessModal />
-                                                                            : currentModal == "error" ? <ErrorModal />
-                                                                                : <></>
+                                                                : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
+                                                                    : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
+                                                                        : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
+                                                                            : currentModal == "success" ? <SuccessModal />
+                                                                                : currentModal == "error" ? <ErrorModal />
+                                                                                    : <></>
                 }
                 <Navbar />
                 <Header title={"Profile"} />
@@ -173,14 +177,14 @@ const Profile = () => {
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { seltobedeletededucation(element); dispatch(setModal(("educationdelete"))) }} >
+                                                            <button onClick={() => { settobedeletededucation(element); dispatch(setModal(("educationdelete"))) }} >
                                                                 <i className="fa fa-trash" aria-hidden="true"></i>
 
                                                             </button>
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { selselectededucation(element); dispatch(setModal(("educationedit"))) }} >
+                                                            <button onClick={() => { setselectededucation(element); dispatch(setModal(("educationedit"))) }} >
                                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                                             </button>
@@ -339,7 +343,7 @@ const Profile = () => {
                                                 {element.empRole} | {element.empLocation}
                                             </div>
                                             <div className="">
-                                                <button onClick={() => { selselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -370,35 +374,33 @@ const Profile = () => {
                                     </button>
                                 </div>
                             </div>
-                            <div className="profile-employment-history-details">
-                                <div className="profile-employment-history-detail">
-                                    <div className=" profile-employment-history-detail-title">
-                                        <div className="">
-                                            Intern | Intern Location
-                                        </div>
-                                        <div className="">
-                                            <button className="profile-edit-btn">
-                                                <i className="fa fa-pencil" aria-hidden="true"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div className="row profile-employment-history-detail-description">
+                            {certification.map((element) => {
 
-                                        <div className="profile-employment-history-detail-date">
-                                            Jun 5 - jun 10
+                                return (
+                                    <div className="profile-employment-history-details">
+                                        <div className="profile-employment-history-detail">
+                                            <div className=" profile-employment-history-detail-title">
+                                                <div className="">
+                                                    {element.certTitle} | {element.certProvider}
+                                                </div>
+                                                <div className="">
+                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
+                                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div className="row profile-employment-history-detail-description">
+
+                                                <div className="profile-employment-history-detail-date">
+                                                    {element.dateIssued}
+                                                </div>
+                                                <div className="profile-employment-history-detail-content">
+                                                    {element.certLink}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="profile-employment-history-detail-content">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa eum fuga quod rerum
-                                            inventore doloribus reiciendis iusto dicta dolorum distinctio, perferendis assumenda
-                                            mollitia, repudiandae quos pariatur optio voluptatum voluptas. Animi!
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, deleniti harum?
-                                            Qui
-                                            laboriosam magni ratione atque quia exercitationem eos, officia doloremque assumenda
-                                            rerum ipsam quam at, perferendis unde? Repudiandae, molestiae.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </div>)
+                            })}
                         </div>
                     </div>
 

@@ -68,3 +68,7 @@
 .certification-modal-location-container {
     display: flex;
 }
+
+.certification-modal-period-container .certification-modal-input-group {
+    margin-top: 0;
+}
