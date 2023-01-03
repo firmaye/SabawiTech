@@ -14,6 +14,9 @@ module.exports = app => {
 	//update certification
 	router.patch("/:id/:id1", getUser, certification.update)
 
+	//update certification
+	router.delete("/:id/:id1", getUser, certification.update)
+
 	app.use('/api/users/certification', router);
 
 }
