@@ -23,8 +23,8 @@ exports.create = async(req, res) => {
 // Retrieve all issue from the database.
 exports.findAll = async(req, res) => {
     try{
-        const issue = await issue.find()
-        res.json(issue)
+        const newissue = await issue.find()
+        res.json(newissue)
     }catch(err){
         res.status(500).json({message: err.message})
     }
