@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import "./css/opportunitydetail.css"
+import Loading from './components/Loading';
+
+import FadeIn from "react-fade-in";
 
 const OpportunityDetailPage = () => {
     const [opportunity, setopportunity] = useState({})
@@ -10,6 +13,7 @@ const OpportunityDetailPage = () => {
     const params = useParams()
     const [submittedproposal, setsubmittedproposal] = useState({
     })
+    const [loading, setloading] = useState(true)
     const changepropsaltext = (value) => {
         let updatedValue = { "letterDescription": value }
         setsubmittedproposal(previousState => ({
@@ -59,140 +63,126 @@ const OpportunityDetailPage = () => {
             })
             console.log(skillsarray)
             setrequiredskill(skillsarray)
+            setloading(false)
+
             // opportunity.requiredSkill.map((element) => {
             //     console.log(element)
             // })
         }).catch((error) => { console.log(error) });
 
     }, [])
+    if (loading) {
+        return (
+            <Loading />)
+    }
     return (
-        <main>
-            <Navbar />
-            <Header title={"Project Detail"} />
-            <section class="single-opportunity-container pt-120 pb-95">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 single-opportunity-detail">
-                            <div class="row">
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
+        <FadeIn>
+            <main>
+                <Navbar />
+                <Header title={"Project Detail"} />
+                <section className="single-opportunity-container pt-120 pb-95">
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-lg-8 single-opportunity-detail">
+                                <div className="row">
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Status</span>
+                                                <h6>{opportunity.intStatus}</h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Company Name</span>
+                                                <h6>{opportunity.companyName}</h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="single-opportunity-requirement">
-                                        <div class="my-auto">
-                                            <i class="fa fa-id-card"></i>
-                                        </div>
-                                        <div class="my-auto">
-                                            <span>Seller type</span>
-                                            <h6>Student</h6>
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Location</span>
+                                                <h6>{opportunity.intLocation}</h6>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="single-opportunity-content">
-                                <h4>The Ultimate Guide to Start</h4>
-                                <p>This is the content that will be described below Lorem ipsum dolor sit amet consectetur, adipisicing
-                                    elit. Omnis, eos nemo aspernatur quasi quidem, atque sed quibusdam maiores natus nesciunt commodi
-                                    incidunt voluptatem? Ipsa quo provident quis nemo quod eligendi. Lorem ipsum dolor sit amet, consectetur
-                                    adipisicing elit. A qui amet autem officiis deleniti tenetur, atque excepturi exercitationem nesciunt
-                                    dolor nisi maxime, odio laudantium inventore? Qui ratione sequi voluptates fugit.</p>
-                            </div>
-                            <div class="single-opportunity-skills-required">
-                                <h2 class="mb-4">Skills Required</h2>
-                                <div>
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Type</span>
+                                                <h6>{opportunity.intType}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Duration</span>
+                                                <h6>{opportunity.intDuration}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
-                                    </div>
-                                    <div class="skills">
-                                        QA Specialist
+                                    <div className="col-xl-4">
+                                        <div className="single-opportunity-requirement">
+                                            <div className="my-auto">
+                                                <i className="fa fa-id-card"></i>
+                                            </div>
+                                            <div className="my-auto">
+                                                <span>Seller type</span>
+                                                <h6>Student</h6>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {opportunity.intStatus == "open" ?
-                                <div className="single-opportunity-proposal-form">
-                                    <h2 className="mb-4">Send Proposal</h2>
-                                    <div className="row">
-                                        {/* <div className="col-md-6">
+                                <div className="single-opportunity-content">
+                                    <h4>{opportunity.intTitle}</h4>
+                                    <p>{opportunity.intDescription}</p>
+                                </div>
+                                <div className="single-opportunity-skills-required">
+                                    <h2 className="mb-4">Skills Required</h2>
+                                    <div>
+                                        {
+                                            // console.log(opportunity.requiredSkill)
+                                            // console.log(requiredSkill)
+                                            // opportunity.requiredSkill
+                                            requiredSkill.map((element) => {
+                                                return (<div className="skills">
+                                                    {element}
+                                                </div>)
+                                            })
+
+                                        }
+
+
+                                    </div>
+                                </div>
+                                {opportunity.intStatus == "open" ?
+                                    <div className="single-opportunity-proposal-form">
+                                        <h2 className="mb-4">Send Proposal</h2>
+                                        <div className="row">
+                                            {/* <div className="col-md-6">
                                         <input type="number" className="form-control" />
                                     </div> */}
-                                        {/* <div className="col-md-6">
+                                            {/* <div className="col-md-6">
                                         <select className="form-control">
                                             <option value="">Options to select</option>
                                             <option value="">Options to select</option>
@@ -201,71 +191,67 @@ const OpportunityDetailPage = () => {
                                             <option value="">Options to select</option>
                                         </select>
                                     </div> */}
-                                        <div className="col-md-12">
-                                            <textarea onChange={(data) => { changepropsaltext(data.target.value) }} className="form-control" name="" id="" cols="30" rows="10"></textarea>
-                                            {/* <input type="number" className="form-control">  */}
-                                        </div>
-                                        <div className="col d-flex justify-content-center">
+                                            <div className="col-md-12">
+                                                <textarea onChange={(data) => { changepropsaltext(data.target.value) }} className="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                                {/* <input type="number" className="form-control">  */}
+                                            </div>
+                                            <div className="col d-flex justify-content-center">
 
-                                            <button onClick={() => { sendpropsal() }} className=" single-opportunity-submit-proposal">
-                                                Submit a Proposal
-                                            </button>
+                                                <button onClick={() => { sendpropsal() }} className=" single-opportunity-submit-proposal">
+                                                    Submit a Proposal
+                                                </button>
+                                            </div>
                                         </div>
+                                    </div> : <></>}
+
+                            </div>
+                            <div className="col-lg-4 position-relative single-opportunity-description">
+                                <div className="single-opportunity-sidebar">
+                                    <div className="single-opportunity-sidebar-part">
+                                        <div className="text-center">
+                                            {/* <h5>Budget</h5>
+                                        <h1>$340</h1>
+                                        <span>Project type:Fixed</span> */}
+                                            <div className="single-opportunity-sidebar-buttons">
+
+                                                {/* <button className="single-opportunity-wishlist-proposal">
+                                                Wishlist Project
+                                            </button> */}
+                                            </div>
+                                        </div>
+                                        <ul className="single-opportunity-sidebar-requirements mt-5 mb-3">
+                                            <li className="text-left">
+                                                Status :
+                                                <b className="float-end">{opportunity.intStatus}</b>
+                                            </li>
+                                            {/* <li className="text-left">
+                                            Company Name:
+                                            <b className="float-end">{opportunity.companyName}</b>
+                                        </li> */}
+                                            <li className="text-left">
+                                                Location:
+                                                <b className="float-end">{opportunity.intLocation}</b>
+                                            </li>
+                                            <li className="text-left">
+                                                Type:
+                                                <b className="float-end">{opportunity.intType}</b>
+                                            </li>
+                                            <li className="text-left">
+                                                Duration:
+                                                <b className="float-end">{opportunity.intDuration}</b>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div> : <></>}
-
-                        </div>
-                        <div class="col-lg-4 position-relative single-opportunity-description">
-                            <div class="single-opportunity-sidebar">
-                                <div class="single-opportunity-sidebar-part">
-                                    <div class="text-center">
+                                    {/* <div className="single-opportunity-sidebar-part">
+                                    <div className="text-center">
                                         <h5>Budget</h5>
                                         <h1>$340</h1>
                                         <span>Project type:Fixed</span>
                                         <div className="single-opportunity-sidebar-buttons">
-
-                                            {/* <button className="single-opportunity-wishlist-proposal">
-                                                Wishlist Project
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <ul class="single-opportunity-sidebar-requirements mt-5 mb-3">
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                        <li class="text-left">
-                                            Seller Type :
-                                            <b class="float-end">Student</b>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="single-opportunity-sidebar-part">
-                                    <div class="text-center">
-                                        <h5>Budget</h5>
-                                        <h1>$340</h1>
-                                        <span>Project type:Fixed</span>
-                                        <div class="single-opportunity-sidebar-buttons">
-                                            <button class="single-opportunity-submit-proposal">
+                                            <button className="single-opportunity-submit-proposal">
                                                 Submit a Proposal
                                             </button>
-                                            <button class="single-opportunity-wishlist-proposal">
+                                            <button className="single-opportunity-wishlist-proposal">
                                                 Wishlist Project
                                             </button>
                                         </div>
@@ -296,15 +282,15 @@ const OpportunityDetailPage = () => {
                                             <b class="float-end">Student</b>
                                         </li>
                                     </ul>
+                                </div> */}
+                                    {/* <div className="single-opportunity-sidebar-part"></div> */}
                                 </div>
-                                <div class="single-opportunity-sidebar-part"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="pt-120">
-                        <h2 class="mb-5">Suggested projects</h2>
-                        <div class="suggested-projects-content">
-                            {/* <div class="suggested-projects-featured">
+                        {/* <div className="pt-120">
+                        <h2 className="mb-5">Suggested projects</h2>
+                        <div className="suggested-projects-content">
+                            <div className="suggested-projects-featured">
                                 Featured
                             </div>
                             <div class="suggested-projects-profile text-center">
@@ -326,10 +312,10 @@ const OpportunityDetailPage = () => {
                                         <div>Hourly</div>
                                     </li>
                                 </ul>
-                            </div> */}
+                            </div>
                         </div>
-                    </div>
-                    <div classnames="suggested-projects-parent-container">
+                    </div> */}
+                        {/* <div className="suggested-projects-parent-container">
 
                         <div class="row" >
 
@@ -439,20 +425,17 @@ const OpportunityDetailPage = () => {
                                 </div>
                             </div>
                         </div>
+                    </div> */}
                     </div>
-                </div>
 
 
 
 
 
-            </div>
-            </div>
-            </div>
-            </div>
-            </section>
+                </section >
 
-        </main >
+            </main >
+        </FadeIn>
     )
 }
 

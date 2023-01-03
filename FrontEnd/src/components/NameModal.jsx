@@ -7,8 +7,10 @@ import { setModal } from '../redux/profilemodal';
 
 const NameModal = ({ profileinfo }) => {
     const dispatch = useDispatch()
-
     const [country, setcountry] = useState(profileinfo.country)
+    const [firstname, setfirstname] = useState(profileinfo.firstName)
+    const [lastname, setlastname] = useState(profileinfo.lastName)
+    const [state, setstate] = useState(profileinfo.state)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -20,17 +22,45 @@ const NameModal = ({ profileinfo }) => {
             display: "none"
         })
     }
-    function fileValue(value) {
-        var path = value.value;
-        var extenstion = path.split('.').pop();
-        console.log(value.files[0])
-        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
-            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
-            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
-            document.getElementById("filename").innerHTML = filename;
-        } else {
-            alert("File not supported. Kindly Upload the Image of below given extension ")
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        let body = {
+            firstName: firstname,
+            lastName: lastname,
+            country: country,
+            state: state
         }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        fetch('http://localhost:8080/api/users/personalInfo/63b13cfd127ade2c12562493', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -50,27 +80,13 @@ const NameModal = ({ profileinfo }) => {
                                     <div class="">
                                         <h2 class="name-modal-title"></h2>
                                         <form method="">
-                                            <div className="name-modal-image-container">
-                                                <div className="image-upload">
-                                                    <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
-                                                    <label htmlFor="logo" className="upload-field" id="file-label">
-                                                        <div className="file-thumbnail">
-                                                            <img id="image-preview" src={profileinfo.profilePhoto} alt="" />
-                                                            <h3 id="filename">
-                                                                Drag and Drop
-                                                            </h3>
-                                                            <p >Supports JPG, PNG, SVG</p>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
                                             <div className='d-flex'>
 
                                                 <div class="col-5 name-modal-input-group">
-                                                    <input class="" value={profileinfo.firstName} type="text" placeholder="NAME" name="" />
+                                                    <input class="" value={firstname} onChange={(data) => { setfirstname(data.target.value) }} type="text" name="firstName" />
                                                 </div>
                                                 <div class="col-5 name-modal-input-group">
-                                                    <input class="" value={profileinfo.lastName} type="text" placeholder="NAME" name="" />
+                                                    <input class="" value={lastname} onChange={(data) => { setlastname(data.target.value) }} type="text" name="" />
                                                 </div>
                                             </div>
                                             <div class="row ">
@@ -99,7 +115,7 @@ const NameModal = ({ profileinfo }) => {
                                                 </div>
                                                 <div class="col-12 name-modal-col-12">
                                                     <div class="name-modal-input-group">
-                                                        <input class="" value={profileinfo.state} type="text" placeholder="State" name="" />
+                                                        <input class="" value={state} onChange={(data) => { setstate(data.target.value) }} type="text" placeholder="State" name="" />
                                                     </div>
                                                 </div>
 
@@ -112,7 +128,7 @@ const NameModal = ({ profileinfo }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>

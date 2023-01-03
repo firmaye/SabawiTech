@@ -1,5 +1,8 @@
 const db = require("../../models");
 const user = db.users;
+const multer = require('multer')
+
+
 
 // Retrieve all Users from the database.
 exports.getAll = async(req,res) => {
@@ -72,4 +75,42 @@ exports.update = async (req, res) => {
     }
 };   
 
-	
+
+//image uploading
+//storage 
+const Storage = multer.diskStorage({
+  destination:'uploads/images',
+  filename:(req,file,cb) => {
+     cb(null, Date.now() + file.originalname )
+  }
+})
+
+const upload = multer({
+  storage: Storage 
+}).single('profilePhoto')
+
+
+exports.upload = (req,res) => {
+  let userId = req.params.id
+   upload(req,res,(err) => {
+    if(err){
+      console.log(err)
+    }
+    else{
+      console.log(req.file.filename)
+      let imagePath = req.file.filename
+      let profilePhoto = imagePath
+      const newImage = user.updateOne(
+        { _id: userId },
+        {
+          $set: { profilePhoto: profilePhoto }
+        }
+        ).then(() => {
+          res.send({success:true})
+        }).catch((err) => console.log(err))
+    }
+   })
+};
+
+
+

@@ -13,6 +13,7 @@ import BlogContainer from "./components/BlogContainer";
 import BlogDetails from "./components/BlogDetails";
 import BlogdetailsContainer from "./components/BlogdetailsContainer";
 import Signin from "./components/signin";
+import Contact from "./Contact";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,22 @@ const router = createBrowserRouter([
   {
     path: "/opportunitydetail",
     element: <OpportunityDetailPage />,
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+  {
+    path: "/addportifolio",
+    element: <AddPortifolio />,
+  },
+  {
+    path: "/editportifolio/:id",
+    element: <EditPortifolio />,
+  },
+  {
+    path: "/contact",
+    element: <Contact />,
   },
   {
     path: "/blog",
