@@ -17,6 +17,7 @@ import EditPortifolio from "./EditPortifolio";
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Contact from "./Contact";
+import ExtraDetail from "./ExtraDetail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
     path: "/blog",
 
     element: <BlogContainer />,
+  },
+  {
+    path: "/extradetail",
+
+    element: <ExtraDetail />,
   },
   {
     path: "/blogdetails/:id",

@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const db = require("./app/models");
-const cors=require("cors")
+const cors = require("cors")
 var corsOptions = {
   origin: "*"
 };
@@ -40,7 +40,7 @@ require("./app/routes/userRoutes/otherExperience.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
-
+app.use("/uploads/image", express.static('uploads/image'))
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

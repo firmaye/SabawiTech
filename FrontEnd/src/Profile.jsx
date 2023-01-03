@@ -57,6 +57,18 @@ const Profile = () => {
             setloading(false)
         }).catch((error) => { console.log(error) });
     }, [])
+    function fileValue(value) {
+        var path = value.value;
+        var extenstion = path.split('.').pop();
+        console.log(value.files[0])
+        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            alert("File not supported. Kindly Upload the Image of below given extension ")
+        }
+    }
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     const dispatch = useDispatch()
     if (loading) {
@@ -75,7 +87,7 @@ const Profile = () => {
                                         : currentModal == "educationadd" ? <EducationModal />
                                             : currentModal == "languagesadd" ? <LanguageModal language={language} />
                                                 : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
-                                                    : currentModal == "profileimage" ? <ImageModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
+                                                    : currentModal == "profileimage" ? <ImageModal image={profileinfo.profilePhoto} />
                                                         : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
                                                             : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
                                                                 : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
@@ -98,7 +110,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={ProfileImg} alt="" />
+                                                        <img src={`http://localhost:8080/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>

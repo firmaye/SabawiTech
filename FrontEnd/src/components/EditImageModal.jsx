@@ -5,7 +5,7 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 
-const NameModal = ({ }) => {
+const NameModal = ({ image }) => {
     const dispatch = useDispatch()
 
     const [selectedImage, setSelectedImage] = useState(null);
@@ -62,7 +62,7 @@ const NameModal = ({ }) => {
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // console.log(body)
         // event.preventDefault()
-        fetch('http://localhost:8080/api/users/upload/63b13cfd127ade2c12562493', {
+        fetch('http://localhost:8080/api/users/previousWork/63b13cfd127ade2c12562493', {
             method: 'POST',
 
             body: formData
@@ -105,7 +105,7 @@ const NameModal = ({ }) => {
                                                     }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={""} alt="" />
+                                                            <img id="image-preview" src={`http://localhost:8080/${image}`} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>
