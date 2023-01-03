@@ -221,7 +221,7 @@ const OpportunityDetailPage = () => {
                                     <div class="text-center">
                                         <h5>Budget</h5>
                                         <h1>$340</h1>
-                                        <span>Project type:Fixed</span> */}
+                                        <span>Project type:Fixed</span>
                                         <div className="single-opportunity-sidebar-buttons">
 
                                             {/* <button className="single-opportunity-wishlist-proposal">

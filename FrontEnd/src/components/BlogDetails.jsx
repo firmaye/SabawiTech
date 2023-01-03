@@ -105,7 +105,10 @@ const BlogDetails = ({authenticated}) => {
             {/* <a rel="nofollow" id="cancel-comment-reply-link" href="">Cancel reply</a> */}
             </small></h3>
             {authenticated ?
-            <h4>disqus comment field</h4>
+            <div>
+                
+                <h4>disq</h4>
+                </div>
             :
             <p class="must-log-in">You must be <a href="">logged in</a> to post a comment.</p> 
             }
