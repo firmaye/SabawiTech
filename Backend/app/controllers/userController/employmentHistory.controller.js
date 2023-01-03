@@ -27,9 +27,7 @@ exports.create = async (req, res) => {
       empState: req.body.empState,
       empRole: req.body.empRole,
       empPeriod: req.body.empPeriod,
-      empDescription: req.body.empDescription,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt,
+      empDescription: req.body.empDescription
   }
   
     
@@ -52,9 +50,7 @@ exports.update =  async (req,res) => {
       empLocation: req.empLocation,
       empRole: req.body.empRole,
       empPeriod: req.body.empPeriod,
-      empDescription: req.body.empDescription,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt,
+      empDescription: req.body.empDescription
   }
   
     try{

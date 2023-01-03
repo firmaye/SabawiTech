@@ -26,9 +26,7 @@ exports.create = async (req, res) => {
       certTitle: req.body.certTitle,
       certProvider: req.body.certProvider,
       certLink: req.body.certLink,
-      dateIssued:req.body.dateIssued,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt,
+      dateIssued:req.body.dateIssued
   }
   
     
@@ -51,9 +49,7 @@ exports.update =  async (req,res) => {
       certTitle: req.body.certTitle,
       certProvider: req.body.certProvider,
       certLink: req.body.certLink,
-      dateIssued:req.body.dateIssued,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt,
+      dateIssued:req.body.dateIssued
   }
   
     try{
