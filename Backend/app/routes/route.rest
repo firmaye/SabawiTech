@@ -31,8 +31,6 @@ Content-Type: application/json
       "workSkill": ["React", "json", "Js", "Node"],
       "isDeleted": 0,
       "deletedAt": "2022-12-15T18:35:56.605Z",
-      "createdAt": "2022-12-15T18:35:56.606Z",
-      "updatedAt": "2022-12-15T18:35:56.606Z"
     }
   ],
   "skill": [
@@ -462,7 +460,7 @@ PUT http://localhost:8080/api/issues/63b486f01314756b0881f6e7
 Content-Type: application/json
 
 {
-  "name":"philica",
+  "name":"philos",
   "email": "fikretucker79@gmail.com",
   "subject":"i canot upload portfolio with photo",
   "message":"please fix the above issue"
