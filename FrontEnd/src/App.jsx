@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
+import Signin from './components/signin'
+import Signup from './components/signup'
 function App() {
 
   return (
     <div>
       <Navbar />
+      <Signup />
     </div>
   )
 }
