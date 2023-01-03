@@ -26,8 +26,6 @@ module.exports = mongoose => {
             deletedAt: Date,
             createdAt: Date,
             updatedAt: Date,
-
-
          }
     ],
     skill: [

@@ -85,22 +85,50 @@ exports.create = (req,res) => {
 
     let userId = req.params.id
     let workId= req.params.id1
-    let updatedPrevWork = {
-      workTitle: req.body.workTitle || "",
-      workThumbnail: req.body.workThumbnail || "",
-      workDescription: req.body.workDescription || "",
-      workLink: req.body.workLink || "",
-      workSkill: req.body.workSkill || "",
+    let imageName = ""
+
+    upload(req,res,(err) => {
+    if(err){
+      console.log(err)
     }
-  
-    try{
-      const prevWork = await user.updateOne({_id: userId,"previousWork._id":workId},{$set:{"previousWork.$": updatedPrevWork}})
-      res.status(201).json(prevWork)
-  
-    }catch(err){
-      res.status(400).json({message: err.message})
+    else{
+      console.log("filename: "+req.file.filename)
+      imageName = req.file.filename
+      console.log("imageName: "+imageName)
     }
+    })
+
+    setTimeout(() => {
+      let userId = req.params.id
+      let updatedPrevWork = {
+        workTitle: req.body.workTitle || "",
+        workThumbnail: imageName,
+        workDescription: req.body.workDescription || "",
+        workLink: req.body.workLink || "",
+        workSkill: req.body.workSkill || "",
+      }
+      try{
+        const prevWork = user.updateOne(
+          {_id: userId,"previousWork._id":workId},
+          {$set:{"previousWork.$": updatedPrevWork}}
+          ).then(() => {
+            res.send({success:true})
+          }).catch((err) => console.log(err))
+    
+      }catch(err){
+        res.status(400).json({message: err.message})
+      }
+      
+    }, "1000")
+
+
+    
+  
+    
   };
+
+  // const prevWork = await user.updateOne({_id: userId,"previousWork._id":workId},{$set:{"previousWork.$": updatedPrevWork}})
+
 
 // delete single PrevWork from the database.
 exports.delete = async (req,res) => {
