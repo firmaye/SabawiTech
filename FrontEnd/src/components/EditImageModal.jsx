@@ -8,7 +8,7 @@ import { setModal } from '../redux/profilemodal';
 const NameModal = ({ }) => {
     const dispatch = useDispatch()
 
-
+    const [selectedImage, setSelectedImage] = useState(null);
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -52,7 +52,10 @@ const NameModal = ({ }) => {
                                         <form method="">
                                             <div className="name-modal-image-container">
                                                 <div className="image-upload">
-                                                    <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
+                                                    <input type="file" name="" id="logo" onChange={(value) => {
+                                                        fileValue(value.target);
+                                                        setSelectedImage(value.target.files[0]);
+                                                    }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src={""} alt="" />

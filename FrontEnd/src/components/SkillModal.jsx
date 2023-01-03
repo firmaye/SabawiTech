@@ -4,17 +4,59 @@ import { useState } from 'react'
 import "../css/skillmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-
+import SuccessModal from './SuccessModal';
+import uuid from 'react-uuid';
 const SkillModal = ({ skilllist }) => {
     const dispatch = useDispatch()
 
-    console.log(skilllist)
     const [skilllistmodal, setskilllistmodal] = useState([])
     useEffect(() => {
         setskilllistmodal(skilllist)
     }, [])
+    console.log(skilllistmodal)
 
-
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        console.log(skilllistmodal)
+        let skilllistedited = skilllistmodal.map((element) => {
+            delete element._id
+            return element
+        })
+        let body = {
+            skill: skilllistedited
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        fetch('http://localhost:8080/api/users/skill/63b13cfd127ade2c12562493', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
+    }
     const [newskill, setnewskill] = useState("")
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -46,7 +88,7 @@ const SkillModal = ({ skilllist }) => {
                                         return (<div className="skills">
                                             {element.skillName}
                                             <button onClick={() => {
-                                                setskilllistmodal(skilllistmodal.filter(childelement => childelement.id != element.id,
+                                                setskilllistmodal(skilllistmodal.filter(childelement => childelement._id != element._id,
                                                 ));
                                             }} type="button" className="skill-list-modal-close" >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -65,11 +107,8 @@ const SkillModal = ({ skilllist }) => {
                             <div className="">
                                 <button onClick={() => {
                                     setskilllistmodal(oldArray => [...oldArray, {
-                                        "id": 45575310,
-                                        "skillName": `${newskill}`,
-                                        "deletedAt": "2022-12-15T18:35:56.612Z",
-                                        "createdAt": "2022-12-15T18:35:56.612Z",
-                                        "updatedAt": "2022-12-15T18:35:56.612Z"
+                                        "_id": uuid(),
+                                        "skillName": `${newskill}`
                                     }]); setnewskill("")
                                 }} className="skill-edit-btn">
                                     <i className="fa fa-plus" aria-hidden="true"></i>
@@ -79,7 +118,7 @@ const SkillModal = ({ skilllist }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeSkillModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>

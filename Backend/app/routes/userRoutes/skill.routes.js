@@ -6,9 +6,9 @@ module.exports = app => {
   // ======================= User ==================================
 
   //get all skills 
-  router.get("/skill/:id", getUser, skill.getAll )
+  router.get("/:id", getUser, skill.getAll)
   //create skill
-  router.patch("/skill/:id", getUser ,skill.create)
+  router.patch("/:id", getUser, skill.create)
 
   app.use('/api/users/skill', router);
 

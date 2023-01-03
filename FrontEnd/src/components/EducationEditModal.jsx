@@ -3,11 +3,17 @@ import { useState } from 'react'
 import "../css/educationaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-
+import DatePicker from "react-datepicker";
 
 const EducationEditModal = ({ selected }) => {
+
+    const [schoolname, setschoolname] = useState(selected.schoolName)
+    const [areaofstudy, setareaofstudy] = useState(selected.areaOfStudy)
+    const [attendedfrom, setattendedfrom] = useState(new Date(selected.dateAttendedFrom))
+    const [attendedto, setattendedto] = useState(new Date(selected.dateAttendedTo))
     const dispatch = useDispatch()
     console.log(selected)
+    console.log(selected._id)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -18,6 +24,46 @@ const EducationEditModal = ({ selected }) => {
         setmodalstyle({
             display: "none"
         })
+    }
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        let body = {
+            schoolName: schoolname,
+            dateAttendedFrom: attendedfrom,
+            dateAttendedTo: attendedto,
+            areaOfStudy: areaofstudy
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        fetch(`http://localhost:8080/api/users/education/63b13cfd127ade2c12562493/${selected._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                successModal()
+            })
+            .catch((error) => {
+                errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -38,19 +84,20 @@ const EducationEditModal = ({ selected }) => {
                                         <h2 class="education-modal-education"></h2>
                                         <form method="">
                                             <div class="education-modal-input-group">
-                                                <input class="" type="text" placeholder="School Name" value={selected.schoolName} name="" />
+                                                <input class="" type="text" placeholder="School Name" value={schoolname} onChange={(event) => { setschoolname(event.target.value) }} name="" />
                                             </div>
                                             <div className="education-modal-location-container">
 
                                                 <div class="education-modal-input-group">
-                                                    <input class="" type="text" placeholder="Attended From" name="" />
+                                                    <label>Attended From</label>
+                                                    <DatePicker selected={attendedfrom} onChange={(date) => setattendedfrom(date)} />
                                                 </div>
                                                 <div class="education-modal-input-group">
-                                                    <input class="" type="text" placeholder="Attended To" name="" />
-                                                </div>
+                                                    <label>Attended To</label>
+                                                    <DatePicker selected={attendedto} onChange={(date) => setattendedto(date)} />                                                </div>
                                             </div>
                                             <div class="education-modal-input-group">
-                                                <input class="" type="text" placeholder="Area of Study" value={selected.areaOfStudy} name="" />
+                                                <input class="" type="text" placeholder="Area of Study" value={areaofstudy} onChange={(event) => { setareaofstudy(event.target.value) }} name="" />
                                             </div>
 
 
@@ -62,7 +109,7 @@ const EducationEditModal = ({ selected }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeEducationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" className="btn btn-primary">Save changes</button>
+                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
