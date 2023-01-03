@@ -68,3 +68,40 @@
 .employment-modal-location-container {
     display: flex;
 }
+
+.employment-modal-input-group select {
+    border: 0;
+    /* border-bottom: 2px solid #ccc; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.employment-modal-input-group select:focus-visible {
+    outline: white;
+}
+
+.employment-modal-location-country select {
+    width: 100%;
+}
+
+.employment-modal-location-container .employment-modal-input-group {
+    display: flex;
+}
+
+.employment-modal-input-group textarea {
+    outline: none;
+    margin: 0;
+    border: none;
+    border: 2px solid #ccc;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+.employment-textarea-container {
+    width: 100%;
+}

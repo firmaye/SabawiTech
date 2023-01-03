@@ -17,6 +17,13 @@
     width: calc((100% - 60px) / 2);
 }
 
+.education-modal-input-group .react-datepicker-wrapper input {
+    /* position: relative;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc; */
+    margin-top: 20px;
+}
+
 @media (max-width: 767px) {
     .education-modal-col-2 {
         width: 100%;

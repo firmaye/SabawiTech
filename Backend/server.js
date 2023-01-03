@@ -28,6 +28,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 require("./app/routes/userRoutes/users.routes")(app);
+require("./app/routes/userRoutes/personalInfo.routes")(app);
+require("./app/routes/userRoutes/descriptionInfo.routes")(app);
 require("./app/routes/userRoutes/previousWork.routes")(app);
 require("./app/routes/userRoutes/skill.routes")(app);
 require("./app/routes/userRoutes/language.routes")(app);
@@ -38,6 +40,8 @@ require("./app/routes/userRoutes/otherExperience.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
+require("./app/routes/issue.routes")(app);
+app.use("/uploads/image",express.static('uploads/image'))
 
 
 // set port, listen for requests

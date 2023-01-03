@@ -1,5 +1,8 @@
 const db = require("../../models");
 const user = db.users;
+const multer = require('multer')
+
+
 
 // Retrieve all Users from the database.
 exports.getAll = async(req,res) => {
@@ -13,18 +16,7 @@ exports.getAll = async(req,res) => {
 
 // Retrieve single user from the database.
 exports.getSingle = (req, res) => {
-  const id = req.params.id;
-  user.findById(id)
-    .then(data => {
-      if (!data)
-        res.status(404).send({ message: "Not found User with id " + id });
-      else res.send(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .send({ message: "Error retrieving User with id=" + id });
-    });
+    res.json(res.user)
   };
 
 // Create single user
@@ -37,8 +29,9 @@ exports.create =async(req, res) => {
       email: req.body.email,
       phoneNo: req.body.phoneNo,
       gender: req.body.gender,
-      profilePhoto: req.file.filename,
-      location: req.body.location,
+      profilePhoto: req.body.profilePhoto,
+      country: req.body.country,
+      state: req.body.state,
       title: req.body.title,
       titleOverview: req.body.titleOverview,
       previousWork: req.body.previousWork,
@@ -82,4 +75,42 @@ exports.update = async (req, res) => {
     }
 };   
 
-	
+
+//image uploading
+//storage 
+const Storage = multer.diskStorage({
+  destination:'uploads/images',
+  filename:(req,file,cb) => {
+     cb(null, Date.now() + file.originalname )
+  }
+})
+
+const upload = multer({
+  storage: Storage 
+}).single('profilePhoto')
+
+
+exports.upload = (req,res) => {
+  let userId = req.params.id
+   upload(req,res,(err) => {
+    if(err){
+      console.log(err)
+    }
+    else{
+      console.log(req.file.filename)
+      let imagePath = req.file.filename
+      let profilePhoto = imagePath
+      const newImage = user.updateOne(
+        { _id: userId },
+        {
+          $set: { profilePhoto: profilePhoto }
+        }
+        ).then(() => {
+          res.send({success:true})
+        }).catch((err) => console.log(err))
+    }
+   })
+};
+
+
+

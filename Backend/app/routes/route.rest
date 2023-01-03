@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-GET http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a
+GET http://localhost:8080/api/users/63b13cfd127ade2c12562493
 
 ### create single user 
 
@@ -10,15 +10,16 @@ Content-Type: application/json
 
 
 {
-  "firstName": "malo",
+  "firstName": "Ale",
   "lastName": "moges",
-  "userName": "philica21",
+  "userName": "ale21",
   "password": "sabina12",
   "email": "sabamoges@gmail.com",
   "phoneNo": 912345678,
   "gender": "F",
   "profilePhoto": "https://www.asxbcty.com",
-  "location": "addis ababa",
+  "country": "Ethiopia",
+  "state": "Addis Ababa",
   "title": "Full stack Web developer | Node | React | JavaScript | Html | CSS",
   "titleOverview": "Hello 👋 , I'm saba moges motivated Full-stack web developer  with 2+ years of experience. with excellent customer care, outstanding interpersonal communication and multitasking abilities.  Prepared to deliver first-rate results to clients on the allocated time and finish tasks before deadlines ⏰. 🏆  I am a young talented African sustaining strong motivation for work, and has skills with best practices. I can work collaboratively in different working environments and team compositions. also can work on modifying existing or adding new requirements to existing systems.",
   "previousWork": [
@@ -231,4 +232,238 @@ Content-Type: application/json
       "skillName": "Frappe" 
     }
   ]
+}
+
+### get all languages
+GET http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978
+
+### get single language
+GET http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978/63a60fb23cfbc37ddfacc97d
+
+### create new prevous work history
+
+PATCH  http://localhost:8080/api/users/language/63b13cfd127ade2c12562493
+Content-Type: application/json
+
+{
+  "language":[{
+   "languageName":"Korean",
+   "languageProficiency":"Native",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+},
+{
+   "languageName":"Korean",
+   "languageProficiency":"Native",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+},
+{
+   "languageName":"Korean",
+   "languageProficiency":"Native",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+} ]
+}
+
+### delete language 
+DELETE http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978/63a9562635f310076319d8ab
+
+### update language
+PATCH  http://localhost:3000/users/language/63a60fb23cfbc37ddfacc978
+Content-Type: application/json
+
+{
+  "language":[
+        {
+      "languageName": "Amharic",
+      "languageProficiency": "Native",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.614Z",
+      "createdAt": "2022-12-15T18:35:56.614Z",
+      "updatedAt": "2022-12-15T18:35:56.615Z",
+      "_id": "63a60fb23cfbc37ddfacc97d"
+    },
+    {
+      "languageName": "Englifa",
+      "languageProficiency": "basic",
+      "isDeleted": 0,
+      "deletedAt": "2022-12-15T18:35:56.617Z",
+      "createdAt": "2022-12-15T18:35:56.617Z",
+      "updatedAt": "2022-12-15T18:35:56.618Z",
+      "_id": "63a60fb23cfbc37ddfacc97e"
+    },
+    {
+      "languageName": "Korean",
+      "languageProficiency": "Native",
+      "_id": "63a9584de175d42abe013193"
+    }
+  ]
+}
+
+
+
+### get all education
+GET http://localhost:3000/users/education/63a93ed08e1a8f8f7dbb972a
+
+### get single education 
+GET http://localhost:3000/users/education/63a60fb23cfbc37ddfacc978/63a60fb23cfbc37ddfacc97f
+
+### create education
+
+POST http://localhost:3000/users/education/63a93ed08e1a8f8f7dbb972a
+Content-Type: application/json
+
+{
+   "schoolName":"cathedtal Preparatory School",
+   "dateAttendedFrom":"2022-12-15T18:35:56.619Z",
+   "dateAttendedTo":"2022-12-15T18:35:56.619Z",
+   "areaOfStudy":"computerscience",
+   "eduDescription":"hello there",
+   "isDeleted":0,
+   "deletedAt":"2022-12-15T18:35:56.614Z",
+   "createdAt":"2022-12-15T18:35:56.614Z",
+   "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### update education
+PATCH http://localhost:3000/users/education/63a60fb23cfbc37ddfacc978/63a99bc5eff9ec765e5bdcdf 
+Content-Type: application/json
+
+{
+  "schoolName":"cathedtal Preparatory School",
+  "dateAttendedFrom":"2022-12-15T18:35:56.619Z",
+  "dateAttendedTo":"2022-12-15T18:35:56.619Z",
+  "areaOfStudy":"computerscience",
+  "eduDescription":"hello there",
+  "isDeleted":0,
+  "deletedAt":"2022-12-15T18:35:56.614Z",
+  "createdAt":"2022-12-15T18:35:56.614Z",
+  "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### delete education 
+DELETE http://localhost:3000/users/education/63a93ed08e1a8f8f7dbb972a/63a93ed08e1a8f8f7dbb9731
+
+
+### get all certifications
+GET http://localhost:3000/users/certification/63a93ed08e1a8f8f7dbb972a
+
+### create certification 
+POST http://localhost:3000/users/certification/63a93ed08e1a8f8f7dbb972a
+Content-Type: application/json
+
+{
+  "certPhoto": "https://asdfesd.com",
+  "certTitle": "Mongo db developer completion",
+  "certProvider": "Icpc.foundation",
+  "certLink": "req.body.certTitle",
+  "dateIssued":"2022-12-15T18:35:56.627Z",
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.627Z",
+  "createdAt":"2022-12-15T18:35:56.614Z",
+  "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### update certification 
+PATCH http://localhost:3000/users/certification/63a93ed08e1a8f8f7dbb972a/63ab36887dd55e8a058f642c
+Content-Type: application/json
+
+{
+  "certPhoto": "https://mongy.com",
+  "certTitle": "Mongo db developer completion",
+  "certProvider": "Icpc.foundation",
+  "certLink": "req.body.certTitle",
+  "dateIssued":"2022-12-15T18:35:56.627Z",
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.627Z",
+  "createdAt":"2022-12-15T18:35:56.614Z",
+  "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### delete certification  
+DELETE http://localhost:3000/users/certification/63a93ed08e1a8f8f7dbb972a/63ab3e2994fe4d29a4564c75
+
+
+### get all employmentHistory
+GET http://localhost:3000/users/employmentHistory/63a93ed08e1a8f8f7dbb972a
+
+
+###create employmentHistory 
+POST http://localhost:3000/users/employmentHistory/63a93ed08e1a8f8f7dbb972a
+Content-Type: application/json
+
+{
+  "empAt": "Across Express",
+  "empLocation": "Megenagna",
+  "empRole": "Frontend Developer",
+  "empPeriod": "3month",
+  "empDescription": "Frappe and Erp Next developer",
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.629Z",
+  "createdAt":"2022-12-15T18:35:56.614Z",
+  "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### update employmentHistory 
+PATCH http://localhost:3000/users/employmentHistory/63a93ed08e1a8f8f7dbb972a/63ab4f74e5a6cb8ee5f0303c
+Content-Type: application/json
+
+{
+  "empAt": "Rahove Technologies",
+  "empLocation": "Megenagna",
+  "empRole": "Frontend Developer",
+  "empPeriod": "3month",
+  "empDescription": "Frappe and Erp Next developer",
+  "isDeleted": 0,
+  "deletedAt": "2022-12-15T18:35:56.629Z",
+  "createdAt":"2022-12-15T18:35:56.614Z",
+  "updatedAt":"2022-12-15T18:35:56.615Z"
+}
+
+### delete employmentHistory  
+DELETE http://localhost:3000/users/employmentHistory/63a93ed08e1a8f8f7dbb972a/63a93ed08e1a8f8f7dbb9734
+
+### update profile info 
+
+PATCH http://localhost:3000/users/personalInfo/63b13cfd127ade2c12562493
+Content-Type: application/json
+
+{
+ "firstName":"alazar tfirst",
+ "lastName":"Sabawi tlast",
+ "country":"Kenya",
+ "state":"Addis Ababa"
+}
+
+### create issue
+POST http://localhost:8080/api/issues/
+Content-Type: application/json
+
+{
+  "name":"philica",
+  "email": "fikretucker79@gmail.com",
+  "subject":"i canot upload portfolio with photo",
+  "message":"please fix the above issue"
+}
+
+### return issue
+GET  http://localhost:8080/api/issues/
+
+
+### update issue
+PUT http://localhost:8080/api/issues/63b486f01314756b0881f6e7
+Content-Type: application/json
+
+{
+  "name":"philica",
+  "email": "fikretucker79@gmail.com",
+  "subject":"i canot upload portfolio with photo",
+  "message":"please fix the above issue"
 }

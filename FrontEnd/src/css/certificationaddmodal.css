@@ -1,0 +1,74 @@
+.certification-modal-close {
+    border: 0;
+    background: white;
+
+}
+
+.certification-modal-close svg {
+    width:
+        40px;
+    height: auto;
+}
+
+
+.certification-modal-col-2 {
+    width: -webkit-calc((100% - 60px) / 2);
+    width: -moz-calc((100% - 60px) / 2);
+    width: calc((100% - 60px) / 2);
+}
+
+@media (max-width: 767px) {
+    .certification-modal-col-2 {
+        width: 100%;
+    }
+}
+
+
+
+
+/* ==========================================================================
+     #FORM
+     ========================================================================== */
+.certification-modal-page-wrapper input {
+    outline: none;
+    margin: 0;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 14px;
+    font-family: inherit;
+
+}
+
+.certification-modal-input-group {
+    position: relative;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    margin: 30px 20px;
+}
+
+
+.certification-modal-certification {
+    margin-bottom: 37px;
+}
+
+.certification-modal-description-input {
+    position: relative;
+    margin: 0 20px;
+    padding: 5px 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ccc;
+    border: 2px solid #ccc;
+    height: 200px;
+}
+
+.certification-modal-period-container,
+.certification-modal-location-container {
+    display: flex;
+}
+
+.certification-modal-period-container .certification-modal-input-group {
+    margin-top: 0;
+}

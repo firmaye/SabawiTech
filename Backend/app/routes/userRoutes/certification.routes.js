@@ -8,12 +8,15 @@ module.exports = app => {
 	//get single certification
 
 	//=========== To be Implemented ==================
-	
+
 	//create certification 
-	router.post("/:id", getUser, certification.create )	
+	router.post("/:id", getUser, certification.create)
 	//update certification
-	router.patch("/:id/:id1", getUser,certification.update)
-  
-  app.use('/api/users/certification', router);
+	router.patch("/:id/:id1", getUser, certification.update)
+
+	//update certification
+	router.delete("/:id/:id1", getUser, certification.update)
+
+	app.use('/api/users/certification', router);
 
 }
