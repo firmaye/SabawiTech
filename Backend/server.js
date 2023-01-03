@@ -42,6 +42,7 @@ require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
 app.use("/uploads/image", express.static('uploads/image'))
 
+
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
