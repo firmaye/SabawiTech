@@ -11,10 +11,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import OpportunityDetailPage from "./OpportunityDetailPage";
 import BlogContainer from "./components/BlogContainer";
 import BlogDetails from "./components/BlogDetails";
+import AddPortifolio from "./AddPortifolio"
+import EditPortifolio from "./EditPortifolio"
 import BlogdetailsContainer from "./components/BlogdetailsContainer";
-import Signin from "./components/signin";
+import Signin from "./Signin";
 import Contact from "./Contact";
 import ExtraDetail from "./ExtraDetail";
+import Signup from "./Signup";
+import Profile from "./Profile";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -53,8 +58,16 @@ const router = createBrowserRouter([
     element: <ExtraDetail />,
   },
   {
-    path: "/blogdetails/:id",
+    path: "/blogdetails",
     element: <BlogdetailsContainer />
+  },
+  {
+    path: "/signin",
+    element: <Signin />
+  },
+  {
+    path: "/signup",
+    element: <Signup />
   }
 ]);
 
