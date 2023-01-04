@@ -41,7 +41,7 @@ require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
-app.use("/uploads/image",express.static('uploads/image'))
+app.use("/uploads/images",express.static('uploads/images'))
 
 
 // set port, listen for requests
