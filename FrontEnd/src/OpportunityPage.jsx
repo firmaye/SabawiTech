@@ -18,7 +18,9 @@ const OpportunityPage = () => {
         // setloading(
         //     true
         // )
-        fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user)
+        fetch("http://localhost:8080/api/internships", { headers: { 'x-access-token': user.accessToken } }).then(res => res.json()).then(result => {
             console.log(result)
             setloading(false)
 

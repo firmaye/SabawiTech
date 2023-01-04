@@ -1,5 +1,38 @@
+import { useState } from 'react'
 import './css/authentication.css'
 const Signin = () => {
+    const [email, setemail] = useState("")
+    const [password, setpassword] = useState("")
+    let handleSubmit = (event) => {
+        let body = {
+            email,
+            password
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+        fetch('http://localhost:8080/api/auth/signin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                if (data.accessToken) {
+                    localStorage.setItem("user", JSON.stringify(data));
+                    window.location.href = "http://localhost:8081/"
+                }
+                // successModal()
+            })
+            .catch((error) => {
+                // errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
+    }
     return (
         <div className='main-container-parent'>
             <div className=" main-container">
@@ -11,12 +44,12 @@ const Signin = () => {
                         Sign In And Explore
                     </div>
                     <div className="input-container">
-                        <input type="email" name='email' placeholder='Email' className="" />
-                        <span className="">
+                        <input type="email" onChange={(data) => { setemail(data.target.value) }} name='email' placeholder='Email' className="" />
+                        <span onChange={(data) => { setpassword(data.target.value) }} className="">
                         </span>
                     </div>
                     <div className="input-container">
-                        <input type="text" name='password' placeholder='password' className="" />
+                        <input onChange={(data) => { setpassword(data.target.value) }} type="text" name='password' placeholder='password' className="" />
                         <span className=''>
                         </span>
                     </div>
@@ -24,7 +57,7 @@ const Signin = () => {
                     <span className=''></span>
 
                     <div className="input-button">
-                        <button type='submit' className="sign-in">
+                        <button onClick={(event) => { handleSubmit(event) }} type='submit' className="sign-in">
                             Sign In
                         </button>
                         <button type="button" className="login-with-google-btn" >

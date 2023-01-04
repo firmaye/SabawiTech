@@ -62,7 +62,8 @@ const NameModal = ({ image }) => {
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // console.log(body)
         // event.preventDefault()
-        fetch('http://localhost:8080/api/users/previousWork/63b13cfd127ade2c12562493', {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/upload/${userid}`, {
             method: 'POST',
 
             body: formData

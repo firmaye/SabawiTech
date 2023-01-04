@@ -62,11 +62,11 @@ const router = createBrowserRouter([
     path: "/blogdetails/:id",
     element: <BlogdetailsContainer />
   }, {
-    path: "/siginin",
+    path: "/signin",
     element: <Signin />,
   },
   {
-    path: "/siginup",
+    path: "/signup",
     element: <Signup />,
   },
 ]);

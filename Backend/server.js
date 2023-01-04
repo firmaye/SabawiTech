@@ -44,7 +44,7 @@ require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
 
 require('./app/routes/auth.routes')(app);
-app.use("/uploads/image", express.static('uploads/image'))
+app.use("/uploads/image", express.static('uploads/images'))
 
 
 // set port, listen for requests

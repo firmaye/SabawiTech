@@ -30,6 +30,10 @@ import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
 const Profile = () => {
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+        window.location.href = "http://localhost:8081/signin"
+    }
+
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
@@ -45,9 +49,11 @@ const Profile = () => {
     const [certification, setcertification] = useState([])
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
+    let userid = JSON.parse(localStorage.getItem('user')).id
+    console.log(userid)
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
-            console.log(result.certification)
+        fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+            console.log(result)
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
@@ -112,7 +118,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={`http://localhost:8080/${profileinfo.profilePhoto}`} alt="" />
+                                                        <img src={`http://localhost:8080/uploads/image/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
