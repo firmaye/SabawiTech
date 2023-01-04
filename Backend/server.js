@@ -3,8 +3,9 @@ const app = express()
 const db = require("./app/models");
 const cors=require("cors")
 var corsOptions = {
-  origin: "*"
+    origin: "http://localhost:8081"
 };
+
 app.use(cors(corsOptions));
 
 db.mongoose
@@ -40,6 +41,9 @@ require("./app/routes/userRoutes/otherExperience.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
+require("./app/routes/issue.routes")(app);
+
+require('./app/routes/auth.routes')(app);
 app.use("/uploads/image",express.static('uploads/image'))
 
 

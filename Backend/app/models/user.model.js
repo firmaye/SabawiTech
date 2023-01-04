@@ -6,14 +6,14 @@ module.exports = mongoose => {
     lastName:      {type: String, required: true},
     userName:      {type: String, required: true},
     password:      {type: String, required: true},
-    email:         {type: String, required: true},
-    phoneNo:       {type: String, required: true},
+    email:         {type: String, },
+    phoneNo:       {type: String, },
     gender:        {type: String, required: false},
     profilePhoto:  {data:Buffer,type: String},
-    country:      {type: String, required: false},
-    state:      {type: String, required: false},
-    title:         {type: String, required: false},
-    titleOverview: {type: String, required: false},
+    country:      {type: String, required: true},
+    state:      {type: String, required: true},
+    title:         {type: String, },
+    titleOverview: {type: String,},
     previousWork: [
         {
             id: mongoose.ObjectId,
@@ -26,8 +26,6 @@ module.exports = mongoose => {
             deletedAt: Date,
             createdAt: Date,
             updatedAt: Date,
-
-
          }
     ],
     skill: [
