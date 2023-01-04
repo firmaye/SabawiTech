@@ -245,34 +245,6 @@ p{
 .detail_list_inine{
   padding-right: 32px;
 }
-.block-quote{
-  margin-bottom: 20px;
-  overflow-wrap: break-word;
-  box-sizing: border-box;
-  background: #f8fafb;
-  padding-left: 60px;
-  position: relative;
-  padding: 20px 16px;
-  border-radius: 15px;
-  margin: 0 0 1rem;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 40px;
-  margin-inline-end: 40px;
-}
-blockquote p {
-  font-size: 24px;
-  color: #4a6375;
-  font-weight: 500;
-  line-height: 35px;
-}
-blockquote cite {
-  position: relative;
-  display: inline-block;
-  font-style: inherit;
-  padding-top: 10px;
-  margin-left: 15px;
-}
 .secondTitle{
   font-family: Poppins;
   font-weight: 700;
@@ -390,6 +362,15 @@ blockquote cite {
   margin-top: 50px;
   display: inline-block;
   width: 100%;
+}
+.noresultscont{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.noresultscont img{
+  width:50%;
 }
 @media(max-width:991px){
   .blogcontainer{

@@ -1,6 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
@@ -258,30 +256,30 @@ const OpportunityDetailPage = () => {
                                             </button>
                                         </div>
                                     </div>
-                                    <ul className="single-opportunity-sidebar-requirements mt-5 mb-3">
-                                        <li className="text-left">
+                                    <ul class="single-opportunity-sidebar-requirements mt-5 mb-3">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
-                                        <li className="text-left">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
-                                        <li className="text-left">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
-                                        <li className="text-left">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
-                                        <li className="text-left">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
-                                        <li className="text-left">
+                                        <li class="text-left">
                                             Seller Type :
-                                            <b className="float-end">Student</b>
+                                            <b class="float-end">Student</b>
                                         </li>
                                     </ul>
                                 </div> */}
@@ -295,22 +293,22 @@ const OpportunityDetailPage = () => {
                             <div className="suggested-projects-featured">
                                 Featured
                             </div>
-                            <div className="suggested-projects-profile text-center">
+                            <div class="suggested-projects-profile text-center">
                                 <div>
 
-                                    <img src="./profile.jpg" className="suggested-projects-profile-img" alt="" />
-                                    <h5 className="suggested-projects-profile-name">Bayley Robertson</h5>
+                                    <img src="./profile.jpg" class="suggested-projects-profile-img" alt="" />
+                                    <h5 class="suggested-projects-profile-name">Bayley Robertson</h5>
                                 </div>
-                                <div className="suggested-projects-profile-title">
+                                <div class="suggested-projects-profile-title">
                                     Swift / Swift Developer for B2B IOS apps
                                 </div>
-                                <ul className="mb-0">
+                                <ul class="mb-0">
                                     <li>
-                                        <i className="fa fa-bar-chart"></i>
+                                        <i class="fa fa-bar-chart"></i>
                                         <div>Hourly</div>
                                     </li>
                                     <li>
-                                        <i className="fa fa-bar-chart"></i>
+                                        <i class="fa fa-bar-chart"></i>
                                         <div>Hourly</div>
                                     </li>
                                 </ul>
@@ -319,107 +317,107 @@ const OpportunityDetailPage = () => {
                     </div> */}
                         {/* <div className="suggested-projects-parent-container">
 
-                        <div className="row" >
+                        <div class="row" >
 
-                            <div className="col-md-4 " >
-                                <div className="suggested-project-item ">
-                                    <div className="suggested-project-featured-post">Featured</div>
-                                    <div className="text-center">
-                                        <a className="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
+                            <div class="col-md-4 " >
+                                <div class="suggested-project-item ">
+                                    <div class="suggested-project-featured-post">Featured</div>
+                                    <div class="text-center">
+                                        <a class="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
                                             <img src="https://themebing.com/wp/prolancer/wp-content/uploads/2021/04/pexels-andrea-piacquadio-3777566-150x150.jpg" alt="" />
                                             <h5>David Parker</h5>
                                         </a>
-                                        <a className="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
-                                        <ul className="list-inline suggested-project-profile-detail">
-                                            <li className="list-inline-item"> Fixed</li>
-                                            <li className="list-inline-item"> 1-5 Days</li>
+                                        <a class="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
+                                        <ul class="list-inline suggested-project-profile-detail">
+                                            <li class="list-inline-item"> Fixed</li>
+                                            <li class="list-inline-item"> 1-5 Days</li>
                                         </ul>
-                                        <div className="">
-                                            <a href={"/opportunitydetail"} className="opportunity-button">
+                                        <div classnames="">
+                                            <a href={"/opportunitydetail"} classnames="opportunity-button">
                                                 Detail
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-4 " >
-                                <div className="suggested-project-item ">
-                                    <div className="suggested-project-featured-post">Featured</div>
-                                    <div className="text-center">
-                                        <a className="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
+                            <div class="col-md-4 " >
+                                <div class="suggested-project-item ">
+                                    <div class="suggested-project-featured-post">Featured</div>
+                                    <div class="text-center">
+                                        <a class="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
                                             <img src="https://themebing.com/wp/prolancer/wp-content/uploads/2021/04/pexels-andrea-piacquadio-3777566-150x150.jpg" alt="" />
                                             <h5>David Parker</h5>
                                         </a>
-                                        <a className="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
-                                        <ul className="list-inline suggested-project-profile-detail">
-                                            <li className="list-inline-item"> Fixed</li>
-                                            <li className="list-inline-item"> 1-5 Days</li>
+                                        <a class="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
+                                        <ul class="list-inline suggested-project-profile-detail">
+                                            <li class="list-inline-item"> Fixed</li>
+                                            <li class="list-inline-item"> 1-5 Days</li>
                                         </ul>
-                                        <div className="">
-                                            <a href={"/opportunitydetail"} className="opportunity-button">
+                                        <div classnames="">
+                                            <a href={"/opportunitydetail"} classnames="opportunity-button">
                                                 Detail
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-4 " >
-                                <div className="suggested-project-item ">
-                                    <div className="suggested-project-featured-post">Featured</div>
-                                    <div className="text-center">
-                                        <a className="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
+                            <div class="col-md-4 " >
+                                <div class="suggested-project-item ">
+                                    <div class="suggested-project-featured-post">Featured</div>
+                                    <div class="text-center">
+                                        <a class="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
                                             <img src="https://themebing.com/wp/prolancer/wp-content/uploads/2021/04/pexels-andrea-piacquadio-3777566-150x150.jpg" alt="" />
                                             <h5>David Parker</h5>
                                         </a>
-                                        <a className="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
-                                        <ul className="list-inline suggested-project-profile-detail">
-                                            <li className="list-inline-item"> Fixed</li>
-                                            <li className="list-inline-item"> 1-5 Days</li>
+                                        <a class="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
+                                        <ul class="list-inline suggested-project-profile-detail">
+                                            <li class="list-inline-item"> Fixed</li>
+                                            <li class="list-inline-item"> 1-5 Days</li>
                                         </ul>
-                                        <div className="">
-                                            <a href={"/opportunitydetail"} className="opportunity-button">
+                                        <div classnames="">
+                                            <a href={"/opportunitydetail"} classnames="opportunity-button">
                                                 Detail
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-4 " >
-                                <div className="suggested-project-item ">
-                                    <div className="suggested-project-featured-post">Featured</div>
-                                    <div className="text-center">
-                                        <a className="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
+                            <div class="col-md-4 " >
+                                <div class="suggested-project-item ">
+                                    <div class="suggested-project-featured-post">Featured</div>
+                                    <div class="text-center">
+                                        <a class="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
                                             <img src="https://themebing.com/wp/prolancer/wp-content/uploads/2021/04/pexels-andrea-piacquadio-3777566-150x150.jpg" alt="" />
                                             <h5>David Parker</h5>
                                         </a>
-                                        <a className="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
-                                        <ul className="list-inline suggested-project-profile-detail">
-                                            <li className="list-inline-item"> Fixed</li>
-                                            <li className="list-inline-item"> 1-5 Days</li>
+                                        <a class="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
+                                        <ul class="list-inline suggested-project-profile-detail">
+                                            <li class="list-inline-item"> Fixed</li>
+                                            <li class="list-inline-item"> 1-5 Days</li>
                                         </ul>
-                                        <div className="">
-                                            <a href={"/opportunitydetail"} className="opportunity-button">
+                                        <div classnames="">
+                                            <a href={"/opportunitydetail"} classnames="opportunity-button">
                                                 Detail
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-md-4 " >
-                                <div className="suggested-project-item ">
-                                    <div className="suggested-project-featured-post">Featured</div>
-                                    <div className="text-center">
-                                        <a className="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
+                            <div class="col-md-4 " >
+                                <div class="suggested-project-item ">
+                                    <div class="suggested-project-featured-post">Featured</div>
+                                    <div class="text-center">
+                                        <a class="suggested-project-profile-image-container" href="https://themebing.com/wp/prolancer/buyers/david-parker/" tabindex="-1">
                                             <img src="https://themebing.com/wp/prolancer/wp-content/uploads/2021/04/pexels-andrea-piacquadio-3777566-150x150.jpg" alt="" />
                                             <h5>David Parker</h5>
                                         </a>
-                                        <a className="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
-                                        <ul className="list-inline suggested-project-profile-detail">
-                                            <li className="list-inline-item"> Fixed</li>
-                                            <li className="list-inline-item"> 1-5 Days</li>
+                                        <a class="suggested-project-profile-title" href="https://themebing.com/wp/prolancer/projects/english-content-writer-for-fintech/" tabindex="-1"><h3>English content writer for Fintech</h3></a>
+                                        <ul class="list-inline suggested-project-profile-detail">
+                                            <li class="list-inline-item"> Fixed</li>
+                                            <li class="list-inline-item"> 1-5 Days</li>
                                         </ul>
-                                        <div className="">
-                                            <a href={"/opportunitydetail"} className="opportunity-button">
+                                        <div classnames="">
+                                            <a href={"/opportunitydetail"} classnames="opportunity-button">
                                                 Detail
                                             </a>
                                         </div>
