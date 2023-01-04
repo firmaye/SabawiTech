@@ -9,17 +9,17 @@ import "./index.css";
 import OpportunityPage from "./OpportunityPage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import OpportunityDetailPage from "./OpportunityDetailPage";
+import Profile from "./Profile";
+import AddPortifolio from "./AddPortifolio";
 import BlogContainer from "./components/BlogContainer";
-import BlogDetails from "./components/BlogDetails";
-import AddPortifolio from "./AddPortifolio"
-import EditPortifolio from "./EditPortifolio"
 import BlogdetailsContainer from "./components/BlogdetailsContainer";
-import Signin from "./Signin";
+import EditPortifolio from "./EditPortifolio";
+import { store } from './redux/store'
+import { Provider } from 'react-redux'
 import Contact from "./Contact";
 import ExtraDetail from "./ExtraDetail";
+import Signin from "./Signin";
 import Signup from "./Signup";
-import Profile from "./Profile";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     element: <OpportunityPage />,
   },
   {
-    path: "/opportunitydetail",
+    path: "/opportunitydetail/:id",
     element: <OpportunityDetailPage />,
   },
   {
@@ -50,6 +50,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blog",
+
     element: <BlogContainer />,
   },
   {
@@ -58,21 +59,24 @@ const router = createBrowserRouter([
     element: <ExtraDetail />,
   },
   {
-    path: "/blogdetails",
+    path: "/blogdetails/:id",
     element: <BlogdetailsContainer />
+  }, {
+    path: "/siginin",
+    element: <Signin />,
   },
   {
-    path: "/signin",
-    element: <Signin />
+    path: "/siginup",
+    element: <Signup />,
   },
-  {
-    path: "/signup",
-    element: <Signup />
-  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+
+    <React.StrictMode>
+
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>,
 );
