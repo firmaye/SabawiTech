@@ -27,11 +27,16 @@ import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
 import ErrorModal from './components/ErrorModal';
 import DeleteEducationModal from './components/DeleteEducationModal';
+import DeleteEmploymentModal from './components/DeleteEmploymentModal';
+import DeleteCertificationModal from './components/DeleteCertificationModal';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
     const [selectedcertificate, setselectedcertificate] = useState({})
+    const [tobedeletedemployment, settobedeletedemployment] = useState({})
+    const [tobedeletedportifolio, settobedeletedportifolio] = useState({})
+    const [tobedeletedcertification, settobedeletedcertification] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
@@ -39,12 +44,10 @@ const Profile = () => {
     const [employmenthistory, setemploymenthistory] = useState([])
     const [certification, setcertification] = useState([])
     const [education, seteducation] = useState([])
-    const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
     const [loading, setloading] = useState(true)
     useEffect(() => {
         fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
             console.log(result.certification)
-
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
@@ -55,6 +58,18 @@ const Profile = () => {
             setloading(false)
         }).catch((error) => { console.log(error) });
     }, [])
+    function fileValue(value) {
+        var path = value.value;
+        var extenstion = path.split('.').pop();
+        console.log(value.files[0])
+        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            alert("File not supported. Kindly Upload the Image of below given extension ")
+        }
+    }
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     const dispatch = useDispatch()
     if (loading) {
@@ -73,15 +88,17 @@ const Profile = () => {
                                         : currentModal == "educationadd" ? <EducationModal />
                                             : currentModal == "languagesadd" ? <LanguageModal language={language} />
                                                 : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
-                                                    : currentModal == "profileimage" ? <ImageModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
-                                                        : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
-                                                            : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
-                                                                : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
-                                                                    : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
-                                                                        : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
-                                                                            : currentModal == "success" ? <SuccessModal />
-                                                                                : currentModal == "error" ? <ErrorModal />
-                                                                                    : <></>
+                                                    : currentModal == "profileimage" ? <ImageModal image={profileinfo.profilePhoto} />
+                                                        : currentModal == "deleteportifolio" ? <DeletePortifolioModal tobedeleted={tobedeletedportifolio} />
+                                                            : currentModal == "deletecertification" ? <DeleteCertificationModal tobedeleted={tobedeletedcertification} />
+                                                                : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
+                                                                    : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
+                                                                        : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
+                                                                            : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
+                                                                                : currentModal == "employmentdelete" ? <DeleteEmploymentModal tobedeleted={tobedeletedemployment} />
+                                                                                    : currentModal == "success" ? <SuccessModal />
+                                                                                        : currentModal == "error" ? <ErrorModal />
+                                                                                            : <></>
                 }
                 <Navbar />
                 <Header title={"Profile"} />
@@ -95,7 +112,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={ProfileImg} alt="" />
+                                                        <img src={`http://localhost:8080/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
@@ -275,12 +292,12 @@ const Profile = () => {
                                                 return (
                                                     <div className="col-6 col-md-4">
                                                         <div className="portifolio-image-container">
-                                                            <img className="col-12" src={ProfileImg} alt="" />
+                                                            <img className="col-12" src={"http://localhost:8080/uploads/image/" + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
-                                                                <a href={`editportifolio/${element.id}`} className="profile-edit-btn">
+                                                                <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                                 </a>
-                                                                <a onClick={() => { setportifoliotobedeleted(element.id); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
+                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
                                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                                 </a>
                                                             </div>
@@ -346,7 +363,7 @@ const Profile = () => {
                                                 <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
-                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal(("employmentdelete"))) }} className="profile-edit-btn">
                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -354,7 +371,10 @@ const Profile = () => {
                                         <div className="row profile-employment-history-detail-description">
 
                                             <div className="profile-employment-history-detail-date">
-                                                {element.empPeriod}
+                                                {element.empAt}
+                                            </div>
+                                            <div className="profile-employment-history-detail-date">
+                                                {element.empFrom} - {element.empTo}
                                             </div>
                                             <div className="profile-employment-history-detail-content">
                                                 {element.empDescription}
@@ -390,7 +410,7 @@ const Profile = () => {
                                                     <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
                                                         <i className="fa fa-pencil" aria-hidden="true"></i>
                                                     </button>
-                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
+                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal(("deletecertification"))) }} className="profile-edit-btn">
                                                         <i className="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
