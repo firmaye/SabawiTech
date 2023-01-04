@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-GET http://localhost:8080/api/users/63a93ed08e1a8f8f7dbb972a
+GET http://localhost:8080/api/users/63b13cfd127ade2c12562493
 
 ### create single user 
 
@@ -440,4 +440,30 @@ Content-Type: application/json
  "lastName":"Sabawi tlast",
  "country":"Kenya",
  "state":"Addis Ababa"
+}
+
+### create issue
+POST http://localhost:8080/api/issues/
+Content-Type: application/json
+
+{
+  "name":"philica",
+  "email": "fikretucker79@gmail.com",
+  "subject":"i canot upload portfolio with photo",
+  "message":"please fix the above issue"
+}
+
+### return issue
+GET  http://localhost:8080/api/issues/
+
+
+### update issue
+PUT http://localhost:8080/api/issues/63b486f01314756b0881f6e7
+Content-Type: application/json
+
+{
+  "name":"philica",
+  "email": "fikretucker79@gmail.com",
+  "subject":"i canot upload portfolio with photo",
+  "message":"please fix the above issue"
 }
