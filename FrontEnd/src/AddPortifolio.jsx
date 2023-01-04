@@ -4,36 +4,35 @@ import "./css/addportifolio.css"
 import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
+import ErrorModal from './components/ErrorModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from './redux/profilemodal'
 
 const AddPortifolio = () => {
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
-    const [newportifolio, setnewportifolio] = useState("")
     const [workTitle, setworkTitle] = useState("")
     const [workThumbnail, setworkThumbnail] = useState()
     const [workLink, setworkLink] = useState()
+
     const dispatch = useDispatch()
     let successModal = () => {
         dispatch(setModal("addportifoliosuccess"))
-        setmodalstyle({
-            display: "none"
-        })
+
     }
     let errorModal = () => {
         dispatch(setModal("error"))
-        setmodalstyle({
-            display: "none"
-        })
+
     }
     let handleSubmit = (event) => {
 
         console.log(workThumbnail)
+        console.log(skills)
+
         const formData = new FormData();
         // Update the formData object
         formData.append(
-            'profilePhoto',
+            'workThumbnail',
             workThumbnail
         );
         formData.append(
@@ -44,6 +43,11 @@ const AddPortifolio = () => {
             'workLink',
             workLink
         );
+        formData.append(
+            'workSkill',
+            skills
+        );
+
         fetch('http://localhost:8080/api/users/previousWork/63b13cfd127ade2c12562493', {
             method: 'POST',
 
@@ -52,10 +56,10 @@ const AddPortifolio = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                // successModal()
+                successModal()
             })
             .catch((error) => {
-                // errorModal()
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });

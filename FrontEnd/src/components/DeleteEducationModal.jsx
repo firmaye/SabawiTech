@@ -18,7 +18,6 @@ const DeleteEducationModal = ({ tobedeleted }) => {
         setmodalstyle({
             display: "none"
         })
-        window.location.reload()
     }
     let successModal = () => {
         dispatch(setModal("success"))

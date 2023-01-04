@@ -28,12 +28,15 @@ import FadeIn from "react-fade-in";
 import ErrorModal from './components/ErrorModal';
 import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
+import DeleteCertificationModal from './components/DeleteCertificationModal';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
     const [selectedcertificate, setselectedcertificate] = useState({})
     const [tobedeletedemployment, settobedeletedemployment] = useState({})
+    const [tobedeletedportifolio, settobedeletedportifolio] = useState({})
+    const [tobedeletedcertification, settobedeletedcertification] = useState({})
     const [profileinfo, setprofileinfo] = useState({})
     const [language, setlanguage] = useState([])
     const [previouswork, setpreviouswork] = useState([])
@@ -41,12 +44,10 @@ const Profile = () => {
     const [employmenthistory, setemploymenthistory] = useState([])
     const [certification, setcertification] = useState([])
     const [education, seteducation] = useState([])
-    const [portifoliotobedeleted, setportifoliotobedeleted] = useState("")
     const [loading, setloading] = useState(true)
     useEffect(() => {
         fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
             console.log(result.certification)
-
             setprofileinfo(result)
             setlanguage(result.language)
             setskilllist(result.skill)
@@ -88,15 +89,16 @@ const Profile = () => {
                                             : currentModal == "languagesadd" ? <LanguageModal language={language} />
                                                 : currentModal == "emailandphone" ? <EmailAndPhoneModal emailandphone={{ email: profileinfo.email, phone: profileinfo.phoneNo }} />
                                                     : currentModal == "profileimage" ? <ImageModal image={profileinfo.profilePhoto} />
-                                                        : currentModal == "deleteportifolio" ? <DeletePortifolioModal detail={portifoliotobedeleted} />
-                                                            : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
-                                                                : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
-                                                                    : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
-                                                                        : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
-                                                                            : currentModal == "employmentdelete" ? <DeleteEmploymentModal tobedeleted={tobedeletedemployment} />
-                                                                                : currentModal == "success" ? <SuccessModal />
-                                                                                    : currentModal == "error" ? <ErrorModal />
-                                                                                        : <></>
+                                                        : currentModal == "deleteportifolio" ? <DeletePortifolioModal tobedeleted={tobedeletedportifolio} />
+                                                            : currentModal == "deletecertification" ? <DeleteCertificationModal tobedeleted={tobedeletedcertification} />
+                                                                : currentModal == "employmentedit" ? <EmploymentEditModal selected={selectedemployment} />
+                                                                    : currentModal == "certificationedit" ? <CertificationEditModal selected={selectedcertificate} />
+                                                                        : currentModal == "educationedit" ? <EducationEditModal selected={selectededucation} />
+                                                                            : currentModal == "educationdelete" ? <DeleteEducationModal tobedeleted={tobedeletededucation} />
+                                                                                : currentModal == "employmentdelete" ? <DeleteEmploymentModal tobedeleted={tobedeletedemployment} />
+                                                                                    : currentModal == "success" ? <SuccessModal />
+                                                                                        : currentModal == "error" ? <ErrorModal />
+                                                                                            : <></>
                 }
                 <Navbar />
                 <Header title={"Profile"} />
@@ -290,12 +292,12 @@ const Profile = () => {
                                                 return (
                                                     <div className="col-6 col-md-4">
                                                         <div className="portifolio-image-container">
-                                                            <img className="col-12" src={ProfileImg} alt="" />
+                                                            <img className="col-12" src={"http://localhost:8080/uploads/image/" + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
-                                                                <a href={`editportifolio/${element.id}`} className="profile-edit-btn">
+                                                                <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                                 </a>
-                                                                <a onClick={() => { setportifoliotobedeleted(element.id); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
+                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
                                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                                 </a>
                                                             </div>
@@ -408,7 +410,7 @@ const Profile = () => {
                                                     <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
                                                         <i className="fa fa-pencil" aria-hidden="true"></i>
                                                     </button>
-                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
+                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal(("deletecertification"))) }} className="profile-edit-btn">
                                                         <i className="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
                                                 </div>

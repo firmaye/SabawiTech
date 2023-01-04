@@ -17,7 +17,7 @@ const AddPortifolioSuccessModal = () => {
         setmodalstyle({
             display: "none"
         })
-        window.location.reload()
+        window.location.href = "http://localhost:8081/profile";
     }
     return (
         <form>
