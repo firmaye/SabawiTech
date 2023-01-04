@@ -14,8 +14,8 @@ const BlogdetailsContainer = (props) => {
                 <div class="container">
                     <div class="container">
                         <div class="row blogmodification">
-                            <BlogDetails />
-                            <Blogsidebar />
+                            <BlogDetails authenticated = {true}/>
+                            <Blogsidebar display = "none"/>
                         </div>
                     </div>
                 </div>
