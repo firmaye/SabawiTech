@@ -10,12 +10,12 @@ const BlogdetailsContainer = (props) => {
         <div>
             <Navbar />
             <Header title="What are the advantages of being a freelancer?" />
-            <div className="maincont">
-                <div className="container">
-                    <div className="container">
-                        <div className="row blogmodification">
-                            <BlogDetails />
-                            <Blogsidebar />
+            <div class="maincont">
+                <div class="container">
+                    <div class="container">
+                        <div class="row blogmodification">
+                            <BlogDetails authenticated={true} />
+                            <Blogsidebar display="none" />
                         </div>
                     </div>
                 </div>
