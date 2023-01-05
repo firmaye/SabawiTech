@@ -9,7 +9,6 @@ function App() {
   return (
     <div>
       <Navbar />
-      <Signup />
     </div>
   )
 }

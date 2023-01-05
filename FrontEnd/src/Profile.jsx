@@ -1,6 +1,5 @@
 import React from 'react'
 import ProfileImg from "./assets/profile.jpg"
-import 'font-awesome/css/font-awesome.min.css';
 import "./css/profile.css"
 import Header from './components/Header';
 import Navbar from './components/Navbar';

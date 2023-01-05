@@ -89,7 +89,7 @@ const Blog = ({ catagory }) => {
         )
       })
       }
-      {startPage != "" ?
+      {startPage == 2 ?
       <a class="next page-numbers" href="javascript:void(0)" 
       onClick={()=>{
         if(startPage<pagination){

@@ -14,6 +14,9 @@ import BlogDetails from "./components/BlogDetails";
 import BlogdetailsContainer from "./components/BlogdetailsContainer";
 import Signin from "./components/signin";
 import Contact from "./Contact";
+import Profile from "./Profile"
+import AddPortifolio from "./AddPortifolio"
+import EditPortifolio from './EditPortifolio'
 const router = createBrowserRouter([
   {
     path: "/",
