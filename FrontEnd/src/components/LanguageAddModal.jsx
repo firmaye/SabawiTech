@@ -42,7 +42,8 @@ const LanguageModal = ({ language }) => {
         console.log(language)
         event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`Whttp://localhost:8080/api/users/language/${userid}`, {
+        console.log(`http://localhost:8080/api/users/language/${userid}`)
+        fetch(`http://localhost:8080/api/users/language/${userid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

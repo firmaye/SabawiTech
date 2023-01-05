@@ -40,8 +40,8 @@ const Signup = () => {
                 console.log(data)
                 if (data.accessToken) {
                     localStorage.setItem("user", JSON.stringify(data));
+                    window.location.href = "http://localhost:8081/extradetail"
                 }
-                window.location.href = "http://localhost:8081/extradetail"
 
             })
             .catch((error) => {
