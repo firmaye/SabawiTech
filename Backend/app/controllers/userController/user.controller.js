@@ -2,6 +2,19 @@ const db = require("../../models");
 const user = db.users;
 const multer = require('multer')
 
+//image uploading
+//storage
+ 
+const Storage = multer.diskStorage({
+  destination:'uploads/images',
+  filename:(req,file,cb) => {
+     cb(null, Date.now() + file.originalname )
+  }
+})
+
+const upload = multer({
+  storage: Storage 
+}).single('profilePhoto')
 
 
 // Retrieve all Users from the database.
@@ -51,6 +64,45 @@ exports.create =async(req, res) => {
     }
   };
 
+  exports.register = (req,res) => {
+    let imageName = ""
+
+    upload(req,res,(err) => {
+      if(err){
+        console.log(err)
+      }
+      else{
+        console.log("filename: "+req.file.filename)
+        imageName = req.file.filename
+        console.log("imageName: "+imageName)
+      }
+     })
+
+     setTimeout(() => {
+      let userId = req.params.id
+     
+       let  profilePhoto= imageName
+       let title= req.body.title
+       let  titleOverview= req.body.titleOverview
+       let skill= req.body.skill
+    
+      try{
+        console.log(newUser)
+        const updatedUser = user.updateOne(
+          {_id: userId}, 
+          {$push: {profilePhoto:profilePhoto,title:title,titleOverview:titleOverview,skill:skill} }
+          ).then(() => {
+            res.send({success:true})
+          }).catch((err) => console.log(err))
+    
+      }catch(err){
+        res.status(400).json({message: err.message})
+      }
+    }, "1000")
+  }
+
+
+
 //Delete A single user
 exports.delete = async (req, res) => {
     try{
@@ -74,20 +126,6 @@ exports.update = async (req, res) => {
       res.status(400).json({message: err.message})
     }
 };   
-
-
-//image uploading
-//storage 
-const Storage = multer.diskStorage({
-  destination:'uploads/images',
-  filename:(req,file,cb) => {
-     cb(null, Date.now() + file.originalname )
-  }
-})
-
-const upload = multer({
-  storage: Storage 
-}).single('profilePhoto')
 
 
 exports.upload = (req,res) => {
