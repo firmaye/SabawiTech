@@ -30,10 +30,6 @@ import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
 const Profile = () => {
-    if (JSON.parse(localStorage.getItem('user')) == null) {
-        window.location.href = "http://localhost:8081/signin"
-    }
-
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
@@ -49,33 +45,25 @@ const Profile = () => {
     const [certification, setcertification] = useState([])
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
-    let userid = JSON.parse(localStorage.getItem('user')).id
-    console.log(userid)
     useEffect(() => {
-        fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
-            console.log(result)
-            setprofileinfo(result)
-            setlanguage(result.language)
-            setskilllist(result.skill)
-            setpreviouswork(result.previousWork)
-            setemploymenthistory(result.employmentHistory)
-            setcertification(result.certification)
-            seteducation(result.education)
-            setloading(false)
-        }).catch((error) => { console.log(error) });
-    }, [])
-    function fileValue(value) {
-        var path = value.value;
-        var extenstion = path.split('.').pop();
-        console.log(value.files[0])
-        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
-            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
-            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
-            document.getElementById("filename").innerHTML = filename;
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
         } else {
-            alert("File not supported. Kindly Upload the Image of below given extension ")
+            let userid = JSON.parse(localStorage.getItem('user')).id
+            console.log(userid)
+            fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+                console.log(result)
+                setprofileinfo(result)
+                setlanguage(result.language)
+                setskilllist(result.skill)
+                setpreviouswork(result.previousWork)
+                setemploymenthistory(result.employmentHistory)
+                setcertification(result.certification)
+                seteducation(result.education)
+                setloading(false)
+            }).catch((error) => { console.log(error) });
         }
-    }
+    }, [])
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     const dispatch = useDispatch()
     if (loading) {

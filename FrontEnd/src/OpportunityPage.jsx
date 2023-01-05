@@ -30,7 +30,12 @@ const OpportunityPage = () => {
         ;
     }
     useEffect(() => {
-        getFetchUsers()
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
+        } else {
+
+            getFetchUsers()
+        }
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)

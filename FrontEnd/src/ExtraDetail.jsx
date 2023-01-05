@@ -5,6 +5,9 @@ import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 
 const ExtraDetail = () => {
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+        window.location.href = "http://localhost:8081/signin"
+    }
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
     const [selectedImage, setSelectedImage] = useState(null);

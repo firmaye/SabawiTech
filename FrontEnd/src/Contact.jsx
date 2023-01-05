@@ -3,6 +3,9 @@ import Header from './components/Header'
 import Navbar from './components/Navbar'
 import "./css/contact.css"
 const Contact = () => {
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+        window.location.href = "http://localhost:8081/signin"
+    }
     const [name, setname] = useState("")
     const [email, setemail] = useState("")
     const [subject, setsubject] = useState("")
@@ -29,7 +32,7 @@ const Contact = () => {
         body = JSON.stringify(body)
         console.log(body)
         event.preventDefault()
-        let userid = JSON.parse(localStorage.getItem('user')).id
+
         console.log(`http://localhost:8080/api/issues`)
         fetch(`http://localhost:8080/api/issues`, {
             method: 'POST',

@@ -8,6 +8,7 @@ import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
 
 const OpportunityDetailPage = () => {
+
     const [opportunity, setopportunity] = useState({})
     const [requiredSkill, setrequiredskill] = useState([])
     const params = useParams()
@@ -42,7 +43,9 @@ const OpportunityDetailPage = () => {
             });
     }
     useEffect(() => {
-
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
+        }
         let paramsid = params.id
 
         fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
