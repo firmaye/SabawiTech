@@ -44,8 +44,9 @@ const CertificationEditModal = ({ selected }) => {
         body = JSON.stringify(body)
         console.log(body)
         event.preventDefault()
-        // console.log(`http://localhost:8080/api/users/certification/63b13cfd127ade2c12562493/${selected._id}`)
-        fetch(`http://localhost:8080/api/users/certification/63b13cfd127ade2c12562493/${selected._id}`, {
+
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/certification/${userid}/${selected._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

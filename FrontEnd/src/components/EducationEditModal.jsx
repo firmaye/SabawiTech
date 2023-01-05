@@ -47,7 +47,7 @@ const EducationEditModal = ({ selected }) => {
         body = JSON.stringify(body)
         console.log(body)
         event.preventDefault()
-        fetch(`http://localhost:8080/api/users/education/63b13cfd127ade2c12562493/${selected._id}`, {
+        fetch(`http://localhost:8080/api/users/education/${userid}/${selected._id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

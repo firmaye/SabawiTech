@@ -190,10 +190,6 @@
     border: none;
 }
 
-.getintouch textarea:focus,
-.getintouch input:focus {
-    border-color: transparent !important;
-}
 
 
 
@@ -283,7 +279,6 @@
     height: 50px;
     border-radius: 25px;
     padding: 0 30px;
-    color: white;
 }
 
 .getintouch input.input1+.shadow-input1 {
@@ -329,10 +324,7 @@
     color: rgba(87, 184, 70, 0.5);
 }
 
-.getintouch .input1:focus+.shadow-input1 {
-    -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-    animation: anim-shadow 0.5s ease-in-out forwards;
-}
+
 
 @-webkit-keyframes anim-shadow {
     to {

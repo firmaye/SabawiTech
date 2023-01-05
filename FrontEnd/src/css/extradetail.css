@@ -357,6 +357,20 @@
 }
 
 /* end of skills css */
+/* start of intro css */
+.extra-detail-intro-description {
+    max-width: 100%;
+}
+
+.extra-detail-intro-title h2 {
+    font-size: 65px;
+}
+
+.extra-detail-intro-subititle {
+    font-size: 35px;
+}
+
+/* end of into css */
 @media (max-width: 992px) {
 
     .extra-detail-identity-container-parent,

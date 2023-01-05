@@ -106,7 +106,7 @@ const NameModal = ({ image }) => {
                                                     }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={`http://localhost:8080/uploads/image/${image}`} alt="" />
+                                                            <img id="image-preview" src={`http://localhost:8080/uploads/images/${image}`} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>

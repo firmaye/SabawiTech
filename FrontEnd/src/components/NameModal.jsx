@@ -44,7 +44,8 @@ const NameModal = ({ profileinfo }) => {
         body = JSON.stringify(body)
         console.log(body)
         event.preventDefault()
-        fetch('http://localhost:8080/api/users/personalInfo/63b13cfd127ade2c12562493', {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/personalInfo/${userid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

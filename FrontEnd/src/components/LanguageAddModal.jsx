@@ -41,7 +41,8 @@ const LanguageModal = ({ language }) => {
         let language = JSON.stringify({ language: languageedited })
         console.log(language)
         event.preventDefault()
-        fetch('http://localhost:8080/api/users/language/63b13cfd127ade2c12562493', {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`Whttp://localhost:8080/api/users/language/${userid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

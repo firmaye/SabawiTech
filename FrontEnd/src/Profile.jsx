@@ -118,7 +118,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={`http://localhost:8080/uploads/image/${profileinfo.profilePhoto}`} alt="" />
+                                                        <img src={`http://localhost:8080/uploads/images/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
@@ -298,7 +298,7 @@ const Profile = () => {
                                                 return (
                                                     <div className="col-6 col-md-4">
                                                         <div className="portifolio-image-container">
-                                                            <img className="col-12" src={"http://localhost:8080/uploads/image/" + element.workThumbnail} alt="" />
+                                                            <img className="col-12" src={"http://localhost:8080/uploads/images/" + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
                                                                 <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>

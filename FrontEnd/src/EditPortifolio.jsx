@@ -21,9 +21,11 @@ const EditPortifolio = () => {
 
 
     useEffect(() => {
-
-
-        fetch("http://localhost:8080/api/users/previousWork/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
+        }
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
             console.log(result.previousWork)
             const found = result.previousWork.find(element => element._id == paramsid);
             console.log(found)
@@ -112,7 +114,7 @@ const EditPortifolio = () => {
                                                     <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={"http://localhost:8080/uploads/image/" + workThumbnail} alt="" />
+                                                            <img id="image-preview" src={"http://localhost:8080/uploads/images/" + workThumbnail} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>
