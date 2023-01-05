@@ -6,5 +6,11 @@ exports.post = async(req, res) => {
     const email= req.body.email
     const subject= req.body.subject
     const message= req.body.message
-    EmailSender({email,name,subject,message})
+    try{
+        EmailSender({email,name,subject,message})
+        res.send({success:true})
+    }catch(err){
+        res.status(500).send({success:false})
+    }
+    
 };
