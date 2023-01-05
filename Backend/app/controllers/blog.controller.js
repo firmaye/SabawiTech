@@ -49,6 +49,22 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Retrieve all Blog from the database.
+exports.findRecent = (req, res) => {
+  const blogTitle = req.query.blogTitle;
+  Blog.find(blogTitle).sort({"createdAt": -1}).limit(4)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving blogs."
+      });
+    });
+};
+
+
 // Find a single Blog with an id
 exports.findOne = (req, res) => {
   const id = req.params.id;

@@ -21,6 +21,12 @@ const SkillModal = ({ skilllist }) => {
             display: "none"
         })
     }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
     let handleSubmit = (event) => {
         console.log(skilllistmodal)
         let skilllistedited = skilllistmodal.map((element) => {
@@ -43,9 +49,10 @@ const SkillModal = ({ skilllist }) => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                // successModal()
+                successModal()
             })
             .catch((error) => {
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });

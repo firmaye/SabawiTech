@@ -3,8 +3,9 @@ const app = express()
 const db = require("./app/models");
 const cors=require("cors")
 var corsOptions = {
-  origin: "*"
+    origin: "*"
 };
+
 app.use(cors(corsOptions));
 
 db.mongoose
@@ -42,6 +43,8 @@ require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
 app.use("/uploads/images",express.static('uploads/images'))
+require('./app/routes/auth.routes')(app);
+
 
 
 // set port, listen for requests
