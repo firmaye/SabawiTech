@@ -50,7 +50,7 @@ const HomePage = () => {
                 </p>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 bottomresponsive">
                     <div class="card popularcardmodify">
                         <div class="card-body popularcardbody">
                             <img src="./Images/translate-600x399.jpg" alt=""/>
@@ -68,7 +68,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 bottomresponsive">
                     <div class="card popularcardmodify">
                         <div class="card-body popularcardbody">
                             <img src="./translate-600x399.jpg" alt=""/>
@@ -86,7 +86,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 bottomresponsive">
                     <div class="card popularcardmodify">
                         <div class="card-body popularcardbody">
                             <img src="./translate-600x399.jpg" alt=""/>

@@ -206,6 +206,21 @@ footer{
         display:none;
     }
     .banner_content{
-        width:100%;
+        width: 100%;
+        margin-top: 275px;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        padding-bottom: 129px;
+        text-align: center;
+    }
+    .providecont{
+        height:auto;
+    }
+    .providecont h1{
+        margin-bottom:64px;
+    }
+    .bottomresponsive{
+        margin-bottom: 90px;
     }
 }
