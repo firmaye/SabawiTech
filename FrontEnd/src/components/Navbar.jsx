@@ -8,7 +8,7 @@ const Navbar = () => {
         <div class="container">
         <a href="/" class="navbar-brand">
         <i class="fas fa-blog"></i> &nbsp;
-        Blog Template
+        SabawiDevs
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -19,24 +19,16 @@ const Navbar = () => {
         <div id="navbarCollapse" class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="" class="nav-link active">
-                    Home
-                </a>
+            <a href={"/"}  class="nav-link active">Home</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link active">
-                    Blog
-                </a>
+            <a href={"/opportunity"} class="nav-link active">Browse Jobs</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link active">
-                    About
-                </a>
+            <a href={"/blog"} class="nav-link active">Blog</a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link active">
-                    Contact
-                </a>
+            <a href={"/contact"} class="nav-link active">Contact</a>
             </li>
         </ul>
         </div>
