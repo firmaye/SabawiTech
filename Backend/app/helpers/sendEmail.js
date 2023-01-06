@@ -12,10 +12,11 @@ const Email = (options) => {
       }
   });
   transpoter.sendMail(options, (err, info) => {
-    if (err) {
-      console.log(err);
-      return;
-    }
+    if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
   });
 };
 
@@ -52,6 +53,7 @@ const EmailSender = ({ email,name,subject,message }) => {
         `,
   };
 
-  Email(options)
+  const sent=Email(options)
+  return sent
 };
 module.exports= EmailSender

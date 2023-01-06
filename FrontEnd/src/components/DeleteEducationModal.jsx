@@ -32,9 +32,9 @@ const DeleteEducationModal = ({ tobedeleted }) => {
         })
     }
     let handleSubmit = (event) => {
-        // console.log(`http://localhost:8080/api/users/education/63b13cfd127ade2c12562493/${tobedeleted._id}`)
+        let userid = JSON.parse(localStorage.getItem('user')).id
         event.preventDefault()
-        fetch(`http://localhost:8080/api/users/education/63b13cfd127ade2c12562493/${tobedeleted._id}`, {
+        fetch(`http://localhost:8080/api/users/education/${userid}/${tobedeleted._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

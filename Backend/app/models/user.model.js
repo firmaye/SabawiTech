@@ -21,32 +21,20 @@ module.exports = mongoose => {
             workThumbnail: String,
             workDescription: String,
             workLink: String,
-            workSkill: [String] ,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            workSkill: [String]
          }
     ],
     skill: [
         {
             id: mongoose.ObjectId,
-            skillName: String,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            skillName: String
         }
     ],
     language: [
         {
             id: mongoose.ObjectId,
             languageName: String,
-            languageProficiency: String,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            languageProficiency: String
         }
     ],
     education: [
@@ -56,11 +44,7 @@ module.exports = mongoose => {
             dateAttendedFrom: Date,
             dateAttendedTo: Date,
             areaOfStudy: String,
-            eduDescription: String,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            eduDescription: String
         }
     ],
     certification: [
@@ -70,11 +54,7 @@ module.exports = mongoose => {
             certTitle: String,
             certProvider: String,
             certLink: String,
-            dateIssued: Date,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            dateIssued: Date
         }
     ],
     employmentHistory:[
@@ -86,22 +66,14 @@ module.exports = mongoose => {
             empRole: String,
             empFrom: String,
             empTo: String,
-            empDescription: String,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            empDescription: String
         }
     ],
     otherExperience: [
         {
             id: mongoose.ObjectId,
             expSubject: String,
-            expDescription: String,
-            isDeleted: Number,
-            deletedAt: Date,
-            createdAt: Date,
-            updatedAt: Date,
+            expDescription: String
         }
     ]
     },{timestamps: true })

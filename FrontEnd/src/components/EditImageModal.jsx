@@ -27,9 +27,13 @@ const NameModal = ({ image }) => {
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
             document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            console.log(filename)
             document.getElementById("filename").innerHTML = filename;
         } else {
-            alert("File not supported. Kindly Upload the Image of below given extension ")
+            // document.getElementById("filename").innerHTML = "";
+            setSelectedImage("")
+            document.getElementById('image-preview').src = ""
+            alert("File Not Selected Or Selected Format Not Supported")
         }
     }
     let successModal = () => {
@@ -62,7 +66,8 @@ const NameModal = ({ image }) => {
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // console.log(body)
         // event.preventDefault()
-        fetch('http://localhost:8080/api/users/previousWork/63b13cfd127ade2c12562493', {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/upload/${userid}`, {
             method: 'POST',
 
             body: formData
@@ -100,12 +105,13 @@ const NameModal = ({ image }) => {
                                             <div className="name-modal-image-container">
                                                 <div className="image-upload">
                                                     <input type="file" name="" id="logo" onChange={(value) => {
+                                                        console.log(value)
                                                         fileValue(value.target);
                                                         setImagePath(value);
                                                     }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={`http://localhost:8080/${image}`} alt="" />
+                                                            <img id="image-preview" src={`http://localhost:8080/uploads/images/${image}`} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>
@@ -122,7 +128,7 @@ const NameModal = ({ image }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Edit Image</button>
+                        <button type="button" onClick={(event) => { if (selectedImage) { handleSubmit(event) } else { console.log("Please Select Image") } }} className="btn btn-primary">Edit Image</button>
                     </div>
                 </div>
             </div>

@@ -46,30 +46,24 @@ const Profile = () => {
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
     useEffect(() => {
-        fetch("http://localhost:8080/api/users/63b13cfd127ade2c12562493").then(res => res.json()).then(result => {
-            console.log(result.certification)
-            setprofileinfo(result)
-            setlanguage(result.language)
-            setskilllist(result.skill)
-            setpreviouswork(result.previousWork)
-            setemploymenthistory(result.employmentHistory)
-            setcertification(result.certification)
-            seteducation(result.education)
-            setloading(false)
-        }).catch((error) => { console.log(error) });
-    }, [])
-    function fileValue(value) {
-        var path = value.value;
-        var extenstion = path.split('.').pop();
-        console.log(value.files[0])
-        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
-            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
-            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
-            document.getElementById("filename").innerHTML = filename;
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
         } else {
-            alert("File not supported. Kindly Upload the Image of below given extension ")
+            let userid = JSON.parse(localStorage.getItem('user')).id
+            console.log(userid)
+            fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+                console.log(result)
+                setprofileinfo(result)
+                setlanguage(result.language)
+                setskilllist(result.skill)
+                setpreviouswork(result.previousWork)
+                setemploymenthistory(result.employmentHistory)
+                setcertification(result.certification)
+                seteducation(result.education)
+                setloading(false)
+            }).catch((error) => { console.log(error) });
         }
-    }
+    }, [])
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     const dispatch = useDispatch()
     if (loading) {
@@ -112,7 +106,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={`http://localhost:8080/${profileinfo.profilePhoto}`} alt="" />
+                                                        <img src={`http://localhost:8080/uploads/images/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
@@ -292,7 +286,7 @@ const Profile = () => {
                                                 return (
                                                     <div className="col-6 col-md-4">
                                                         <div className="portifolio-image-container">
-                                                            <img className="col-12" src={"http://localhost:8080/uploads/image/" + element.workThumbnail} alt="" />
+                                                            <img className="col-12" src={"http://localhost:8080/uploads/images/" + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
                                                                 <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>

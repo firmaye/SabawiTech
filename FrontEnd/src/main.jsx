@@ -18,6 +18,8 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Contact from "./Contact";
 import ExtraDetail from "./ExtraDetail";
+import Signin from "./Signin";
+import Signup from "./Signup";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,7 +61,14 @@ const router = createBrowserRouter([
   {
     path: "/blogdetails/:id",
     element: <BlogdetailsContainer />
-  }
+  }, {
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -4,7 +4,7 @@ const multer = require('multer')
 
 //storage 
 const Storage = multer.diskStorage({
-  destination: 'uploads/image',
+  destination: 'uploads/images',
   filename: (req, file, cb) => {
     cb(null, Date.now() + file.originalname)
   }
@@ -38,13 +38,10 @@ exports.getSingle = async (req, res) => {
 
 // create single PrevWork 
 exports.create = (req, res) => {
-
   let userId = req.params.id
   let imageName = ""
 
   upload(req, res, (err) => {
-    console.log(req.body)
-    console.log(req.file)
     if (err) {
       console.log(err)
     }
@@ -71,7 +68,7 @@ exports.create = (req, res) => {
         { $push: { previousWork: newPrevWork } }
       ).then(() => {
         res.send({ success: true })
-      }).catch((err) => { res.status(400).json({ message: err.message }) })
+      }).catch((err) => console.log(err))
 
     } catch (err) {
       res.status(400).json({ message: err.message })
@@ -144,4 +141,3 @@ exports.delete = async (req, res) => {
     res.status(400).json({ message: err.message })
   }
 };
-

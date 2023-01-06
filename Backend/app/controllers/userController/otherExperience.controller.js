@@ -22,11 +22,7 @@ exports.create =async (req, res) => {
     
     let newExperience = {
       expSubject: req.body.expSubject,
-      expDescription: req.body.expDescription,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt,
-      createdAt: req.body.createdAt,
-      updatedAt: req.body.createdAt,
+      expDescription: req.body.expDescription
   }
     try {
       const experience = await user.updateOne({ _id: userId }, { $push: { otherExperience: newExperience } })
@@ -44,9 +40,7 @@ exports.update =  async (req,res) => {
     let experienceId= req.params.id1
     let updatedExperience ={
       expSubject: req.body.expSubject,
-      expDescription: req.body.expDescription,
-      isDeleted: req.body.isDeleted,
-      deletedAt: req.body.deletedAt    
+      expDescription: req.body.expDescription    
     }
   
     try{

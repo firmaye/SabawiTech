@@ -1,8 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import "./css/contact.css"
 const Contact = () => {
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+        window.location.href = "http://localhost:8081/signin"
+    }
+    const [name, setname] = useState("")
+    const [email, setemail] = useState("")
+    const [subject, setsubject] = useState("")
+    const [message, setmessage] = useState("")
+    let successModal = () => {
+        dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let handleSubmit = (event) => {
+        let body = {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+        }
+        body = JSON.stringify(body)
+        console.log(body)
+        event.preventDefault()
+
+        console.log(`http://localhost:8080/api/issues`)
+        fetch(`http://localhost:8080/api/issues`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: body
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                // successModal()
+            })
+            .catch((error) => {
+                // errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
+    }
     return (
         <main>
             <Navbar />
@@ -96,6 +145,8 @@ const Contact = () => {
 
                     </div>
                 </div>
+
+
                 <div className="getintouch">
 
                     <div className="contact1">
@@ -110,27 +161,27 @@ const Contact = () => {
                                 </span>
 
                                 <div className="wrap-input1 validate-input" data-validate="Name is required">
-                                    <input className="input1" type="text" name="name" placeholder="Name" />
+                                    <input onChange={(data) => { setname(data.target.value) }} className="input1" type="text" name="name" placeholder="Name" />
                                     <span className="shadow-input1"></span>
                                 </div>
 
                                 <div className="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                    <input className="input1" type="text" name="email" placeholder="Email" />
+                                    <input onChange={(data) => { setemail(data.target.value) }} className="input1" type="text" name="email" placeholder="Email" />
                                     <span className="shadow-input1"></span>
                                 </div>
 
                                 <div className="wrap-input1 validate-input" data-validate="Subject is required">
-                                    <input className="input1" type="text" name="subject" placeholder="Subject" />
+                                    <input onChange={(data) => { setsubject(data.target.value) }} className="input1" type="text" name="subject" placeholder="Subject" />
                                     <span className="shadow-input1"></span>
                                 </div>
 
                                 <div className="wrap-input1 validate-input" data-validate="Message is required">
-                                    <textarea className="input1" name="message" placeholder="Message"></textarea>
+                                    <textarea onChange={(data) => { setmessage(data.target.value) }} className="input1" name="message" placeholder="Message"></textarea>
                                     <span className="shadow-input1"></span>
                                 </div>
 
                                 <div className="container-contact1-form-btn">
-                                    <button className="contact1-form-btn">
+                                    <button onClick={(value) => { handleSubmit(value) }} className="contact1-form-btn">
                                         <span>
                                             Send Email
                                             <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
@@ -141,6 +192,7 @@ const Contact = () => {
                         </div>
                     </div>
                 </div>
+
 
             </section>
         </main>

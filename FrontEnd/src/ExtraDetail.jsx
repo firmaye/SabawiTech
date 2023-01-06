@@ -1,21 +1,99 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Sidebar from './components/Sidebar'
 import "./css/extradetail.css"
 import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 
 const ExtraDetail = () => {
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+        window.location.href = "http://localhost:8081/signin"
+    }
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
-    const [newportifolio, setnewportifolio] = useState({
-        workTitle: "",
-        workThumbnail: "",
-        workDescription: "",
-        workLink: "",
-        workSkill: "",
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [title, settitle] = useState(null);
+    const [descritpion, setdescritpion] = useState(null);
 
-    })
-    const [selectedpart, setselectedpart] = useState("profileImage")
+    let setImagePath = (e) => {
+        setSelectedImage(e.target.files[0])
+
+    }
+    let handleSubmit = (event) => {
+        const formData = new FormData();
+        // Update the formData object
+        formData.append(
+            'profilePhoto',
+            selectedImage
+        );
+        // console.log(file)
+        // console.log({ profilePhoto: selectedImage })
+        // let body = JSON.stringify({ profilePhoto: selectedImage })
+        // console.log(body)
+        // event.preventDefault()
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/upload/${userid}`, {
+            method: 'POST',
+
+            body: formData
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data)
+                console.log("profile photo successfully addded")
+                let userid = JSON.parse(localStorage.getItem('user')).id
+                fetch(`http://localhost:8080/api/users/upload/${userid}`, {
+                    method: 'POST',
+
+                    body: formData
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data)
+                        console.log("profile photo successfully addded")
+                        fetch(`http://localhost:8080/api/users/skill/${userid}`, {
+                            method: 'PATCH',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: body
+                        })
+                        // successModal()
+                    })
+                    .catch((error) => {
+                        errorModal()
+                        console.log(error)
+                        console.error('Error:', error);
+                    });
+                // successModal()
+            })
+            .catch((error) => {
+                // errorModal()
+                console.log(error)
+                console.error('Error:', error);
+            });
+    }
+    function fileValue(value) {
+        var path = value.value;
+        var extenstion = path.split('.').pop();
+        console.log(value.files[0])
+        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            alert("File not supported. Kindly Upload the Image of below given extension ")
+        }
+    }
+    let userid = JSON.parse(localStorage.getItem('user')).id
+
+    const [username, setusername] = useState("")
+    useEffect(() => {
+        fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+            console.log(result)
+            setusername(`${result.firstName} ${result.lastName} `)
+        }).catch((error) => { console.log(error) });
+    }, [])
+    const [selectedpart, setselectedpart] = useState("")
     console.log(selectedpart)
     return (
         <main>
@@ -85,7 +163,34 @@ const ExtraDetail = () => {
 
                             </div>
                         </div>
-                        {selectedpart == "profileImage" ?
+                        {/*  */}
+                        {/*  */}
+                        {selectedpart == "" ? <div className=" extra-detail-personal-description-container col min-width-0">
+                            <div className="extra-detail-intro-description">
+                                <div className=" extra-detail-intro-title row">
+                                    <div className="col">
+                                        <h2>Hello there {username}</h2>
+                                    </div>
+
+                                </div>
+                                <div className="row extra-detail-intro-details">
+                                    <div className="extra-detail-intro-details-child extra-detail-intro-subititle">
+                                        Ready for your next big opportunity
+                                    </div>
+                                    <div className="extra-detail-intro-details-child ">
+                                        Please fill out this form it only takes about 5 minutes
+
+                                        It only takes 5 minutes
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="extra-detail-buttons ">
+                                        <button onClick={() => { window.location.href = "http://localhost:8081/profile" }} className="see-public">Close </button>
+                                        <button onClick={() => { setselectedpart("profileImage") }} className="setting">Get Started</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> : selectedpart == "profileImage" ?
                             <div className=" extra-detail-personal-description-container col min-width-0">
                                 <div className="extra-detail-personal-description">
                                     <div className=" extra-detail-personal-description-title row">
@@ -101,7 +206,10 @@ const ExtraDetail = () => {
                                             </div>
                                             <div className="extra-detail-modal-image-container">
                                                 <div className="image-upload">
-                                                    <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
+                                                    <input type="file" name="" id="logo" onChange={(value) => {
+                                                        fileValue(value.target);
+                                                        setImagePath(value);
+                                                    }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" />
@@ -139,7 +247,7 @@ const ExtraDetail = () => {
                                                     Work Title
                                                 </div>
                                                 <div className="extra-detail-label-input-container">
-                                                    <input type="text" />
+                                                    <input onChange={(data) => { settitle(data.target.value) }} type="text" />
                                                 </div>
 
                                             </div>
@@ -148,7 +256,7 @@ const ExtraDetail = () => {
                                                     Work Description
                                                 </div>
                                                 <div className="extra-detail-label-input-container">
-                                                    <textarea ></textarea>
+                                                    <textarea onChange={(data) => { settitle(data.target.value) }}  ></textarea>
                                                 </div>
 
                                             </div>

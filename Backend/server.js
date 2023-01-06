@@ -3,7 +3,7 @@ const app = express()
 const db = require("./app/models");
 const cors = require("cors")
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "*"
 };
 
 app.use(cors(corsOptions));
@@ -42,9 +42,9 @@ require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
-
+app.use("/uploads/images", express.static('uploads/images'))
 require('./app/routes/auth.routes')(app);
-app.use("/uploads/image", express.static('uploads/image'))
+
 
 
 // set port, listen for requests

@@ -2,22 +2,18 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import Home from './Home'
-function App() {
-  const [count, setCount] = useState(0)
+console.log(JSON.parse(localStorage.getItem('user')))
 
+function App() {
+  if (JSON.parse(localStorage.getItem('user')) == null) {
+    window.location.href = "http://localhost:8081/signin"
+  }
   return (
     <div>
       <Navbar />
-      <Home />
+      Home
     </div>
   )
 }
-
-
-
-
-
-
-
 
 export default App

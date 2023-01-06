@@ -18,7 +18,10 @@ const OpportunityPage = () => {
         // setloading(
         //     true
         // )
-        fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(user)
+        fetch("http://localhost:8080/api/internships", { headers: { 'x-access-token': user.accessToken } }).then(res => res.json()).then(result => {
+            console.log(result)
             setloading(false)
 
             // console.log(result.opportunities)
@@ -27,7 +30,12 @@ const OpportunityPage = () => {
         ;
     }
     useEffect(() => {
-        getFetchUsers()
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = "http://localhost:8081/signin"
+        } else {
+
+            getFetchUsers()
+        }
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
