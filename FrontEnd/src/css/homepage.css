@@ -29,6 +29,7 @@
     font-family: Rubik;
     font-style: normal;
     margin-top:-10px;
+    color:white;
 }
 .landingillustration{
     width:50%;
@@ -116,8 +117,9 @@
     border-radius: 16px;
 }
 .popularcardbody{
-    padding:0;
+    padding: 0 !important;;
     border-radius: 10px;
+    margin-left:0px !important;
 }
 .service{
     display:flex;
@@ -168,6 +170,9 @@ hr{
     padding-left: 59px;
     padding-right: 20px;
     margin-bottom:100px;
+}
+.cardmodify{
+    border: none !important;;
 }
 .cardviewtext{
     width:60%;
