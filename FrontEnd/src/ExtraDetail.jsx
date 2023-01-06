@@ -90,7 +90,7 @@ const ExtraDetail = () => {
     useEffect(() => {
         fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
             console.log(result)
-            setusername(result.userName)
+            setusername(`${result.firstName} ${result.lastName} `)
         }).catch((error) => { console.log(error) });
     }, [])
     const [selectedpart, setselectedpart] = useState("")

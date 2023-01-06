@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import countries from "i18n-iso-countries"
+import React, { useEffect, useState } from 'react'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import './css/authentication.css'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import enLocale from "i18n-iso-countries/langs/en.json"
 const Signup = () => {
     const [firstName, setfirstName] = useState("")
     const [lastName, setlastName] = useState("")
@@ -15,7 +20,36 @@ const Signup = () => {
             display: "none"
         })
     }
+    const SignupSchema = Yup.object().shape({
+        password: Yup.string()
+            .min(2, 'Too Short!')
+            .max(20, 'Too Long!')
+            .required('Required'),
+        confirmPassword: Yup.string()
+            .required('Required')
+            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+        firstName: Yup.string()
+            .min(2, 'Too Short!')
+            .max(20, 'Too Long!')
+            .required('Required'),
+        lastName: Yup.string()
+            .min(2, 'Too Short!')
+            .max(20, 'Too Long!')
+            .required('Required'),
+        userName: Yup.string()
+            .min(2, 'Too Short!')
+            .max(20, 'Too Long!')
+            .required('Required'),
+        country: Yup.string()
+            .required('Required'),
+        state: Yup.string()
+            .required('Required'),
+        email: Yup.string().email('Invalid email').required('Required')
+
+    })
+
     let handleSubmit = (event) => {
+        event.preventDefault()
         let body = {
             firstName,
             lastName,
@@ -27,111 +61,174 @@ const Signup = () => {
         }
         body = JSON.stringify(body)
         // console.log(body)
-        event.preventDefault()
-        fetch('http://localhost:8080/api/auth/signup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                if (data.accessToken) {
-                    localStorage.setItem("user", JSON.stringify(data));
-                    window.location.href = "http://localhost:8081/extradetail"
-                }
+        // fetch('http://localhost:8080/api/auth/signup', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: body
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         console.log(data)
+        //         if (data.accessToken) {
+        //             localStorage.setItem("user", JSON.stringify(data));
+        //             window.location.href = "http://localhost:8081/extradetail"
+        //         }
 
-            })
-            .catch((error) => {
-                // errorModal()
-                console.log(error)
-                console.error('Error:', error);
-            });
+        //     })
+        //     .catch((error) => {
+        //         // errorModal()
+        //         console.log(error)
+        //         console.error('Error:', error);
+        //     });
     }
     return (
         <div className="main-container">
-            <div className="background">
-                <img src="./Images/background.jpg" alt="" srcSet="" />
-            </div>
-            <form className='signup-form'>
-                <div className="form-title">
-                    Sign Up And Explore
-                </div>
-                <div className="siderow">
-                    <div className="input-container">
-                        <input type="text" onChange={(data) => { setfirstName(data.target.value) }} name='Username' placeholder='First Name' className="" />
-                        <span className=''>
+            <Formik
+                initialValues={{
+                    email: "",
+                    password: "",
+                    confirmPassword: "",
+                    firstName: "",
+                    lastName: "",
+                    userName: "",
+                    country: "",
+                    state: ""
+                }}
+                validateOnChange={false}
+                validateOnBlur={false}
+                validationSchema={SignupSchema}
+                onSubmit={async (values, { setSubmitting }, formik) => {
+                    let body = {
+                        email: values.email,
+                        password: values.password,
+                        firstName: values.firstName,
+                        lastName: values.lastName,
+                        userName: values.userName,
+                        country: values.country,
+                        state: values.state
 
-                        </span>
-                    </div>
-                    <div className="input-container">
-                        <input type="text" onChange={(data) => { setlastName(data.target.value) }} name='Username' placeholder='Last Name' className="" />
-                        <span className=''>
+                    }
+                    body = JSON.stringify(body)
+                    console.log(body)
+                    setSubmitting(false);
+                    await fetch('http://localhost:8080/api/auth/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: body
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log(data)
+                            if (data.accessToken) {
+                                localStorage.setItem("user", JSON.stringify(data));
+                            }
+                            window.location.href = "http://localhost:8081/extradetail"
 
-                        </span>
-                    </div>
-                </div>
+                        })
+                        .catch((error) => {
+                            // errorModal()
+                            console.log(error)
+                            console.error('Error:', error);
+                        });
+                }}
+            >
+                {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    setFieldValue,
+                    /* and other goodies */
+                }) => (
+                    <form className='signup-form row justify-content-center'>
+                        <div className="form-title">
+                            Sign Up And Explore
+                        </div>
+                        <div className="input-container col-6">
+                            <input type="text" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.firstName} name='firstName' placeholder='First Name' className="" />
+                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.firstName && touched.firstName && errors.firstName}</div>
+                        </div>
+                        <div className="input-container col-6">
+                            <input type="text" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.lastName} name='lastName' placeholder='last Name' className="" />
+                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.lastName && touched.lastName && errors.lastName}</div>
 
-                <div className="input-container">
-                    <input type="email" onChange={(data) => { setemail(data.target.value) }} name='email' placeholder='Email' className="" />
-                    <span className="">
-                    </span>
-                </div>
+                        </div>
+                        <div className="input-container col-6">
+                            <input type="text" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.userName} name='userName' placeholder='user Name' className="" />
+                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.userName && touched.userName && errors.userName}</div>
 
-                <div className="siderow">
-                    {/* <input type="text" name='Username' placeholder='Country' className="" />
-                        <span className=''>
+                        </div>
+                        <div className="input-container col-6">
+                            <input type="email" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email} name='email' placeholder='Email' className="" />
+                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.email && touched.email && errors.email}</div>
 
-                        </span> */}
-                    <CountryDropdown
-                        className="input-container countrycont"
-                        value={country}
-                        onChange={(val) => setcountry(val)} />
+                        </div>
+                        <div className="col-6">
+                            <CountryDropdown
+                                className="input-container countrycont"
 
-                    <div className="input-container">
-                        <input type="text" onChange={(data) => { setstate(data.target.value) }} name='Username' placeholder='State' className="" />
-                        <span className=''>
+                                onChange={(val) => { setFieldValue("country", val) }}
+                                onBlur={handleBlur}
+                                value={values.country}
+                            // onChange={(val) => setcountry(val)}
+                            />
+                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
 
-                        </span>
-                    </div>
-                </div>
+                        </div>
+                        <div className="input-container col-6">
+                            <input type="text" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.state} name='state' placeholder='State' className="" />
+                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
+                        </div>
+                        <div className="input-container col-6">
+                            <input onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.password} type="password" name='password' placeholder='password' className="" />
+                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.password && touched.password && errors.password}</div>
+                        </div>
 
-                <div className="input-container">
-                    <input onChange={(data) => { setpassword(data.target.value) }} type="text" name='password' placeholder='password' className="" />
-                    <span className=''>
-                    </span>
-                </div>
-                <span className=""></span>
+                        <div className="input-container col-6">
+                            <input type="password" onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.confirmPassword} name='confirmPassword' placeholder='Confirm Password' className="" />
+                            <span className=''></span>
+                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div>
+                        </div>
 
-                <div className="input-container">
-                    <input type="" name='cpassword' placeholder='Confirm Password' className="" />
-                    <span className=''></span>
-                </div>
-                <div className="input-container">
-                    <input onChange={(data) => { setuserName(data.target.value) }} type="text" name='username' placeholder='username' className="" />
-                    <span className=''>
-                    </span>
-                </div>
-                <span className=""></span>
-                <span className=''></span>
 
-                <div className="input-button">
-                    <button type='submit' onClick={handleSubmit} className="sign-in">
+                        <div className="input-button col-6">
+                            <button type='submit' onClick={handleSubmit} className="sign-in">
 
-                        Sign Up
-                    </button>
-                    <button type="button" className="login-with-google-btn" >
-                        Sign up with Google
+                                Sign Up
+                            </button>
+                            <button type="button" className="login-with-google-btn" >
+                                Sign up with Google
 
-                    </button>
-                    <div className='register-container' >
+                            </button>
+                            <div className='register-container' >
 
-                        Already Have an Account? <a> Login</a>
-                    </div>
-                </div>
-            </form>
+                                Already Have an Account? <a href='/signin'> Login</a>
+                            </div>
+                        </div>
+                    </form>
+                )}
+            </Formik>
+
         </div>
     )
 }
