@@ -6,14 +6,14 @@ import "../css/deletemodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 
-const DeleteEmploymentModal = ({ tobedeleted }) => {
+const DeleteCertificationModal = ({ tobedeleted }) => {
     console.log(tobedeleted)
     const dispatch = useDispatch()
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
-    let closeDeleteEmploymentModal = () => {
+    let closeDeleteCertificationModal = () => {
         dispatch(setModal(""))
         setmodalstyle({
             display: "none"
@@ -32,9 +32,9 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
         })
     }
     let handleSubmit = (event) => {
-        let userid = JSON.parse(localStorage.getItem('user')).id
         event.preventDefault()
-        fetch(`http://localhost:8080/api/users/employmentHistory/${userid}/${tobedeleted._id}`, {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/certification/${userid}/${tobedeleted._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
                                 <i className="fa fa-trash"></i>
                             </div>
                             <h4 className="modal-title w-100">Delete</h4>
-                            <button onClick={closeDeleteEmploymentModal} type="button" className="delete-portifolio-modal-close" >
+                            <button onClick={closeDeleteCertificationModal} type="button" className="delete-portifolio-modal-close" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                 </svg>                        </button>                    </div>
@@ -71,7 +71,7 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
                         </div>
                         <div className="modal-footer justify-content-center">
 
-                            <button onClick={closeDeleteEmploymentModal} type="submit" className="btn btn-danger ">NO</button>
+                            <button onClick={closeDeleteCertificationModal} type="submit" className="btn btn-danger ">NO</button>
                             <button onClick={handleSubmit} type="submit" className="btn btn-danger modal-yes-btn">YES</button>
                         </div>
                     </div>
@@ -81,4 +81,4 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
     )
 }
 
-export default DeleteEmploymentModal
+export default DeleteCertificationModal

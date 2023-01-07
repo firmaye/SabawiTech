@@ -17,6 +17,23 @@
     width: calc((100% - 60px) / 2);
 }
 
+.language-modal-existing-input-group ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: red;
+    opacity: 1;
+    /* Firefox */
+}
+
+.language-modal-existing-input-group :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: red;
+}
+
+.language-modal-existing-input-group ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: red;
+}
+
 @media (max-width: 767px) {
     .language-modal-col-2 {
         width: 100%;

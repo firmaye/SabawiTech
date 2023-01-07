@@ -26,10 +26,21 @@ export const filterSlice = createSlice({
                 state.filterState.status.splice(index, 1); // 2nd parameter means remove one item only
             }
         },
+        setFilterType: (state, action) => {
+            state.filterState.type = [...state.filterState.type, action.payload]
+
+        },
+        removeFilterType: (state, action) => {
+            const index = state.filterState.type.indexOf(action.payload);
+            if (index > -1) { // only splice array when item is found
+                state.filterState.type.splice(index, 1); // 2nd parameter means remove one item only
+            }
+        },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { setFilterLocation, removeFilterLocation, setFilterStatus, removeFilterStatus } = filterSlice.actions
+export const { setFilterLocation, removeFilterLocation, setFilterStatus, removeFilterStatus, setFilterType
+    , removeFilterType } = filterSlice.actions
 
 export default filterSlice.reducer

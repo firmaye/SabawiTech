@@ -46,10 +46,10 @@ const BlogContainer = () => {
         <div>
             <Navbar />
             <Header title={"Blog"} />
-            <div class="maincont">
-                <div class="container">
-                    <div class="container">
-                        <div class="row blogmodification">
+            <div className="maincont">
+                <div className="container">
+                    <div className="container">
+                        <div className="row blogmodification">
                             <Blog catagory={catagories} />
                             <Blogsidebar catagoryFiletering={catagoryFiletering} />
                         </div>

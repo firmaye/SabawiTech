@@ -68,3 +68,7 @@
 .employment-modal-location-container {
     display: flex;
 }
+
+.employment-textarea-container-child {
+    width: 100%;
+}

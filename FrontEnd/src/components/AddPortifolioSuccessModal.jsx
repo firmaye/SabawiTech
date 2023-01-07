@@ -6,7 +6,7 @@ import "../css/successmodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 
-const SuccessModal = () => {
+const AddPortifolioSuccessModal = () => {
     const dispatch = useDispatch()
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -17,7 +17,7 @@ const SuccessModal = () => {
         setmodalstyle({
             display: "none"
         })
-        window.location.reload()
+        window.location.href = "http://localhost:8081/profile";
     }
     return (
         <form>
@@ -48,4 +48,4 @@ const SuccessModal = () => {
     )
 }
 
-export default SuccessModal
+export default AddPortifolioSuccessModal
