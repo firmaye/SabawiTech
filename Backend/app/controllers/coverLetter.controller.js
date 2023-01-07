@@ -11,15 +11,14 @@ exports.create = (req, res) => {
 
   // Create a CoverLetter
   const coverLetter = new CoverLetter({
-			sender:req.body.sender,
-			receiverCompany:req.body.receiverCompany,
-			letterDescription:req.body.letterDescription,	
-			intPostId:req.body.intPostId,
-			status:req.body.status,
-			isDeleted:0,
-			deletedAt:req.body.deletedAt
-    });
-
+    sender: req.body.sender,
+    receiverCompany: req.body.receiverCompany,
+    letterDescription: req.body.letterDescription,
+    intPostId: req.body.intPostId,
+    status: req.body.status,
+    isDeleted: 0,
+    deletedAt: req.body.deletedAt
+  });
   // Save CoverLetter in the database
   coverLetter.save(coverLetter)
     .then(data => {
@@ -113,7 +112,7 @@ exports.delete = (req, res) => {
 
 // Delete all CoverLetter from the database.
 exports.deleteAll = (req, res) => {
-    CoverLetter.deleteMany({})
+  CoverLetter.deleteMany({})
     .then(data => {
       res.send({
         message: `${data.deletedCount} CoverLetter were deleted successfully!`

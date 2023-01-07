@@ -1,26 +1,28 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import ErrorModal from './components/ErrorModal'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
+import SuccessModal from './components/SuccessModal'
 import "./css/contact.css"
+import { setModal } from './redux/profilemodal'
+
 const Contact = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
         window.location.href = "http://localhost:8081/signin"
     }
+    const dispatch = useDispatch()
     const [name, setname] = useState("")
     const [email, setemail] = useState("")
     const [subject, setsubject] = useState("")
     const [message, setmessage] = useState("")
     let successModal = () => {
         dispatch(setModal("success"))
-        setmodalstyle({
-            display: "none"
-        })
+
     }
     let errorModal = () => {
         dispatch(setModal("error"))
-        setmodalstyle({
-            display: "none"
-        })
+
     }
     let handleSubmit = (event) => {
         let body = {
@@ -44,16 +46,22 @@ const Contact = () => {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                // successModal()
+                successModal()
             })
             .catch((error) => {
-                // errorModal()
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });
     }
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
     return (
         <main>
+
+            {currentModal == "success" ? <SuccessModal />
+                : currentModal == "error" ? <ErrorModal />
+                    : <></>
+            }
             <Navbar />
             <Header title={"Contact"} />
 

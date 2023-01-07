@@ -20,12 +20,19 @@ const OpportunityPage = () => {
         // )
         const user = JSON.parse(localStorage.getItem('user'));
         console.log(user)
+        // console.log(user)
         fetch("http://localhost:8080/api/internships", { headers: { 'x-access-token': user.accessToken } }).then(res => res.json()).then(result => {
             console.log(result)
-            setloading(false)
+            if (result.message == "Unauthorized!") {
+                window.localStorage.removeItem('user')
+                window.location.href = "http://localhost:8081/signin"
+            } else {
 
-            // console.log(result.opportunities)
-            setopportunitylist(result)
+                setloading(false)
+
+                // console.log(result.opportunities)
+                setopportunitylist(result)
+            }
         }).catch((error) => { console.log(error) });
         ;
     }

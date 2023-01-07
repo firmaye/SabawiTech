@@ -7,12 +7,12 @@ const Signin = () => {
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
     const SigninSchema = Yup.object().shape({
-        password: Yup.string()
-            .min(2, 'Too Short!')
-            .max(20, 'Too Long!')
-            .required('Required'),
+        // password: Yup.string()
+        //     .min(2, 'Too Short!')
+        //     .max(20, 'Too Long!')
+        //     .required('Required'),
         email: Yup.string().email('Invalid email').required('Required')
-            .test('Unique Email', 'Email already in use', // <- key, message
+            .test('Unique Email', "User Doesn't Exist", // <- key, message
                 function (value) {
                     let body = {
                         email: value,
@@ -79,7 +79,7 @@ const Signin = () => {
     }
     return (
         <div className='main-container-parent'>
-            <div className=" main-container">
+            <div className=" main-container main-container-signin">
                 <Formik
                     initialValues={{ email: '', password: '' }}
                     validateOnChange={false}
@@ -138,10 +138,10 @@ const Signin = () => {
                             .then((data) => {
                                 setSubmitting(false);
                                 console.log(data)
-                                if (data.accessToken) {
-                                    localStorage.setItem("user", JSON.stringify(data));
-                                    window.location.href = "http://localhost:8081/"
-                                }
+                                // if (data.accessToken) {
+                                //     localStorage.setItem("user", JSON.stringify(data));
+                                //     window.location.href = "http://localhost:8081/"
+                                // }
                                 // successModal()
                             })
                             .catch((error) => {
@@ -168,39 +168,50 @@ const Signin = () => {
                             <div className="form-title">
                                 Sign In And Explore
                             </div>
-                            <div className="input-container">
-                                <input onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.email} type="email" name='email' placeholder='Email' className="" />
-                                <span className="">
-                                </span>
-                            </div>
-                            <div className='input-error-display' >{errors.email && touched.email && errors.email}</div>
+                            <div style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "center"
+                            }}>
 
-                            <div className="input-container">
-                                <input type="password"
-                                    name="password"
-                                    onChange={(event) => { setpassword(event.target.value), handleChange(event) }}
-                                    onBlur={handleBlur}
-                                    value={values.password} placeholder='password' className="" />
-                                <span className=''>
-                                </span>
-                            </div>
-                            <div className='input-error-display' >{errors.password && touched.password && errors.password}</div>
+                                <div className="input-container">
+                                    <input
+                                        style={{ marginLeft: 0 }}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.email} type="email" name='email' placeholder='Email' className="" />
+                                    <span className="">
+                                    </span>
+                                </div>
+                                <div className='input-error-display' >{errors.email && touched.email && errors.email}</div>
 
-
-
-                            <div className="input-button">
-                                <button onClick={(event) => { handleSubmit(event) }} type='submit' className="sign-in">
-                                    Sign In
-                                </button>
-                                <button type="button" className="login-with-google-btn" >
-                                    Sign In with Google
-                                </button>
-                                <div className='register-container' >
-                                    Not Registered Yet? <a href='/signup' className='register'> Register</a>
+                                <div className="input-container">
+                                    <input
+                                        style={{ marginLeft: 0 }}
+                                        type="password"
+                                        name="password"
+                                        onChange={(event) => { setpassword(event.target.value), handleChange(event) }}
+                                        onBlur={handleBlur}
+                                        value={values.password} placeholder='password' className="" />
+                                    <span className=''>
+                                    </span>
+                                </div>
+                                <div className='input-error-display' >{errors.password && touched.password && errors.password}</div>
+                                <div className="input-button">
+                                    <button onClick={(event) => { handleSubmit(event) }} type='submit' className="sign-in">
+                                        Sign In
+                                    </button>
+                                    <button type="button" className="login-with-google-btn" >
+                                        Sign In with Google
+                                    </button>
+                                    <div className='register-container' >
+                                        Not Registered Yet? <a href='/signup' className='register'> Register</a>
+                                    </div>
                                 </div>
                             </div>
+
+
+
 
                         </form>
                         // <form onSubmit={handleSubmit}>

@@ -35,6 +35,9 @@ const Navbar = () => {
                             <a href={"/contact"} class="nav-link active">Contact</a>
                         </li>
                         <li class="nav-item">
+                            <a href={"/profile"} class="nav-link active">Profile</a>
+                        </li>
+                        <li class="nav-item">
                             <div><button onClick={logout} type="submit" className="btn btn-primary">Log Out</button>
                             </div>            </li>
                     </ul>

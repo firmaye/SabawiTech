@@ -1,17 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
 import "./css/opportunitydetail.css"
 import Loading from './components/Loading';
-
 import FadeIn from "react-fade-in";
-
 const OpportunityDetailPage = () => {
-
     const [opportunity, setopportunity] = useState({})
     const [requiredSkill, setrequiredskill] = useState([])
-    const params = useParams()
+
     const [submittedproposal, setsubmittedproposal] = useState({
     })
     const [loading, setloading] = useState(true)
@@ -42,36 +39,38 @@ const OpportunityDetailPage = () => {
                 console.error('Error:', error);
             });
     }
+    const params = useParams()
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = "http://localhost:8081/signin"
+        } else {
+            let paramsid = params.id
+            console.log(paramsid)
+            console.log(`http://localhost:8080/api/internships/${paramsid}`)
+            fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
+                const found = result
+                console.log(found)
+                let skillsarray = found.requiredSkill.split(",")
+                setopportunity(found)
+                setsubmittedproposal({
+
+                    "sender": "currentperson",
+                    "receiverCompany": found.companyName,
+                    "letterDescription": "",
+                    "intPostId": found._id,
+                    "status": ""
+
+                })
+                console.log(skillsarray)
+                setrequiredskill(skillsarray)
+                setloading(false)
+
+                // opportunity.requiredSkill.map((element) => {
+                //     console.log(element)
+                // })
+            }).catch((error) => { console.log(error) });
         }
-        let paramsid = params.id
 
-        fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
-
-
-            const found = result
-            console.log(found.requiredSkill)
-            let skillsarray = found.requiredSkill.split(",")
-            setopportunity(found)
-            setsubmittedproposal({
-
-                "sender": "currentperson",
-                "receiverCompany": found.companyName,
-                "letterDescription": "",
-                "intPostId": found._id,
-                "status": ""
-
-            })
-            console.log(skillsarray)
-            setrequiredskill(skillsarray)
-            setloading(false)
-
-            // opportunity.requiredSkill.map((element) => {
-            //     console.log(element)
-            // })
-        }).catch((error) => { console.log(error) });
 
     }, [])
     if (loading) {
@@ -205,7 +204,28 @@ const OpportunityDetailPage = () => {
                                                 </button>
                                             </div>
                                         </div>
-                                    </div> : <></>}
+                                    </div> : <div className="single-opportunity-proposal-form">
+                                        <h2 className="mb-4">Send Proposal</h2>
+                                        <div className="row">
+                                            {/* <div className="col-md-6">
+                                        <input type="number" className="form-control" />
+                                    </div> */}
+                                            {/* <div className="col-md-6">
+                                        <select className="form-control">
+                                            <option value="">Options to select</option>
+                                            <option value="">Options to select</option>
+                                            <option value="">Options to select</option>
+                                            <option value="">Options to select</option>
+                                            <option value="">Options to select</option>
+                                        </select>
+                                    </div> */}
+                                            <div className="col-md-12">
+                                                <h3 className='ml-5' style={{ color: "#6366f1" }}>Internship Opportunity is Closed</h3>
+
+                                                {/* <input type="number" className="form-control">  */}
+                                            </div>
+                                        </div>
+                                    </div>}
 
                             </div>
                             <div className="col-lg-4 position-relative single-opportunity-description">
