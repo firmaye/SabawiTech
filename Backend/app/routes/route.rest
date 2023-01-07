@@ -35,28 +35,15 @@ Content-Type: application/json
   ],
   "skill": [
     {
-      
-      "skillName": "React",
-      "isDeleted": 0,
-      "deletedAt": "2022-12-15T18:35:56.607Z",
-      "createdAt": "2022-12-15T18:35:56.608Z",
-      "updatedAt": "2022-12-15T18:35:56.609Z"
+     "skillName": "React",
     },
     {
      
-      "skillName": "CSS",
-      "isDeleted": 0,
-      "deletedAt": "2022-12-15T18:35:56.609Z",
-      "createdAt": "2022-12-15T18:35:56.610Z",
-      "updatedAt": "2022-12-15T18:35:56.610Z"
+      "skillName": "CSS"
     },
     {
       
       "skillName": "Node",
-      "isDeleted": 0,
-      "deletedAt": "2022-12-15T18:35:56.612Z",
-      "createdAt": "2022-12-15T18:35:56.612Z",
-      "updatedAt": "2022-12-15T18:35:56.612Z"
     }
   ],
   "language": [
