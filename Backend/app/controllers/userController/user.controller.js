@@ -130,11 +130,7 @@ exports.update = async (req, res) => {
 
 exports.upload = (req, res) => {
   let userId = req.params.id
-  console.log(req.body)
   upload(req, res, (err) => {
-    console.log(req.file)
-    console.log("req.file")
-    console.log(req.body)
     if (err) {
       console.log(err)
     }
