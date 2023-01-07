@@ -107,10 +107,12 @@ const SkillModal = ({ skilllist }) => {
                             </div>
                             <div className="">
                                 <button onClick={() => {
-                                    setskilllistmodal(oldArray => [...oldArray, {
-                                        "_id": uuid(),
-                                        "skillName": `${newskill}`
-                                    }]); setnewskill("")
+                                    if (newskill == "") { } else {
+                                        setskilllistmodal(oldArray => [...oldArray, {
+                                            "_id": uuid(),
+                                            "skillName": `${newskill}`
+                                        }]); setnewskill("")
+                                    }
                                 }} className="skill-edit-btn">
                                     <i className="fa fa-plus" aria-hidden="true"></i>
                                 </button>

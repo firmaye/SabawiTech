@@ -86,8 +86,9 @@ exports.update = async (req, res) => {
   let userId = req.params.id
   let workId = req.params.id1
   let imageName = ""
-
   upload(req, res, (err) => {
+    console.log(req.file)
+    console.log(req.body)
     if (err) {
       console.log(err)
     }

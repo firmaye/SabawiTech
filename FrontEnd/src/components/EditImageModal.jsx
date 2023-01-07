@@ -7,8 +7,9 @@ import { setModal } from '../redux/profilemodal';
 
 const NameModal = ({ image }) => {
     const dispatch = useDispatch()
+    const [imageerror, setimageerror] = useState("")
 
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState("Please Change Image");
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -20,6 +21,7 @@ const NameModal = ({ image }) => {
             display: "none"
         })
     }
+
     function fileValue(value) {
         var path = value.value;
         var extenstion = path.split('.').pop();
@@ -30,8 +32,9 @@ const NameModal = ({ image }) => {
             console.log(filename)
             document.getElementById("filename").innerHTML = filename;
         } else {
-            // document.getElementById("filename").innerHTML = "";
+            console.log("not selected")
             setSelectedImage("")
+            document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
             alert("File Not Selected Or Selected Format Not Supported")
         }
@@ -51,6 +54,20 @@ const NameModal = ({ image }) => {
     let setImagePath = (e) => {
         setSelectedImage(e.target.files[0])
 
+    }
+    let checkPhotoExistence = () => {
+        console.log(selectedImage)
+        if (selectedImage == "" || selectedImage == undefined || selectedImage == "Please Change Image") {
+            if (selectedImage == "Please Change Image") {
+                setimageerror("Please Change Image")
+            } else {
+                setimageerror("Please Select An Image")
+            }
+            return false
+        } else {
+            setimageerror("")
+            return true
+        }
     }
     let handleSubmit = (event) => {
 
@@ -89,7 +106,7 @@ const NameModal = ({ image }) => {
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Edit Name And Location</h5>
+                        <h5 className="modal-title" id="exampleModalLabel">Edit Profile Image</h5>
                         <button onClick={closeNameModal} type="button" className="name-modal-close" >
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -117,6 +134,7 @@ const NameModal = ({ image }) => {
                                                             </h3>
                                                             <p >Supports JPG, PNG, SVG</p>
                                                         </div>
+                                                        <div className='input-error-display extra-detail-error-profile-photo' style={{ marginLeft: "40px" }} >{imageerror}</div>
                                                     </label>
                                                 </div>
                                             </div>
@@ -126,9 +144,10 @@ const NameModal = ({ image }) => {
                             </div>
                         </div>
                     </div>
+
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={(event) => { if (selectedImage) { handleSubmit(event) } else { console.log("Please Select Image") } }} className="btn btn-primary">Edit Image</button>
+                        <button type="button" onClick={(event) => { checkPhotoExistence() ? handleSubmit() : () => { } }} className="btn btn-primary">Edit Image</button>
                     </div>
                 </div>
             </div>

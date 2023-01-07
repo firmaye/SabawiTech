@@ -29,6 +29,8 @@ import ErrorModal from './components/ErrorModal';
 import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
+import "react-datetime/css/react-datetime.css";
+import Datetime from 'react-datetime';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
@@ -50,7 +52,7 @@ const Profile = () => {
             window.location.href = "http://localhost:8081/signin"
         } else {
             let userid = JSON.parse(localStorage.getItem('user')).id
-            console.log(userid)
+            // console.log(userid)
             fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
                 console.log(result)
                 setprofileinfo(result)
@@ -71,8 +73,10 @@ const Profile = () => {
             <Loading />)
     }
     return (
+
         <FadeIn>
             <main>
+                ;
                 {
                     currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} />
                         : currentModal == "title" ? <TitleModal profileinfo={{ title: profileinfo.title, description: profileinfo.titleOverview }} />
@@ -106,7 +110,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={`http://localhost:8080/uploads/images/${profileinfo.profilePhoto}`} alt="" />
+                                                        <img src={profileinfo.profilePhoto == undefined || profileinfo.profilePhoto == "" ? "https://www.btklsby.go.id/images/placeholder/basic.png" : `http://localhost:8080/uploads/images/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
@@ -235,8 +239,11 @@ const Profile = () => {
                             <div className=" profile-personal-description-container col min-width-0">
                                 <div className="profile-personal-description">
                                     <div className=" profile-personal-description-title row">
+                                        <div className="col-12">
+                                            <h2>Title And Description</h2>
+                                        </div>
                                         <div className="col">
-                                            <h2>{profileinfo.title}</h2>
+                                            <h5>{profileinfo.title}</h5>
                                         </div>
                                         <div className="col col-auto">
                                             <button onClick={() => { dispatch(setModal(("title"))) }} className="profile-edit-btn">
