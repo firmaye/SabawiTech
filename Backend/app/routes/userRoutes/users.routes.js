@@ -20,7 +20,8 @@ module.exports = app => {
 
   //upload profile image
   router.post('/upload/:id', getUser, user.upload)
-  router.post('/register/:id', getUser, user.register)
+
+  router.patch('/register/:id', getUser, user.register)
 
   //register user
   router.patch('/register/:id',getUser, user.register)

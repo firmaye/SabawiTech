@@ -9,7 +9,7 @@ module.exports = mongoose => {
     email:         {type: String, },
     phoneNo:       {type: String, },
     gender:        {type: String, required: false},
-    profilePhoto:  {data:Buffer,type: String},
+    profilePhoto:  {type: String},
     country:      {type: String, required: true},
     state:      {type: String, required: true},
     title:         {type: String, },

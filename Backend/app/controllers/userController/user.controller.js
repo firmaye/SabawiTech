@@ -80,14 +80,10 @@ exports.create =async(req, res) => {
 
      setTimeout(() => {
       let userId = req.params.id
-     
-      //  let profilePhoto= imageName
-      //  let title= req.body.title
-      //  let titleOverview= req.body.titleOverview
-       let skill = req.body.skill.split(',')
-       let skillArray = []
+      let skill = req.body.skill.split(',')
+      let skillArray = []
        
-       for(let i = 0; i < skill.length; i++){
+      for(let i = 0; i < skill.length; i++){
            let sk = {
                "skillName": skill[i].trim()
            }
@@ -106,12 +102,12 @@ exports.create =async(req, res) => {
     
       try{
         console.log(registeredUser)
-        // const updatedUser = user.updateOne(
-        //   {_id: userId}, 
-        //   {$push: {profilePhoto:profilePhoto,title:title,titleOverview:titleOverview,skill:skill} }
-        //   ).then(() => {
-        //     res.send({success:true})
-        //   }).catch((err) => console.log(err))
+        const updatedUser = user.updateOne(
+          {_id: userId}, 
+          {$set: registeredUser }
+          ).then(() => {
+            res.send({success:true})
+          }).catch((err) => console.log(err))
     
       }catch(err){
         res.status(400).json({message: err.message})
