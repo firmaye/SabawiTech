@@ -17,6 +17,9 @@ import EditPortifolio from "./EditPortifolio";
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
 import Contact from "./Contact";
+import Profile from "./Profile"
+import AddPortifolio from "./AddPortifolio"
+import EditPortifolio from './EditPortifolio'
 import ExtraDetail from "./ExtraDetail";
 import Signin from "./Signin";
 import Signup from "./Signup";

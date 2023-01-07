@@ -2,8 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
 import Home from './Home'
-console.log(JSON.parse(localStorage.getItem('user')))
-
+import HomePage from './components/HomePage'
 function App() {
   if (JSON.parse(localStorage.getItem('user')) == null) {
     window.location.href = "http://localhost:8081/signin"
@@ -11,7 +10,7 @@ function App() {
   return (
     <div>
       <Navbar />
-      Home
+      <HomePage />
     </div>
   )
 }
