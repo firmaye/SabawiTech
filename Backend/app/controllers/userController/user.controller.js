@@ -133,6 +133,8 @@ exports.upload = (req, res) => {
   console.log(req.body)
   upload(req, res, (err) => {
     console.log(req.file)
+    console.log("req.file")
+    console.log(req.body)
     if (err) {
       console.log(err)
     }

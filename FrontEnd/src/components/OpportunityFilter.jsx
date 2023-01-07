@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeFilterLocation, removeFilterStatus, setFilterLocation, setFilterStatus } from '../redux/filter'
+import { removeFilterLocation, removeFilterType, removeFilterStatus, setFilterLocation, setFilterType, setFilterStatus } from '../redux/filter'
 
 const OpportunityFilter = () => {
     const dispatch = useDispatch()
@@ -57,7 +57,28 @@ const OpportunityFilter = () => {
                         </div>
                     </div>
                 </div>
-                <div className="price-container">
+                <div className="seller-container">
+                    <div className="seller-title">
+                        Status
+                    </div>
+                    <div className="seller-options">
+
+                        <div className="seller-option">
+                            <div className="form-check form-switch">
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterType("paid")) : dispatch(removeFilterType("paid")) }} className="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" />
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Paid</label>
+                            </div>
+                            <div className="form-check form-switch">
+                                <input onClick={(data) => { data.target.checked ? dispatch(setFilterType("unpaid")) : dispatch(removeFilterType("unpaid")) }} className="form-check-input" type="checkbox" role="switch"
+                                    id="flexSwitchCheckDefault" />
+                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Unpaid</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {/* <div className="price-container">
                     <div className="price-title">
                         Price
                     </div>
@@ -84,7 +105,7 @@ const OpportunityFilter = () => {
                         <option value="">result</option>
                         <option value="">result</option>
                     </select>
-                </div>
+                </div> */}
             </div>
         </div>
     )

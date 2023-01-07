@@ -1,19 +1,17 @@
-import countries from "i18n-iso-countries"
 import React, { useEffect, useState } from 'react'
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
 import './css/authentication.css'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import enLocale from "i18n-iso-countries/langs/en.json"
 const Signup = () => {
-    const [firstName, setfirstName] = useState("")
-    const [lastName, setlastName] = useState("")
-    const [userName, setuserName] = useState("")
-    const [email, setemail] = useState("")
-    const [password, setpassword] = useState("")
-    const [country, setcountry] = useState("")
-    const [state, setstate] = useState("")
+    // const [firstName, setfirstName] = useState("")
+    // const [lastName, setlastName] = useState("")
+    // const [userName, setuserName] = useState("")
+    // const [email, setemail] = useState("")
+    // const [password, setpassword] = useState("")
+    // const [country, setcountry] = useState("")
+    // const [state, setstate] = useState("")
     let errorModal = () => {
         dispatch(setModal("error"))
         setmodalstyle({

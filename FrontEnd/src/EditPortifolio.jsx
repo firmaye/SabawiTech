@@ -6,27 +6,136 @@ import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import Loading from './components/Loading'
+import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
+
+import ErrorModal from './components/ErrorModal'
+
+import { setModal } from './redux/profilemodal'
+import { useDispatch, useSelector } from 'react-redux'
 
 const EditPortifolio = () => {
     const params = useParams()
     const paramsid = params.id
     const [previouswork, setpreviouswork] = useState([])
-    const [skills, setskills] = useState(["react", "node"])
+    const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
     const [workTitle, setworkTitle] = useState("")
     const [workThumbnail, setworkThumbnail] = useState()
+    const [workPlaceholder, setworkPlaceholder] = useState()
+    const [errorworkTitle, seterrorworkTitle] = useState("")
+    const [errorworkThumbnail, seterrorworkThumbnail] = useState()
     const [workLink, setworkLink] = useState()
+    const dispatch = useDispatch()
+
     console.log(skills)
     const [loading, setloading] = useState(true)
+    let successModal = () => {
+        dispatch(setModal("addportifoliosuccess"))
 
+    }
+    const blobUrlToFile = (blobUrl) => new Promise((resolve) => {
+        fetch(blobUrl).then((res) => {
+            res.blob().then((blob) => {
+                // please change the file.extension with something more meaningful
+                // or create a utility function to parse from URL
+                const file = new File([blob], 'file.extension', { type: blob.type })
+                resolve(file)
+            })
+        })
+    })
+    let handleSubmit = async () => {
+        // console.log(workSkill)
+        console.log(skills)
+        if (workTitle == "") {
+            seterrorworkTitle("Required")
+        } else {
+            seterrorworkTitle("")
+        }
+        if (!checkPhotoExistence()) {
+            seterrorworkThumbnail("Please Select A Valid Image")
+        } else {
+            seterrorworkThumbnail("")
+        }
+        if (workTitle != "" && checkPhotoExistence()) {
+            let image = await blobUrlToFile(workPlaceholder)
+            console.log(workPlaceholder)
+            const formData = new FormData();
+            // Update the formData object
+            formData.append(
+                'workThumbnail',
+                image
+            );
+            formData.append(
+                'workTitle',
+                workTitle
+            );
+            formData.append(
+                'workLink',
+                workLink
+            );
+            formData.append(
+                'workSkill',
+                skills
+            );
+            let userid = JSON.parse(localStorage.getItem('user')).id
+            fetch(`http://localhost:8080/api/users/previousWork/${userid}/${paramsid}`, {
+                method: 'PATCH',
 
+                body: formData
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    successModal()
+                })
+                .catch((error) => {
+                    // errorModal()
+                    console.log(error)
+                    console.error('Error:', error);
+                });
+        }
+    }
+    function fileValue(value) {
+        console.log("filevlaue called")
+        var path = value.value;
+        var extenstion = path.split('.').pop();
+        console.log(value.files[0])
+        setworkThumbnail(value.files[0])
+        if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
+            document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
+            setworkPlaceholder(window.URL.createObjectURL(value.files[0]))
+            var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
+            document.getElementById("filename").innerHTML = filename;
+        } else {
+            console.log("not selected")
+            seterrorworkThumbnail("")
+            document.getElementById("filename").innerHTML = "Please Select an image";
+            document.getElementById('image-preview').src = ""
+            // alert("File Not Selected Or Selected Format Not Supported")
+        }
+    }
+    let checkPhotoExistence = () => {
+        console.log(workThumbnail)
+        if (workThumbnail == "" || workThumbnail == undefined || workThumbnail == "Please Change Image") {
+            if (workThumbnail == "Please Change Image") {
+                seterrorworkThumbnail("Please Change Image")
+            } else {
+                seterrorworkThumbnail("Please Select An Image")
+            }
+            return false
+        } else {
+            seterrorworkThumbnail("")
+            return true
+        }
+    }
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = "http://localhost:8081/signin"
         }
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`http://localhost:8080/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
-            console.log(result.previousWork)
+            console.log(result)
             const found = result.previousWork.find(element => element._id == paramsid);
             console.log(found)
             let skillsString = found.workSkill[0].split(",")
@@ -34,6 +143,7 @@ const EditPortifolio = () => {
             setskills(skillsString)
             setworkTitle(found.workTitle)
             setworkThumbnail(found.workThumbnail)
+            setworkPlaceholder("http://localhost:8080/uploads/images/" + found.workThumbnail)
             setworkLink(found.workLink)
             setpreviouswork(found)
             setloading(false)
@@ -44,10 +154,14 @@ const EditPortifolio = () => {
         return (
             <Loading />)
     }
+
     return (
 
         <FadeIn>
             <main>
+                {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
+                    : currentModal == "error" ? <ErrorModal />
+                        : <></>}
 
                 <div className="">
                     <div className="edit-portifolio-container">
@@ -114,7 +228,7 @@ const EditPortifolio = () => {
                                                     <input type="file" name="" id="logo" onChange={(value) => { fileValue(value.target) }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={"http://localhost:8080/uploads/images/" + workThumbnail} alt="" />
+                                                            <img id="image-preview" src={workPlaceholder} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>
@@ -123,6 +237,7 @@ const EditPortifolio = () => {
                                                     </label>
                                                 </div>
                                             </div>
+                                            <div className='input-error-display' style={{ position: "absolute" }} >{errorworkThumbnail}</div>
 
                                         </div>
                                         <div className="col-12 edit-portifolio-input-parent-container">
@@ -130,16 +245,17 @@ const EditPortifolio = () => {
                                                 Work Title
                                             </div>
                                             <div className="edit-portifolio-label-input-container">
-                                                <input type="text" value={workTitle} />
+                                                <input onChange={(data) => { setworkTitle(data.target.value) }} value={workTitle} type="text" />
                                             </div>
+                                            <div className='input-error-display' style={{ position: "absolute" }} >{errorworkTitle}</div>
 
                                         </div>
                                         <div className="col-12 edit-portifolio-input-parent-container">
                                             <div className="edit-portifolio-label">
-                                                Work Link
+                                                Work Link (Optional)
                                             </div>
                                             <div className="edit-portifolio-label-input-container">
-                                                <input type="text" value={workLink} />
+                                                <input onChange={(data) => { setworkLink(data.target.value) }} value={workLink} type="text" />
                                             </div>
 
                                         </div>
@@ -172,9 +288,9 @@ const EditPortifolio = () => {
                                                 </div>
                                             </div>
                                             <div className="edit-portifolio-label-input-container row">
-                                                <input onChange={(data) => { setnewskills(data.target.value) }} type="text" className='col edit-portifolio-input' />
+                                                <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} type="text" className='col edit-portifolio-input' />
                                                 <div className="col col-auto">
-                                                    <button onClick={() => { setskills([...skills, newskills]) }} className="profile-edit-btn">
+                                                    <button onClick={() => { if (newskills != "") { setskills([...skills, newskills]); setnewskills("") } }} className="profile-edit-btn">
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
@@ -184,8 +300,10 @@ const EditPortifolio = () => {
                                     </div>
                                     <div className="row">
                                         <div className="edit-portifolio-buttons ">
-                                            <button className="see-public">Close </button>
-                                            <button className="setting">Edit</button>
+                                            <button onClick={() => {
+                                                window.location.href = "http://localhost:8081/profile";
+                                            }} className="see-public">Close </button>
+                                            <button onClick={handleSubmit} className="setting">Edit</button>
                                         </div>
                                     </div>
                                 </div>

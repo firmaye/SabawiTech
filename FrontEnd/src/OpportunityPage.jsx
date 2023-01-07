@@ -78,6 +78,26 @@ const OpportunityPage = () => {
             }
         }
     })
+    sublist = sublist.filter((elt) => {
+
+        if (currentFilter.type.length == 0) {
+            console.log("nofilter")
+            return elt
+        } else {
+            console.log(elt.intType)
+            console.log(elt.intType == "paid")
+            if (currentFilter.type.includes("paid")) {
+                if (elt.intType == "paid") {
+                    return elt
+                }
+            }
+            if (currentFilter.type.includes("unpaid")) {
+                if (elt.intType == "unpaid") {
+                    return elt
+                }
+            }
+        }
+    })
     if (loading) {
         return (
             <Loading />)

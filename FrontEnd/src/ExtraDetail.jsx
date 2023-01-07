@@ -3,17 +3,29 @@ import Sidebar from './components/Sidebar'
 import "./css/extradetail.css"
 import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 const ExtraDetail = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
         window.location.href = "http://localhost:8081/signin"
     }
+
+    const titleSchema = Yup.object().shape({
+        formtitle: Yup.string()
+            .min(2, 'Too Short!')
+            .required('Required'),
+        formdescription: Yup.string()
+            .min(2, 'Too Short!')
+            .required('Required')
+    })
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [title, settitle] = useState(null);
-    const [descritpion, setdescritpion] = useState(null);
-
+    const [selectedImage, setSelectedImage] = useState("");
+    const [title, settitle] = useState("");
+    const [descritpion, setdescritpion] = useState("");
+    const [imageerror, setimageerror] = useState("")
+    const [skillerror, setskillerror] = useState("")
     let setImagePath = (e) => {
         setSelectedImage(e.target.files[0])
 
@@ -25,45 +37,32 @@ const ExtraDetail = () => {
             'profilePhoto',
             selectedImage
         );
+        formData.append(
+            'title',
+            title
+        );
+        formData.append(
+            'titleOverview',
+            descritpion
+        );
+        formData.append(
+            'skill',
+            skills
+        );
         // console.log(file)
         // console.log({ profilePhoto: selectedImage })
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // console.log(body)
         // event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/upload/${userid}`, {
+        fetch(`http://localhost:8080/api/users/register/${userid}`, {
             method: 'POST',
-
             body: formData
         })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
-                console.log("profile photo successfully addded")
-                let userid = JSON.parse(localStorage.getItem('user')).id
-                fetch(`http://localhost:8080/api/users/upload/${userid}`, {
-                    method: 'POST',
 
-                    body: formData
-                })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        console.log(data)
-                        console.log("profile photo successfully addded")
-                        fetch(`http://localhost:8080/api/users/skill/${userid}`, {
-                            method: 'PATCH',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: body
-                        })
-                        // successModal()
-                    })
-                    .catch((error) => {
-                        errorModal()
-                        console.log(error)
-                        console.error('Error:', error);
-                    });
                 // successModal()
             })
             .catch((error) => {
@@ -81,7 +80,33 @@ const ExtraDetail = () => {
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
             document.getElementById("filename").innerHTML = filename;
         } else {
-            alert("File not supported. Kindly Upload the Image of below given extension ")
+            setSelectedImage("")
+            document.getElementById("filename").innerHTML = "Please Select an image";
+            document.getElementById('image-preview').src = ""
+            console.log("File not supported. Kindly Upload the Image of below given extension ")
+        }
+    }
+    let checkPhotoExistence = () => {
+        console.log(selectedImage)
+        if (selectedImage == "" || selectedImage == undefined) {
+            setimageerror("Please Select Valid Image")
+            return false
+        } else {
+            setimageerror("")
+            return true
+        }
+    }
+    let checkSkillExistence = () => {
+
+        console.log(skills.length)
+        if (skills.length == 0) {
+            setskillerror("Please Add A Work Skill")
+            console.log(skillerror)
+            return false
+        } else {
+            setskillerror("")
+            console.log(skillerror)
+            return true
         }
     }
     let userid = JSON.parse(localStorage.getItem('user')).id
@@ -163,9 +188,217 @@ const ExtraDetail = () => {
 
                             </div>
                         </div>
-                        {/*  */}
-                        {/*  */}
+
                         {selectedpart == "" ? <div className=" extra-detail-personal-description-container col min-width-0">
+                            <div className="extra-detail-intro-description">
+                                <div className=" extra-detail-intro-title row">
+                                    <div className="col">
+                                        <h2>Hello there {username}</h2>
+                                    </div>
+
+                                </div>
+                                <div className="row extra-detail-intro-details">
+                                    <div className="extra-detail-intro-details-child extra-detail-intro-subititle">
+                                        Ready for your next big opportunity
+                                    </div>
+                                    <div className="extra-detail-intro-details-child ">
+                                        Please fill out this form it only takes about 5 minutes
+
+                                        It only takes 5 minutes
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="extra-detail-buttons ">
+                                        <button onClick={() => { window.location.href = "http://localhost:8081/profile" }} className="see-public">Close </button>
+                                        <button onClick={(event) => { event.preventDefault(); setselectedpart("profileImage") }} className="setting">Get Started</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> : selectedpart == "profileImage" ?
+
+                            <div className=" extra-detail-personal-description-container col min-width-0">
+                                <div className="extra-detail-personal-description">
+                                    <div className=" extra-detail-personal-description-title row">
+                                        <div className="col">
+                                            <h2>Add Portifolio Image</h2>
+                                        </div>
+
+                                    </div>
+                                    <div className="row extra-detail-personal-description-details">
+                                        <div className="col-12 extra-detail-input-parent-container">
+                                            <div className="extra-detail-label">
+                                                Profile Image
+                                            </div>
+                                            <div className="extra-detail-modal-image-container">
+                                                <div className="image-upload">
+                                                    <input type="file" name="" id="logo"
+                                                        onChange={(value) => {
+                                                            fileValue(value.target);
+                                                            setImagePath(value);
+                                                        }}
+                                                    />
+                                                    <label htmlFor="logo" className="upload-field" id="file-label">
+                                                        <div className="file-thumbnail">
+                                                            <img id="image-preview" src={selectedImage == "" ? "https://www.btklsby.go.id/images/placeholder/basic.png" : window.URL.createObjectURL(selectedImage)} alt="" />
+                                                            <h3 id="filename">
+                                                                Drag and Drop
+                                                            </h3>
+                                                            <p >Supports JPG, PNG, SVG</p>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div className='input-error-display extra-detail-error-profile-photo' style={{ marginLeft: "40px" }} >{imageerror}</div>
+
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div className="extra-detail-buttons ">
+                                            <button className="see-public">Close </button>
+                                            <button type='button' onClick={(event) => { event.preventDefault(); checkPhotoExistence() ? setselectedpart("title") : () => { } }} className="setting">Next</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            : selectedpart == "title" ?
+                                <Formik
+                                    initialValues={{
+                                        formtitle: title
+                                        ,
+                                        formdescription: descritpion
+                                    }}
+                                    validateOnBlur={false}
+                                    validationSchema={titleSchema}
+                                    onSubmit={async (values, { setSubmitting }, formik) => {
+                                        console.log(values)
+                                        setSubmitting(false);
+                                        setdescritpion(values.formdescription)
+                                        settitle(values.formtitle);
+                                        setselectedpart("skills")
+                                    }}
+                                >
+                                    {({
+                                        values,
+                                        errors,
+                                        touched,
+                                        handleChange,
+                                        handleSubmit,
+                                        handleBlur,
+
+                                        /* and other goodies */
+                                    }) => (
+                                        <form className='col'>
+                                            <div className=" extra-detail-personal-description-container col min-width-0">
+                                                <div className="extra-detail-personal-description">
+                                                    <div className=" extra-detail-personal-description-title row">
+                                                        <div className="col">
+                                                            <h2>Add Title And Description</h2>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="row extra-detail-personal-description-details">
+
+                                                        <div className="col-12 extra-detail-input-parent-container">
+                                                            <div className="extra-detail-label">
+                                                                Work Title
+                                                            </div>
+                                                            <div className="extra-detail-label-input-container">
+                                                                <input
+                                                                    onChange={handleChange}
+                                                                    onBlur={handleBlur}
+                                                                    value={values.formtitle} name='formtitle' placeholder='Work Title' type="text" />
+                                                            </div>
+                                                            <div className='input-error-display' >{errors.formtitle && touched.formtitle && errors.formtitle}</div>
+
+                                                        </div>
+                                                        <div className="col-12 extra-detail-input-parent-container">
+                                                            <div className="extra-detail-label">
+                                                                Work Description
+                                                            </div>
+                                                            <div className="extra-detail-label-input-container">
+                                                                <textarea placeholder='Work Description' style={{ marginBottom: "0px" }} value={values.formdescription} onChange={(data) => { handleChange(data) }} name="formdescription" ></textarea>
+                                                                <div className='input-error-display' >{errors.formdescription && touched.formdescription && errors.formdescription}</div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="extra-detail-buttons ">
+                                                            <button type='button' onClick={(event) => { event.preventDefault(); setselectedpart("profileImage") }} className="see-public">Back </button>
+                                                            <button type='button' onClick={(event) => { event.preventDefault(); handleSubmit(event) }} className="setting">Next</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div></form>
+                                    )}
+                                </Formik>
+                                : selectedpart == "skills" ?
+                                    <div className=" extra-detail-personal-description-container col min-width-0">
+                                        <div className="extra-detail-personal-description">
+                                            <div className=" extra-detail-personal-description-title row">
+                                                <div className="col">
+                                                    <h2>Add Skills</h2>
+                                                </div>
+
+                                            </div>
+                                            <div className="col-12 add-portifolio-input-parent-container">
+                                                <div className="add-portifolio-label">
+                                                    Work Skills
+                                                </div>
+
+                                                <div className="edit-portifolio-skills col">
+
+                                                    <div className="skill-list">
+                                                        {
+                                                            skills.map((element) => {
+                                                                return (<div className="skills">
+                                                                    {element}
+                                                                    <button onClick={(event) => {
+                                                                        event.preventDefault();
+                                                                        let newskilllist = skills.filter((childelement) => {
+                                                                            if (childelement != element) {
+                                                                                return childelement
+                                                                            }
+                                                                        })
+                                                                        setskills(newskilllist)
+                                                                    }} type="button" className="skill-list-modal-close" >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
+                                                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                                        </svg>
+                                                                    </button>
+                                                                </div>)
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <div className="edit-portifolio-label-input-container col-12">
+                                                        <div style={{ display: "flex" }}>
+
+                                                            <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />
+                                                            <div className="col col-auto">
+                                                                <button onClick={(event) => { event.preventDefault(); setskills([...skills, newskills]); setnewskills("") }} className="profile-edit-btn">
+                                                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className='input-error-display extra-detail-error-profile-photo' >{skillerror}</div>
+                                                    <div className="row">
+                                                        <div className="extra-detail-buttons ">
+                                                            <button onClick={(event) => { event.preventDefault(); setselectedpart("title") }} className="see-public">Back </button>
+                                                            <button onClick={() => { checkSkillExistence() ? handleSubmit() : console.log("invalid") }} className="setting">Finish</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    : <></>}
+
+                        {/* {selectedpart == "" ? <div className=" extra-detail-personal-description-container col min-width-0">
                             <div className="extra-detail-intro-description">
                                 <div className=" extra-detail-intro-title row">
                                     <div className="col">
@@ -327,7 +560,7 @@ const ExtraDetail = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    : <></>}
+                                    : <></>} */}
 
 
                     </div>

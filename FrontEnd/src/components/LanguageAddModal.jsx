@@ -24,9 +24,11 @@ const LanguageModal = ({ language }) => {
         backgroundColor: "rgba(0,0,0,0.8)"
     })
     const [languagelistmodal, setlanguagelistmodal] = useState(language)
-    const [langtobeedited, setlangtobeedited] = useState({})
-    const [langtobeadded, setlangtobeadded] = useState({})
-    const [proficiencytobeadded, setproficiencytobeadded] = useState({})
+    const [langtobeadded, setlangtobeadded] = useState("")
+    const [proficiencytobeadded, setproficiencytobeadded] = useState("")
+    const [langerror, setlangerror] = useState("")
+    const [existinglangerror, setexistinglangerror] = useState("")
+    const [proficiencyerror, setproficiencyerror] = useState("")
     let closeLanguageModal = () => {
         dispatch(setModal(""))
         setmodalstyle({
@@ -34,32 +36,56 @@ const LanguageModal = ({ language }) => {
         })
     }
     let handleSubmit = (event) => {
-        let languageedited = languagelistmodal.map((element) => {
-            delete element._id
-            return element
+        let error = false
+        console.log(languagelistmodal)
+        languagelistmodal.map((element) => {
+
+            console.log("executed")
+            if (element.languageName == "") {
+                error = true
+            }
+            if (element.languageProficiency == "") {
+                error = true
+            }
+
+
         })
-        let language = JSON.stringify({ language: languageedited })
-        console.log(language)
-        event.preventDefault()
-        let userid = JSON.parse(localStorage.getItem('user')).id
-        console.log(`http://localhost:8080/api/users/language/${userid}`)
-        fetch(`http://localhost:8080/api/users/language/${userid}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: language
+        let languageedited = languagelistmodal.filter((element) => {
+            if (element.languageName == "" && element.languageName == "") {
+                return false
+            } else { return true }
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                successModal()
+        console.log(languageedited)
+        console.log(error)
+        if (!error) {
+
+            let languageedited = languagelistmodal.map((element) => {
+                delete element._id
+                return element
             })
-            .catch((error) => {
-                errorModal()
-                console.log(error)
-                console.error('Error:', error);
-            });
+            let language = JSON.stringify({ language: languageedited })
+            console.log(language)
+            event.preventDefault()
+            let userid = JSON.parse(localStorage.getItem('user')).id
+            console.log(`http://localhost:8080/api/users/language/${userid}`)
+            fetch(`http://localhost:8080/api/users/language/${userid}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: language
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    successModal()
+                })
+                .catch((error) => {
+                    errorModal()
+                    console.log(error)
+                    console.error('Error:', error);
+                });
+        }
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -84,7 +110,7 @@ const LanguageModal = ({ language }) => {
 
                                                     <div className="col-12 d-flex align-items-center language-modal-existing-group-container mb-3">
                                                         <div className="col-6 language-modal-existing-input-group">
-                                                            <input className="" type="text" onChange={(event) => {
+                                                            <input className="" placeholder="Please Set Language" type="text" onChange={(event) => {
                                                                 setlanguagelistmodal((oldlist) => {
                                                                     const found = oldlist.find(childelement => childelement._id == element._id);
                                                                     found.languageName = event.target.value
@@ -103,6 +129,7 @@ const LanguageModal = ({ language }) => {
                                                         </div>
                                                         <div className="col-5 language-modal-existing-input-group">
                                                             <input className="" type="text" onChange={(event) => {
+
                                                                 setlanguagelistmodal((oldlist) => {
                                                                     const found = oldlist.find(childelement => childelement._id == element._id);
                                                                     found.languageProficiency = event.target.value
@@ -116,7 +143,7 @@ const LanguageModal = ({ language }) => {
                                                                     return result;
                                                                     ;
                                                                 })
-                                                            }} value={element.languageProficiency} name="" />
+                                                            }} value={element.languageProficiency} placeholder="Please Set Proficiency" name="" />
                                                         </div>
                                                         <button onClick={(event) => {
                                                             event.preventDefault()
@@ -147,23 +174,45 @@ const LanguageModal = ({ language }) => {
                                             <div className="language-modal-location-container d-flex align-items-center">
 
                                                 <div className="language-modal-input-group">
-                                                    <input className="" onChange={(event) => { setlangtobeadded(event.target.value) }} type="text" placeholder="Language Name" name="" />
+                                                    <input value={langtobeadded} className="" onChange={(event) => { setlangtobeadded(event.target.value) }} type="text" placeholder="Language Name" name="" />
+                                                    <div style={{ position: "absolute" }} className='input-error-display' >{langerror}</div>
+
                                                 </div>
                                                 <div className="language-modal-input-group">
-                                                    <input className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} type="text" placeholder="Proficiency" name="" />
+                                                    <input value={proficiencytobeadded} className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} type="text" placeholder="Proficiency" name="" />
+                                                    <div style={{ position: "absolute" }} className='input-error-display' >{proficiencyerror}</div>
                                                 </div>
                                                 <div className="">
                                                     <button onClick={(event) => {
                                                         event.preventDefault()
-                                                        setlanguagelistmodal((oldstate) => {
-                                                            let newstate = [...oldstate, {
-                                                                "_id": uuid(),
-                                                                "languageName": langtobeadded,
-                                                                "languageProficiency": proficiencytobeadded,
-                                                            }]
-                                                            return newstate
-                                                        })
-                                                        console.log(uuid())
+                                                        if (langtobeadded == "") {
+                                                            setlangerror("Required")
+                                                        } else {
+                                                            setlangerror("")
+
+                                                        }
+                                                        if (proficiencytobeadded == "") {
+                                                            setproficiencyerror("Required")
+
+
+                                                        } else {
+                                                            setproficiencyerror("")
+
+                                                        }
+                                                        if (langtobeadded != "" &&
+                                                            proficiencytobeadded != "") {
+                                                            console.log("execute")
+                                                            setlanguagelistmodal((oldstate) => {
+                                                                let newstate = [...oldstate, {
+                                                                    "_id": uuid(),
+                                                                    "languageName": langtobeadded,
+                                                                    "languageProficiency": proficiencytobeadded,
+                                                                }]
+                                                                return newstate
+                                                            })
+                                                            setlangtobeadded("")
+                                                            setproficiencytobeadded("")
+                                                        }
                                                     }} className="language-edit-btn">
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
