@@ -4,7 +4,7 @@ module.exports = app => {
   const { getUser } = require("../../middleware");
 
   //get all users 
-  router.get('/',user.getAll)
+  router.get('/', user.getAll)
 
   //get single user 
   router.get('/:id', getUser, user.getSingle)
@@ -19,7 +19,8 @@ module.exports = app => {
   router.patch('/:id', getUser, user.update)
 
   //upload profile image
-  router.post('/upload/:id',getUser, user.upload)
+  router.post('/upload/:id', getUser, user.upload)
+  router.post('/register/:id', getUser, user.register)
 
   //register user
   router.patch('/register/:id',getUser, user.register)

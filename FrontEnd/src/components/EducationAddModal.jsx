@@ -3,10 +3,21 @@ import { useState } from 'react'
 import "../css/educationaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import DatePicker from "react-datepicker";
-
+import Datetime from "react-datetime"
 import "react-datepicker/dist/react-datepicker.css";
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+const EducationSchema = Yup.object().shape({
+    formattendedFrom: Yup.string()
+        .required('Required'),
+    formattendedTo: Yup.string()
+        .required('Required'),
+    formareaofstudy: Yup.string()
+        .required('Required'),
+    formschoolname: Yup.string()
+        .required('Required'),
 
+})
 const EducationModal = () => {
     const dispatch = useDispatch()
     const [schoolname, setschoolname] = useState("")
@@ -46,7 +57,8 @@ const EducationModal = () => {
         body = JSON.stringify(body)
         console.log(body)
         event.preventDefault()
-        fetch('http://localhost:8080/api/users/education/63b13cfd127ade2c12562493', {
+        let userid = JSON.parse(localStorage.getItem('user')).id
+        fetch(`http://localhost:8080/api/users/education/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,50 +79,133 @@ const EducationModal = () => {
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title" id="exampleModalLabel">Add Education</h5>
-                        <button onClick={closeEducationModal} type="button" className="education-modal-close" >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
-                            </svg>                        </button>
-                    </div>
-                    <div className="modal-body">
-                        <div class="education-modal-page-wrapper ">
-                            <div class="">
-                                <div class="">
-                                    <div class="">
-                                        <h2 class="education-modal-education"></h2>
-                                        <form method="">
-                                            <div class="education-modal-input-group">
-                                                <input onChange={(event) => { setschoolname(event.target.value) }} class="" type="text" placeholder="School Name" name="" />
-                                            </div>
-                                            <div className="education-modal-location-container">
+                <Formik
+                    initialValues={{
+                        formattendedFrom: "",
+                        formattendedTo: "",
+                        formareaofstudy: "",
+                        formschoolname: "",
+                    }}
+                    validateOnChange={false}
+                    validateOnBlur={false}
+                    validationSchema={EducationSchema}
+                    onSubmit={async (values, { setSubmitting }, formik) => {
+                        console.log(values)
+                        let body = {
+                            schoolName: values.formschoolname,
+                            dateAttendedFrom: values.formattendedFrom,
+                            dateAttendedTo: values.formattendedTo,
+                            areaOfStudy: values.formareaofstudy
+                        }
+                        body = JSON.stringify(body)
+                        console.log(body)
+                        let userid = JSON.parse(localStorage.getItem('user')).id
+                        fetch(`http://localhost:8080/api/users/education/${userid}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: body
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data)
+                                successModal()
+                            })
+                            .catch((error) => {
+                                errorModal()
+                                console.log(error)
+                                console.error('Error:', error);
+                            });
+                    }}
+                >
+                    {({
+                        values,
+                        errors,
+                        touched,
+                        handleChange,
+                        handleBlur,
+                        handleSubmit,
+                        setFieldValue,
+                        /* and other goodies */
+                    }) => (
+                        <form className=' row '>
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Add Education</h5>
+                                    <button onClick={closeEducationModal} type="button" className="education-modal-close" >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                        </svg>                        </button>
+                                </div>
+                                <div className="modal-body">
+                                    <div class="education-modal-page-wrapper ">
+                                        <div class="">
+                                            <div class="">
+                                                <div class="">
+                                                    <h2 class="education-modal-education"></h2>
 
-                                                <div class="education-modal-input-group">
-                                                    <label>Attended From</label>
-                                                    <DatePicker selected={attendedfrom} onChange={(date) => setattendedfrom(date)} />
+                                                    <div class="education-modal-input-group">
+                                                        <label>School Name</label>
+                                                        <input onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            value={values.formschoolname} name='formschoolname' class="" type="text" />
+                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formschoolname && touched.formschoolname && errors.formschoolname}</div>
+                                                    </div>
+                                                    <div className="education-modal-location-container">
+
+
+                                                        <Datetime initialValue={values.formattendedFrom} onChange={(event) => { setFieldValue("formattendedFrom", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
+                                                            return (
+                                                                <div>
+
+                                                                    <div class="education-modal-input-group">
+                                                                        <label>Attended From</label>
+                                                                        <input {...props} />
+                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+
+                                                        }} />
+
+                                                        {/* <DatePicker selected={attendedfrom} onChange={(date) => setattendedfrom(date)} /> */}
+
+                                                        <Datetime initialValue={values.formattendedTo} onChange={(event) => { setFieldValue("formattendedTo", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
+                                                            return (
+                                                                <div>
+
+                                                                    <div class="education-modal-input-group">
+                                                                        <label>Attended To</label>
+                                                                        <input {...props} />
+                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedTo && touched.formattendedTo && errors.formattendedTo}</div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+
+                                                        }} />
+                                                    </div>
+                                                    <div class="education-modal-input-group">
+                                                        <label>Area of Study</label>
+
+                                                        <input onChange={handleChange}
+                                                            onBlur={handleBlur}
+                                                            value={values.formareaofstudy} name='formareaofstudy' type="text" />
+                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formareaofstudy && touched.formareaofstudy && errors.formareaofstudy}</div>
+                                                    </div>
                                                 </div>
-                                                <div class="education-modal-input-group">
-                                                    <label>Attended To</label>
-                                                    <DatePicker selected={attendedto} onChange={(date) => setattendedto(date)} />                                                </div>
                                             </div>
-                                            <div class="education-modal-input-group">
-                                                <input onChange={(event) => { setareaofstudy(event.target.value) }} class="" type="text" placeholder="Area of Study" name="" />
-                                            </div>
-
-
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
+                                <div className="modal-footer">
+                                    <button type="button" onClick={closeEducationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button type="button" onClick={closeEducationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
+                        </form>
+                    )}
+                </Formik>
             </div>
         </div>
     )

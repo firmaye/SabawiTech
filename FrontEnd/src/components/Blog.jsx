@@ -8,10 +8,10 @@ const Blog = ({ catagory }) => {
 
   useEffect(() => {
     fetch("http://localhost:8080/api/blogs/").then(res => res.json()).then(result => {
-        console.log(result)
-        setBlog(result)
+      console.log(result)
+      setBlog(result)
     }).catch((error) => { console.log(error) });
-}, [])
+  }, [])
 
   // useEffect(async ()=>{
   //   const response = await api.get("/api/blogs");
@@ -26,13 +26,13 @@ const Blog = ({ catagory }) => {
       return elt
     }
     else if (elt.blogCategory == catagory) {
-        return elt
-      }
+      return elt
+    }
   })
   const blogPerPage = 3
-  const pagination = Math.ceil(sublist.length/blogPerPage);
+  const pagination = Math.ceil(sublist.length / blogPerPage);
   const pageNumbers = []
-  for(var i=1; i<=pagination; i++){
+  for (var i = 1; i <= pagination; i++) {
     pageNumbers.push(i)
   }
   // console.log("pagenumber", pageNumbers)
@@ -41,7 +41,7 @@ const Blog = ({ catagory }) => {
   const selectedbloglist = sublist.slice(start, end);
 
   console.log("selected", selectedbloglist)
-  for(var i = 0; i <= blogPerPage; i++){
+  for (var i = 0; i <= blogPerPage; i++) {
     console.log(i);
   }
   console.log("start page", startPage)
@@ -49,60 +49,60 @@ const Blog = ({ catagory }) => {
 
   return (
     <div class="blogcontainer">
-      {sublist.length == 0 ? 
-      <div class="noresultscont">
-        <img src="./Images/searchnotfound.png" alt="" />
-        <h3>No results found on the section</h3>
-        <p>Try again</p>
-      </div>:
-      selectedbloglist.map((blog) => {
-        return (
-          <div class="col-lg-12 the_excerpt">
-            <img class="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
-            {/* style="margin-top: 55px;" */}
-            <div class="card-body the_excerpt_content" >
-              <div class="entry-meta">
-                <ul class="list-inline">
-                  <li class="list-inline-item">
-                    <i class="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
-                  </li>
-                  <li class="list-inline-item">
-                    <i class="fa fa-comment"></i> <a href="">0 Comments</a>
-                  </li>
-                </ul>
-              </div>
-              <a class="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
-              <p class="card-text">{blog.blogDescription.substring(0,200)+' . . .'}</p>
+      {sublist.length == 0 ?
+        <div class="noresultscont">
+          <img src="./Images/searchnotfound.png" alt="" />
+          <h3>No results found on the section</h3>
+          <p>Try again</p>
+        </div> :
+        selectedbloglist.map((blog) => {
+          return (
+            <div className="col-lg-12 the_excerpt">
+              <img className="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
+              {/* style="margin-top: 55px;" */}
+              <div class="card-body the_excerpt_content" >
+                <div class="entry-meta">
+                  <ul class="list-inline">
+                    <li class="list-inline-item">
+                      <i class="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
+                    </li>
+                    <li className="list-inline-item">
+                      <i className="fa fa-comment"></i> <a href="">0 Comments</a>
+                    </li>
+                  </ul>
+                </div>
+                <a class="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
+                <p class="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
 
-              <a class="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
+                <a class="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
+              </div>
             </div>
-          </div>
-        )
-      })}
-      
+          )
+        })}
+
       <div class="pagination nav-links">
-      {pageNumbers.map((page)=>{
-        return(
-          <div>
-            <a class="page-numbers" href="javascript:void(0)" onClick={()=>{setStartPage(page)}}>{page}</a>
+        {pageNumbers.map((page) => {
+          return (
+            <div>
+              <a class="page-numbers" href="javascript:void(0)" onClick={() => { setStartPage(page) }}>{page}</a>
             </div>
-        )
-      })
-      }
-      {startPage != "" ?
-      <a class="next page-numbers" href="javascript:void(0)" 
-      onClick={()=>{
-        if(startPage<pagination){
-          setStartPage(startPage+1)
-        }else{
-          setStartPage(startPage)
+          )
+        })
         }
-       }}>Next {'❯'}</a>
-      :
-      ""
-      }
+        {startPage != "" ?
+          <a class="next page-numbers" href="javascript:void(0)"
+            onClick={() => {
+              if (startPage < pagination) {
+                setStartPage(startPage + 1)
+              } else {
+                setStartPage(startPage)
+              }
+            }}>Next {'❯'}</a>
+          :
+          ""
+        }
       </div>
-      </div>
+    </div>
   );
 }
 
