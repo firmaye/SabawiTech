@@ -116,13 +116,8 @@ const HomePage = () => {
                     <img src="./Images/provider error.png" alt="" />
                 </div>
             </div>
-            <footer>
-                <hr />
-                <p>Copyright 2023/2024 Sabawi Dev's</p>
-            </footer>
         </div>
-        <Footer />
-    </div>
+
 
     );
 }
