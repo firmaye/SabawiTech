@@ -7,61 +7,83 @@ const Footer = () => {
                
                 <section class="">
                 <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"35%"}}>
+                        <h5 class="text-uppercase">ProLancer</h5>
+                        <p className="footertext">328 Queensberry Street, North Mellbourne VIC 3051, Australia. support@sabawidevs.com</p>
+                        <section class="">
+                            <form action="">
+                                <div class="row d-flex justify-content-center">
+                                <div class="col-md-5 col-12">
+                                    <div class="form-outline mb-4">
+                                        <input type="email" id="form5Example2" class="form-control" placeholder='Email address'/>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-4">
+                                    Subscribe
+                                    </button>
+                                </div>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"20%"}}>
+                        <h5 class="text-uppercase">Categories</h5>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Navigation</h5>
-
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                        <a href="#!" class="text-dark">Link 1</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 2</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 3</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 4</a>
-                        </li>
-                    </ul>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                            <a href="#!" class="text-dark">video & Animation</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Digital Marketing</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Graphics & Design</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Business</a>
+                            </li>
+                        </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Links</h5>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"20%"}}>
+                        <h5 class="text-uppercase">Community</h5>
 
-                    <ul class="list-unstyled mb-0">
-                        <li>
-                        <a href="#!" class="text-dark">Link 1</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 2</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 3</a>
-                        </li>
-                        <li>
-                        <a href="#!" class="text-dark">Link 4</a>
-                        </li>
-                    </ul>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                            <a href="#!" class="text-dark">video & Animation</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Digital Marketing</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Graphics & Design</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Business</a>
+                            </li>
+                        </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase">Visit us on</h5>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"20%"}}>
+                        <h5 class="text-uppercase">Support</h5>
 
-                    <section class="mb-4 footersocial">
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
-
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
-
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-google"></i></a>
-
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
-
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
-                <a class="btn btn-primary btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
-                </section>
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                            <a href="#!" class="text-dark">video & Animation</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Digital Marketing</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Graphics & Design</a>
+                            </li>
+                            <li>
+                            <a href="#!" class="text-dark">Business</a>
+                            </li>
+                        </ul>
                     </div>
+
                 </div>
 
             </section>
