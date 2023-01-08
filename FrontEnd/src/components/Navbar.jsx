@@ -1,7 +1,5 @@
 import React from 'react'
 import "../css/opportunitypage.css"
-import Logo from "../assets/logo.png"
-
 const Navbar = () => {
     let logout = () => {
         window.localStorage.removeItem('user')
@@ -12,7 +10,7 @@ const Navbar = () => {
             <div className="container">
                 <a href="/" className="navbar-brand">
                     <i className="fas fa-blog"></i> &nbsp;
-                    SabawiDevs
+                    ProTalent
                 </a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -26,7 +24,7 @@ const Navbar = () => {
                             <a href={"/"} className="nav-link active">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a href={"/opportunity"} className="nav-link active">Browse Jobs</a>
+                            <a href={"/opportunity"} className="nav-link active">Browse Opportunities</a>
                         </li>
                         <li className="nav-item">
                             <a href={"/blog"} className="nav-link active">Blog</a>

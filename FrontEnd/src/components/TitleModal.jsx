@@ -3,7 +3,6 @@ import { useState } from 'react'
 import "../css/titlemodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import SuccessModal from './SuccessModal';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 const titleSchema = Yup.object().shape({
@@ -24,6 +23,12 @@ const TitleModal = ({ profileinfo }) => {
     })
     let successModal = () => {
         dispatch(setModal("success"))
+        setmodalstyle({
+            display: "none"
+        })
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
         setmodalstyle({
             display: "none"
         })
@@ -91,8 +96,9 @@ const TitleModal = ({ profileinfo }) => {
                                 successModal()
                             })
                             .catch((error) => {
+
                                 console.log(error)
-                                console.error('Error:', error);
+                                errorModal()
                             });
 
 

@@ -364,10 +364,16 @@
 
 .extra-detail-intro-title h2 {
     font-size: 65px;
+    text-align: center;
 }
 
 .extra-detail-intro-subititle {
     font-size: 35px;
+    text-align: center;
+}
+
+.extra-detail-intro-details-child {
+    text-align: center;
 }
 
 /* end of into css */

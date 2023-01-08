@@ -228,7 +228,7 @@ const OpportunityDetailPage = () => {
                                     </div>}
 
                             </div>
-                            <div className="col-lg-4 position-relative single-opportunity-description">
+                            <div className="col-lg-4 d-none d-lg-block position-relative single-opportunity-description">
                                 <div className="single-opportunity-sidebar">
                                     <div className="single-opportunity-sidebar-part">
                                         <div className="text-center">
