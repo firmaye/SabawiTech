@@ -221,6 +221,21 @@ footer{
         margin-bottom:64px;
     }
     .bottomresponsive{
+        width:100%;
         margin-bottom: 90px;
+    }
+}
+@media (max-width:770px){
+    .cardview{
+        flex-direction: column-reverse;
+        height:auto;
+        padding-top:20px;
+        padding-bottom:40px;
+        width:92%;
+    }
+    .cardviewtext{
+        width:80%;
+        text-align: center;
+        margin-top:50px;
     }
 }
