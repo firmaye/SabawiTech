@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/homepage.css'
+import Footer from './footer';
 const HomePage = () => {
     return (
         <div class="flex-container maincont">
@@ -115,10 +116,7 @@ const HomePage = () => {
                 <img src="./Images/provider error.png" alt=""/>
             </div>
         </div>
-        <footer>
-            <hr/>
-            <p>Copyright 2023/2024 Sabawi Dev's</p>
-        </footer>
+        <Footer />
     </div>
     );
 }
