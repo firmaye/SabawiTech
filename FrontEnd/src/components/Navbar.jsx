@@ -8,36 +8,36 @@ const Navbar = () => {
         window.location.href = "http://localhost:8081/signin"
     }
     return (
-        <nav class="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
-            <div class="container">
-                <a href="/" class="navbar-brand">
-                    <i class="fas fa-blog"></i> &nbsp;
+        <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
+            <div className="container">
+                <a href="/" className="navbar-brand">
+                    <i className="fas fa-blog"></i> &nbsp;
                     SabawiDevs
                 </a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
 
 
-                <div id="navbarCollapse" class="collapse navbar-collapse">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href={"/"} class="nav-link active">Home</a>
+                <div id="navbarCollapse" className="collapse navbar-collapse">
+                    <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                            <a href={"/"} className="nav-link active">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a href={"/opportunity"} class="nav-link active">Browse Jobs</a>
+                        <li className="nav-item">
+                            <a href={"/opportunity"} className="nav-link active">Browse Jobs</a>
                         </li>
-                        <li class="nav-item">
-                            <a href={"/blog"} class="nav-link active">Blog</a>
+                        <li className="nav-item">
+                            <a href={"/blog"} className="nav-link active">Blog</a>
                         </li>
-                        <li class="nav-item">
-                            <a href={"/contact"} class="nav-link active">Contact</a>
+                        <li className="nav-item">
+                            <a href={"/contact"} className="nav-link active">Contact</a>
                         </li>
-                        <li class="nav-item">
-                            <a href={"/profile"} class="nav-link active">Profile</a>
+                        <li className="nav-item">
+                            <a href={"/profile"} className="nav-link active">Profile</a>
                         </li>
-                        <li class="nav-item">
+                        <li className="nav-item">
                             <div><button onClick={logout} type="submit" className="btn btn-primary">Log Out</button>
                             </div>            </li>
                     </ul>

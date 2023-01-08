@@ -6,7 +6,18 @@ import Navbar from './components/Navbar'
 import SuccessModal from './components/SuccessModal'
 import "./css/contact.css"
 import { setModal } from './redux/profilemodal'
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+const CertificationSchema = Yup.object().shape({
+    formname: Yup.string()
+        .required('Required'),
+    formemail: Yup.string().email('Invalid email').required('Required'),
+    formsubject: Yup.string()
+        .required('Required'),
+    formmessage: Yup.string()
+        .required('Required'),
 
+})
 const Contact = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
         window.location.href = "http://localhost:8081/signin"
@@ -162,41 +173,100 @@ const Contact = () => {
                             <div className="contact1-pic js-tilt" data-tilt>
                                 <img src="./Images/img-01.png" alt="IMG" />
                             </div>
+                            <Formik
+                                initialValues={{
+                                    formname: "",
+                                    formemail: "",
+                                    formsubject: "",
+                                    formmessage: "",
+                                }}
+                                validateOnChange={false}
+                                validateOnBlur={false}
+                                validationSchema={CertificationSchema}
+                                onSubmit={async (values, { setSubmitting }, formik) => {
+                                    let body = {
+                                        name: values.formname,
+                                        email: values.formemail,
+                                        subject: values.formsubject,
+                                        message: values.formmessage
+                                    }
+                                    body = JSON.stringify(body)
+                                    console.log(body)
 
-                            <form className="contact1-form validate-form">
-                                <span className="contact1-form-title">
-                                    Get in touch
-                                </span>
-
-                                <div className="wrap-input1 validate-input" data-validate="Name is required">
-                                    <input onChange={(data) => { setname(data.target.value) }} className="input1" type="text" name="name" placeholder="Name" />
-                                    <span className="shadow-input1"></span>
-                                </div>
-
-                                <div className="wrap-input1 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                                    <input onChange={(data) => { setemail(data.target.value) }} className="input1" type="text" name="email" placeholder="Email" />
-                                    <span className="shadow-input1"></span>
-                                </div>
-
-                                <div className="wrap-input1 validate-input" data-validate="Subject is required">
-                                    <input onChange={(data) => { setsubject(data.target.value) }} className="input1" type="text" name="subject" placeholder="Subject" />
-                                    <span className="shadow-input1"></span>
-                                </div>
-
-                                <div className="wrap-input1 validate-input" data-validate="Message is required">
-                                    <textarea onChange={(data) => { setmessage(data.target.value) }} className="input1" name="message" placeholder="Message"></textarea>
-                                    <span className="shadow-input1"></span>
-                                </div>
-
-                                <div className="container-contact1-form-btn">
-                                    <button onClick={(value) => { handleSubmit(value) }} className="contact1-form-btn">
-                                        <span>
-                                            Send Email
-                                            <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                    console.log(`http://localhost:8080/api/issues`)
+                                    fetch(`http://localhost:8080/api/issues`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                        },
+                                        body: body
+                                    })
+                                        .then((response) => response.json())
+                                        .then((data) => {
+                                            console.log(data)
+                                            successModal()
+                                        })
+                                        .catch((error) => {
+                                            errorModal()
+                                            console.log(error)
+                                            console.error('Error:', error);
+                                        });
+                                }}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    setFieldValue,
+                                    /* and other goodies */
+                                }) => (
+                                    <form className="contact1-form validate-form">
+                                        <span className="contact1-form-title">
+                                            Get in touch
                                         </span>
-                                    </button>
-                                </div>
-                            </form>
+
+                                        <div className="wrap-input1 validate-input" >
+                                            <input onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.formname} className="input1" type="text" name="formname" placeholder="Name" />
+                                            <div className='input-error-display' style={{ position: "absolute", left: "20px" }} >{errors.formname && touched.formname && errors.formname}</div>
+                                        </div>
+
+                                        <div className="wrap-input1 validate-input" >
+                                            <input onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.formemail} className="input1" type="text" name="formemail" placeholder="Email" />
+                                            <div className='input-error-display' style={{ position: "absolute", left: "20px" }} >{errors.formemail && touched.formemail && errors.formemail}</div>
+                                        </div>
+
+                                        <div className="wrap-input1 validate-input" >
+                                            <input onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.formsubject} className="input1" type="text" name="formsubject" placeholder="Subject" />
+                                            <div className='input-error-display' style={{ position: "absolute", left: "20px" }} >{errors.formsubject && touched.formsubject && errors.formsubject}</div>
+                                        </div>
+
+                                        <div className="wrap-input1 validate-input" >
+                                            <textarea onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.formmessage} className="input1" name="formmessage" placeholder="Message"></textarea>
+                                            <div className='input-error-display' style={{ position: "absolute", left: "20px" }} >{errors.formmessage && touched.formmessage && errors.formmessage}</div>
+                                        </div>
+
+                                        <div className="container-contact1-form-btn">
+                                            <button onClick={(value) => { handleSubmit(value) }} className="contact1-form-btn">
+                                                <span>
+                                                    Send Email
+                                                    <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </form>
+                                )}
+                            </Formik>
                         </div>
                     </div>
                 </div>

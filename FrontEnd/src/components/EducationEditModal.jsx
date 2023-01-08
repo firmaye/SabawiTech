@@ -162,7 +162,7 @@ const EducationEditModal = ({ selected }) => {
                                                                 return (
                                                                     <div>
 
-                                                                        <div class="education-modal-input-group">
+                                                                        <div className="education-modal-input-group">
                                                                             <label>Attended From</label>
                                                                             <input {...props} />
                                                                             <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
@@ -178,7 +178,7 @@ const EducationEditModal = ({ selected }) => {
                                                                 return (
                                                                     <div>
 
-                                                                        <div class="education-modal-input-group">
+                                                                        <div className="education-modal-input-group">
                                                                             <label>Attended To</label>
                                                                             <input {...props} />
                                                                             <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedTo && touched.formattendedTo && errors.formattendedTo}</div>

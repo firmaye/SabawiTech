@@ -12,6 +12,8 @@ import ErrorModal from './components/ErrorModal'
 
 import { setModal } from './redux/profilemodal'
 import { useDispatch, useSelector } from 'react-redux'
+import Navbar from './components/Navbar'
+import Header from './components/Header'
 
 const EditPortifolio = () => {
     const params = useParams()
@@ -159,6 +161,8 @@ const EditPortifolio = () => {
 
         <FadeIn>
             <main>
+                <Navbar />
+                <Header title={"Edit Portifolio"} />
                 {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
                     : currentModal == "error" ? <ErrorModal />
                         : <></>}
@@ -265,7 +269,7 @@ const EditPortifolio = () => {
                                             </div>
                                             <div className="edit-portifolio-skills">
 
-                                                <div className="skill-list">
+                                                <div className="skill-list mt-2">
                                                     {
                                                         skills.map((element) => {
                                                             return (<div className="skills">
@@ -287,7 +291,7 @@ const EditPortifolio = () => {
                                                     }
                                                 </div>
                                             </div>
-                                            <div className="edit-portifolio-label-input-container row">
+                                            <div className="edit-portifolio-label-input-container ml-1 mt-2 row">
                                                 <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} type="text" className='col edit-portifolio-input' />
                                                 <div className="col col-auto">
                                                     <button onClick={() => { if (newskills != "") { setskills([...skills, newskills]); setnewskills("") } }} className="profile-edit-btn">

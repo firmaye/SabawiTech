@@ -20,12 +20,12 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
             {
               recent.map((recentPost) => {
                 return (
-                  <div class="thumbnailbox recent_item_container">
+                  <div className="thumbnailbox recent_item_container">
                     <div className="recentthumbcontainer">
-                      <img class="card-img-left recentimagemodification" src={recentPost.blogImage} alt="Card" />
+                      <img className="card-img-left recentimagemodification" src={recentPost.blogImage} alt="Card" />
                     </div>
-                    <div class="card-body">
-                      <p class="card-title">{recentPost.blogTitle}</p>
+                    <div className="card-body">
+                      <p className="card-title">{recentPost.blogTitle}</p>
                     </div>
                   </div>
                 )
@@ -38,9 +38,9 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
         </div>
       </div>
 
-      <div class="sidebar-header widget" style={{ display: display }}>
+      <div className="sidebar-header widget" style={{ display: display }}>
         <h4>Catagories</h4>
-        <ul class="catlinks">
+        <ul className="catlinks">
           <li onClick={() => { catagoryFiletering("all") }}>All</li>
           <li onClick={() => { catagoryFiletering("webdevelopers") }}>Web-Developer</li>
           <li onClick={() => { catagoryFiletering("marketing") }}>Marketing</li>

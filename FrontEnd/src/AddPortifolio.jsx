@@ -7,6 +7,8 @@ import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
 import ErrorModal from './components/ErrorModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from './redux/profilemodal'
+import Header from './components/Header'
+import Navbar from './components/Navbar'
 
 const AddPortifolio = () => {
     const [skills, setskills] = useState([])
@@ -115,6 +117,8 @@ const AddPortifolio = () => {
             {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
                 : currentModal == "error" ? <ErrorModal />
                     : <></>}
+            <Navbar />
+            <Header title={"Add Portifolio"} />
             <div className="">
                 <div className="add-portifolio-container">
                     <div className="add-portifolio-card add-portifolio-identity-container-parent  d-lg-block">
@@ -217,7 +221,7 @@ const AddPortifolio = () => {
                                             Work Skills
                                         </div>
 
-                                        <div className="edit-portifolio-skills col">
+                                        <div className="edit-portifolio-skills">
 
                                             <div className="skill-list">
                                                 {
@@ -241,7 +245,7 @@ const AddPortifolio = () => {
                                                     })
                                                 }
                                             </div>
-                                            <div className="edit-portifolio-label-input-container col-12">
+                                            <div className="edit-portifolio-label-input-container ">
                                                 <div style={{ display: "flex" }}>
 
                                                     <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />

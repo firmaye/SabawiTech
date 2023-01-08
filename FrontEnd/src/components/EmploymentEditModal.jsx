@@ -204,7 +204,7 @@ const EmploymentEditModal = ({ selected }) => {
                                                             return (
                                                                 <div>
 
-                                                                    <div class="education-modal-input-group">
+                                                                    <div className="education-modal-input-group">
                                                                         <label>Period From</label>
                                                                         <input {...props} />
                                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
@@ -217,7 +217,7 @@ const EmploymentEditModal = ({ selected }) => {
                                                             return (
                                                                 <div>
 
-                                                                    <div class="education-modal-input-group">
+                                                                    <div className="education-modal-input-group">
                                                                         <label>Period To</label>
                                                                         <input {...props} />
                                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
