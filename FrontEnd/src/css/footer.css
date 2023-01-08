@@ -1,0 +1,15 @@
+.footercont{
+    width:100%;
+    background-color: rgb(172, 172, 172);
+}
+.list-unstyled li a{
+    text-decoration: none;
+    text-align: start;
+}
+.modifyfooter{
+    text-align: start;
+    margin-left:30px;
+}
+.footersocial{
+    margin-bottom:20px;
+}
