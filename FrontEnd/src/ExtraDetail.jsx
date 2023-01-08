@@ -5,12 +5,24 @@ import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
+import ErrorModal from './components/ErrorModal'
+import { useDispatch, useSelector } from 'react-redux'
+import { setModal } from './redux/profilemodal'
 
 const ExtraDetail = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
         window.location.href = "http://localhost:8081/signin"
     }
+    const dispatch = useDispatch()
+    let successModal = () => {
+        dispatch(setModal("addportifoliosuccess"))
 
+    }
+    let errorModal = () => {
+        dispatch(setModal("error"))
+
+    }
     const titleSchema = Yup.object().shape({
         formtitle: Yup.string()
             .min(2, 'Too Short!')
@@ -56,17 +68,17 @@ const ExtraDetail = () => {
         // event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`http://localhost:8080/api/users/register/${userid}`, {
-            method: 'POST',
+            method: 'PATCH',
             body: formData
         })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
 
-                // successModal()
+                successModal()
             })
             .catch((error) => {
-                // errorModal()
+                errorModal()
                 console.log(error)
                 console.error('Error:', error);
             });
@@ -120,8 +132,13 @@ const ExtraDetail = () => {
     }, [])
     const [selectedpart, setselectedpart] = useState("")
     console.log(selectedpart)
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
+
     return (
         <main>
+            {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
+                : currentModal == "error" ? <ErrorModal />
+                    : <></>}
 
             <div className="">
                 <div className="extra-detail-container">
@@ -349,7 +366,7 @@ const ExtraDetail = () => {
                                                     Work Skills
                                                 </div>
 
-                                                <div className="edit-portifolio-skills col">
+                                                <div className="edit-portifolio-skills ">
 
                                                     <div className="skill-list">
                                                         {
@@ -373,7 +390,7 @@ const ExtraDetail = () => {
                                                             })
                                                         }
                                                     </div>
-                                                    <div className="edit-portifolio-label-input-container col-12">
+                                                    <div className="edit-portifolio-label-input-container ">
                                                         <div style={{ display: "flex" }}>
 
                                                             <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />

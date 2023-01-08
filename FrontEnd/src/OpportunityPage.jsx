@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loading from './components/Loading';
 
 import FadeIn from "react-fade-in";
+import NotAllowed from './components/NotAllowedModal'
 
 
 
@@ -15,26 +16,18 @@ const OpportunityPage = () => {
     const [loading, setloading] = useState(true)
     const [opportunitylist, setopportunitylist] = useState([])
     let getFetchUsers = () => {
-        // setloading(
-        //     true
-        // )
         const user = JSON.parse(localStorage.getItem('user'));
-        console.log(user)
-        // console.log(user)
         fetch("http://localhost:8080/api/internships", { headers: { 'x-access-token': user.accessToken } }).then(res => res.json()).then(result => {
+            // fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
             console.log(result)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')
                 window.location.href = "http://localhost:8081/signin"
             } else {
-
                 setloading(false)
-
-                // console.log(result.opportunities)
                 setopportunitylist(result)
             }
         }).catch((error) => { console.log(error) });
-        ;
     }
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
@@ -46,11 +39,8 @@ const OpportunityPage = () => {
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
-
     console.log(currentFilter.location.length)
-
     let sublist = opportunitylist.filter((elt) => {
-
         if (currentFilter.location.length == 0) {
             console.log("nofilter")
             return elt
@@ -105,28 +95,27 @@ const OpportunityPage = () => {
             }
         }
     })
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (
             <Loading />)
     } else {
-
         return (
             <FadeIn>
                 <main>
+
+                    {currentModal == "notallowed" ? <NotAllowed />
+                        : <></>}
+
                     <Navbar />
                     <Header title={"Projects"} />
                     <div className="main-content-container container">
                         <div className="main-content-container-child row">
-
                             <OpportunityFilter />
-
                             <div className="opportunities-container  col-xl-8">
                                 {sublist.map((opportunity) => {
-
                                     return <Opportunity data={opportunity} />
                                 })}
-
-
                             </div>
                         </div>
 

@@ -163,7 +163,7 @@ const CertificationEditModal = ({ selected }) => {
                                                             return (
                                                                 <div>
 
-                                                                    <div class="certification-modal-input-group">
+                                                                    <div className="certification-modal-input-group">
                                                                         <label>Date Issued</label>
                                                                         <input {...props} />
                                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>

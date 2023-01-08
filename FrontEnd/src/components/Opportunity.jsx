@@ -1,10 +1,21 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { createSearchParams, useNavigate } from 'react-router-dom'
 import Profile from "../assets/profile.jpg"
 import OpportunityDetailPage from '../OpportunityDetailPage'
+import { setModal } from '../redux/profilemodal'
 
 const Opportunity = ({ data }) => {
+    let dispatch = useDispatch()
+    let buttonClick = () => {
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            dispatch(setModal("notallowed"))
+        } else {
 
+            window.location.href = "http://localhost:8081/opportunitydetail/" + data._id
+        }
+
+    }
     return (
         <div className="opportunities">
             {data.intStatus == "open" ?
@@ -42,9 +53,9 @@ const Opportunity = ({ data }) => {
                     {data.intType.toUpperCase()}
                 </div>
                 <div className="col-md-3 my-auto">
-                    <a href={"/opportunitydetail/" + data._id} className="opportunity-button">
+                    <button onClick={buttonClick} className="opportunity-button">
                         Detail
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

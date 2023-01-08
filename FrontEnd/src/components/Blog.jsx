@@ -48,9 +48,9 @@ const Blog = ({ catagory }) => {
   console.log(blog)
 
   return (
-    <div class="blogcontainer">
+    <div className="blogcontainer">
       {sublist.length == 0 ?
-        <div class="noresultscont">
+        <div className="noresultscont">
           <img src="./Images/searchnotfound.png" alt="" />
           <h3>No results found on the section</h3>
           <p>Try again</p>
@@ -60,37 +60,37 @@ const Blog = ({ catagory }) => {
             <div className="col-lg-12 the_excerpt">
               <img className="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
               {/* style="margin-top: 55px;" */}
-              <div class="card-body the_excerpt_content" >
-                <div class="entry-meta">
-                  <ul class="list-inline">
-                    <li class="list-inline-item">
-                      <i class="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
+              <div className="card-body the_excerpt_content" >
+                <div className="entry-meta">
+                  <ul className="list-inline">
+                    <li className="list-inline-item">
+                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
                     </li>
                     <li className="list-inline-item">
                       <i className="fa fa-comment"></i> <a href="">0 Comments</a>
                     </li>
                   </ul>
                 </div>
-                <a class="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
-                <p class="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
+                <a className="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
+                <p className="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
 
-                <a class="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
+                <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
               </div>
             </div>
           )
         })}
 
-      <div class="pagination nav-links">
+      <div className="pagination nav-links">
         {pageNumbers.map((page) => {
           return (
             <div>
-              <a class="page-numbers" href="javascript:void(0)" onClick={() => { setStartPage(page) }}>{page}</a>
+              <a className="page-numbers" href="javascript:void(0)" onClick={() => { setStartPage(page) }}>{page}</a>
             </div>
           )
         })
         }
         {startPage == 2 ?
-          <a class="next page-numbers" href="javascript:void(0)"
+          <a className="next page-numbers" href="javascript:void(0)"
             onClick={() => {
               if (startPage < pagination) {
                 setStartPage(startPage + 1)

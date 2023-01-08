@@ -21,10 +21,8 @@ module.exports = app => {
   //upload profile image
   router.post('/upload/:id', getUser, user.upload)
 
-  router.patch('/register/:id', getUser, user.register)
-
   //register user
-  router.patch('/register/:id',getUser, user.register)
+  router.patch('/register/:id', getUser, user.register)
 
   app.use('/api/users', router);
 

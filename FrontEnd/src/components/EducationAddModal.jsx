@@ -134,22 +134,22 @@ const EducationModal = () => {
                                 <div className="modal-header">
                                     <h5 className="modal-title" id="exampleModalLabel">Add Education</h5>
                                     <button onClick={closeEducationModal} type="button" className="education-modal-close" >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x" viewBox="0 0 16 16">
                                             <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
                                         </svg>                        </button>
                                 </div>
                                 <div className="modal-body">
-                                    <div class="education-modal-page-wrapper ">
-                                        <div class="">
-                                            <div class="">
-                                                <div class="">
-                                                    <h2 class="education-modal-education"></h2>
+                                    <div className="education-modal-page-wrapper ">
+                                        <div className="">
+                                            <div className="">
+                                                <div className="">
+                                                    <h2 className="education-modal-education"></h2>
 
-                                                    <div class="education-modal-input-group">
+                                                    <div className="education-modal-input-group">
                                                         <label>School Name</label>
                                                         <input onChange={handleChange}
                                                             onBlur={handleBlur}
-                                                            value={values.formschoolname} name='formschoolname' class="" type="text" />
+                                                            value={values.formschoolname} name='formschoolname' className="" type="text" />
                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.formschoolname && touched.formschoolname && errors.formschoolname}</div>
                                                     </div>
                                                     <div className="education-modal-location-container">
@@ -159,7 +159,7 @@ const EducationModal = () => {
                                                             return (
                                                                 <div>
 
-                                                                    <div class="education-modal-input-group">
+                                                                    <div className="education-modal-input-group">
                                                                         <label>Attended From</label>
                                                                         <input {...props} />
                                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
@@ -175,7 +175,7 @@ const EducationModal = () => {
                                                             return (
                                                                 <div>
 
-                                                                    <div class="education-modal-input-group">
+                                                                    <div className="education-modal-input-group">
                                                                         <label>Attended To</label>
                                                                         <input {...props} />
                                                                         <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedTo && touched.formattendedTo && errors.formattendedTo}</div>
@@ -185,7 +185,7 @@ const EducationModal = () => {
 
                                                         }} />
                                                     </div>
-                                                    <div class="education-modal-input-group">
+                                                    <div className="education-modal-input-group">
                                                         <label>Area of Study</label>
 
                                                         <input onChange={handleChange}

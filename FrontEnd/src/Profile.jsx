@@ -1,9 +1,7 @@
 import React from 'react'
-import ProfileImg from "./assets/profile.jpg"
 import "./css/profile.css"
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import Modal from './components/Modal';
 import NameModal from './components/NameModal';
 import TitleModal from './components/TitleModal';
 import { useState } from 'react';
@@ -29,7 +27,6 @@ import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
 import "react-datetime/css/react-datetime.css";
-import Datetime from 'react-datetime';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
@@ -372,7 +369,7 @@ const Profile = () => {
                                                 {element.empAt}
                                             </div>
                                             <div className="profile-employment-history-detail-date">
-                                                {element.empFrom} - {element.empTo}
+                                                {new Date(element.empFrom).toISOString().replace('-', '/').split('T')[0].replace('-', '/')} - {new Date(element.empTo).toISOString().replace('-', '/').split('T')[0].replace('-', '/')}
                                             </div>
                                             <div className="profile-employment-history-detail-content">
                                                 {element.empDescription}

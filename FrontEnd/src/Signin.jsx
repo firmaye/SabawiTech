@@ -12,7 +12,7 @@ const Signin = () => {
         //     .max(20, 'Too Long!')
         //     .required('Required'),
         email: Yup.string().email('Invalid email').required('Required')
-            .test('Unique Email', "User Doesn't Exist", // <- key, message
+            .test('Unique Email', "Incorrect User Name or Password", // <- key, message
                 function (value) {
                     let body = {
                         email: value,
@@ -33,6 +33,9 @@ const Signin = () => {
                                 console.log(data)
                                 if (data.message == "User Not found.") {
                                     resolve(false);
+                                } else if (data.message == "Invalid Password!") {
+                                    resolve(false);
+
                                 } else {
                                     resolve(true)
                                 }
@@ -138,10 +141,10 @@ const Signin = () => {
                             .then((data) => {
                                 setSubmitting(false);
                                 console.log(data)
-                                // if (data.accessToken) {
-                                //     localStorage.setItem("user", JSON.stringify(data));
-                                //     window.location.href = "http://localhost:8081/"
-                                // }
+                                if (data.accessToken) {
+                                    localStorage.setItem("user", JSON.stringify(data));
+                                    window.location.href = "http://localhost:8081/"
+                                }
                                 // successModal()
                             })
                             .catch((error) => {
