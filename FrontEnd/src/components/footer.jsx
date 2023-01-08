@@ -2,9 +2,9 @@ import React from 'react';
 import '../css/footer.css'
 const Footer = () => {
     return (
-            <footer class="bg-light text-center footercont">
+        <footer class="bg-light text-center footercont">
             <div class="container p-4">
-               
+
                 <section class="">
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"35%"}}>
@@ -46,8 +46,8 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"20%"}}>
-                        <h5 class="text-uppercase">Community</h5>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Links</h5>
 
                         <ul class="list-unstyled mb-0">
                             <li>
@@ -65,8 +65,8 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0" style={{width:"20%"}}>
-                        <h5 class="text-uppercase">Support</h5>
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">Visit us on</h5>
 
                         <ul class="list-unstyled mb-0">
                             <li>
@@ -86,7 +86,7 @@ const Footer = () => {
 
                 </div>
 
-            </section>
+                </section>
 
 
             </div>

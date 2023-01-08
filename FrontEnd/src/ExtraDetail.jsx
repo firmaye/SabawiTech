@@ -42,7 +42,7 @@ const ExtraDetail = () => {
         setSelectedImage(e.target.files[0])
 
     }
-    let handleSubmit = (event) => {
+    let handleSubmit = () => {
         const formData = new FormData();
         // Update the formData object
         formData.append(
@@ -405,7 +405,7 @@ const ExtraDetail = () => {
                                                     <div className="row">
                                                         <div className="extra-detail-buttons ">
                                                             <button onClick={(event) => { event.preventDefault(); setselectedpart("title") }} className="see-public">Back </button>
-                                                            <button onClick={() => { checkSkillExistence() ? handleSubmit() : console.log("invalid") }} className="setting">Finish</button>
+                                                            <button onClick={() => { checkSkillExistence() ? handleSubmit() : () => { } }} className="setting">Finish</button>
                                                         </div>
                                                     </div>
                                                 </div>
