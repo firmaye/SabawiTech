@@ -27,6 +27,7 @@ import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
 import "react-datetime/css/react-datetime.css";
+import Footer from './components/footer';
 const Profile = () => {
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
@@ -427,6 +428,7 @@ const Profile = () => {
 
                 </div>
             </main>
+            <Footer />
         </FadeIn>
     )
 }
