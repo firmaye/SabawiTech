@@ -116,8 +116,7 @@ const HomePage = () => {
                     <img src="./Images/provider error.png" alt="" />
                 </div>
             </div>
-        </div>
-
+    </div>
 
     );
 }
