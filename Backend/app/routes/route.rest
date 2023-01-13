@@ -1,7 +1,7 @@
 GET http://localhost:8080/api/users 
 
 ### Get single user 
-GET http://localhost:8080/api/users/63b13cfd127ade2c12562493
+GET http://localhost:8080/api/users/63b78d65953a36be02f6d504
 
 ### create single user 
 
@@ -179,7 +179,7 @@ DELETE http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135/63a52c9
 
 ### update previous work  history 
 
-PATCH http://localhost:3000/users/previousWork/63a4ee908bc253b3856a0135/63a5f04bc4da69af17e737b9
+PATCH http://localhost:8080/api/users/previousWork/63b78d65953a36be02f6d504/63b910f7f5193d2ec387cb61
 Content-Type: application/json
 
 {
@@ -451,4 +451,15 @@ Content-Type: application/json
   "email": "fikretucker79@gmail.com",
   "subject":"i canot upload portfolio with photo",
   "message":"please fix the above issue"
+}
+
+###
+
+
+PATCH http://localhost:8080/api/users/63b78d65953a36be02f6d504
+Content-Type: application/json
+
+{
+  "email":"philos@gmail.com",
+  "phoneNo": "0962875596"
 }
