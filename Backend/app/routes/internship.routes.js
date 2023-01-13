@@ -10,7 +10,7 @@ module.exports = app => {
   // Create a new Internship
   router.post("/", internship.create);
   // Retrieve all Internship
-  router.get("/", [authJwt.verifyToken], internship.findAll);
+  router.get("/", internship.findAll);
   // Retrieve a single internship with id
   router.get("/:id", internship.findOne);
   // Update a internship with id

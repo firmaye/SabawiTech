@@ -2,6 +2,20 @@ const express = require('express')
 const app = express()
 const db = require("./app/models");
 const cors = require("cors")
+const { default: AdminBro } = require('admin-bro');
+
+// AdminBro setups
+
+const options = require('./src/admin.options');
+const buildAdminRouter = require('./src/admin.router');
+const admin = new AdminBro(options);
+const router = buildAdminRouter(admin);
+
+app.use(admin.options.rootPath, router);
+
+app.use('/uploads', express.static('uploads'));
+
+//end setup
 var corsOptions = {
   origin: "*"
 };
@@ -44,6 +58,7 @@ require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
 app.use("/uploads/images", express.static('uploads/images'))
 require('./app/routes/auth.routes')(app);
+
 
 
 
