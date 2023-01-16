@@ -20,6 +20,8 @@ const CertificationSchema = Yup.object().shape({
 })
 const CertificationModal = () => {
     const dispatch = useDispatch()
+    const [buttonloading, setbuttonloading] = useState(false)
+
     const [dateissued, setdateissued] = useState(new Date())
     const [certificatetitle, setcertificatetitle] = useState("")
     const [certificateprovider, setcertificateprovider] = useState("")
@@ -48,17 +50,6 @@ const CertificationModal = () => {
             display: "none"
         })
     }
-    let handleSubmit = (event) => {
-        let body = {
-            certTitle: certificatetitle,
-            certProvider: certificateprovider,
-            certLink: certificatelink,
-            dateIssued: dateissued
-        }
-        body = JSON.stringify(body)
-        console.log(body)
-
-    }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -83,6 +74,7 @@ const CertificationModal = () => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
+                        setbuttonloading(true)
 
                         fetch(`http://localhost:8080/api/users/certification/${userid}`, {
                             method: 'POST',
@@ -182,7 +174,10 @@ const CertificationModal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeCertificationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

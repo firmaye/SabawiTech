@@ -37,6 +37,7 @@ const EmploymentEditModal = ({ selected }) => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
 
     let closeEmploymentEditModal = () => {
         dispatch(setModal(""))
@@ -55,23 +56,6 @@ const EmploymentEditModal = ({ selected }) => {
         setmodalstyle({
             display: "none"
         })
-    }
-    let handleSubmit = (event) => {
-        let body = {
-            empAt: companyName,
-            empCountry: country,
-            empState: city,
-            empRole: title,
-            empFrom: periodfrom,
-            empTo: periodto,
-            empDescription: description
-        }
-
-        body = JSON.stringify(body)
-        console.log(body)
-        event.preventDefault()
-        let userid = JSON.parse(localStorage.getItem('user')).id
-
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,6 +88,8 @@ const EmploymentEditModal = ({ selected }) => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
+                        setbuttonloading(true)
+
                         fetch(`http://localhost:8080/api/users/employmentHistory/${userid}/${selected._id}`, {
                             method: 'PATCH',
                             headers: {
@@ -248,7 +234,10 @@ const EmploymentEditModal = ({ selected }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEmploymentEditModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

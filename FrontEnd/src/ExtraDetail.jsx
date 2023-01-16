@@ -140,7 +140,7 @@ const ExtraDetail = () => {
                 : currentModal == "error" ? <ErrorModal />
                     : <></>}
 
-            <div className="">
+            <div className="" style={{ marginBottom: "50px" }}>
                 <div className="extra-detail-container">
                     <div className="extra-detail-card extra-detail-identity-container-parent  d-lg-block">
 
@@ -210,7 +210,7 @@ const ExtraDetail = () => {
                             <div className="extra-detail-intro-description">
                                 <div className=" extra-detail-intro-title row">
                                     <div className="col">
-                                        <h2>Hello there {username}</h2>
+                                        <h2>Hello there <span style={{ color: "#6787FE" }} >{username}</span></h2>
                                     </div>
 
                                 </div>

@@ -28,6 +28,7 @@ const EducationModal = () => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
 
     let closeEducationModal = () => {
         dispatch(setModal(""))
@@ -46,35 +47,6 @@ const EducationModal = () => {
         setmodalstyle({
             display: "none"
         })
-    }
-    let handleSubmit = (event) => {
-        let body = {
-            schoolName: schoolname,
-            dateAttendedFrom: attendedfrom,
-            dateAttendedTo: attendedto,
-            areaOfStudy: areaofstudy
-        }
-        body = JSON.stringify(body)
-        console.log(body)
-        event.preventDefault()
-        let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/education/${userid}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                successModal()
-            })
-            .catch((error) => {
-                errorModal()
-                console.log(error)
-                console.error('Error:', error);
-            });
     }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -100,6 +72,7 @@ const EducationModal = () => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
+                        setbuttonloading(true)
                         fetch(`http://localhost:8080/api/users/education/${userid}`, {
                             method: 'POST',
                             headers: {
@@ -200,7 +173,10 @@ const EducationModal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEducationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

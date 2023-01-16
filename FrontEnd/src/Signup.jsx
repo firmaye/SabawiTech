@@ -148,36 +148,36 @@ const Signup = () => {
                         <div className="form-title">
                             Sign Up And Explore
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.firstName} name='firstName' placeholder='First Name' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.firstName && touched.firstName && errors.firstName}</div>
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.lastName} name='lastName' placeholder='last Name' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.lastName && touched.lastName && errors.lastName}</div>
 
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.userName} name='userName' placeholder='user Name' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.userName && touched.userName && errors.userName}</div>
 
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="email" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.email} name='email' placeholder='Email' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.email && touched.email && errors.email}</div>
 
                         </div>
-                        <div className="col-6">
+                        <div className=" input-container col-12 col-md-6">
                             <CountryDropdown
-                                className="input-container countrycont"
+                                className=" "
 
                                 onChange={(val) => { setFieldValue("country", val) }}
                                 onBlur={handleBlur}
@@ -187,20 +187,20 @@ const Signup = () => {
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
 
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.state} name='state' placeholder='State' className="" />
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
                         </div>
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.password} type="password" name='password' placeholder='password' className="" />
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.password && touched.password && errors.password}</div>
                         </div>
 
-                        <div className="input-container col-6">
+                        <div className="input-container col-12 col-md-6">
                             <input type="password" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.confirmPassword} name='confirmPassword' placeholder='Confirm Password' className="" />

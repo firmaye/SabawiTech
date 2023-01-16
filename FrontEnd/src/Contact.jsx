@@ -8,6 +8,7 @@ import "./css/contact.css"
 import { setModal } from './redux/profilemodal'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import Footer from './components/footer'
 const CertificationSchema = Yup.object().shape({
     formname: Yup.string()
         .required('Required'),
@@ -19,9 +20,9 @@ const CertificationSchema = Yup.object().shape({
 
 })
 const Contact = () => {
-    if (JSON.parse(localStorage.getItem('user')) == null) {
-        window.location.href = "http://localhost:8081/signin"
-    }
+    // if (JSON.parse(localStorage.getItem('user')) == null) {
+    //     window.location.href = "http://localhost:8081/signin"
+    // }
     const dispatch = useDispatch()
     const [name, setname] = useState("")
     const [email, setemail] = useState("")
@@ -76,7 +77,7 @@ const Contact = () => {
             <Navbar />
             <Header title={"Contact"} />
 
-            <section>
+            <section style={{ marginBottom: "80px" }}>
                 <div className="container">
                     <div className="row">
 
@@ -273,6 +274,7 @@ const Contact = () => {
 
 
             </section>
+            <Footer />
         </main>
     )
 }

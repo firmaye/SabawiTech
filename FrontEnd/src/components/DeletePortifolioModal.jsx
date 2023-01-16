@@ -13,6 +13,7 @@ const DeletePortifolioModal = ({ tobedeleted }) => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
     let closeDeletePortifolioModal = () => {
         dispatch(setModal(""))
         setmodalstyle({
@@ -35,6 +36,8 @@ const DeletePortifolioModal = ({ tobedeleted }) => {
         event.preventDefault()
         console.log(tobedeleted)
         let userid = JSON.parse(localStorage.getItem('user')).id
+        setbuttonloading(true)
+
         fetch(`http://localhost:8080/api/users/previousWork/${userid}/${tobedeleted._id}`, {
             method: 'DELETE',
             headers: {
@@ -73,7 +76,10 @@ const DeletePortifolioModal = ({ tobedeleted }) => {
                         <div className="modal-footer justify-content-center">
 
                             <button onClick={closeDeletePortifolioModal} type="submit" className="btn btn-danger ">NO</button>
-                            <button onClick={handleSubmit} type="submit" className="btn btn-danger modal-yes-btn">YES</button>
+                            {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button> : <button onClick={handleSubmit} type="submit" className="btn btn-danger modal-yes-btn">YES</button>}
                         </div>
                     </div>
                 </div>

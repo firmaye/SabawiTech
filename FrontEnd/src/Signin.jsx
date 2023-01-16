@@ -49,37 +49,6 @@ const Signin = () => {
                     })
                 })
     })
-    let handleSubmit = (event) => {
-        console.log("handlesubmit")
-        event.preventDefault()
-        let body = {
-            email,
-            password
-        }
-        body = JSON.stringify(body)
-        console.log(body)
-        fetch('http://localhost:8080/api/auth/signin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                if (data.accessToken) {
-                    localStorage.setItem("user", JSON.stringify(data));
-                    window.location.href = "http://localhost:8081/"
-                }
-                // successModal()
-            })
-            .catch((error) => {
-                // errorModal()
-                console.log(error)
-                console.error('Error:', error);
-            });
-    }
     return (
         <div className='main-container-parent'>
             <div className=" main-container main-container-signin">
@@ -87,40 +56,7 @@ const Signin = () => {
                     initialValues={{ email: '', password: '' }}
                     validateOnChange={false}
                     validateOnBlur={false}
-                    // validate={values => {
-                    //     const errors = {};
-                    //     if (!values.email) {
-                    //         errors.email = 'Required';
-                    //     } else if (
-                    //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                    //     ) {
-                    //         errors.email = 'Invalid email address';
-                    //     }
-                    //     let body = {
-                    //         email: values.email,
-                    //         password: values.password,
-                    //     }
-                    //     body = JSON.stringify(body)
-                    //     fetch('http://localhost:8080/api/auth/signin', {
-                    //         method: 'POST',
-                    //         headers: {
-                    //             'Content-Type': 'application/json',
-                    //         },
-                    //         body: body
-                    //     })
-                    //         .then((response) => response.json())
-                    //         .then((data) => {
-                    //             console.log(data)
-                    //             if (data.message == "User Not found.") {
-                    //                 console.log("called")
-                    //                 errors.email = 'User Doesnt Exist';
-                    //             }
-                    //         })
-                    //     if (!values.password) {
-                    //         errors.password = 'Required';
-                    //     }
-                    //     return errors;
-                    // }}
+
                     validationSchema={SigninSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
                         let body = {

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "../css/successmodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
+import { redirect } from 'react-router-dom';
 
 const NotAllowed = () => {
     const dispatch = useDispatch()
@@ -35,7 +36,11 @@ const NotAllowed = () => {
                         </div>
                         <div className="modal-footer justify-content-center">
 
-                            <button onClick={closeNotAllowed} type="submit" className="btn btn-danger">Finish</button>
+                            <button onClick={closeNotAllowed} type="submit" className="btn btn-danger">Back</button>
+                            <button onClick={(event) => {
+                                event.preventDefault()
+                                window.location.href = "http://localhost:8081/signin"
+                            }} type="submit" className="btn btn-danger">SignIn</button>
                         </div>
                     </div>
                 </div>

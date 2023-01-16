@@ -95,7 +95,7 @@ const Profile = () => {
                 }
                 <Navbar />
                 <Header title={"Profile"} />
-                <div className="">
+                <div className="" style={{ marginBottom: "90px" }}>
                     <div className="profile-container">
                         <div className="profile-card profile-identity-container-parent  d-lg-block">
                             <div className="profile-header profile-card py-30">

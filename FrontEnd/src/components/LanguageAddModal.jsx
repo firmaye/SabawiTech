@@ -23,6 +23,8 @@ const LanguageModal = ({ language }) => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
+
     const [languagelistmodal, setlanguagelistmodal] = useState(language)
     const [langtobeadded, setlangtobeadded] = useState("")
     const [proficiencytobeadded, setproficiencytobeadded] = useState("")
@@ -68,6 +70,8 @@ const LanguageModal = ({ language }) => {
             event.preventDefault()
             let userid = JSON.parse(localStorage.getItem('user')).id
             console.log(`http://localhost:8080/api/users/language/${userid}`)
+            setbuttonloading(true)
+
             fetch(`http://localhost:8080/api/users/language/${userid}`, {
                 method: 'PATCH',
                 headers: {
@@ -228,7 +232,10 @@ const LanguageModal = ({ language }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeLanguageModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                        {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                     </div>
                 </div>
             </div>

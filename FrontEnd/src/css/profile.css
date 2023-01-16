@@ -322,3 +322,24 @@
     }
 
 }
+
+@media (max-width: 500px) {
+
+    .profile-container,
+    .profile-employment-history-container {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+}
+
+.btn-primary {
+    background-color: #6787FE;
+    border-color: #6787FE;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    color: #6787FE;
+}

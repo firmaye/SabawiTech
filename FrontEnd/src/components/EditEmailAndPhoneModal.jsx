@@ -19,6 +19,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
 
     let closeEmailAndPhoneModal = () => {
         dispatch(setModal(""))
@@ -59,6 +60,8 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         console.log(userid)
+                        setbuttonloading(true)
+
                         fetch(`http://localhost:8080/api/users/emailPhone/${userid}`, {
                             method: 'PATCH',
                             headers: {
@@ -72,7 +75,6 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                                 successModal()
                             })
                             .catch((error) => {
-
                                 console.log(error)
                                 errorModal()
                             });
@@ -131,7 +133,10 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEmailAndPhoneModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

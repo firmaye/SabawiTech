@@ -37,6 +37,7 @@ const EmploymentModal = () => {
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
     })
+    const [buttonloading, setbuttonloading] = useState(false)
 
     let closeEmploymentModal = () => {
         dispatch(setModal(""))
@@ -70,6 +71,8 @@ const EmploymentModal = () => {
         console.log(body)
         event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
+        setbuttonloading(true)
+
         fetch(`http://localhost:8080/api/users/employmentHistory/${userid}`, {
             method: 'POST',
             headers: {
@@ -262,7 +265,10 @@ const EmploymentModal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEmploymentModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

@@ -8,7 +8,7 @@ import { setModal } from '../redux/profilemodal';
 const NameModal = ({ image }) => {
     const dispatch = useDispatch()
     const [imageerror, setimageerror] = useState("")
-
+    const [buttonloading, setbuttonloading] = useState(false)
     const [selectedImage, setSelectedImage] = useState("Please Change Image");
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -83,6 +83,7 @@ const NameModal = ({ image }) => {
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // console.log(body)
         // event.preventDefault()
+        setbuttonloading(true)
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`http://localhost:8080/api/users/upload/${userid}`, {
             method: 'POST',
@@ -147,7 +148,12 @@ const NameModal = ({ image }) => {
 
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={(event) => { checkPhotoExistence() ? handleSubmit() : () => { } }} className="btn btn-primary">Edit Image</button>
+                        {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button> : <button type="button" onClick={(event) => { checkPhotoExistence() ? handleSubmit() : () => { } }} className="btn btn-primary">Edit Image</button>}
+
+
                     </div>
                 </div>
             </div>

@@ -11,7 +11,6 @@ const Opportunity = ({ data }) => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
             dispatch(setModal("notallowed"))
         } else {
-
             window.location.href = "http://localhost:8081/opportunitydetail/" + data._id
         }
 

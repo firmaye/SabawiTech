@@ -24,7 +24,7 @@ const SuccessModal = () => {
 
             <div style={modalstyle} id="successModal" className="modal ">
                 <div className="modal-dialog modal-confirm">
-                    <div className="modal-content">
+                    <div className="modal-content col-11">
                         <div className="modal-header flex-column">
                             <div className="icon-box">
                                 <i className="fa fa-check"></i>

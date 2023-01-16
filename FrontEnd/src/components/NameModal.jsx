@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+
 const nameModalSchema = Yup.object().shape({
 
     formfirstName: Yup.string()
@@ -23,6 +24,8 @@ const nameModalSchema = Yup.object().shape({
 })
 const NameModal = ({ profileinfo }) => {
     const dispatch = useDispatch()
+    const [buttonloading, setbuttonloading] = useState(false)
+
     const [country, setcountry] = useState(profileinfo.country)
     const [firstname, setfirstname] = useState(profileinfo.firstName)
     const [lastname, setlastname] = useState(profileinfo.lastName)
@@ -79,6 +82,8 @@ const NameModal = ({ profileinfo }) => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
+                        setbuttonloading(true)
+
                         fetch(`http://localhost:8080/api/users/personalInfo/${userid}`, {
                             method: 'PATCH',
                             headers: {
@@ -126,7 +131,7 @@ const NameModal = ({ profileinfo }) => {
 
                                                     <div className='d-flex'>
 
-                                                        <div className="col-5 name-modal-input-group">
+                                                        <div className="col-10 col-sm-5 name-modal-input-group">
                                                             <label>First Name</label>
 
                                                             <input className=""
@@ -138,7 +143,7 @@ const NameModal = ({ profileinfo }) => {
 
                                                             <div style={{ position: "absolute" }} className='input-error-display' >{errors.formfirstName && touched.formfirstName && errors.formfirstName}</div>
                                                         </div>
-                                                        <div className="col-lg-5 name-modal-input-group">
+                                                        <div className="col-10 col-sm-5 name-modal-input-group">
                                                             <label>Last Name</label>
 
                                                             <input onChange={handleChange}
@@ -151,7 +156,7 @@ const NameModal = ({ profileinfo }) => {
                                                         </div>
                                                     </div>
                                                     <div className="row ">
-                                                        <div className="col-12 name-modal-dropdown">
+                                                        <div className="col-10  name-modal-dropdown">
                                                             <div className="">
                                                                 <label>Location</label>
                                                                 <div>
@@ -165,7 +170,7 @@ const NameModal = ({ profileinfo }) => {
                                                             </div>
 
                                                         </div>
-                                                        <div className="col-12 name-modal-col-12">
+                                                        <div className="col-12  name-modal-col-12">
                                                             <div className="name-modal-input-group">
                                                                 <label>State</label>
 
@@ -186,7 +191,10 @@ const NameModal = ({ profileinfo }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
+                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

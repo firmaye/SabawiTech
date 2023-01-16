@@ -9,6 +9,7 @@ import Loading from './components/Loading';
 
 import FadeIn from "react-fade-in";
 import NotAllowed from './components/NotAllowedModal'
+import Footer from './components/footer'
 
 
 
@@ -17,7 +18,7 @@ const OpportunityPage = () => {
     const [opportunitylist, setopportunitylist] = useState([])
     let getFetchUsers = () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        fetch("http://localhost:8080/api/internships", { headers: { 'x-access-token': user.accessToken } }).then(res => res.json()).then(result => {
+        fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
             // fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
             console.log(result)
             if (result.message == "Unauthorized!") {
@@ -30,12 +31,12 @@ const OpportunityPage = () => {
         }).catch((error) => { console.log(error) });
     }
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user')) == null) {
-            window.location.href = "http://localhost:8081/signin"
-        } else {
+        // if (JSON.parse(localStorage.getItem('user')) == null) {
+        //     window.location.href = "http://localhost:8081/signin"
+        // } else {
 
-            getFetchUsers()
-        }
+        // }
+        getFetchUsers()
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
@@ -102,7 +103,7 @@ const OpportunityPage = () => {
     } else {
         return (
             <FadeIn>
-                <main>
+                <main style={{ marginBottom: "40px" }}>
 
                     {currentModal == "notallowed" ? <NotAllowed />
                         : <></>}
@@ -121,6 +122,7 @@ const OpportunityPage = () => {
 
                     </div>
                 </main>
+                <Footer />
             </FadeIn>
 
         )

@@ -5,25 +5,38 @@ import Navbar from './components/Navbar'
 import "./css/opportunitydetail.css"
 import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
+import Footer from './components/footer'
+import { useDispatch, useSelector } from 'react-redux'
+import { setModal } from './redux/profilemodal'
+import SuccessModal from './components/SuccessModal'
+import ErrorModal from './components/ErrorModal'
 const OpportunityDetailPage = () => {
     const [opportunity, setopportunity] = useState({})
+    const [error, seterror] = useState()
     const [requiredSkill, setrequiredskill] = useState([])
 
     const [submittedproposal, setsubmittedproposal] = useState({
     })
     const [loading, setloading] = useState(true)
+    const dispatch = useDispatch()
     const changepropsaltext = (value) => {
         let updatedValue = { "letterDescription": value }
         setsubmittedproposal(previousState => ({
             ...previousState,
             ...updatedValue
         }
+
         )
         );
         console.log(submittedproposal)
     }
     const sendpropsal = () => {
-        console.log(submittedproposal)
+
+        if (submittedproposal.letterDescription == "") {
+            seterror("Proposal Cannot be blank")
+        } else {
+
+        }
         fetch('http://localhost:8080/api/coverLetters', {
             method: 'POST',
             headers: {
@@ -33,9 +46,11 @@ const OpportunityDetailPage = () => {
         })
             .then((response) => response.json())
             .then((data) => {
+                dispatch(setModal("success"))
                 console.log('Success:', data);
             })
             .catch((error) => {
+                dispatch(setModal("error"))
                 console.error('Error:', error);
             });
     }
@@ -46,6 +61,7 @@ const OpportunityDetailPage = () => {
         } else {
             let paramsid = params.id
             console.log(paramsid)
+            let userid = JSON.parse(localStorage.getItem('user')).id
             console.log(`http://localhost:8080/api/internships/${paramsid}`)
             fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
                 const found = result
@@ -54,7 +70,7 @@ const OpportunityDetailPage = () => {
                 setopportunity(found)
                 setsubmittedproposal({
 
-                    "sender": "currentperson",
+                    "sender": userid,
                     "receiverCompany": found.companyName,
                     "letterDescription": "",
                     "intPostId": found._id,
@@ -73,13 +89,16 @@ const OpportunityDetailPage = () => {
 
 
     }, [])
+    const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (
             <Loading />)
     }
     return (
         <FadeIn>
-            <main>
+            {currentModal == "success" ? <SuccessModal />
+                : currentModal == "error" ? <ErrorModal /> : <></>}
+            <main style={{ marginBottom: "40px" }}>
                 <Navbar />
                 <Header title={"Project Detail"} />
                 <section className="single-opportunity-container pt-120 pb-95">
@@ -196,6 +215,9 @@ const OpportunityDetailPage = () => {
                                             <div className="col-md-12">
                                                 <textarea onChange={(data) => { changepropsaltext(data.target.value) }} className="form-control" name="" id="" cols="30" rows="10"></textarea>
                                                 {/* <input type="number" className="form-control">  */}
+                                            </div>
+                                            <div style={{ color: "red", textAlign: "center" }}>
+                                                {error}
                                             </div>
                                             <div className="col d-flex justify-content-center">
 
@@ -458,6 +480,7 @@ const OpportunityDetailPage = () => {
                 </section >
 
             </main >
+            <Footer />
         </FadeIn>
     )
 }

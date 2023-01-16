@@ -351,3 +351,13 @@
     }
 
 }
+
+@media (max-width: 600px) {
+    .add-portifolio-container {
+        margin: 0;
+    }
+
+    .add-portifolio-personal-description {
+        max-width: 100%;
+    }
+}
