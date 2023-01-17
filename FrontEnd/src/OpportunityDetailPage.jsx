@@ -37,7 +37,7 @@ const OpportunityDetailPage = () => {
         } else {
 
         }
-        fetch('http://localhost:8080/api/coverLetters', {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/coverLetters`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,8 +62,7 @@ const OpportunityDetailPage = () => {
             let paramsid = params.id
             console.log(paramsid)
             let userid = JSON.parse(localStorage.getItem('user')).id
-            console.log(`http://localhost:8080/api/internships/${paramsid}`)
-            fetch(`http://localhost:8080/api/internships/${paramsid}`).then(res => res.json()).then(result => {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
                 const found = result
                 console.log(found)
                 let skillsarray = found.requiredSkill.split(",")

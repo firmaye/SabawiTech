@@ -47,7 +47,7 @@ const TitleModal = ({ profileinfo }) => {
         body = JSON.stringify(body)
         console.log(body)
         let userid = JSON.parse(localStorage.getItem('user')).id
-        // fetch(`http://localhost:8080/api/users/descriptionInfo/${userid}`, {
+        // fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/descriptionInfo/${userid}`, {
         //     method: 'PATCH',
         //     headers: {
         //         'Content-Type': 'application/json',
@@ -83,7 +83,7 @@ const TitleModal = ({ profileinfo }) => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
-                        fetch(`http://localhost:8080/api/users/descriptionInfo/${userid}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/descriptionInfo/${userid}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

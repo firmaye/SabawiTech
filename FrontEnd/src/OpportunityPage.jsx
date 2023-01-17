@@ -18,8 +18,8 @@ const OpportunityPage = () => {
     const [opportunitylist, setopportunitylist] = useState([])
     let getFetchUsers = () => {
         const user = JSON.parse(localStorage.getItem('user'));
-        fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
-            // fetch("http://localhost:8080/api/internships").then(res => res.json()).then(result => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
+            // fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
             console.log(result)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')

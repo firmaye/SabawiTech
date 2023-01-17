@@ -84,7 +84,7 @@ const NameModal = ({ profileinfo }) => {
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
-                        fetch(`http://localhost:8080/api/users/personalInfo/${userid}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/personalInfo/${userid}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

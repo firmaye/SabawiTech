@@ -77,7 +77,7 @@ const EducationEditModal = ({ selected }) => {
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
-                        fetch(`http://localhost:8080/api/users/education/${userid}/${selected._id}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/education/${userid}/${selected._id}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

@@ -28,7 +28,10 @@ import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
 import "react-datetime/css/react-datetime.css";
 import Footer from './components/footer';
+import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const Profile = () => {
+    // dotenv.config()
+    console.log(import.meta.env)
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
@@ -45,12 +48,14 @@ const Profile = () => {
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
     useEffect(() => {
+
+        // console.log(process)
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = "http://localhost:8081/signin"
         } else {
             let userid = JSON.parse(localStorage.getItem('user')).id
             // console.log(userid)
-            fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
                 console.log(result)
                 setprofileinfo(result)
                 setlanguage(result.language)
@@ -105,7 +110,7 @@ const Profile = () => {
                                             <div className="profile-identity">
                                                 <div className="profile-img-container mr-10 mr-lg-30 position-relative">
                                                     <div className="profile-photo">
-                                                        <img src={profileinfo.profilePhoto == undefined || profileinfo.profilePhoto == "" ? "https://www.btklsby.go.id/images/placeholder/basic.png" : `http://localhost:8080/uploads/images/${profileinfo.profilePhoto}`} alt="" />
+                                                        <img src={profileinfo.profilePhoto == undefined || profileinfo.profilePhoto == "" ? "https://www.btklsby.go.id/images/placeholder/basic.png" : `${import.meta.env.VITE_BACKEND_URL}/uploads/images/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
                                                             <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </button>
@@ -288,7 +293,7 @@ const Profile = () => {
                                                 return (
                                                     <div className="col-6 col-md-4">
                                                         <div className="portifolio-image-container">
-                                                            <img className="col-12" src={"http://localhost:8080/uploads/images/" + element.workThumbnail} alt="" />
+                                                            <img className="col-12" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/images/` + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
                                                                 <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>

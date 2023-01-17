@@ -80,7 +80,7 @@ const EditPortifolio = () => {
                 skills
             );
             let userid = JSON.parse(localStorage.getItem('user')).id
-            fetch(`http://localhost:8080/api/users/previousWork/${userid}/${paramsid}`, {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}/${paramsid}`, {
                 method: 'PATCH',
 
                 body: formData
@@ -136,7 +136,7 @@ const EditPortifolio = () => {
             window.location.href = "http://localhost:8081/signin"
         }
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
             console.log(result)
             const found = result.previousWork.find(element => element._id == paramsid);
             console.log(found)
@@ -145,7 +145,7 @@ const EditPortifolio = () => {
             setskills(skillsString)
             setworkTitle(found.workTitle)
             setworkThumbnail(found.workThumbnail)
-            setworkPlaceholder("http://localhost:8080/uploads/images/" + found.workThumbnail)
+            setworkPlaceholder(`${import.meta.env.VITE_BACKEND_URL}/uploads/images/` + found.workThumbnail)
             setworkLink(found.workLink)
             setpreviouswork(found)
             setloading(false)

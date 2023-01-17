@@ -85,7 +85,7 @@ const NameModal = ({ image }) => {
         // event.preventDefault()
         setbuttonloading(true)
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/upload/${userid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/upload/${userid}`, {
             method: 'POST',
 
             body: formData
@@ -129,7 +129,7 @@ const NameModal = ({ image }) => {
                                                     }} />
                                                     <label htmlFor="logo" className="upload-field" id="file-label">
                                                         <div className="file-thumbnail">
-                                                            <img id="image-preview" src={`http://localhost:8080/uploads/images/${image}`} alt="" />
+                                                            <img id="image-preview" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/images/${image}`} alt="" />
                                                             <h3 id="filename">
                                                                 Drag and Drop
                                                             </h3>

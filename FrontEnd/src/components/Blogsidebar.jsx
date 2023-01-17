@@ -4,7 +4,7 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
   const [catagory, setCatagory] = useState("")
   const [recent, setRecent] = useState([])
   useEffect(() => {
-    fetch("http://localhost:8080/api/blogs/recent").then(resp => resp.json())
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
       .then(
         result => {
           setRecent(result)

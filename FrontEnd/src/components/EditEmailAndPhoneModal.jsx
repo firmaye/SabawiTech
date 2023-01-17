@@ -62,7 +62,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                         console.log(userid)
                         setbuttonloading(true)
 
-                        fetch(`http://localhost:8080/api/users/emailPhone/${userid}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/emailPhone/${userid}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

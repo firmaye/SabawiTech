@@ -40,7 +40,7 @@ const SkillModal = ({ skilllist }) => {
         console.log(body)
         event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/skill/${userid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/skill/${userid}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

@@ -73,7 +73,7 @@ const EmploymentModal = () => {
         let userid = JSON.parse(localStorage.getItem('user')).id
         setbuttonloading(true)
 
-        fetch(`http://localhost:8080/api/users/employmentHistory/${userid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/employmentHistory/${userid}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ const EmploymentModal = () => {
                         body = JSON.stringify(body)
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
-                        fetch(`http://localhost:8080/api/users/employmentHistory/${userid}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/employmentHistory/${userid}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

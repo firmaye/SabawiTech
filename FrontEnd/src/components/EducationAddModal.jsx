@@ -73,7 +73,7 @@ const EducationModal = () => {
                         console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
-                        fetch(`http://localhost:8080/api/users/education/${userid}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/education/${userid}`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',

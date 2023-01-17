@@ -67,7 +67,7 @@ const ExtraDetail = () => {
         // console.log(body)
         // event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
-        fetch(`http://localhost:8080/api/users/register/${userid}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/register/${userid}`, {
             method: 'PATCH',
             body: formData
         })
@@ -125,7 +125,7 @@ const ExtraDetail = () => {
 
     const [username, setusername] = useState("")
     useEffect(() => {
-        fetch(`http://localhost:8080/api/users/${userid}`).then(res => res.json()).then(result => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
             console.log(result)
             setusername(`${result.firstName} ${result.lastName} `)
         }).catch((error) => { console.log(error) });

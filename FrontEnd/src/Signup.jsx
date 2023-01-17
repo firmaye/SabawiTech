@@ -59,7 +59,7 @@ const Signup = () => {
         }
         body = JSON.stringify(body)
         // console.log(body)
-        // fetch('http://localhost:8080/api/auth/signup', {
+        // fetch('${import.meta.env.VITE_BACKEND_URL}/api/auth/signup', {
         //     method: 'POST',
         //     headers: {
         //         'Content-Type': 'application/json',
@@ -111,7 +111,7 @@ const Signup = () => {
                     body = JSON.stringify(body)
                     console.log(body)
                     setSubmitting(false);
-                    await fetch('http://localhost:8080/api/auth/signup', {
+                    await fetch('${import.meta.env.VITE_BACKEND_URL}/api/auth/signup', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

@@ -75,7 +75,7 @@ const CertificationEditModal = ({ selected }) => {
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
-                        fetch(`http://localhost:8080/api/users/certification/${userid}/${selected._id}`, {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/certification/${userid}/${selected._id}`, {
                             method: 'PATCH',
                             headers: {
                                 'Content-Type': 'application/json',

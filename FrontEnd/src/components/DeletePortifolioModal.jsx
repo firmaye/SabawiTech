@@ -38,7 +38,7 @@ const DeletePortifolioModal = ({ tobedeleted }) => {
         let userid = JSON.parse(localStorage.getItem('user')).id
         setbuttonloading(true)
 
-        fetch(`http://localhost:8080/api/users/previousWork/${userid}/${tobedeleted._id}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}/${tobedeleted._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

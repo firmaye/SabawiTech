@@ -69,10 +69,10 @@ const LanguageModal = ({ language }) => {
             console.log(language)
             event.preventDefault()
             let userid = JSON.parse(localStorage.getItem('user')).id
-            console.log(`http://localhost:8080/api/users/language/${userid}`)
+            console.log(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`)
             setbuttonloading(true)
 
-            fetch(`http://localhost:8080/api/users/language/${userid}`, {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

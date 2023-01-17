@@ -7,7 +7,7 @@ const Blog = ({ catagory }) => {
   const [startPage, setStartPage] = useState(1);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/blogs/").then(res => res.json()).then(result => {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
       console.log(result)
       setBlog(result)
     }).catch((error) => { console.log(error) });

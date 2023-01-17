@@ -4,13 +4,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 const Signin = () => {
-    const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
     const SigninSchema = Yup.object().shape({
-        // password: Yup.string()
-        //     .min(2, 'Too Short!')
-        //     .max(20, 'Too Long!')
-        //     .required('Required'),
         email: Yup.string().email('Invalid email').required('Required')
             .test('Unique Email', "Incorrect User Name or Password", // <- key, message
                 function (value) {
@@ -21,7 +16,7 @@ const Signin = () => {
                     body = JSON.stringify(body)
                     console.log(body)
                     return new Promise((resolve, reject) => {
-                        fetch('http://localhost:8080/api/auth/signin', {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -66,7 +61,7 @@ const Signin = () => {
                         body = JSON.stringify(body)
                         console.log(body)
                         setSubmitting(false);
-                        await fetch('http://localhost:8080/api/auth/signin', {
+                        await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -100,7 +95,6 @@ const Signin = () => {
                         handleChange,
                         handleBlur,
                         handleSubmit,
-                        isSubmitting,
                         /* and other goodies */
                     }) => (
                         <form onSubmit={handleSubmit} className='signup-form'>

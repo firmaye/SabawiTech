@@ -63,7 +63,7 @@ const AddPortifolio = () => {
                 skills
             );
             let userid = JSON.parse(localStorage.getItem('user')).id
-            fetch(`http://localhost:8080/api/users/previousWork/${userid}`, {
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}`, {
                 method: 'POST',
 
                 body: formData

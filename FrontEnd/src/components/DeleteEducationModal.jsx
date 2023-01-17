@@ -38,7 +38,7 @@ const DeleteEducationModal = ({ tobedeleted }) => {
         event.preventDefault()
         setbuttonloading(true)
 
-        fetch(`http://localhost:8080/api/users/education/${userid}/${tobedeleted._id}`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/education/${userid}/${tobedeleted._id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

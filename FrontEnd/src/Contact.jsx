@@ -47,8 +47,7 @@ const Contact = () => {
         console.log(body)
         event.preventDefault()
 
-        console.log(`http://localhost:8080/api/issues`)
-        fetch(`http://localhost:8080/api/issues`, {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/issues`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -194,8 +193,7 @@ const Contact = () => {
                                     body = JSON.stringify(body)
                                     console.log(body)
 
-                                    console.log(`http://localhost:8080/api/issues`)
-                                    fetch(`http://localhost:8080/api/issues`, {
+                                    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/issues`, {
                                         method: 'POST',
                                         headers: {
                                             'Content-Type': 'application/json',
