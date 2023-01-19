@@ -3,9 +3,25 @@ const app = express()
 const db = require("./app/models");
 const cors = require("cors")
 const { default: AdminBro } = require('admin-bro');
-
+// 
 // AdminBro setups
+var fs = require('fs');
+var util = require('util');
 
+var log_file = fs.createWriteStream(__dirname + '/debug.log', { flags: 'w' });
+var log_stdout = process.stdout;
+
+console.log = function (d) {
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
+
+console.error = function (d) {
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
+
+// 
 const options = require('./src/admin.options');
 const buildAdminRouter = require('./src/admin.router');
 const admin = new AdminBro(options);

@@ -21,7 +21,7 @@ const CertificationSchema = Yup.object().shape({
 })
 const Contact = () => {
     // if (JSON.parse(localStorage.getItem('user')) == null) {
-    //     window.location.href = "http://localhost:8081/signin"
+    //     window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/signin"
     // }
     const dispatch = useDispatch()
     const [name, setname] = useState("")

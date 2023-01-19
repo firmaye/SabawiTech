@@ -133,7 +133,7 @@ const EditPortifolio = () => {
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
-            window.location.href = "http://localhost:8081/signin"
+            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         }
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
@@ -305,7 +305,7 @@ const EditPortifolio = () => {
                                     <div className="row">
                                         <div className="edit-portifolio-buttons ">
                                             <button onClick={() => {
-                                                window.location.href = "http://localhost:8081/profile";
+                                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                             }} className="see-public">Close </button>
                                             <button onClick={handleSubmit} className="setting">Edit</button>
                                         </div>

@@ -39,7 +39,7 @@ const NotAllowed = () => {
                             <button onClick={closeNotAllowed} type="submit" className="btn btn-danger">Back</button>
                             <button onClick={(event) => {
                                 event.preventDefault()
-                                window.location.href = "http://localhost:8081/signin"
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
                             }} type="submit" className="btn btn-danger">SignIn</button>
                         </div>
                     </div>

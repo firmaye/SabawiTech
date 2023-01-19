@@ -1,23 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import React from 'react'
+import { CountryDropdown } from 'react-country-region-selector';
 import './css/authentication.css'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Signup = () => {
-    // const [firstName, setfirstName] = useState("")
-    // const [lastName, setlastName] = useState("")
-    // const [userName, setuserName] = useState("")
-    // const [email, setemail] = useState("")
-    // const [password, setpassword] = useState("")
-    // const [country, setcountry] = useState("")
-    // const [state, setstate] = useState("")
-    let errorModal = () => {
-        dispatch(setModal("error"))
-        setmodalstyle({
-            display: "none"
-        })
-    }
     const SignupSchema = Yup.object().shape({
         password: Yup.string()
             .min(2, 'Too Short!')
@@ -43,44 +30,7 @@ const Signup = () => {
         state: Yup.string()
             .required('Required'),
         email: Yup.string().email('Invalid email').required('Required')
-
     })
-
-    let handleSubmit = (event) => {
-        event.preventDefault()
-        let body = {
-            firstName,
-            lastName,
-            userName,
-            email,
-            password,
-            country,
-            state
-        }
-        body = JSON.stringify(body)
-        // console.log(body)
-        // fetch('${import.meta.env.VITE_BACKEND_URL}/api/auth/signup', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: body
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log(data)
-        //         if (data.accessToken) {
-        //             localStorage.setItem("user", JSON.stringify(data));
-        //             window.location.href = "http://localhost:8081/extradetail"
-        //         }
-
-        //     })
-        //     .catch((error) => {
-        //         // errorModal()
-        //         console.log(error)
-        //         console.error('Error:', error);
-        //     });
-    }
     return (
         <div className="main-container">
             <Formik
@@ -106,12 +56,10 @@ const Signup = () => {
                         userName: values.userName,
                         country: values.country,
                         state: values.state
-
                     }
                     body = JSON.stringify(body)
-                    console.log(body)
                     setSubmitting(false);
-                    await fetch('${import.meta.env.VITE_BACKEND_URL}/api/auth/signup', {
+                    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -124,11 +72,9 @@ const Signup = () => {
                             if (data.accessToken) {
                                 localStorage.setItem("user", JSON.stringify(data));
                             }
-                            window.location.href = "http://localhost:8081/extradetail"
-
+                            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
                         })
                         .catch((error) => {
-                            // errorModal()
                             console.log(error)
                             console.error('Error:', error);
                         });
@@ -142,7 +88,6 @@ const Signup = () => {
                     handleBlur,
                     handleSubmit,
                     setFieldValue,
-                    /* and other goodies */
                 }) => (
                     <form className='signup-form row justify-content-center'>
                         <div className="form-title">
@@ -175,23 +120,18 @@ const Signup = () => {
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.email && touched.email && errors.email}</div>
 
                         </div>
-                        <div className=" input-container col-12 col-md-6">
+                        <div className="input-container col-12 col-md-6">
                             <CountryDropdown
-                                className=" "
-
                                 onChange={(val) => { setFieldValue("country", val) }}
                                 onBlur={handleBlur}
-                                value={values.country}
-                            // onChange={(val) => setcountry(val)}
-                            />
+                                value={values.country} />
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
-
                         </div>
                         <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
                                 value={values.state} name='state' placeholder='State' className="" />
-                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
+                            <div style={{ marginLeft: "40px" }} className='input-error-display'>{errors.state && touched.state && errors.state}</div>
                         </div>
                         <div className="input-container col-12 col-md-6">
                             <input onChange={handleChange}
@@ -199,7 +139,6 @@ const Signup = () => {
                                 value={values.password} type="password" name='password' placeholder='password' className="" />
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.password && touched.password && errors.password}</div>
                         </div>
-
                         <div className="input-container col-12 col-md-6">
                             <input type="password" onChange={handleChange}
                                 onBlur={handleBlur}
@@ -207,28 +146,21 @@ const Signup = () => {
                             <span className=''></span>
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div>
                         </div>
-
-
                         <div className="input-button col-6">
                             <button type='submit' onClick={handleSubmit} className="sign-in">
-
                                 Sign Up
                             </button>
                             <button type="button" className="login-with-google-btn" >
                                 Sign up with Google
-
                             </button>
                             <div className='register-container' >
-
                                 Already Have an Account? <a href='/signin'> Login</a>
                             </div>
                         </div>
                     </form>
                 )}
             </Formik>
-
         </div>
     )
 }
-
 export default Signup

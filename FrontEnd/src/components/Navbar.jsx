@@ -3,7 +3,7 @@ import "../css/opportunitypage.css"
 const Navbar = () => {
     let logout = () => {
         window.localStorage.removeItem('user')
-        window.location.href = "http://localhost:8081/signin"
+        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     return (
         <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">

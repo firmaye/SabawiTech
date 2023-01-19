@@ -51,7 +51,7 @@ const Profile = () => {
 
         // console.log(process)
         if (JSON.parse(localStorage.getItem('user')) == null) {
-            window.location.href = "http://localhost:8081/signin"
+            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let userid = JSON.parse(localStorage.getItem('user')).id
             // console.log(userid)

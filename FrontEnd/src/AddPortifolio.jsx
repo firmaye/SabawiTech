@@ -262,7 +262,7 @@ const AddPortifolio = () => {
                                 <div className="row">
                                     <div className="add-portifolio-buttons ">
                                         <button onClick={() => {
-                                            window.location.href = "http://localhost:8081/profile";
+                                            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                         }} className="see-public">Close </button>
                                         <button onClick={handleSubmit} className="setting">Add</button>
                                     </div>

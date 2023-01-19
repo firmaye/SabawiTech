@@ -74,7 +74,7 @@ const Signin = () => {
                                 console.log(data)
                                 if (data.accessToken) {
                                     localStorage.setItem("user", JSON.stringify(data));
-                                    window.location.href = "http://localhost:8081/"
+                                    window.location.href = `${import.meta.env.VITE_FRONTEND_URL}`
                                 }
                                 // successModal()
                             })

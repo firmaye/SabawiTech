@@ -23,7 +23,7 @@ const OpportunityPage = () => {
             console.log(result)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')
-                window.location.href = "http://localhost:8081/signin"
+                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
             } else {
                 setloading(false)
                 setopportunitylist(result)
@@ -32,7 +32,7 @@ const OpportunityPage = () => {
     }
     useEffect(() => {
         // if (JSON.parse(localStorage.getItem('user')) == null) {
-        //     window.location.href = "http://localhost:8081/signin"
+        //     window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/signin"
         // } else {
 
         // }

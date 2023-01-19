@@ -12,7 +12,7 @@ import { setModal } from './redux/profilemodal'
 
 const ExtraDetail = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
-        window.location.href = "http://localhost:8081/signin"
+        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     const dispatch = useDispatch()
     let successModal = () => {
@@ -226,7 +226,7 @@ const ExtraDetail = () => {
                                 </div>
                                 <div className="row">
                                     <div className="extra-detail-buttons ">
-                                        <button onClick={() => { window.location.href = "http://localhost:8081/profile" }} className="see-public">Close </button>
+                                        <button onClick={() => { window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile` }} className="see-public">Close </button>
                                         <button onClick={(event) => { event.preventDefault(); setselectedpart("profileImage") }} className="setting">Get Started</button>
                                     </div>
                                 </div>
@@ -435,7 +435,7 @@ const ExtraDetail = () => {
                                 </div>
                                 <div className="row">
                                     <div className="extra-detail-buttons ">
-                                        <button onClick={() => { window.location.href = "http://localhost:8081/profile" }} className="see-public">Close </button>
+                                        <button onClick={() => { window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/profile" }} className="see-public">Close </button>
                                         <button onClick={() => { setselectedpart("profileImage") }} className="setting">Get Started</button>
                                     </div>
                                 </div>
