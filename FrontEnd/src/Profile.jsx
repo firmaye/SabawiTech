@@ -75,7 +75,6 @@ const Profile = () => {
     }
     return (
         <FadeIn>
-            <EducationModal />
             <main>
                 {
                     currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} />
