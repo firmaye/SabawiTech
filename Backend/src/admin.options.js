@@ -9,8 +9,7 @@ const User = require('./user/user.options')
 
 const Internship  = require('./internship/internship.options')
 const CoverLetter  = require('./coverLetter/coverLetter.options')
-
-const options = {
+const options = { 
     resources: [AdminCompany, User, Blog,Internship, CoverLetter ],
     branding: {
         companyName:"Intrant",
