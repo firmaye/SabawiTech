@@ -13,6 +13,18 @@ const options = {
         blogImage: {
             isVisible: false,
         },
+        isDeleted: {
+            isVisible: false,
+        },
+        deletedAt: {
+            isVisible: false,
+        },
+        updatedAt: {
+            isVisible: false,
+        },
+        createdAt: {
+            isVisible: false,
+        },
         blogDescription: {
             type: 'richtext'
         },

@@ -4,7 +4,7 @@ const { CoverLetter } = require('./coverLetter.model');
 
 const options = {
 	properties:{
-		isDeletedAt:{
+		isDeleted:{
 			isVisible:false
 		},
 		createdAt:{
