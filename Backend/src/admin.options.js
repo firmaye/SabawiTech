@@ -23,6 +23,16 @@ const options = {
             },
             component: AdminBro.bundle('./components/dashboard'),
         },
+    locale: {
+        translations: {
+            messages: {
+                loginWelcome: 'Please Login to access the admin site' // the smaller text
+            },
+        labels: {
+            loginWelcome: 'INTRANT', // this could be your project name
+        },
+    }
+},
 };
 
 module.exports = options;
