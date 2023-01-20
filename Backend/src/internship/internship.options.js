@@ -4,7 +4,7 @@ const { Internship } = require('./internship.model');
 
 const options = {
 	properties:{
-		isDeletedAt:{
+		isDeleted:{
 			isVisible:false
 		},
 		createdAt:{

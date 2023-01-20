@@ -1,9 +1,14 @@
 const AdminBro = require('admin-bro');
-const { Company } = require('./company.entity');
+const { AdminUsers } = require('./company.entity');
+
+const {
+  after: passwordAfterHook,
+  before: passwordBeforeHook,
+} = require('./actions/password.hook');
 
 
 const options = {
-  parent:{
+ parent:{
     name:"Admin Content",
     icon:'fas fa-cogs'
   },
@@ -14,10 +19,20 @@ const options = {
     password: {
       type: 'password',
     },
+    },
+  actions: {
+    new: {
+      after: passwordAfterHook,
+      before: passwordBeforeHook,
+    },
+    edit: {
+      after: passwordAfterHook,
+      before: passwordBeforeHook,
+    },
   },
 };
 
 module.exports = {
   options,
-  resource: Company,
+  resource: AdminUsers,
 };

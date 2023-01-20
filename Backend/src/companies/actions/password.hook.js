@@ -2,7 +2,7 @@ const argon2 = require('argon2');
 const AdminBro = require('admin-bro');
 
 const after = async (response) => {
-  if (response.record && response.record.errors && response.record.errors.encryptedPassword) {
+  if (response.record && response.record.errors) {
     response.record.errors.password = response.record.errors.encryptedPassword;
   }
   return response;

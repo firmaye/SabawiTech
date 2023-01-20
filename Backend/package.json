@@ -10,7 +10,7 @@
   "author": "philica",
   "license": "ISC",
   "dependencies": {
-    "admin-bro": "^2.2.4",
+    "admin-bro": "^2.9.0",
     "admin-bro-expressjs": "^2.0.4",
     "admin-bro-mongoose": "^0.5.0",
     "argon2": "^0.30.3",

@@ -1,7 +1,15 @@
 const mongoose = require('mongoose');
 
-const CompanySchema = new mongoose.Schema({
-  companyName: {
+const AdminSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  roleName: {
     type: String,
     required: true,
   },
@@ -15,6 +23,6 @@ const CompanySchema = new mongoose.Schema({
   },
 });
 
-const Company = mongoose.model('Company', CompanySchema);
+const AdminUsers = mongoose.model('AdminUsers', AdminSchema);
 
-module.exports = { CompanySchema, Company };
+module.exports = { AdminSchema, AdminUsers };

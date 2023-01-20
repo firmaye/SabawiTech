@@ -13,7 +13,7 @@ const CoverLetter  = require('./coverLetter/coverLetter.options')
 const options = {
     resources: [AdminCompany, User, Blog,Internship, CoverLetter ],
     branding: {
-        companyName:"ProTalent",
+        companyName:"Intrant",
         logo: "https://sabawitech.com/assets/img/sabawi.png",
         softwareBrothers: false,
         },
