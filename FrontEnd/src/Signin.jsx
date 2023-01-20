@@ -134,9 +134,9 @@ const Signin = () => {
                                     <button onClick={(event) => { handleSubmit(event) }} type='submit' className="sign-in">
                                         Sign In
                                     </button>
-                                    <button type="button" className="login-with-google-btn" >
+                                    {/* <button type="button" className="login-with-google-btn" >
                                         Sign In with Google
-                                    </button>
+                                    </button> */}
                                     <div className='register-container' >
                                         Not Registered Yet? <a href='/signup' className='register'> Register</a>
                                     </div>

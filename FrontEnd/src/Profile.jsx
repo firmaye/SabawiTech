@@ -7,13 +7,13 @@ import TitleModal from './components/TitleModal';
 import { useState } from 'react';
 import SkillModal from './components/SkillModal';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from './redux/profilemodal';
 import EmploymentModal from './components/EmploymentAddModal';
 import CertificationModal from './components/CertificationAddModal';
 import CertificationEditModal from './components/CertificationEditModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { setModal } from './redux/profilemodal';
 import EmailAndPhoneModal from './components/EditEmailAndPhoneModal';
 import DeletePortifolioModal from './components/DeletePortifolioModal';
 import EmploymentEditModal from './components/EmploymentEditModal';
@@ -49,7 +49,6 @@ const Profile = () => {
     const [loading, setloading] = useState(true)
     useEffect(() => {
 
-        // console.log(process)
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
@@ -76,6 +75,7 @@ const Profile = () => {
     }
     return (
         <FadeIn>
+            <EducationModal />
             <main>
                 {
                     currentModal == "" ? <></> : currentModal == "name" ? <NameModal profileinfo={{ firstName: profileinfo.firstName, lastName: profileinfo.lastName, Username: profileinfo.Username, profilePhoto: profileinfo.profilePhoto, country: profileinfo.country, state: profileinfo.state }} />
@@ -154,7 +154,7 @@ const Profile = () => {
                                             <div>
                                                 Languages
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("languagesadd"))) }} >
+                                            <button onClick={() => { dispatch(setModal("languagesadd")) }} >
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                             </button>
@@ -176,7 +176,7 @@ const Profile = () => {
                                             <div>
                                                 Education
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("educationadd"))) }} >
+                                            <button onClick={() => { dispatch(setModal("educationadd")) }} >
                                                 <i className="fa fa-plus" aria-hidden="true"></i>
 
                                             </button>
@@ -192,14 +192,14 @@ const Profile = () => {
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { settobedeletededucation(element); dispatch(setModal(("educationdelete"))) }} >
+                                                            <button onClick={() => { settobedeletededucation(element); dispatch(setModal("educationdelete")) }} >
                                                                 <i className="fa fa-trash" aria-hidden="true"></i>
 
                                                             </button>
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { setselectededucation(element); dispatch(setModal(("educationedit"))) }} >
+                                                            <button onClick={() => { setselectededucation(element); dispatch(setModal("educationedit")) }} >
                                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                                             </button>
@@ -221,7 +221,7 @@ const Profile = () => {
                                             <div>
                                                 Email And Phone Number
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("emailandphone"))) }}>
+                                            <button onClick={() => { dispatch(setModal("emailandphone")) }}>
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
 
                                             </button>
@@ -246,7 +246,7 @@ const Profile = () => {
                                             <h5>{profileinfo.title}</h5>
                                         </div>
                                         <div className="col col-auto">
-                                            <button onClick={() => { dispatch(setModal(("title"))) }} className="profile-edit-btn">
+                                            <button onClick={() => { dispatch(setModal("title")) }} className="profile-edit-btn">
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -298,7 +298,7 @@ const Profile = () => {
                                                                 <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
                                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                                 </a>
-                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
+                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal("deleteportifolio")) }} className="profile-edit-btn">
                                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                                 </a>
                                                             </div>
@@ -320,7 +320,7 @@ const Profile = () => {
 
                                         </div>
                                         <div className="col col-auto">
-                                            <button onClick={() => { dispatch(setModal(("skill"))) }} className="profile-edit-btn">
+                                            <button onClick={() => { dispatch(setModal("skill")) }} className="profile-edit-btn">
                                                 <i className="fa fa-pencil" aria-hidden="true"></i>
                                             </button>
                                         </div>
@@ -346,7 +346,7 @@ const Profile = () => {
                                     <h2>Employment History</h2>
                                 </div>
                                 <div className="">
-                                    <button onClick={() => { dispatch(setModal(("employmentadd"))) }} className="profile-edit-btn">
+                                    <button onClick={() => { dispatch(setModal("employmentadd")) }} className="profile-edit-btn">
                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -361,10 +361,10 @@ const Profile = () => {
                                                 {element.empRole} | {element.empCountry} , {element.empState}
                                             </div>
                                             <div className="">
-                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
+                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal("employmentedit")) }} className="profile-edit-btn">
                                                     <i className="fa fa-pencil" aria-hidden="true"></i>
                                                 </button>
-                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal(("employmentdelete"))) }} className="profile-edit-btn">
+                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal("employmentdelete")) }} className="profile-edit-btn">
                                                     <i className="fa fa-trash" aria-hidden="true"></i>
                                                 </button>
                                             </div>
@@ -393,7 +393,7 @@ const Profile = () => {
                                     <h2>Certification</h2>
                                 </div>
                                 <div className="">
-                                    <button onClick={() => { dispatch(setModal(("certificationadd"))) }} className="profile-edit-btn">
+                                    <button onClick={() => { dispatch(setModal("certificationadd")) }} className="profile-edit-btn">
                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -408,10 +408,10 @@ const Profile = () => {
                                                     {element.certTitle} | {element.certProvider}
                                                 </div>
                                                 <div className="">
-                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
+                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal("certificationedit")) }} className="profile-edit-btn">
                                                         <i className="fa fa-pencil" aria-hidden="true"></i>
                                                     </button>
-                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal(("deletecertification"))) }} className="profile-edit-btn">
+                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal("deletecertification")) }} className="profile-edit-btn">
                                                         <i className="fa fa-trash" aria-hidden="true"></i>
                                                     </button>
                                                 </div>

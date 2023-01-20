@@ -54,9 +54,6 @@ const NameModal = ({ profileinfo }) => {
             display: "none"
         })
     }
-    let handleSubmit = () => {
-
-    }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -191,8 +188,8 @@ const NameModal = ({ profileinfo }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         Loading...
                                     </button> : <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>

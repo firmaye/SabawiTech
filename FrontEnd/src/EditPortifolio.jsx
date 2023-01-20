@@ -18,6 +18,8 @@ import Header from './components/Header'
 const EditPortifolio = () => {
     const params = useParams()
     const paramsid = params.id
+    const [buttonloading, setbuttonloading] = useState(false)
+
     const [previouswork, setpreviouswork] = useState([])
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
@@ -28,12 +30,25 @@ const EditPortifolio = () => {
     const [errorworkThumbnail, seterrorworkThumbnail] = useState()
     const [workLink, setworkLink] = useState()
     const dispatch = useDispatch()
+    const [skillerror, setskillerror] = useState("")
 
     console.log(skills)
     const [loading, setloading] = useState(true)
     let successModal = () => {
         dispatch(setModal("addportifoliosuccess"))
 
+    }
+    let checkSkillExistence = () => {
+
+        if (skills.length == 0) {
+            setskillerror("Please Add A Work Skill")
+            console.log(skillerror)
+            return false
+        } else {
+            setskillerror("")
+            console.log(skillerror)
+            return true
+        }
     }
     const blobUrlToFile = (blobUrl) => new Promise((resolve) => {
         fetch(blobUrl).then((res) => {
@@ -47,6 +62,8 @@ const EditPortifolio = () => {
     })
     let handleSubmit = async () => {
         // console.log(workSkill)
+        checkSkillExistence()
+
         console.log(skills)
         if (workTitle == "") {
             seterrorworkTitle("Required")
@@ -58,7 +75,10 @@ const EditPortifolio = () => {
         } else {
             seterrorworkThumbnail("")
         }
-        if (workTitle != "" && checkPhotoExistence()) {
+        if (workTitle != "" && checkPhotoExistence() && checkSkillExistence()
+        ) {
+            setbuttonloading(true)
+
             let image = await blobUrlToFile(workPlaceholder)
             console.log(workPlaceholder)
             const formData = new FormData();
@@ -234,7 +254,7 @@ const EditPortifolio = () => {
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src={workPlaceholder} alt="" />
                                                             <h3 id="filename">
-                                                                Drag and Drop
+                                                                Click or Drag and Drop Image on the Space Provided
                                                             </h3>
                                                             <p >Supports JPG, PNG, SVG</p>
                                                         </div>
@@ -298,6 +318,8 @@ const EditPortifolio = () => {
                                                         <i className="fa fa-plus" aria-hidden="true"></i>
                                                     </button>
                                                 </div>
+                                                <div className='input-error-display extra-detail-error-profile-photo' >{skillerror}</div>
+
                                             </div>
 
                                         </div>
@@ -307,7 +329,11 @@ const EditPortifolio = () => {
                                             <button onClick={() => {
                                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                             }} className="see-public">Close </button>
-                                            <button onClick={handleSubmit} className="setting">Edit</button>
+                                            {buttonloading ? <button className="btn btn-primary loading" type="button" disabled>
+                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Loading...
+                                            </button> : <button onClick={handleSubmit} className="setting">Edit</button>}
+
                                         </div>
                                     </div>
                                 </div>

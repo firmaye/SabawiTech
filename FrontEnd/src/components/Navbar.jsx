@@ -5,6 +5,9 @@ const Navbar = () => {
         window.localStorage.removeItem('user')
         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
+    let login = () => {
+        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+    }
     return (
         <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
             <div className="container">
@@ -32,12 +35,21 @@ const Navbar = () => {
                         <li className="nav-item">
                             <a href={"/contact"} className="nav-link active">Contact</a>
                         </li>
-                        <li className="nav-item">
-                            <a href={"/profile"} className="nav-link active">Profile</a>
-                        </li>
-                        <li className="nav-item">
-                            <div><button onClick={logout} type="submit" className="btn btn-primary">Log Out</button>
-                            </div>            </li>
+                        {JSON.parse(localStorage.getItem('user')) == null ?
+                            <></>
+                            : <li className="nav-item">
+                                <a href={"/profile"} className="nav-link active">Profile</a>
+                            </li>}
+                        {JSON.parse(localStorage.getItem('user')) == null ?
+                            <li className="nav-item">
+                                <div><button onClick={login} type="submit" className="btn btn-primary">Log In</button>
+                                </div>
+                            </li>
+                            : <li className="nav-item">
+                                <div><button onClick={logout} type="submit" className="btn btn-primary">Log Out</button>
+                                </div>            </li>}
+
+
                     </ul>
                 </div>
 

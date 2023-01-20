@@ -107,6 +107,12 @@
     border-radius: 10rem;
 }
 
+.add-portifolio-buttons .loading {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10rem;
+}
+
 .add-portifolio-sidebar-container {
 
     margin-top: 52px;

@@ -20,6 +20,7 @@ import Contact from "./Contact";
 import ExtraDetail from "./ExtraDetail";
 import Signin from "./Signin";
 import Signup from "./Signup";
+import NotFoundPageProfile from "./components/NotFoundPageProfile";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -35,10 +36,12 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
+    errorElement: <NotFoundPageProfile />
   },
   {
     path: "/addportifolio",
     element: <AddPortifolio />,
+    errorElement: <NotFoundPageProfile />
   },
   {
     path: "/editportifolio/:id",
@@ -60,7 +63,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/blogdetails/:id",
-    element: <BlogdetailsContainer />
+    element: <BlogdetailsContainer />,
   }, {
     path: "/signin",
     element: <Signin />,
@@ -68,6 +71,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPageProfile />,
   },
 ]);
 

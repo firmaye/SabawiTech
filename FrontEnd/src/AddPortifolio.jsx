@@ -18,7 +18,8 @@ const AddPortifolio = () => {
     const [workLink, setworkLink] = useState("")
     const [errorworkTitle, seterrorworkTitle] = useState("")
     const [errorworkThumbnail, seterrorworkThumbnail] = useState()
-    // const [errorworkLink, seterrorworkLink] = useState()
+    const [skillerror, setskillerror] = useState("")
+    const [buttonloading, setbuttonloading] = useState(false)
 
     const dispatch = useDispatch()
     let successModal = () => {
@@ -29,8 +30,20 @@ const AddPortifolio = () => {
         dispatch(setModal("error"))
 
     }
-    let handleSubmit = (event) => {
+    let checkSkillExistence = () => {
 
+        if (skills.length == 0) {
+            setskillerror("Please Add A Work Skill")
+            console.log(skillerror)
+            return false
+        } else {
+            setskillerror("")
+            console.log(skillerror)
+            return true
+        }
+    }
+    let handleSubmit = (event) => {
+        checkSkillExistence()
         console.log(workThumbnail)
         console.log(skills)
         if (workTitle == "") {
@@ -43,8 +56,10 @@ const AddPortifolio = () => {
         } else {
             seterrorworkThumbnail("")
         }
-        if (workTitle != "" && checkPhotoExistence()) {
+        if (workTitle != "" && checkPhotoExistence() && checkSkillExistence()) {
             const formData = new FormData();
+            setbuttonloading(true)
+
             // Update the formData object
             formData.append(
                 'workThumbnail',
@@ -114,6 +129,7 @@ const AddPortifolio = () => {
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     return (
         <main>
+
             {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
                 : currentModal == "error" ? <ErrorModal />
                     : <></>}
@@ -185,7 +201,7 @@ const AddPortifolio = () => {
                                                     <div className="file-thumbnail">
                                                         <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" />
                                                         <h3 id="filename">
-                                                            Drag and Drop
+                                                            Click or Drag and Drop Image on the Space Provided
                                                         </h3>
                                                         <p >Supports JPG, PNG, SVG</p>
                                                     </div>
@@ -254,7 +270,10 @@ const AddPortifolio = () => {
                                                             <i className="fa fa-plus" aria-hidden="true"></i>
                                                         </button>
                                                     </div>
+
                                                 </div>
+                                                <div className='input-error-display extra-detail-error-profile-photo' >{skillerror}</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -264,7 +283,11 @@ const AddPortifolio = () => {
                                         <button onClick={() => {
                                             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                         }} className="see-public">Close </button>
-                                        <button onClick={handleSubmit} className="setting">Add</button>
+                                        {buttonloading ? <button className="btn btn-primary loading" type="button" disabled>
+                                            <span className="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </button> : <button onClick={handleSubmit} className="setting">Add</button>}
+
                                     </div>
                                 </div>
                             </div>

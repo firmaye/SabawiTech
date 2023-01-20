@@ -112,3 +112,17 @@
     display: inline-block;
     margin: 100px auto;
 }
+
+.success-portifolio-modal-close {
+    border: 0;
+    background: white;
+    position: absolute;
+    right: 0;
+    top: -11px;
+}
+
+.success-portifolio-modal-close svg {
+    width:
+        40px;
+    height: auto;
+}

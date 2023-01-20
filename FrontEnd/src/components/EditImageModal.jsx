@@ -131,7 +131,7 @@ const NameModal = ({ image }) => {
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/images/${image}`} alt="" />
                                                             <h3 id="filename">
-                                                                Drag and Drop
+                                                                Click or Drag and Drop Image on the Space Provided
                                                             </h3>
                                                             <p >Supports JPG, PNG, SVG</p>
                                                         </div>
@@ -148,8 +148,8 @@ const NameModal = ({ image }) => {
 
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button> : <button type="button" onClick={(event) => { checkPhotoExistence() ? handleSubmit() : () => { } }} className="btn btn-primary">Edit Image</button>}
 

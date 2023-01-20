@@ -150,9 +150,9 @@ const Signup = () => {
                             <button type='submit' onClick={handleSubmit} className="sign-in">
                                 Sign Up
                             </button>
-                            <button type="button" className="login-with-google-btn" >
+                            {/* <button type="button" className="login-with-google-btn" >
                                 Sign up with Google
-                            </button>
+                            </button> */}
                             <div className='register-container' >
                                 Already Have an Account? <a href='/signin'> Login</a>
                             </div>

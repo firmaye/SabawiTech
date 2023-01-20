@@ -76,8 +76,8 @@ const DeleteEducationModal = ({ tobedeleted }) => {
                         <div className="modal-footer justify-content-center">
 
                             <button onClick={closeDeleteEducationModal} type="submit" className="btn btn-danger ">NO</button>
-                            {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Loading...
                             </button> : <button onClick={handleSubmit} type="submit" className="btn btn-danger modal-yes-btn">YES</button>}
                         </div>
