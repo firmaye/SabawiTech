@@ -1,12 +1,12 @@
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.users;
-
+const Validator=require('../helpers/emailValidator')
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-exports.signup = (req, res) => {
+exports.signup =async (req, res) => {
     const user = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -29,6 +29,13 @@ exports.signup = (req, res) => {
         otherExperience: req.body.otherExperience
 
     })
+    const {valid, reason, validators} = await Validator.isEmailValid(user.email);
+    if (!valid){
+        return res.status(400).send({
+            message: "Please provide a valid email address.",
+            reason: validators[reason].reason
+        })
+    }
 
     user.save((err, user) => {
         if (err) {
