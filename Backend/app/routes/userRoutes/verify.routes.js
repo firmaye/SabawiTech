@@ -2,9 +2,14 @@ module.exports = app => {
   var router = require("express").Router();
   const db = require("../../models");
   const User = db.users;
+  const Token=db.tokens
   // ======================= User ==================================
+  router.get('/sifan',(req,res) => {
+	res.send("Here We are in verify routes ")
+  })
   router.get("/verify/:id/:token", async (req, res) => {
-		try {
+		// res.send('here I am')
+		
 			const user = await User.findOne({ _id: req.params.id });
 			if (!user) return res.status(400).send({
 				success:false,
@@ -20,7 +25,7 @@ module.exports = app => {
 				message:"Invalid link"
 			});
 
-			await User.updateOne({ _id: user._id, verified: true });
+			await User.updateOne({ _id: user._id},{verified: true} );
 			await Token.findByIdAndRemove(token._id);
 
 			res.status(200).send({
@@ -28,15 +33,10 @@ module.exports = app => {
 				message:"email verified sucessfully"
 			});
 			return;
-		} catch (error) {
-			res.status(400).send({
-				success:false,
-				message:"error occured"
-			});
-		}
+		
 	});
 
-  app.use('/api/users/', router);
+  app.use('/api/user', router);
 
 }
 

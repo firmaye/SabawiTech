@@ -71,6 +71,8 @@ require("./app/routes/userRoutes/education.routes")(app);
 require("./app/routes/userRoutes/certification.routes")(app);
 require("./app/routes/userRoutes/employmentHistory.routes")(app);
 require("./app/routes/userRoutes/otherExperience.routes")(app);
+
+require("./app/routes/userRoutes/verify.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);

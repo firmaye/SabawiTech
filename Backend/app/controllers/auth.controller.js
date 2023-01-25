@@ -66,7 +66,6 @@ exports.signup =async (req, res) => {
             res.status(500).send({ message: err });
             return;
         }
-        console.log(process.env.BASE_URL)
         const message =`${process.env.BASE_URL}/user/verify/${user.id}/${token.token}`;
         console.log(user.email)
         EmailSender ({email:user.email, subject:"Verify Email", message});
@@ -113,7 +112,11 @@ exports.signin = (req, res) => {
                 success:false,
                 message: "User is not Registered" });
         }
-
+         if (user.source==='google') {
+            return res.status(404).send({ 
+                success:false,
+                message: "User signed up with different method" });
+        }
         var passwordIsValid = bcrypt.compareSync(
             req.body.password,
             user.password
@@ -150,13 +153,53 @@ exports.signin = (req, res) => {
 exports.google= async (req, res) => {
 
     const  accessToken=req.body.access_token
-    var Userd=null
     fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
             method: "GET",
             headers: {"Authorization": `Bearer ${accessToken}`
     }})
     .then(res => res.json())
-    .then((data) => {
+    .then(async (data) => {
+        if (data.error){
+            res.status(400).send({
+                success:false,
+                exists:false,
+                info:"Fake Access Token"
+            })
+            return;
+        }
+
+        const existedUser=await User.findOne({ email:data.email});    
+        if (existedUser && existedUser.source==='local'){
+            console.log(existedUser)
+            res.status(400).send({                
+                success:false,
+                exists:true,
+                info:"User signed up with different method",
+                });
+            return;
+        }
+        if (existedUser && existedUser.source==='google'){
+            var tokens = jwt.sign({ id: existedUser.id }, process.env.SECRET, {
+            expiresIn: 86400 // 24 hours
+            });
+            
+            res.status(200).send(
+                {
+                success:true,
+                exist:true,
+                info:
+                {
+                    id: existedUser._id,
+                    username: existedUser.username,
+                    email: existedUser.email,
+                    accessToken: tokens,
+                }
+
+            });
+            return;
+        }
+        
+        
        const user = new User({
             firstName: data.given_name,
             lastName: data.family_name,
@@ -179,13 +222,37 @@ exports.google= async (req, res) => {
             source:'google',
             verified:true
         })  
-
-        console.log(user)
         
+    user.save(async (err, user) => {
+        if (err) {
+            res.status(500).send({ message: err });
+            return;
+        }
+        var tokens = jwt.sign({ id: user.id }, process.env.SECRET, {
+            expiresIn: 86400 // 24 hours
+        });
+
+        res.status(200).send(
+            {
+            success:true,
+            exist:false,
+            info:
+            {
+                id: user._id,
+                username: user.username,
+                email: user.email,
+                accessToken: tokens,
+            }
+
+        });
+        return;
+        
+        });
+
         })
     .catch(err => console.log(err));
    
-        res.send({Userd});
+      
         return;
 
 }
