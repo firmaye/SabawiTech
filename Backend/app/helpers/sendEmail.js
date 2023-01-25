@@ -1,11 +1,10 @@
 const nodemailer= require('nodemailer')
-const config=require('../config/auth.config')
 const Email = (options) => {
   let transpoter = nodemailer.createTransport({
-    service: 'gmail', //i use outlook
+    service:process.env.SERVICE, 
     auth: {
-      user:config.email, // email
-      pass: config.pass, //password
+      user:process.env.USER, 
+      pass: process.env.PASS, 
     },
 	tls: {
           rejectUnauthorized: false

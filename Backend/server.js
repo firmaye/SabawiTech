@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const db = require("./app/models");
 const cors = require("cors")
+
+require("dotenv").config();
 const { default: AdminBro } = require('admin-bro');
 // 
 // AdminBro setups
@@ -39,7 +41,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 db.mongoose
-  .connect(db.url, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
