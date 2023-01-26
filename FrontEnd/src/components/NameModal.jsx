@@ -77,7 +77,6 @@ const NameModal = ({ profileinfo }) => {
                             state: values.formstate
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -90,12 +89,10 @@ const NameModal = ({ profileinfo }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
                     }}

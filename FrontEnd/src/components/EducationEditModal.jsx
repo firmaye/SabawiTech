@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { DatePicker } from 'antd';
 import { Formik } from 'formik';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import * as Yup from 'yup';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 const EducationSchema = Yup.object().shape({
     formattendedFrom: Yup.string()
         .required('Required'),
@@ -19,9 +24,11 @@ const EducationSchema = Yup.object().shape({
 })
 const EducationEditModal = ({ selected }) => {
 
+    const [schoolname, setschoolname] = useState(selected.schoolName)
+    const [areaofstudy, setareaofstudy] = useState(selected.areaOfStudy)
+    const [attendedfrom, setattendedfrom] = useState(new Date(selected.dateAttendedFrom))
+    const [attendedto, setattendedto] = useState(new Date(selected.dateAttendedTo))
     const dispatch = useDispatch()
-    console.log(selected)
-    console.log(selected._id)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -60,7 +67,6 @@ const EducationEditModal = ({ selected }) => {
                     validateOnBlur={false}
                     validationSchema={EducationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             schoolName: values.formschoolname,
                             dateAttendedFrom: values.formattendedFrom,
@@ -68,7 +74,6 @@ const EducationEditModal = ({ selected }) => {
                             areaOfStudy: values.formareaofstudy
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -81,12 +86,10 @@ const EducationEditModal = ({ selected }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
                     }}
@@ -118,6 +121,7 @@ const EducationEditModal = ({ selected }) => {
                                                     <h2 className="education-modal-education"></h2>
                                                     <form method="">
                                                         <div className="education-modal-input-group">
+                                                            <label >School Name</label>
                                                             <input className="" type="text" placeholder="School Name" onChange={handleChange}
                                                                 onBlur={handleBlur}
                                                                 value={values.formschoolname} name='formschoolname' />
@@ -126,26 +130,26 @@ const EducationEditModal = ({ selected }) => {
                                                         </div>
                                                         <div className="education-modal-location-container">
 
-                                                            <div>
-
-                                                                <div className="education-modal-input-group">
+                                                            <div className="education-modal-input-group">
+                                                                <div>
                                                                     <label>Attended From</label>
-                                                                    <DatePicker onChange={(date) => { setFieldValue("formattendedFrom", date.$d.toString()); }} />
-                                                                    <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
                                                                 </div>
+                                                                <DatePicker defaultValue={dayjs(values.formattendedFrom)} onChange={(date) => { setFieldValue("formattendedFrom", date.$d.toString()); }} />
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
                                                             </div>
 
-                                                            <div>
 
-                                                                <div className="education-modal-input-group">
+
+                                                            <div className="education-modal-input-group">
+                                                                <div>
                                                                     <label>Attended To</label>
-                                                                    <DatePicker onChange={(date) => { setFieldValue("formattendedTo", date.$d.toString()); }} />
-
-                                                                    <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedTo && touched.formattendedTo && errors.formattendedTo}</div>
                                                                 </div>
+                                                                <DatePicker defaultValue={dayjs(values.formattendedTo)} onChange={(date) => { setFieldValue("formattendedTo", date.$d.toString()); }} />
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
                                                             </div>
                                                         </div>
                                                         <div className="education-modal-input-group">
+                                                            <label >Area Of Study</label>
                                                             <input className="" type="text" placeholder="Area of Study" onChange={handleChange}
                                                                 onBlur={handleBlur}
                                                                 value={values.formareaofstudy} name='formareaofstudy' />

@@ -12,7 +12,6 @@ const Navbar = () => {
         <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
             <div className="container">
                 <a href="/" className="navbar-brand">
-                    <i className="fas fa-blog"></i> &nbsp;
                     ProTalent
                 </a>
 

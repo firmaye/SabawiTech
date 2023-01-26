@@ -140,6 +140,11 @@
     border: 2px solid #6787FE;
 }
 
+.profile-edit-btn:hover svg {
+
+    color: #6787FE;
+}
+
 .profile-edit-btn {
     background: #6787FE;
     color: white;

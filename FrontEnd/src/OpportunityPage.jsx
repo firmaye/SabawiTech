@@ -26,7 +26,7 @@ const OpportunityPage = () => {
                 setloading(false)
                 setopportunitylist(result)
             }
-        }).catch((error) => { console.log(error) });
+        }).catch((error) => { });
     }
     useEffect(() => {
         // if (JSON.parse(localStorage.getItem('user')) == null) {
@@ -38,7 +38,6 @@ const OpportunityPage = () => {
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
-    console.log(opportunitylist)
     let sublist = opportunitylist.filter((elt) => {
         if (currentFilter.location.length == 0) {
             return elt
@@ -89,7 +88,6 @@ const OpportunityPage = () => {
             }
         }
     })
-    console.log(sublist.length)
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (

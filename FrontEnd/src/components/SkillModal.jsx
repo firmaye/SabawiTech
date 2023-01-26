@@ -13,7 +13,6 @@ const SkillModal = ({ skilllist }) => {
     useEffect(() => {
         setskilllistmodal(skilllist)
     }, [])
-    console.log(skilllistmodal)
 
     let successModal = () => {
         dispatch(setModal("success"))
@@ -28,7 +27,6 @@ const SkillModal = ({ skilllist }) => {
         })
     }
     let handleSubmit = (event) => {
-        console.log(skilllistmodal)
         let skilllistedited = skilllistmodal.map((element) => {
             delete element._id
             return element
@@ -37,7 +35,6 @@ const SkillModal = ({ skilllist }) => {
             skill: skilllistedited
         }
         body = JSON.stringify(body)
-        console.log(body)
         event.preventDefault()
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/skill/${userid}`, {
@@ -49,13 +46,10 @@ const SkillModal = ({ skilllist }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 successModal()
             })
             .catch((error) => {
                 errorModal()
-                console.log(error)
-                console.error('Error:', error);
             });
     }
     const [newskill, setnewskill] = useState("")
@@ -114,7 +108,7 @@ const SkillModal = ({ skilllist }) => {
                                         }]); setnewskill("")
                                     }
                                 }} className="skill-edit-btn">
-                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                    <FontAwesomeIcon icon={faPlus} />
                                 </button>
                             </div>
                         </div>

@@ -15,6 +15,7 @@ const titleSchema = Yup.object().shape({
 })
 const TitleModal = ({ profileinfo }) => {
     const dispatch = useDispatch()
+    const [buttonloading, setbuttonloading] = useState(false)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -43,9 +44,9 @@ const TitleModal = ({ profileinfo }) => {
             <div className="modal-dialog" role="document">
                 <Formik
                     initialValues={{
-                        formtitle: title
+                        formtitle: profileinfo.title
                         ,
-                        formdescription: description
+                        formdescription: profileinfo.description
                     }}
                     validateOnBlur={false}
                     validationSchema={titleSchema}
@@ -55,7 +56,6 @@ const TitleModal = ({ profileinfo }) => {
                             titleOverview: values.formdescription
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         setbuttonloading(true)
 
                         let userid = JSON.parse(localStorage.getItem('user')).id
@@ -68,12 +68,9 @@ const TitleModal = ({ profileinfo }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
-
-                                console.log(error)
                                 errorModal()
                             });
 

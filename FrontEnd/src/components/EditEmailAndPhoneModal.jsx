@@ -7,6 +7,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import 'react-phone-number-input/style.css'
 import PhoneInput from 'react-phone-number-input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const emailSchema = Yup.object().shape({
     formemail: Yup.string()
         .min(2, 'Too Short!')
@@ -59,9 +61,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                             phoneNo: values.formphone
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
-                        console.log(userid)
                         setbuttonloading(true)
 
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/emailPhone/${userid}`, {
@@ -73,11 +73,9 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
-                                console.log(error)
                                 errorModal()
                             });
 

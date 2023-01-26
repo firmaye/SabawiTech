@@ -68,14 +68,12 @@ const Signup = () => {
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            console.log(data)
                             if (data.accessToken) {
                                 localStorage.setItem("user", JSON.stringify(data));
                             }
                             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
                         })
                         .catch((error) => {
-                            console.log(error)
                             console.error('Error:', error);
                         });
                 }}

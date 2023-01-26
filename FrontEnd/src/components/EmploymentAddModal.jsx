@@ -66,7 +66,6 @@ const EmploymentModal = () => {
                     validateOnBlur={false}
                     validationSchema={EmploymentSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             empAt: values.formcompanyname,
                             empCountry: values.formcountry,
@@ -77,7 +76,6 @@ const EmploymentModal = () => {
                             empDescription: values.formdescription,
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/employmentHistory/${userid}`, {
@@ -89,12 +87,10 @@ const EmploymentModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                // console.log(error)
                                 console.error('Error:', error);
                             });
                     }}
@@ -191,7 +187,6 @@ const EmploymentModal = () => {
                                                                 <label>Period To</label>
                                                                 <DatePicker onChange={(date) => { setFieldValue("formperiodTo", date.$d.toString()); }} />
 
-                                                                <input {...props} />
                                                                 <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
                                                             </div>
                                                         </div>

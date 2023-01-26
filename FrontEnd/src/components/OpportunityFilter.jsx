@@ -6,7 +6,6 @@ const OpportunityFilter = () => {
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
 
-    console.log(currentFilter)
     return (
         <div className="filter-container col-xl-4">
             <div className="filter-box">

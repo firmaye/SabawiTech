@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "../css/errormodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 const ErrorModal = () => {
     const dispatch = useDispatch()
@@ -27,7 +29,7 @@ const ErrorModal = () => {
                     <div className="modal-content col-11">
                         <div className="modal-header flex-column">
                             <div className="icon-box">
-                                <i className="fa fa-exclamation-triangle"></i>
+                                <FontAwesomeIcon icon={faExclamationTriangle} />
                             </div>
                             <h4 className="modal-title w-100">Error</h4>
                             <button onClick={closeErrorModal} type="button" className="delete-portifolio-modal-close" >

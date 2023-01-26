@@ -4,9 +4,11 @@ import "../css/employmenteditmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { DatePicker } from 'antd';
-
 import { Formik } from 'formik';
 import * as Yup from 'yup'; import { CountryDropdown } from 'react-country-region-selector';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 const EmploymentSchema = Yup.object().shape({
     formcompanyname: Yup.string()
         .required('Required'),
@@ -25,7 +27,6 @@ const EmploymentSchema = Yup.object().shape({
 })
 const EmploymentEditModal = ({ selected }) => {
     const dispatch = useDispatch()
-    console.log(selected)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -68,7 +69,6 @@ const EmploymentEditModal = ({ selected }) => {
                     validateOnBlur={false}
                     validationSchema={EmploymentSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             empAt: values.formcompanyname,
                             empCountry: values.formcountry,
@@ -79,7 +79,6 @@ const EmploymentEditModal = ({ selected }) => {
                             empDescription: values.formdescription,
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -92,12 +91,10 @@ const EmploymentEditModal = ({ selected }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                // console.log(error)
                                 console.error('Error:', error);
                             });
                     }}
@@ -183,9 +180,8 @@ const EmploymentEditModal = ({ selected }) => {
 
                                                             <div className="education-modal-input-group">
                                                                 <label>Period From</label>
-                                                                <DatePicker onChange={(date) => { setFieldValue("formperiodFrom", date.$d.toString()); }} />
+                                                                <DatePicker defaultValue={dayjs(values.formperiodFrom)} onChange={(date) => { setFieldValue("formperiodFrom", date.$d.toString()); }} />
 
-                                                                <input {...props} />
                                                                 <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
                                                             </div>
                                                         </div>
@@ -194,9 +190,8 @@ const EmploymentEditModal = ({ selected }) => {
 
                                                             <div className="education-modal-input-group">
                                                                 <label>Period To</label>
-                                                                <DatePicker onChange={(date) => { setFieldValue("formperiodTo", date.$d.toString()); }} />
+                                                                <DatePicker defaultValue={dayjs(values.formperiodTo)} onChange={(date) => { setFieldValue("formperiodTo", date.$d.toString()); }} />
 
-                                                                <input {...props} />
                                                                 <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
                                                             </div>
                                                         </div>

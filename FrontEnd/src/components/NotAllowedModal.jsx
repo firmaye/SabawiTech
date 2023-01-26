@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "../css/successmodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { redirect } from 'react-router-dom';
+import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 
 const NotAllowed = () => {
     const dispatch = useDispatch()
@@ -24,7 +26,7 @@ const NotAllowed = () => {
                     <div className="modal-content">
                         <div className="modal-header flex-column">
                             <div className="icon-box">
-                                <i className="fa fa-exclamation"></i>
+                                <FontAwesomeIcon icon={faExclamation} />
                             </div>
                             <h4 className="modal-title w-100">Please Signin or Signup to view details</h4>
                             <button onClick={closeNotAllowed} type="button" className="delete-portifolio-modal-close" >

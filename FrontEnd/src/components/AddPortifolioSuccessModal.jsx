@@ -6,6 +6,8 @@ import "../css/successmodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
 const AddPortifolioSuccessModal = () => {
     const dispatch = useDispatch()
     const [modalstyle, setmodalstyle] = useState({
@@ -27,7 +29,7 @@ const AddPortifolioSuccessModal = () => {
                     <div className="modal-content col-11">
                         <div className="modal-header flex-column">
                             <div className="icon-box">
-                                <i className="fa fa-check"></i>
+                                <FontAwesomeIcon icon={faCheck} />
                             </div>
                             <h4 className="modal-title w-100">Success</h4>
                             <button onClick={closeSuccessModal} type="button" className="success-portifolio-modal-close" >

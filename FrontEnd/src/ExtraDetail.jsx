@@ -6,9 +6,12 @@ import * as Yup from 'yup';
 import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
 import ErrorModal from './components/ErrorModal'
 import { useDispatch, useSelector } from 'react-redux'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { setModal } from './redux/profilemodal'
 import FadeIn from 'react-fade-in/lib/FadeIn';
 import Loading from './components/Loading';
+import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ExtraDetail = () => {
     if (JSON.parse(localStorage.getItem('user')) == null) {
@@ -40,6 +43,8 @@ const ExtraDetail = () => {
     const [descritpion, setdescritpion] = useState("");
     const [imageerror, setimageerror] = useState("")
     const [skillerror, setskillerror] = useState("")
+    const [buttonloading, setbuttonloading] = useState(false)
+
     let setImagePath = (e) => {
         setSelectedImage(e.target.files[0])
 
@@ -64,6 +69,8 @@ const ExtraDetail = () => {
             skills
         );
         let userid = JSON.parse(localStorage.getItem('user')).id
+        setbuttonloading(true)
+
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/register/${userid}`, {
             method: 'PATCH',
             body: formData
@@ -88,7 +95,7 @@ const ExtraDetail = () => {
             setSelectedImage("")
             document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
-            console.log("File not supported. Kindly Upload the Image of below given extension ")
+            setimageerror("Please Select Valid Image")
         }
     }
     let checkPhotoExistence = () => {
@@ -102,14 +109,11 @@ const ExtraDetail = () => {
     }
     let checkSkillExistence = () => {
 
-        console.log(skills.length)
         if (skills.length == 0) {
             setskillerror("Please Add A Work Skill")
-            console.log(skillerror)
             return false
         } else {
             setskillerror("")
-            console.log(skillerror)
             return true
         }
     }
@@ -118,14 +122,12 @@ const ExtraDetail = () => {
     const [username, setusername] = useState("")
     useEffect(() => {
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
-            console.log(result)
             setloading(false)
 
             setusername(`${result.firstName} ${result.lastName} `)
-        }).catch((error) => { console.log(error) });
+        }).catch((error) => { });
     }, [])
     const [selectedpart, setselectedpart] = useState("")
-    console.log(selectedpart)
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
 
 
@@ -153,8 +155,7 @@ const ExtraDetail = () => {
                                             Profile Image
                                         </div>
                                         <button className={selectedpart == "profileImage" || selectedpart == "title" || selectedpart == "skills" ? "selected" : ""}>
-                                            <i className="fa fa-check" aria-hidden="true"></i>
-
+                                            <FontAwesomeIcon icon={faCheck} />
                                         </button>
                                     </div>
                                     <div className="extra-detail-edit-extra-detail">
@@ -162,7 +163,7 @@ const ExtraDetail = () => {
                                             Title And Description
                                         </div>
                                         <button className={selectedpart == "title" || selectedpart == "skills" ? "selected" : ""} >
-                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                            <FontAwesomeIcon icon={faCheck} />
 
                                         </button>
                                     </div>
@@ -171,7 +172,7 @@ const ExtraDetail = () => {
                                             Skills
                                         </div>
                                         <button className={selectedpart == "skills" ? "selected" : ""}>
-                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                            <FontAwesomeIcon icon={faCheck} />
 
                                         </button>
                                     </div>
@@ -180,7 +181,7 @@ const ExtraDetail = () => {
                                         Select Template
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -189,7 +190,7 @@ const ExtraDetail = () => {
                                         Add details
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -198,7 +199,7 @@ const ExtraDetail = () => {
                                         Preview
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div> */}
@@ -288,7 +289,6 @@ const ExtraDetail = () => {
                                         validateOnBlur={false}
                                         validationSchema={titleSchema}
                                         onSubmit={async (values, { setSubmitting }, formik) => {
-                                            console.log(values)
                                             setSubmitting(false);
                                             setdescritpion(values.formdescription)
                                             settitle(values.formtitle);
@@ -396,7 +396,7 @@ const ExtraDetail = () => {
                                                                 <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />
                                                                 <div className="col col-auto">
                                                                     <button onClick={(event) => { event.preventDefault(); setskills([...skills, newskills]); setnewskills("") }} className="profile-edit-btn">
-                                                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                                                        <FontAwesomeIcon icon={faPlus} />
                                                                     </button>
                                                                 </div>
                                                             </div>
@@ -405,7 +405,11 @@ const ExtraDetail = () => {
                                                         <div className="row">
                                                             <div className="extra-detail-buttons ">
                                                                 <button onClick={(event) => { event.preventDefault(); setselectedpart("title") }} className="see-public">Back </button>
-                                                                <button onClick={() => { checkSkillExistence() ? handleSubmit() : () => { } }} className="setting">Finish</button>
+                                                                {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                                                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                                    Loading...
+                                                                </button> : <button onClick={() => { checkSkillExistence() ? handleSubmit() : () => { } }} className="setting">Finish</button>}
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -562,7 +566,7 @@ const ExtraDetail = () => {
                                                             <input onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />
                                                             <div className="col col-auto">
                                                                 <button onClick={() => { setskills([...skills, newskills]) }} className="profile-edit-btn">
-                                                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                                                    <FontAwesomeIcon icon={faPlus} />
                                                                 </button>
                                                             </div>
                                                         </div>

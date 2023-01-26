@@ -4,6 +4,7 @@ import "../css/certificationaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { DatePicker } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -59,7 +60,6 @@ const CertificationModal = () => {
                     validateOnBlur={false}
                     validationSchema={CertificationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             certTitle: values.formtitle,
                             certProvider: values.formprovider,
@@ -67,7 +67,6 @@ const CertificationModal = () => {
                             dateIssued: values.fromdateissued
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -80,12 +79,10 @@ const CertificationModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
 
@@ -150,7 +147,6 @@ const CertificationModal = () => {
                                                                 <label>Date Issued</label>
                                                                 <DatePicker onChange={(date) => { setFieldValue("fromdateissued", date.$d.toString()); }} />
 
-                                                                <input {...props} />
                                                                 <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
                                                             </div>
                                                         </div>

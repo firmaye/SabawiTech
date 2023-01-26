@@ -4,6 +4,8 @@ import "./css/addportifolio.css"
 import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 import ErrorModal from './components/ErrorModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from './redux/profilemodal'
@@ -34,18 +36,14 @@ const AddPortifolio = () => {
 
         if (skills.length == 0) {
             setskillerror("Please Add A Work Skill")
-            console.log(skillerror)
             return false
         } else {
             setskillerror("")
-            console.log(skillerror)
             return true
         }
     }
     let handleSubmit = (event) => {
         checkSkillExistence()
-        console.log(workThumbnail)
-        console.log(skills)
         if (workTitle == "") {
             seterrorworkTitle("Required")
         } else {
@@ -85,12 +83,10 @@ const AddPortifolio = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     successModal()
                 })
                 .catch((error) => {
                     errorModal()
-                    console.log(error)
                     console.error('Error:', error);
                 });
         }
@@ -98,14 +94,12 @@ const AddPortifolio = () => {
     function fileValue(value) {
         var path = value.value;
         var extenstion = path.split('.').pop();
-        console.log(value.files[0])
         setworkThumbnail(value.files[0])
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
             document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
             document.getElementById("filename").innerHTML = filename;
         } else {
-            console.log("not selected")
             seterrorworkThumbnail("")
             document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
@@ -113,7 +107,6 @@ const AddPortifolio = () => {
         }
     }
     let checkPhotoExistence = () => {
-        console.log(workThumbnail)
         if (workThumbnail == "" || workThumbnail == undefined || workThumbnail == "Please Change Image") {
             if (workThumbnail == "Please Change Image") {
                 seterrorworkThumbnail("Please Change Image")
@@ -148,7 +141,7 @@ const AddPortifolio = () => {
                                         Add Project
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -157,7 +150,7 @@ const AddPortifolio = () => {
                                         Select Template
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -166,7 +159,7 @@ const AddPortifolio = () => {
                                         Add details
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -175,7 +168,7 @@ const AddPortifolio = () => {
                                         Preview
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div> */}
@@ -267,7 +260,7 @@ const AddPortifolio = () => {
                                                     <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />
                                                     <div className="col col-auto">
                                                         <button onClick={() => { if (newskills != "") { setskills([...skills, newskills]); setnewskills("") } }} className="profile-edit-btn">
-                                                            <i className="fa fa-plus" aria-hidden="true"></i>
+                                                            <FontAwesomeIcon icon={faPlus} />
                                                         </button>
                                                     </div>
 

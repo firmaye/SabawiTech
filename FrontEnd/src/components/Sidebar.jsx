@@ -1,29 +1,31 @@
+import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useRef, useState } from 'react';
 import '../css/sidebar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const sidebarNavItems = [
     {
         display: 'Add Project',
-        icon: <i className='fa fa-pencil'></i>
+        icon: <FontAwesomeIcon icon={faPencil} />
     },
     {
         display: 'Select template',
-        icon: <i className='fa fa-pencil'></i>,
+        icon: <FontAwesomeIcon icon={faPencil} />,
 
     },
     {
         display: 'Add details',
-        icon: <i className='fa fa-pencil'></i>,
+        icon: <FontAwesomeIcon icon={faPencil} />,
 
     },
     {
         display: 'Preview',
-        icon: <i className='fa fa-pencil'></i>,
+        icon: <FontAwesomeIcon icon={faPencil} />,
 
     },
     {
         display: 'Orders',
-        icon: <i className='fa fa-pencil'></i>,
+        icon: <FontAwesomeIcon icon={faPencil} />,
 
     },
 ]

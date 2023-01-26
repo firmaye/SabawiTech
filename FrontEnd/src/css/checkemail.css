@@ -1,0 +1,75 @@
+.checkemailbody .heading-section {}
+
+.checkemailbody .heading-section h2 {
+    color: #000000;
+    font-size: 28px;
+    margin-top: 0;
+    line-height: 1.4;
+    font-weight: 400;
+}
+
+.checkemailbody .heading-section .subheading {
+    margin-bottom: 20px !important;
+    display: inline-block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(0, 0, 0, .4);
+    position: relative;
+}
+
+.checkemailbody .heading-section .subheading::after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -10px;
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: #30e3ca;
+    margin: 0 auto;
+}
+
+.checkemailbody .heading-section-white {
+    color: rgba(255, 255, 255, .8);
+}
+
+.checkemailbody .heading-section-white h2 {
+
+    line-height: 1;
+    padding-bottom: 0;
+}
+
+.checkemailbody .heading-section-white h2 {
+    color: #ffffff;
+}
+
+.checkemailbody .heading-section-white .subheading {
+    margin-bottom: 0;
+    display: inline-block;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, .4);
+}
+
+
+.checkemailbody ul.social {
+    padding: 0;
+}
+
+.checkemailbody ul.social li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.checkemailbody .btn-redirect {
+    color: white;
+    background: #6787FE;
+}
+
+.checkemailbody .btn-redirect:hover {
+    color: #6787FE;
+    background: white;
+    border: 1px solid #6787FE;
+}

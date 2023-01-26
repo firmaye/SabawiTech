@@ -4,9 +4,12 @@ import "../css/certificationeditmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { DatePicker } from 'antd';
-
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
+
 const CertificationSchema = Yup.object().shape({
     formtitle: Yup.string()
         .required('Required'),
@@ -20,7 +23,6 @@ const CertificationSchema = Yup.object().shape({
 })
 const CertificationEditModal = ({ selected }) => {
     const dispatch = useDispatch()
-    console.log(selected)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -59,7 +61,6 @@ const CertificationEditModal = ({ selected }) => {
                     validateOnBlur={false}
                     validationSchema={CertificationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             certTitle: values.formtitle,
                             certProvider: values.formprovider,
@@ -67,7 +68,6 @@ const CertificationEditModal = ({ selected }) => {
                             dateIssued: values.fromdateissued
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -80,12 +80,10 @@ const CertificationEditModal = ({ selected }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
 
@@ -148,9 +146,7 @@ const CertificationEditModal = ({ selected }) => {
 
                                                             <div className="certification-modal-input-group">
                                                                 <label>Date Issued</label>
-                                                                <DatePicker onChange={(date) => { setFieldValue("fromdateissued", date.$d.toString()); }} />
-
-                                                                <input {...props} />
+                                                                <DatePicker defaultValue={dayjs(values.fromdateissued)} onChange={(date) => { setFieldValue("fromdateissued", date.$d.toString()); }} />
                                                                 <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
                                                             </div>
                                                         </div>

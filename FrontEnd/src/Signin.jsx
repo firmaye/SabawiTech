@@ -14,7 +14,6 @@ const Signin = () => {
                         password: password
                     }
                     body = JSON.stringify(body)
-                    console.log(body)
                     return new Promise((resolve, reject) => {
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
                             method: 'POST',
@@ -25,7 +24,6 @@ const Signin = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 if (data.message == "User Not found.") {
                                     resolve(false);
                                 } else if (data.message == "Invalid Password!") {
@@ -38,7 +36,6 @@ const Signin = () => {
                             })
                             .catch((error) => {
                                 // errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
                     })
@@ -59,7 +56,6 @@ const Signin = () => {
                             password: values.password
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         setSubmitting(false);
                         await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
                             method: 'POST',
@@ -71,7 +67,6 @@ const Signin = () => {
                             .then((response) => response.json())
                             .then((data) => {
                                 setSubmitting(false);
-                                console.log(data)
                                 if (data.accessToken) {
                                     localStorage.setItem("user", JSON.stringify(data));
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}`
@@ -81,7 +76,6 @@ const Signin = () => {
                             .catch((error) => {
                                 // errorModal()
                                 setSubmitting(false);
-                                console.log(error)
                                 console.error('Error:', error);
                             });
 

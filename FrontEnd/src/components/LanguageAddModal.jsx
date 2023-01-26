@@ -4,6 +4,9 @@ import "../css/languageaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import uuid from 'react-uuid';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 const LanguageModal = ({ language }) => {
     const dispatch = useDispatch()
 
@@ -39,10 +42,7 @@ const LanguageModal = ({ language }) => {
     }
     let handleSubmit = (event) => {
         let error = false
-        console.log(languagelistmodal)
         languagelistmodal.map((element) => {
-
-            console.log("executed")
             if (element.languageName == "") {
                 error = true
             }
@@ -57,8 +57,6 @@ const LanguageModal = ({ language }) => {
                 return false
             } else { return true }
         })
-        console.log(languageedited)
-        console.log(error)
         if (!error) {
 
             let languageedited = languagelistmodal.map((element) => {
@@ -66,10 +64,8 @@ const LanguageModal = ({ language }) => {
                 return element
             })
             let language = JSON.stringify({ language: languageedited })
-            console.log(language)
             event.preventDefault()
             let userid = JSON.parse(localStorage.getItem('user')).id
-            console.log(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`)
             setbuttonloading(true)
 
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`, {
@@ -81,12 +77,10 @@ const LanguageModal = ({ language }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     successModal()
                 })
                 .catch((error) => {
                     errorModal()
-                    console.log(error)
                     console.error('Error:', error);
                 });
         }
@@ -156,21 +150,20 @@ const LanguageModal = ({ language }) => {
 
                                                             setlanguagelistmodal((oldlist) => {
                                                                 const found = oldlist.filter(childelement => childelement._id != element._id);
-                                                                console.log(found)
-                                                                    // found.languageName = event.target.value
-                                                                    // const result = oldlist.map(oldelement => {
-                                                                    //     if (oldelement._id == element._id) {
-                                                                    //         return found
-                                                                    //     } else {
-                                                                    //         return oldelement
-                                                                    //     }
-                                                                    // });
-                                                                    // return result;
-                                                                    ;
+                                                                // found.languageName = event.target.value
+                                                                // const result = oldlist.map(oldelement => {
+                                                                //     if (oldelement._id == element._id) {
+                                                                //         return found
+                                                                //     } else {
+                                                                //         return oldelement
+                                                                //     }
+                                                                // });
+                                                                // return result;
+                                                                ;
                                                                 return found
                                                             })
                                                         }} className="language-edit-btn">
-                                                            <i className="fa fa-trash" aria-hidden="true"></i>
+                                                            <FontAwesomeIcon icon={faTrash} />
                                                         </button>
                                                     </div>
                                                 )
@@ -205,7 +198,6 @@ const LanguageModal = ({ language }) => {
                                                         }
                                                         if (langtobeadded != "" &&
                                                             proficiencytobeadded != "") {
-                                                            console.log("execute")
                                                             setlanguagelistmodal((oldstate) => {
                                                                 let newstate = [...oldstate, {
                                                                     "_id": uuid(),
@@ -218,7 +210,7 @@ const LanguageModal = ({ language }) => {
                                                             setproficiencytobeadded("")
                                                         }
                                                     }} className="language-edit-btn">
-                                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                                        <FontAwesomeIcon icon={faPlus} />
                                                     </button>
                                                 </div>
                                             </div>

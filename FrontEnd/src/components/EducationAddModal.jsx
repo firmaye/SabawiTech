@@ -6,6 +6,7 @@ import { setModal } from '../redux/profilemodal';
 import { DatePicker } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const EducationSchema = Yup.object().shape({
     formattendedFrom: Yup.string()
         .required('Required'),
@@ -57,7 +58,6 @@ const EducationModal = () => {
                     validateOnBlur={false}
                     validationSchema={EducationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             schoolName: values.formschoolname,
                             dateAttendedFrom: values.formattendedFrom,
@@ -65,7 +65,6 @@ const EducationModal = () => {
                             areaOfStudy: values.formareaofstudy
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/education/${userid}`, {
@@ -77,13 +76,10 @@ const EducationModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
-                                console.error('Error:', error);
                             });
                     }}
                 >

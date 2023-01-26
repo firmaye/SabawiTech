@@ -9,7 +9,6 @@ export const profileModalSlice = createSlice({
     initialState,
     reducers: {
         setModal: (state, action) => {
-            console.log(action.payload)
             state.openedmodal = action.payload
         },
     },
