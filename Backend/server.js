@@ -2,6 +2,8 @@ const express = require('express')
 const app = express()
 const db = require("./app/models");
 const cors = require("cors")
+
+require("dotenv").config();
 const { default: AdminBro } = require('admin-bro');
 // 
 // AdminBro setups
@@ -40,7 +42,7 @@ app.use('/uploads', express.static('uploads'));
 
 
 db.mongoose
-  .connect(db.url, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -70,6 +72,8 @@ require("./app/routes/userRoutes/education.routes")(app);
 require("./app/routes/userRoutes/certification.routes")(app);
 require("./app/routes/userRoutes/employmentHistory.routes")(app);
 require("./app/routes/userRoutes/otherExperience.routes")(app);
+
+require("./app/routes/userRoutes/verify.routes")(app);
 require("./app/routes/blog.routes")(app);
 require("./app/routes/internship.routes")(app);
 require("./app/routes/coverLetter.routes")(app);
