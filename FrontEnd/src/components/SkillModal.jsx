@@ -4,10 +4,12 @@ import { useState } from 'react'
 import "../css/skillmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import SuccessModal from './SuccessModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import uuid from 'react-uuid';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 const SkillModal = ({ skilllist }) => {
     const dispatch = useDispatch()
+    const [buttonloading, setbuttonloading] = useState(false)
 
     const [skilllistmodal, setskilllistmodal] = useState([])
     useEffect(() => {
@@ -36,6 +38,7 @@ const SkillModal = ({ skilllist }) => {
         }
         body = JSON.stringify(body)
         event.preventDefault()
+        setbuttonloading(true)
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/skill/${userid}`, {
             method: 'PATCH',
@@ -115,7 +118,10 @@ const SkillModal = ({ skilllist }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeSkillModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                        {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button> : <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                     </div>
                 </div>
             </div>

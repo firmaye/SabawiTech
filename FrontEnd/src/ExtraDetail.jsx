@@ -14,9 +14,7 @@ import Loading from './components/Loading';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const ExtraDetail = () => {
-    if (JSON.parse(localStorage.getItem('user')) == null) {
-        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
-    }
+
     const [loading, setloading] = useState(true)
 
     const dispatch = useDispatch()
@@ -121,11 +119,16 @@ const ExtraDetail = () => {
 
     const [username, setusername] = useState("")
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
-            setloading(false)
+        if (JSON.parse(localStorage.getItem('user')) == null) {
+            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+        } else {
 
-            setusername(`${result.firstName} ${result.lastName} `)
-        }).catch((error) => { });
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
+                setloading(false)
+
+                setusername(`${result.firstName} ${result.lastName} `)
+            }).catch((error) => { });
+        }
     }, [])
     const [selectedpart, setselectedpart] = useState("")
     const currentModal = useSelector((state) => state.profileModal.openedmodal)

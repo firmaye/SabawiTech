@@ -48,7 +48,6 @@ const Profile = () => {
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
     useEffect(() => {
-
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {

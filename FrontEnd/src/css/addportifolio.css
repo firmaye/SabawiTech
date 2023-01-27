@@ -337,6 +337,10 @@
     color: #6787FE
 }
 
+.skill-list-modal-close svg {
+    color: #6787FE !important
+}
+
 /* end of skills css */
 @media (max-width: 992px) {
 

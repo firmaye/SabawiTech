@@ -126,7 +126,8 @@ const LanguageModal = ({ language }) => {
 
                                                         </div>
                                                         <div className="col-5 language-modal-existing-input-group">
-                                                            <input className="" type="text" onChange={(event) => {
+                                                            {/* <input className="" type="text" placeholder="Please Set Proficiency" name="" /> */}
+                                                            <select value={element.languageProficiency} onChange={(event) => {
 
                                                                 setlanguagelistmodal((oldlist) => {
                                                                     const found = oldlist.find(childelement => childelement._id == element._id);
@@ -141,7 +142,13 @@ const LanguageModal = ({ language }) => {
                                                                     return result;
                                                                     ;
                                                                 })
-                                                            }} value={element.languageProficiency} placeholder="Please Set Proficiency" name="" />
+                                                            }} className="" selected={""} name="" id="">
+                                                                <option value={""}></option>
+                                                                <option value={"Basic"} >Basic</option>
+                                                                <option value={"Converstational"} >Converstational</option>
+                                                                <option value={"Fluent"} >Fluent</option>
+                                                                <option value={"Native"} >Native/Bilingual</option>
+                                                            </select>
                                                         </div>
                                                         <button onClick={(event) => {
                                                             event.preventDefault()
@@ -171,12 +178,21 @@ const LanguageModal = ({ language }) => {
                                             <div className="language-modal-location-container d-flex align-items-center">
 
                                                 <div className="language-modal-input-group">
+                                                    <label htmlFor="">Language Name</label>
                                                     <input value={langtobeadded} className="" onChange={(event) => { setlangtobeadded(event.target.value) }} type="text" placeholder="Language Name" name="" />
                                                     <div style={{ position: "absolute" }} className='input-error-display' >{langerror}</div>
 
                                                 </div>
                                                 <div className="language-modal-input-group">
-                                                    <input value={proficiencytobeadded} className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} type="text" placeholder="Proficiency" name="" />
+                                                    <label htmlFor="">Proficiency</label>
+                                                    {/* <input type="text" placeholder="Proficiency" name="" /> */}
+                                                    <select value={proficiencytobeadded} className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} selected={""} name="" id="">
+                                                        <option value={""}></option>
+                                                        <option value={"Basic"} >Basic</option>
+                                                        <option value={"Converstational"} >Converstational</option>
+                                                        <option value={"Fluent"} >Fluent</option>
+                                                        <option value={"Native"} >Native/Bilingual</option>
+                                                    </select>
                                                     <div style={{ position: "absolute" }} className='input-error-display' >{proficiencyerror}</div>
                                                 </div>
                                                 <div className="">

@@ -46,7 +46,8 @@
 /* ==========================================================================
      #FORM
      ========================================================================== */
-.language-modal-page-wrapper input {
+.language-modal-page-wrapper input,
+.language-modal-page-wrapper select {
     outline: none;
     margin: 0;
     border: none;

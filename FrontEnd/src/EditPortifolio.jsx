@@ -46,7 +46,6 @@ const EditPortifolio = () => {
         }
     }
     const blobUrlToFile = (blobUrl) => new Promise((resolve) => {
-        console.log(blobUrl)
         fetch(blobUrl, {
             headers: {
                 'Access-Control-Allow-Origin': '*'
@@ -59,7 +58,6 @@ const EditPortifolio = () => {
                 const file = new File([blob], '.png', { type: blob.type })
                 resolve(file)
             }).catch((error) => {
-                console.log(error)
             })
         })
     })

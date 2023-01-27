@@ -2,12 +2,14 @@ import { useState } from 'react'
 import './css/authentication.css'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useGoogleLogin } from '@react-oauth/google';
 
 const Signin = () => {
     const [password, setpassword] = useState("")
+    const [emailerror, setemailerror] = useState("")
     const SigninSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required('Required')
-            .test('Unique Email', "Incorrect User Name or Password", // <- key, message
+        email: Yup.string().email('Invalid email').required({})
+            .test('Invalid Email', "Invalid Email or Password", // <- key, message
                 function (value) {
                     let body = {
                         email: value,
@@ -24,11 +26,17 @@ const Signin = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                if (data.message == "User Not found.") {
-                                    resolve(false);
-                                } else if (data.message == "Invalid Password!") {
-                                    resolve(false);
-
+                                if (!data.success) {
+                                    resolve(this.createError({ message: data.message }));
+                                    // if (data.message == "User Not found.") {
+                                    //     resolve(false);
+                                    // }
+                                    // if (data.message == "Invalid Password!") {
+                                    //     resolve(false);
+                                    // }
+                                    // if (data.message == "User is not Registered") {
+                                    //     resolve(false);
+                                    // }
                                 } else {
                                     resolve(true)
                                 }
@@ -40,7 +48,61 @@ const Signin = () => {
                             });
                     })
                 })
+        , password: Yup.string()
+            .required('Required'),
     })
+    const [googleerror, setgoogleerror] = useState("")
+
+    const loginusingGoogle =
+        useGoogleLogin({
+            onSuccess: async response => {
+                let body = {
+                    access_token: response.access_token
+                }
+                body = JSON.stringify(body)
+                // fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+                //     method: "GET",
+                //     headers: {
+                //         "Authorization": `Bearer ${response.access_token}`
+                //     }
+                // }).then(response => response.json()).then((data) => {
+                // })
+                try {
+                    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: body
+                    }).then(response => response.json()).then((data) => {
+                        if (data.success) {
+                            if (data.exist) {
+                                if (data.info == "User signed up with different method") {
+                                    setgoogleerror("User Signed In Using Other Methods.")
+                                } else {
+                                    // redirect to home page
+                                    if (data.info.accessToken) {
+                                        localStorage.setItem("user", JSON.stringify(data.info));
+                                    }
+                                    window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`
+                                }
+                            } else {
+                                // redirect to extra detail page
+                                if (data.accessToken) {
+                                    localStorage.setItem("user", JSON.stringify(data.info));
+                                }
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
+                            }
+                        } else {
+                            setgoogleerror(data.info)
+                        }
+                    })
+                } catch (err) {
+
+                }
+
+            }
+        })
     return (
         <div className='main-container-parent'>
             <div className=" main-container main-container-signin">
@@ -64,11 +126,14 @@ const Signin = () => {
                             },
                             body: body
                         })
-                            .then((response) => response.json())
+                            .then((response) => {
+
+                                return response.json();
+                            })
                             .then((data) => {
                                 setSubmitting(false);
-                                if (data.accessToken) {
-                                    localStorage.setItem("user", JSON.stringify(data));
+                                if (data.success) {
+                                    localStorage.setItem("user", JSON.stringify(data.info));
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}`
                                 }
                                 // successModal()
@@ -76,7 +141,6 @@ const Signin = () => {
                             .catch((error) => {
                                 // errorModal()
                                 setSubmitting(false);
-                                console.error('Error:', error);
                             });
 
 
@@ -128,9 +192,12 @@ const Signin = () => {
                                     <button onClick={(event) => { handleSubmit(event) }} type='submit' className="sign-in">
                                         Sign In
                                     </button>
-                                    {/* <button type="button" className="login-with-google-btn" >
+                                    <button type="button" onClick={loginusingGoogle} className="login-with-google-btn" >
                                         Sign In with Google
-                                    </button> */}
+                                    </button>
+                                    <div style={{ textAlign: "center", color: "red" }}>
+                                        {googleerror}
+                                    </div>
                                     <div className='register-container' >
                                         Not Registered Yet? <a href='/signup' className='register'> Register</a>
                                     </div>

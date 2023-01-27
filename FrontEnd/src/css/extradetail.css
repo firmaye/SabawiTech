@@ -100,7 +100,8 @@
     border-radius: 10rem;
 }
 
-.extra-detail-buttons .setting {
+.extra-detail-buttons .setting,
+.extra-detail-buttons .btn-primary {
     background: #6787FE;
     color: white;
     margin: 0 20px 30px 0;
@@ -381,6 +382,10 @@
 }
 
 /* end of into css */
+.extra-detail-container .skills svg {
+    color: #6787FE;
+}
+
 @media (max-width: 992px) {
 
     .extra-detail-identity-container-parent,

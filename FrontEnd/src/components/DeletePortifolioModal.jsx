@@ -3,7 +3,7 @@ import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import "../css/deletemodal.css"
+import "../css/deleteportifoliomodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';

@@ -21,6 +21,7 @@ import ExtraDetail from "./ExtraDetail";
 import Signin from "./Signin";
 import Signup from "./Signup";
 import NotFoundPageProfile from "./components/NotFoundPageProfile";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -36,7 +37,7 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
-    errorElement: <NotFoundPageProfile />
+    // errorElement: <NotFoundPageProfile />
   },
   {
     path: "/addportifolio",
@@ -72,17 +73,18 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  {
-    path: "*",
-    element: <NotFoundPageProfile />,
-  },
+  // {
+  //   path: "*",
+  //   element: <NotFoundPageProfile />,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
+    </GoogleOAuthProvider>;
   </Provider>,
 );

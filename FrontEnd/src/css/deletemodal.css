@@ -18,6 +18,13 @@
     height: 50px;
 }
 
+#deleteModal .icon-box svg {
+    color: #6787FE;
+    font-size: 46px;
+    display: inline-block;
+    margin-top: 13px;
+}
+
 #deleteModal .modal-confirm {
     color: #636363;
     width: 400px;
