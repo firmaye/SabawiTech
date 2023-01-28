@@ -4,6 +4,8 @@ import { createSearchParams, useNavigate } from 'react-router-dom'
 import Profile from "../assets/profile.jpg"
 import OpportunityDetailPage from '../OpportunityDetailPage'
 import { setModal } from '../redux/profilemodal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock, faSignal } from '@fortawesome/free-solid-svg-icons'
 
 const Opportunity = ({ data }) => {
     let dispatch = useDispatch()
@@ -39,10 +41,10 @@ const Opportunity = ({ data }) => {
                         {data.intTitle}
                     </div>
                     <ul className="opportunity-title-detail">
-                        <li className="opportunity-title-detail1"><i className="fa fa-clock-o"></i>
+                        <li className="opportunity-title-detail1"><FontAwesomeIcon icon={faClock} />
                             <div>{data.intDuration}</div>
                         </li>
-                        <li className="opportunity-title-detail2"><i className="fa fa-signal"></i>
+                        <li className="opportunity-title-detail2"><FontAwesomeIcon icon={faSignal} />
                             {/* <div>Expensive</div> */}
                         </li>
                     </ul>

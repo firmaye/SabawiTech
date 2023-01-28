@@ -7,8 +7,10 @@ import SuccessModal from './components/SuccessModal'
 import "./css/contact.css"
 import { setModal } from './redux/profilemodal'
 import { Formik } from 'formik';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import * as Yup from 'yup';
 import Footer from './components/footer'
+import { faAddressBook, faEnvelope, faMapMarker, faMapMarkerAlt, faPhone } from '@fortawesome/free-solid-svg-icons'
 const CertificationSchema = Yup.object().shape({
     formname: Yup.string()
         .required('Required'),
@@ -44,7 +46,6 @@ const Contact = () => {
             message: message
         }
         body = JSON.stringify(body)
-        console.log(body)
         event.preventDefault()
 
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/issues`, {
@@ -56,12 +57,10 @@ const Contact = () => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 successModal()
             })
             .catch((error) => {
                 errorModal()
-                console.log(error)
                 console.error('Error:', error);
             });
     }
@@ -85,8 +84,7 @@ const Contact = () => {
 
                                 <div className="profile-thumb-block">
                                     <div className="profile-icon-container address-container">
-
-                                        <i className="fa fa-address-book"></i>
+                                        <FontAwesomeIcon icon={faAddressBook} />
                                     </div>
                                 </div>
                                 <div className="card-content">
@@ -107,8 +105,7 @@ const Contact = () => {
                                 <div className="profile-thumb-block">
 
                                     <div className="profile-icon-container mail-container">
-
-                                        <i className="fa fa-envelope"></i>
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                     </div>
                                 </div>
                                 <div className="card-content">
@@ -127,7 +124,7 @@ const Contact = () => {
 
                                 <div className="profile-thumb-block">
                                     <div className="profile-icon-container phone-container">
-                                        <i className="fa fa-phone"></i>
+                                        <FontAwesomeIcon icon={faPhone} />
                                     </div>
                                 </div>
                                 <div className="card-content">
@@ -147,6 +144,7 @@ const Contact = () => {
                                 <div className="profile-thumb-block">
                                     <div className="profile-icon-container location-container">
                                         <i className="fa fa-map-marker"></i>
+                                        <FontAwesomeIcon icon={faMapMarkerAlt} />
                                     </div>
                                 </div>
                                 <div className="card-content">
@@ -191,7 +189,6 @@ const Contact = () => {
                                         message: values.formmessage
                                     }
                                     body = JSON.stringify(body)
-                                    console.log(body)
 
                                     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/issues`, {
                                         method: 'POST',
@@ -202,12 +199,10 @@ const Contact = () => {
                                     })
                                         .then((response) => response.json())
                                         .then((data) => {
-                                            console.log(data)
                                             successModal()
                                         })
                                         .catch((error) => {
                                             errorModal()
-                                            console.log(error)
                                             console.error('Error:', error);
                                         });
                                 }}

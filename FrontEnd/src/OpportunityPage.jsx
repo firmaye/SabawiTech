@@ -19,16 +19,14 @@ const OpportunityPage = () => {
     let getFetchUsers = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
-            // fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
-            console.log(result)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')
-                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+                window.location.href = `${import.meta.env.VITE_FRONTEND_URL} / signin`
             } else {
                 setloading(false)
                 setopportunitylist(result)
             }
-        }).catch((error) => { console.log(error) });
+        }).catch((error) => { });
     }
     useEffect(() => {
         // if (JSON.parse(localStorage.getItem('user')) == null) {
@@ -40,10 +38,8 @@ const OpportunityPage = () => {
     }, [])
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
-    console.log(currentFilter.location.length)
     let sublist = opportunitylist.filter((elt) => {
         if (currentFilter.location.length == 0) {
-            console.log("nofilter")
             return elt
         } else {
             if (currentFilter.location.includes("remote")) {
@@ -61,7 +57,6 @@ const OpportunityPage = () => {
     sublist = sublist.filter((elt) => {
 
         if (currentFilter.status.length == 0) {
-            console.log("nofilter")
             return elt
         } else {
             if (currentFilter.status.includes("open")) {
@@ -79,11 +74,8 @@ const OpportunityPage = () => {
     sublist = sublist.filter((elt) => {
 
         if (currentFilter.type.length == 0) {
-            console.log("nofilter")
             return elt
         } else {
-            console.log(elt.intType)
-            console.log(elt.intType == "paid")
             if (currentFilter.type.includes("paid")) {
                 if (elt.intType == "paid") {
                     return elt
@@ -113,11 +105,16 @@ const OpportunityPage = () => {
                     <div className="main-content-container container">
                         <div className="main-content-container-child row">
                             <OpportunityFilter />
-                            <div className="opportunities-container  col-xl-8">
+                            {sublist.length == 0 ? <div className="opportunities-container  col-xl-8 noresultscont">
+                                <img src="./Images/searchnotfound.png" alt="" />
+                                <h3>No results found on the section</h3>
+                                <p>Try again</p>
+                            </div> : <div className="opportunities-container  col-xl-8">
                                 {sublist.map((opportunity) => {
                                     return <Opportunity data={opportunity} />
                                 })}
-                            </div>
+                            </div>}
+
                         </div>
 
                     </div>

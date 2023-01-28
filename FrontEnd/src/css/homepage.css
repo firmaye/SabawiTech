@@ -1,8 +1,40 @@
+.body{
+    overflow: hidden;
+}
+nav{
+    height: 90px;
+    opacity:.9;
+}
+.navbar .container{
+    height: 104px;
+    margin-top: -12px;
+    margin-right: 18px;
+    margin-left: 30px;
+    
+}
+.navbar .collapse{
+    padding-left: 34px;
+    padding-top: 20px;
+    padding-bottom: 43px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    margin-top: 24px;
+}
+.show{
+    background-color: whitesmoke;
+}
+.navbar-toggle{
+    margin-right: 25px;
+}
+.collapse a:hover{
+    text-decoration: underline;
+}
 .content{
     display:flex;
     width:100%;
     background-image: linear-gradient( rgb(10, 66, 135), rgb(74, 120, 234));
     color:white;
+    padding: 0 29px;
 }
 .banner_content{
     width:50%;
@@ -69,7 +101,6 @@
 }
 .populartext{
     text-align: center;
-    width: 541px;
     margin-bottom: 62px;
     margin-top: 69px;
 }
@@ -106,6 +137,7 @@
 .popular{
     background-color: aliceblue;
     display: flex;
+    width:100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -128,6 +160,99 @@
 .service p{
     color:rgb(97, 97, 97)
 }
+.blogcardmodify{
+    border: none;
+}
+.latestblogcont{
+    width:100%;
+}
+.latestblogcont img{
+    width:100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: all .5s ease-in;
+    cursor: pointer;
+}
+.latestblogcont img:hover{
+    width:110%;
+    margin-left:-5%;
+}
+.latestblogimgcont{
+    width:100%;
+    height:100%;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+.latestblogprofile{
+    display:flex;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 16px;
+}
+.latestblogprofile img{
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+}
+.latestblogdesc{
+    padding: 0 16px;
+    padding-bottom: 52px;
+}
+.blogpopularcardbody{
+    border:none;
+}
+.latestblogmaincont{
+    padding: 0;
+    box-shadow: 5px 5px 33px #dcdcdc;
+    border-radius: 12px;
+}
+
+.latestblog{
+    background-color: white;
+}
+.latestblog .card-body img{
+    height: auto;
+    border-radius: 20px;
+}
+.latestblogprofile{
+    display:flex;
+    margin-left: 24px;
+}
+.latestblogprofile img{
+    margin-right:14px;
+    width: 40px;
+    height:40px;
+}
+.latestblogprofile p{
+    font-family: Poppins;
+    text-transform: capitalize;
+    font-size: 14px;
+    font-weight: 400;
+    padding-right: 10px;
+    margin-top:19px;
+}
+.latestblogprofile p span{
+    color: #6787FE;
+}
+.latestblogdesc h5{
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 32px;
+    font-family: Poppins;
+    font-style: normal;
+}
+.latestblogdesc:hover{
+    color:rgb(96, 96, 154);
+    
+}
+.latestblogdesc:hover .latestblogcont img{
+    width:110%;
+    margin-left:-5%;
+}
+
+
 .service p:nth-child(2) {
     background-color: rgb(237, 237, 237);  
     padding:2px 13px;
@@ -188,6 +313,27 @@ hr{
 .cardviewillustration img{
     width:100%
 }
+
+.grayscaleimgs img{
+    filter: grayscale(100%);
+    transition: all .3s ease-in;
+    cursor: pointer;
+    width: 100%;
+}
+.grayscaleimgs img:hover{
+    filter: grayscale(4%)
+}
+.grayscaleimgs{
+    display:flex;
+    width:100%;
+    padding-left:20px;
+    padding-right:20px;
+}
+.grayimgcont{
+    width:100%;
+    justify-content: center;
+    overflow-x: hidden;
+}
 footer hr{
     width:80vw;
 }
@@ -225,6 +371,7 @@ footer{
         margin-bottom: 90px;
     }
 }
+
 @media (max-width:770px){
     .cardview{
         flex-direction: column-reverse;
@@ -239,3 +386,20 @@ footer{
         margin-top:50px;
     }
 }
+
+@media (min-width:573px){
+    .populartext{
+        width: 573px;
+    }
+}
+@media (max-width:573px){
+    .popular{
+        padding-left:14px;
+        padding-right:14px;
+    }
+    .cardviewtext {
+        width: 113%;
+    }
+}
+
+

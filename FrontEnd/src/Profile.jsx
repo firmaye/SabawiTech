@@ -7,13 +7,13 @@ import TitleModal from './components/TitleModal';
 import { useState } from 'react';
 import SkillModal from './components/SkillModal';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setModal } from './redux/profilemodal';
 import EmploymentModal from './components/EmploymentAddModal';
 import CertificationModal from './components/CertificationAddModal';
 import CertificationEditModal from './components/CertificationEditModal';
 import EducationModal from './components/EducationAddModal';
 import LanguageModal from './components/LanguageAddModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { setModal } from './redux/profilemodal';
 import EmailAndPhoneModal from './components/EditEmailAndPhoneModal';
 import DeletePortifolioModal from './components/DeletePortifolioModal';
 import EmploymentEditModal from './components/EmploymentEditModal';
@@ -23,15 +23,15 @@ import SuccessModal from './components/SuccessModal';
 import Loading from './components/Loading';
 import FadeIn from "react-fade-in";
 import ErrorModal from './components/ErrorModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
+
 import DeleteEducationModal from './components/DeleteEducationModal';
 import DeleteEmploymentModal from './components/DeleteEmploymentModal';
 import DeleteCertificationModal from './components/DeleteCertificationModal';
-import "react-datetime/css/react-datetime.css";
 import Footer from './components/footer';
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 const Profile = () => {
     // dotenv.config()
-    console.log(import.meta.env)
     const [selectedemployment, setselectedemployment] = useState({})
     const [tobedeletededucation, settobedeletededucation] = useState({})
     const [selectededucation, setselectededucation] = useState({})
@@ -48,15 +48,11 @@ const Profile = () => {
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
     useEffect(() => {
-
-        // console.log(process)
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let userid = JSON.parse(localStorage.getItem('user')).id
-            // console.log(userid)
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
-                console.log(result)
                 setprofileinfo(result)
                 setlanguage(result.language)
                 setskilllist(result.skill)
@@ -65,7 +61,7 @@ const Profile = () => {
                 setcertification(result.certification)
                 seteducation(result.education)
                 setloading(false)
-            }).catch((error) => { console.log(error) });
+            }).catch((error) => { });
         }
     }, [])
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
@@ -112,7 +108,7 @@ const Profile = () => {
                                                     <div className="profile-photo">
                                                         <img src={profileinfo.profilePhoto == undefined || profileinfo.profilePhoto == "" ? "https://www.btklsby.go.id/images/placeholder/basic.png" : `${import.meta.env.VITE_BACKEND_URL}/uploads/images/${profileinfo.profilePhoto}`} alt="" />
                                                         <button onClick={() => { dispatch(setModal("profileimage")) }} className="profile-edit-btn">
-                                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                            <FontAwesomeIcon icon={faPencil} />
                                                         </button>
                                                     </div>
                                                 </div>
@@ -133,7 +129,7 @@ const Profile = () => {
                                             <div className="profile-buttons-mobile">
                                                 <div className="col col-auto">
                                                     <button onClick={() => { dispatch(setModal("name")) }} className="profile-edit-btn">
-                                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                        <FontAwesomeIcon icon={faPencil} />
                                                     </button>
                                                 </div>
                                             </div>
@@ -154,8 +150,8 @@ const Profile = () => {
                                             <div>
                                                 Languages
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("languagesadd"))) }} >
-                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <button onClick={() => { dispatch(setModal("languagesadd")) }} >
+                                                <FontAwesomeIcon icon={faPencil} />
 
                                             </button>
                                         </div>
@@ -176,8 +172,8 @@ const Profile = () => {
                                             <div>
                                                 Education
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("educationadd"))) }} >
-                                                <i className="fa fa-plus" aria-hidden="true"></i>
+                                            <button onClick={() => { dispatch(setModal("educationadd")) }} >
+                                                <FontAwesomeIcon icon={faPlus} />
 
                                             </button>
                                         </div>
@@ -192,15 +188,15 @@ const Profile = () => {
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { settobedeletededucation(element); dispatch(setModal(("educationdelete"))) }} >
-                                                                <i className="fa fa-trash" aria-hidden="true"></i>
+                                                            <button onClick={() => { settobedeletededucation(element); dispatch(setModal("educationdelete")) }} >
+                                                                <FontAwesomeIcon icon={faTrash} />
 
                                                             </button>
                                                         </div>
                                                         <div className="profile-edit-profile-education">
 
-                                                            <button onClick={() => { setselectededucation(element); dispatch(setModal(("educationedit"))) }} >
-                                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                            <button onClick={() => { setselectededucation(element); dispatch(setModal("educationedit")) }} >
+                                                                <FontAwesomeIcon icon={faPencil} />
 
                                                             </button>
                                                         </div>
@@ -221,8 +217,8 @@ const Profile = () => {
                                             <div>
                                                 Email And Phone Number
                                             </div>
-                                            <button onClick={() => { dispatch(setModal(("emailandphone"))) }}>
-                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <button onClick={() => { dispatch(setModal("emailandphone")) }}>
+                                                <FontAwesomeIcon icon={faPencil} />
 
                                             </button>
                                         </div>
@@ -246,8 +242,8 @@ const Profile = () => {
                                             <h5>{profileinfo.title}</h5>
                                         </div>
                                         <div className="col col-auto">
-                                            <button onClick={() => { dispatch(setModal(("title"))) }} className="profile-edit-btn">
-                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <button onClick={() => { dispatch(setModal("title")) }} className="profile-edit-btn">
+                                                <FontAwesomeIcon icon={faPencil} />
                                             </button>
                                         </div>
                                     </div>
@@ -264,7 +260,7 @@ const Profile = () => {
                                     </div>
                                     <div className="col col-auto">
                                         <button className="profile-edit-btn">
-                                            <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <FontAwesomeIcon icon={faPencil} />
                                         </button>
                                     </div>
                                 </div>
@@ -283,7 +279,7 @@ const Profile = () => {
                                         </div>
                                         <div className="col col-auto">
                                             <a href='/addportifolio' className="profile-edit-btn">
-                                                <i className="fa fa-plus" aria-hidden="true"></i>
+                                                <FontAwesomeIcon icon={faPlus} />
                                             </a>
                                         </div>
                                     </div>
@@ -296,10 +292,10 @@ const Profile = () => {
                                                             <img className="col-12" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/images/` + element.workThumbnail} alt="" />
                                                             <div className="portifolio-image-container-icons">
                                                                 <a href={`editportifolio/${element._id}`} className="profile-edit-btn">
-                                                                    <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                                    <FontAwesomeIcon icon={faPencil} />
                                                                 </a>
-                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal(("deleteportifolio"))) }} className="profile-edit-btn">
-                                                                    <i className="fa fa-trash" aria-hidden="true"></i>
+                                                                <a onClick={() => { settobedeletedportifolio(element); dispatch(setModal("deleteportifolio")) }} className="profile-edit-btn">
+                                                                    <FontAwesomeIcon icon={faTrash} />
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -320,8 +316,8 @@ const Profile = () => {
 
                                         </div>
                                         <div className="col col-auto">
-                                            <button onClick={() => { dispatch(setModal(("skill"))) }} className="profile-edit-btn">
-                                                <i className="fa fa-pencil" aria-hidden="true"></i>
+                                            <button onClick={() => { dispatch(setModal("skill")) }} className="profile-edit-btn">
+                                                <FontAwesomeIcon icon={faPencil} />
                                             </button>
                                         </div>
                                     </div>
@@ -346,8 +342,8 @@ const Profile = () => {
                                     <h2>Employment History</h2>
                                 </div>
                                 <div className="">
-                                    <button onClick={() => { dispatch(setModal(("employmentadd"))) }} className="profile-edit-btn">
-                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                    <button onClick={() => { dispatch(setModal("employmentadd")) }} className="profile-edit-btn">
+                                        <FontAwesomeIcon icon={faPlus} />
                                     </button>
                                 </div>
 
@@ -361,11 +357,11 @@ const Profile = () => {
                                                 {element.empRole} | {element.empCountry} , {element.empState}
                                             </div>
                                             <div className="">
-                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal(("employmentedit"))) }} className="profile-edit-btn">
-                                                    <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                <button onClick={() => { setselectedemployment(element); dispatch(setModal("employmentedit")) }} className="profile-edit-btn">
+                                                    <FontAwesomeIcon icon={faPencil} />
                                                 </button>
-                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal(("employmentdelete"))) }} className="profile-edit-btn">
-                                                    <i className="fa fa-trash" aria-hidden="true"></i>
+                                                <button onClick={() => { settobedeletedemployment(element); dispatch(setModal("employmentdelete")) }} className="profile-edit-btn">
+                                                    <FontAwesomeIcon icon={faTrash} />
                                                 </button>
                                             </div>
                                         </div>
@@ -393,8 +389,8 @@ const Profile = () => {
                                     <h2>Certification</h2>
                                 </div>
                                 <div className="">
-                                    <button onClick={() => { dispatch(setModal(("certificationadd"))) }} className="profile-edit-btn">
-                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                    <button onClick={() => { dispatch(setModal("certificationadd")) }} className="profile-edit-btn">
+                                        <FontAwesomeIcon icon={faPlus} />
                                     </button>
                                 </div>
                             </div>
@@ -408,11 +404,11 @@ const Profile = () => {
                                                     {element.certTitle} | {element.certProvider}
                                                 </div>
                                                 <div className="">
-                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal(("certificationedit"))) }} className="profile-edit-btn">
-                                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                                    <button onClick={() => { setselectedcertificate(element); dispatch(setModal("certificationedit")) }} className="profile-edit-btn">
+                                                        <FontAwesomeIcon icon={faPencil} />
                                                     </button>
-                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal(("deletecertification"))) }} className="profile-edit-btn">
-                                                        <i className="fa fa-trash" aria-hidden="true"></i>
+                                                    <button onClick={() => { settobedeletedcertification(element); dispatch(setModal("deletecertification")) }} className="profile-edit-btn">
+                                                        <FontAwesomeIcon icon={faTrash} />
                                                     </button>
                                                 </div>
                                             </div>

@@ -29,16 +29,17 @@ const buildAdminRouter = require('./src/admin.router');
 const admin = new AdminBro(options);
 const router = buildAdminRouter(admin);
 
-app.use(admin.options.rootPath, router);
-
-app.use('/uploads', express.static('uploads'));
-
-//end setup
 var corsOptions = {
   origin: "*"
 };
 
 app.use(cors(corsOptions));
+app.use(admin.options.rootPath, router);
+
+app.use('/uploads', express.static('uploads'));
+
+//end setup
+
 
 db.mongoose
   .connect(process.env.MONGO_URI, {

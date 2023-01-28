@@ -4,16 +4,17 @@ import { useState } from 'react'
 import "../css/skillmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import SuccessModal from './SuccessModal';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import uuid from 'react-uuid';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 const SkillModal = ({ skilllist }) => {
     const dispatch = useDispatch()
+    const [buttonloading, setbuttonloading] = useState(false)
 
     const [skilllistmodal, setskilllistmodal] = useState([])
     useEffect(() => {
         setskilllistmodal(skilllist)
     }, [])
-    console.log(skilllistmodal)
 
     let successModal = () => {
         dispatch(setModal("success"))
@@ -28,7 +29,6 @@ const SkillModal = ({ skilllist }) => {
         })
     }
     let handleSubmit = (event) => {
-        console.log(skilllistmodal)
         let skilllistedited = skilllistmodal.map((element) => {
             delete element._id
             return element
@@ -37,8 +37,8 @@ const SkillModal = ({ skilllist }) => {
             skill: skilllistedited
         }
         body = JSON.stringify(body)
-        console.log(body)
         event.preventDefault()
+        setbuttonloading(true)
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/skill/${userid}`, {
             method: 'PATCH',
@@ -49,13 +49,10 @@ const SkillModal = ({ skilllist }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 successModal()
             })
             .catch((error) => {
                 errorModal()
-                console.log(error)
-                console.error('Error:', error);
             });
     }
     const [newskill, setnewskill] = useState("")
@@ -114,14 +111,17 @@ const SkillModal = ({ skilllist }) => {
                                         }]); setnewskill("")
                                     }
                                 }} className="skill-edit-btn">
-                                    <i className="fa fa-plus" aria-hidden="true"></i>
+                                    <FontAwesomeIcon icon={faPlus} />
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeSkillModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                        {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            Loading...
+                        </button> : <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                     </div>
                 </div>
             </div>

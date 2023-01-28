@@ -1,13 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "../css/deletemodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const DeleteEmploymentModal = ({ tobedeleted }) => {
-    console.log(tobedeleted)
     const dispatch = useDispatch()
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -46,12 +47,10 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 successModal()
             })
             .catch((error) => {
                 errorModal()
-                console.log(error)
                 console.error('Error:', error);
             });
     }
@@ -63,7 +62,7 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
                     <div className="modal-content">
                         <div className="modal-header flex-column">
                             <div className="icon-box">
-                                <i className="fa fa-trash"></i>
+                                <FontAwesomeIcon icon={faTrash} />
                             </div>
                             <h4 className="modal-title w-100">Delete</h4>
                             <button onClick={closeDeleteEmploymentModal} type="button" className="delete-portifolio-modal-close" >
@@ -76,8 +75,8 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
                         <div className="modal-footer justify-content-center">
 
                             <button onClick={closeDeleteEmploymentModal} type="submit" className="btn btn-danger ">NO</button>
-                            {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                            {buttonloading ? <button style={{ background: "#6787FE" }} className="btn btn-primary" type="button" disabled>
+                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                 Loading...
                             </button> : <button onClick={handleSubmit} type="submit" className="btn btn-danger modal-yes-btn">YES</button>}
                         </div>

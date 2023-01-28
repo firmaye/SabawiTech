@@ -6,7 +6,6 @@ const OpportunityFilter = () => {
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
 
-    console.log(currentFilter)
     return (
         <div className="filter-container col-xl-4">
             <div className="filter-box">
@@ -21,16 +20,16 @@ const OpportunityFilter = () => {
                         <div className="category-option">
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("remote")) : dispatch(removeFilterLocation("remote")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Remote</label>
+                                    id="remote" />
+                                <label className="form-check-label" htmlFor="remote">Remote</label>
                             </div>
 
                         </div>
                         <div className="category-option">
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterLocation("office")) : dispatch(removeFilterLocation("office")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Office</label>
+                                    id="office" />
+                                <label className="form-check-label" htmlFor="office">Office</label>
                             </div>
 
                         </div>
@@ -45,13 +44,13 @@ const OpportunityFilter = () => {
                         <div className="seller-option">
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("open")) : dispatch(removeFilterStatus("open")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Open</label>
+                                    id="open" />
+                                <label className="form-check-label" htmlFor="open">Open</label>
                             </div>
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterStatus("closed")) : dispatch(removeFilterStatus("closed")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Closed</label>
+                                    id="closed" />
+                                <label className="form-check-label" htmlFor="closed">Closed</label>
                             </div>
 
                         </div>
@@ -66,13 +65,13 @@ const OpportunityFilter = () => {
                         <div className="seller-option">
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterType("paid")) : dispatch(removeFilterType("paid")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Paid</label>
+                                    id="paid" />
+                                <label className="form-check-label" htmlFor="paid">Paid</label>
                             </div>
                             <div className="form-check form-switch">
                                 <input onClick={(data) => { data.target.checked ? dispatch(setFilterType("unpaid")) : dispatch(removeFilterType("unpaid")) }} className="form-check-input" type="checkbox" role="switch"
-                                    id="flexSwitchCheckDefault" />
-                                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Unpaid</label>
+                                    id="unpaid" />
+                                <label className="form-check-label" htmlFor="unpaid">Unpaid</label>
                             </div>
 
                         </div>

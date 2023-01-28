@@ -4,6 +4,8 @@ import "./css/addportifolio.css"
 import ProfileImg from "./assets/profile.jpg"
 import { useState } from 'react'
 import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 import ErrorModal from './components/ErrorModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from './redux/profilemodal'
@@ -18,7 +20,8 @@ const AddPortifolio = () => {
     const [workLink, setworkLink] = useState("")
     const [errorworkTitle, seterrorworkTitle] = useState("")
     const [errorworkThumbnail, seterrorworkThumbnail] = useState()
-    // const [errorworkLink, seterrorworkLink] = useState()
+    const [skillerror, setskillerror] = useState("")
+    const [buttonloading, setbuttonloading] = useState(false)
 
     const dispatch = useDispatch()
     let successModal = () => {
@@ -29,10 +32,18 @@ const AddPortifolio = () => {
         dispatch(setModal("error"))
 
     }
-    let handleSubmit = (event) => {
+    let checkSkillExistence = () => {
 
-        console.log(workThumbnail)
-        console.log(skills)
+        if (skills.length == 0) {
+            setskillerror("Please Add A Work Skill")
+            return false
+        } else {
+            setskillerror("")
+            return true
+        }
+    }
+    let handleSubmit = (event) => {
+        checkSkillExistence()
         if (workTitle == "") {
             seterrorworkTitle("Required")
         } else {
@@ -43,8 +54,10 @@ const AddPortifolio = () => {
         } else {
             seterrorworkThumbnail("")
         }
-        if (workTitle != "" && checkPhotoExistence()) {
+        if (workTitle != "" && checkPhotoExistence() && checkSkillExistence()) {
             const formData = new FormData();
+            setbuttonloading(true)
+
             // Update the formData object
             formData.append(
                 'workThumbnail',
@@ -70,12 +83,10 @@ const AddPortifolio = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     successModal()
                 })
                 .catch((error) => {
                     errorModal()
-                    console.log(error)
                     console.error('Error:', error);
                 });
         }
@@ -83,14 +94,12 @@ const AddPortifolio = () => {
     function fileValue(value) {
         var path = value.value;
         var extenstion = path.split('.').pop();
-        console.log(value.files[0])
         setworkThumbnail(value.files[0])
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
             document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
             document.getElementById("filename").innerHTML = filename;
         } else {
-            console.log("not selected")
             seterrorworkThumbnail("")
             document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
@@ -98,7 +107,6 @@ const AddPortifolio = () => {
         }
     }
     let checkPhotoExistence = () => {
-        console.log(workThumbnail)
         if (workThumbnail == "" || workThumbnail == undefined || workThumbnail == "Please Change Image") {
             if (workThumbnail == "Please Change Image") {
                 seterrorworkThumbnail("Please Change Image")
@@ -114,6 +122,7 @@ const AddPortifolio = () => {
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     return (
         <main>
+
             {currentModal == "addportifoliosuccess" ? <AddPortifolioSuccessModal />
                 : currentModal == "error" ? <ErrorModal />
                     : <></>}
@@ -132,7 +141,7 @@ const AddPortifolio = () => {
                                         Add Project
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -141,7 +150,7 @@ const AddPortifolio = () => {
                                         Select Template
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -150,7 +159,7 @@ const AddPortifolio = () => {
                                         Add details
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div>
@@ -159,7 +168,7 @@ const AddPortifolio = () => {
                                         Preview
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faCheck} />
 
                                     </button>
                                 </div> */}
@@ -185,7 +194,7 @@ const AddPortifolio = () => {
                                                     <div className="file-thumbnail">
                                                         <img id="image-preview" src="https://www.btklsby.go.id/images/placeholder/basic.png" alt="" />
                                                         <h3 id="filename">
-                                                            Drag and Drop
+                                                            Click or Drag and Drop Image on the Space Provided
                                                         </h3>
                                                         <p >Supports JPG, PNG, SVG</p>
                                                     </div>
@@ -251,10 +260,13 @@ const AddPortifolio = () => {
                                                     <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} placeholder="Enter skills individually and press +" type="text" className='col edit-portifolio-input' />
                                                     <div className="col col-auto">
                                                         <button onClick={() => { if (newskills != "") { setskills([...skills, newskills]); setnewskills("") } }} className="profile-edit-btn">
-                                                            <i className="fa fa-plus" aria-hidden="true"></i>
+                                                            <FontAwesomeIcon icon={faPlus} />
                                                         </button>
                                                     </div>
+
                                                 </div>
+                                                <div className='input-error-display extra-detail-error-profile-photo' >{skillerror}</div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -264,7 +276,11 @@ const AddPortifolio = () => {
                                         <button onClick={() => {
                                             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                         }} className="see-public">Close </button>
-                                        <button onClick={handleSubmit} className="setting">Add</button>
+                                        {buttonloading ? <button className="btn btn-primary loading" type="button" disabled>
+                                            <span className="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
+                                            Loading...
+                                        </button> : <button onClick={handleSubmit} className="setting">Add</button>}
+
                                     </div>
                                 </div>
                             </div>

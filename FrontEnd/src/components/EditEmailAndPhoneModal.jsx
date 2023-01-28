@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const emailSchema = Yup.object().shape({
     formemail: Yup.string()
         .min(2, 'Too Short!')
@@ -57,9 +61,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                             phoneNo: values.formphone
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
-                        console.log(userid)
                         setbuttonloading(true)
 
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/emailPhone/${userid}`, {
@@ -71,11 +73,9 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
-                                console.log(error)
                                 errorModal()
                             });
 
@@ -90,7 +90,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                         handleChange,
                         handleSubmit,
                         handleBlur,
-
+                        setFieldValue,
                         /* and other goodies */
                     }) => (
                         <form className='col'>
@@ -110,6 +110,7 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                                                     <h2 className="emailandphone-modal-education"></h2>
                                                     <form method="">
                                                         <div className="emailandphone-modal-input-group">
+                                                            <label >Email</label>
                                                             <input onChange={handleChange}
                                                                 onBlur={handleBlur}
                                                                 value={values.formemail} name='formemail' className="" type="text" placeholder="Email" />
@@ -117,9 +118,12 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
 
                                                         </div>
                                                         <div className="emailandphone-modal-input-group">
-                                                            <input onChange={handleChange}
-                                                                onBlur={handleBlur}
-                                                                value={values.formphone} name='formphone' className="" type="text" placeholder="Phone Number" />
+                                                            <label >Phone Number</label>
+                                                            <PhoneInput
+                                                                international
+                                                                value={values.formphone}
+                                                                onChange={(val) => { setFieldValue("formphone", val) }}
+                                                            />
                                                             <div style={{ position: "absolute" }} className='input-error-display' >{errors.formphone && touched.formphone && errors.formphone}</div>
 
                                                         </div>
@@ -133,8 +137,8 @@ const EmailAndPhoneModal = ({ emailandphone }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEmailAndPhoneModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         Loading...
                                     </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>

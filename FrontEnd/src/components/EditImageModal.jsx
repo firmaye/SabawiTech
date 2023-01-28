@@ -25,14 +25,11 @@ const NameModal = ({ image }) => {
     function fileValue(value) {
         var path = value.value;
         var extenstion = path.split('.').pop();
-        console.log(value.files[0])
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
             document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
-            console.log(filename)
             document.getElementById("filename").innerHTML = filename;
         } else {
-            console.log("not selected")
             setSelectedImage("")
             document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
@@ -56,7 +53,6 @@ const NameModal = ({ image }) => {
 
     }
     let checkPhotoExistence = () => {
-        console.log(selectedImage)
         if (selectedImage == "" || selectedImage == undefined || selectedImage == "Please Change Image") {
             if (selectedImage == "Please Change Image") {
                 setimageerror("Please Change Image")
@@ -71,17 +67,13 @@ const NameModal = ({ image }) => {
     }
     let handleSubmit = (event) => {
 
-        console.log(selectedImage)
         const formData = new FormData();
         // Update the formData object
         formData.append(
             'profilePhoto',
             selectedImage
         );
-        // console.log(file)
-        // console.log({ profilePhoto: selectedImage })
         // let body = JSON.stringify({ profilePhoto: selectedImage })
-        // console.log(body)
         // event.preventDefault()
         setbuttonloading(true)
         let userid = JSON.parse(localStorage.getItem('user')).id
@@ -92,12 +84,10 @@ const NameModal = ({ image }) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
                 successModal()
             })
             .catch((error) => {
                 errorModal()
-                console.log(error)
                 console.error('Error:', error);
             });
     }
@@ -123,7 +113,6 @@ const NameModal = ({ image }) => {
                                             <div className="name-modal-image-container">
                                                 <div className="image-upload">
                                                     <input type="file" name="" id="logo" onChange={(value) => {
-                                                        console.log(value)
                                                         fileValue(value.target);
                                                         setImagePath(value);
                                                     }} />
@@ -131,7 +120,7 @@ const NameModal = ({ image }) => {
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src={`${import.meta.env.VITE_BACKEND_URL}/uploads/images/${image}`} alt="" />
                                                             <h3 id="filename">
-                                                                Drag and Drop
+                                                                Click or Drag and Drop Image on the Space Provided
                                                             </h3>
                                                             <p >Supports JPG, PNG, SVG</p>
                                                         </div>
@@ -148,8 +137,8 @@ const NameModal = ({ image }) => {
 
                     <div className="modal-footer">
                         <button type="button" onClick={closeNameModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button> : <button type="button" onClick={(event) => { checkPhotoExistence() ? handleSubmit() : () => { } }} className="btn btn-primary">Edit Image</button>}
 

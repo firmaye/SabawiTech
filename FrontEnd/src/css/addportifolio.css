@@ -107,6 +107,12 @@
     border-radius: 10rem;
 }
 
+.add-portifolio-buttons .loading {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 10rem;
+}
+
 .add-portifolio-sidebar-container {
 
     margin-top: 52px;
@@ -329,6 +335,10 @@
 
 .add-portifolio-skills svg {
     color: #6787FE
+}
+
+.skill-list-modal-close svg {
+    color: #6787FE !important
 }
 
 /* end of skills css */

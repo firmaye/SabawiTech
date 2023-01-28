@@ -75,3 +75,15 @@
 .education-modal-location-container {
     display: flex;
 }
+
+@media (max-width: 767px) {
+
+    .education-modal-location-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .education-modal-location-container div {
+        /* flex-direction: row; */
+    }
+}

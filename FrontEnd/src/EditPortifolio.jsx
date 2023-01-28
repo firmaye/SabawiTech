@@ -1,23 +1,23 @@
 import React, { useEffect } from 'react'
-import Sidebar from './components/Sidebar'
 import "./css/editportifolio.css"
-import ProfileImg from "./assets/profile.jpg"
 import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import FadeIn from 'react-fade-in/lib/FadeIn'
 import Loading from './components/Loading'
 import AddPortifolioSuccessModal from './components/AddPortifolioSuccessModal'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ErrorModal from './components/ErrorModal'
-
 import { setModal } from './redux/profilemodal'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from './components/Navbar'
 import Header from './components/Header'
+import { faPencil, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const EditPortifolio = () => {
     const params = useParams()
     const paramsid = params.id
+    const [buttonloading, setbuttonloading] = useState(false)
+
     const [previouswork, setpreviouswork] = useState([])
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")
@@ -28,26 +28,42 @@ const EditPortifolio = () => {
     const [errorworkThumbnail, seterrorworkThumbnail] = useState()
     const [workLink, setworkLink] = useState()
     const dispatch = useDispatch()
+    const [skillerror, setskillerror] = useState("")
 
-    console.log(skills)
     const [loading, setloading] = useState(true)
     let successModal = () => {
         dispatch(setModal("addportifoliosuccess"))
 
     }
+    let checkSkillExistence = () => {
+
+        if (skills.length == 0) {
+            setskillerror("Please Add A Work Skill")
+            return false
+        } else {
+            setskillerror("")
+            return true
+        }
+    }
     const blobUrlToFile = (blobUrl) => new Promise((resolve) => {
-        fetch(blobUrl).then((res) => {
+        fetch(blobUrl, {
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }
+        }).then((res) => {
+
             res.blob().then((blob) => {
                 // please change the file.extension with something more meaningful
                 // or create a utility function to parse from URL
-                const file = new File([blob], 'file.extension', { type: blob.type })
+                const file = new File([blob], '.png', { type: blob.type })
                 resolve(file)
+            }).catch((error) => {
             })
         })
     })
     let handleSubmit = async () => {
-        // console.log(workSkill)
-        console.log(skills)
+        checkSkillExistence()
+
         if (workTitle == "") {
             seterrorworkTitle("Required")
         } else {
@@ -58,9 +74,11 @@ const EditPortifolio = () => {
         } else {
             seterrorworkThumbnail("")
         }
-        if (workTitle != "" && checkPhotoExistence()) {
+        if (workTitle != "" && checkPhotoExistence() && checkSkillExistence()
+        ) {
+            setbuttonloading(true)
+
             let image = await blobUrlToFile(workPlaceholder)
-            console.log(workPlaceholder)
             const formData = new FormData();
             // Update the formData object
             formData.append(
@@ -87,21 +105,17 @@ const EditPortifolio = () => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     successModal()
                 })
                 .catch((error) => {
                     // errorModal()
-                    console.log(error)
                     console.error('Error:', error);
                 });
         }
     }
     function fileValue(value) {
-        console.log("filevlaue called")
         var path = value.value;
         var extenstion = path.split('.').pop();
-        console.log(value.files[0])
         setworkThumbnail(value.files[0])
         if (extenstion === "jpg" || extenstion === "svg" || extenstion === "jpeg" || extenstion === "png" || extenstion === "gif") {
             document.getElementById('image-preview').src = window.URL.createObjectURL(value.files[0]);
@@ -109,7 +123,6 @@ const EditPortifolio = () => {
             var filename = path.replace(/^.*[\\\/]/, '').split('.').slice(0, -1).join('.');
             document.getElementById("filename").innerHTML = filename;
         } else {
-            console.log("not selected")
             seterrorworkThumbnail("")
             document.getElementById("filename").innerHTML = "Please Select an image";
             document.getElementById('image-preview').src = ""
@@ -117,7 +130,6 @@ const EditPortifolio = () => {
         }
     }
     let checkPhotoExistence = () => {
-        console.log(workThumbnail)
         if (workThumbnail == "" || workThumbnail == undefined || workThumbnail == "Please Change Image") {
             if (workThumbnail == "Please Change Image") {
                 seterrorworkThumbnail("Please Change Image")
@@ -137,11 +149,8 @@ const EditPortifolio = () => {
         }
         let userid = JSON.parse(localStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
-            console.log(result)
             const found = result.previousWork.find(element => element._id == paramsid);
-            console.log(found)
             let skillsString = found.workSkill[0].split(",")
-
             setskills(skillsString)
             setworkTitle(found.workTitle)
             setworkThumbnail(found.workThumbnail)
@@ -150,7 +159,7 @@ const EditPortifolio = () => {
             setpreviouswork(found)
             setloading(false)
 
-        }).catch((error) => { console.log(error) });
+        }).catch((error) => { });
     }, [])
     if (loading) {
         return (
@@ -180,7 +189,7 @@ const EditPortifolio = () => {
                                             Edit Project
                                         </div>
                                         <button>
-                                            <i className="fa fa-check" aria-hidden="true"></i>
+                                            <FontAwesomeIcon icon={faPencil} />
 
                                         </button>
                                     </div>
@@ -189,7 +198,8 @@ const EditPortifolio = () => {
                                         Select Template
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faPencil} />
+
 
                                     </button>
                                 </div>
@@ -198,7 +208,8 @@ const EditPortifolio = () => {
                                         Add details
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faPencil} />
+
 
                                     </button>
                                 </div>
@@ -207,7 +218,8 @@ const EditPortifolio = () => {
                                         Preview
                                     </div>
                                     <button>
-                                        <i className="fa fa-check" aria-hidden="true"></i>
+                                        <FontAwesomeIcon icon={faPencil} />
+
 
                                     </button>
                                 </div> */}
@@ -234,7 +246,7 @@ const EditPortifolio = () => {
                                                         <div className="file-thumbnail">
                                                             <img id="image-preview" src={workPlaceholder} alt="" />
                                                             <h3 id="filename">
-                                                                Drag and Drop
+                                                                Click or Drag and Drop Image on the Space Provided
                                                             </h3>
                                                             <p >Supports JPG, PNG, SVG</p>
                                                         </div>
@@ -295,9 +307,12 @@ const EditPortifolio = () => {
                                                 <input value={newskills} onChange={(data) => { setnewskills(data.target.value) }} type="text" className='col edit-portifolio-input' />
                                                 <div className="col col-auto">
                                                     <button onClick={() => { if (newskills != "") { setskills([...skills, newskills]); setnewskills("") } }} className="profile-edit-btn">
-                                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                                        <FontAwesomeIcon icon={faPlus} size="2x" />
+
                                                     </button>
                                                 </div>
+                                                <div className='input-error-display extra-detail-error-profile-photo' >{skillerror}</div>
+
                                             </div>
 
                                         </div>
@@ -307,7 +322,11 @@ const EditPortifolio = () => {
                                             <button onClick={() => {
                                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/profile`;
                                             }} className="see-public">Close </button>
-                                            <button onClick={handleSubmit} className="setting">Edit</button>
+                                            {buttonloading ? <button className="btn btn-primary loading" type="button" disabled>
+                                                <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                                Loading...
+                                            </button> : <button onClick={handleSubmit} className="setting">Edit</button>}
+
                                         </div>
                                     </div>
                                 </div>

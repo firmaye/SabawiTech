@@ -3,10 +3,13 @@ import { useState } from 'react'
 import "../css/certificationeditmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import Datetime from "react-datetime"
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
+
 const CertificationSchema = Yup.object().shape({
     formtitle: Yup.string()
         .required('Required'),
@@ -20,11 +23,6 @@ const CertificationSchema = Yup.object().shape({
 })
 const CertificationEditModal = ({ selected }) => {
     const dispatch = useDispatch()
-    console.log(selected)
-    const [dateissued, setdateissued] = useState(new Date(selected.dateIssued))
-    const [certificatetitle, setcertificatetitle] = useState(selected.certTitle)
-    const [certificateprovider, setcertificateprovider] = useState(selected.certProvider)
-    const [certificatelink, setcertificatelink] = useState(selected.certLink)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -63,7 +61,6 @@ const CertificationEditModal = ({ selected }) => {
                     validateOnBlur={false}
                     validationSchema={CertificationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             certTitle: values.formtitle,
                             certProvider: values.formprovider,
@@ -71,7 +68,6 @@ const CertificationEditModal = ({ selected }) => {
                             dateIssued: values.fromdateissued
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -84,12 +80,10 @@ const CertificationEditModal = ({ selected }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
 
@@ -148,19 +142,15 @@ const CertificationEditModal = ({ selected }) => {
                                                     </div>
                                                     <div className="certification-modal-period-container">
 
-                                                        <Datetime initialValue={values.fromdateissued} onChange={(event) => { setFieldValue("fromdateissued", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                        <div>
 
-                                                                    <div className="certification-modal-input-group">
-                                                                        <label>Date Issued</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                            <div className="certification-modal-input-group">
+                                                                <label>Date Issued</label>
+                                                                <DatePicker defaultValue={dayjs(values.fromdateissued)} onChange={(date) => { setFieldValue("fromdateissued", date.$d.toString()); }} />
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
+                                                            </div>
+                                                        </div>
 
-                                                        }} />
                                                     </div>
 
 
@@ -173,8 +163,8 @@ const CertificationEditModal = ({ selected }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeCertificationEditModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         Loading...
                                     </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>

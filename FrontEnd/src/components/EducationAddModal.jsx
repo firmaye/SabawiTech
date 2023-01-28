@@ -3,10 +3,10 @@ import { useState } from 'react'
 import "../css/educationaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import Datetime from "react-datetime"
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 const EducationSchema = Yup.object().shape({
     formattendedFrom: Yup.string()
         .required('Required'),
@@ -20,10 +20,6 @@ const EducationSchema = Yup.object().shape({
 })
 const EducationModal = () => {
     const dispatch = useDispatch()
-    const [schoolname, setschoolname] = useState("")
-    const [areaofstudy, setareaofstudy] = useState("")
-    const [attendedfrom, setattendedfrom] = useState(new Date())
-    const [attendedto, setattendedto] = useState(new Date())
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -62,7 +58,6 @@ const EducationModal = () => {
                     validateOnBlur={false}
                     validationSchema={EducationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             schoolName: values.formschoolname,
                             dateAttendedFrom: values.formattendedFrom,
@@ -70,7 +65,6 @@ const EducationModal = () => {
                             areaOfStudy: values.formareaofstudy
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/education/${userid}`, {
@@ -82,13 +76,10 @@ const EducationModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
-                                console.error('Error:', error);
                             });
                     }}
                 >
@@ -128,35 +119,30 @@ const EducationModal = () => {
                                                     <div className="education-modal-location-container">
 
 
-                                                        <Datetime initialValue={values.formattendedFrom} onChange={(event) => { setFieldValue("formattendedFrom", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Attended From</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                        <div className="education-modal-input-group">
+                                                            <div>
+                                                                <label>Attended From</label>
+                                                            </div>
+                                                            <DatePicker onChange={(date) => { setFieldValue("formattendedFrom", date.$d.toString()); }} />
+                                                            <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
+                                                        </div>
 
-                                                        }} />
 
-                                                        {/* <DatePicker selected={attendedfrom} onChange={(date) => setattendedfrom(date)} /> */}
 
-                                                        <Datetime initialValue={values.formattendedTo} onChange={(event) => { setFieldValue("formattendedTo", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                        <div className="education-modal-input-group">
+                                                            <div>
+                                                                <label>Attended To</label>
+                                                            </div>
+                                                            <DatePicker onChange={(date) => { setFieldValue("formattendedTo", date.$d.toString()); }} />
+                                                            <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedFrom && touched.formattendedFrom && errors.formattendedFrom}</div>
+                                                        </div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Attended To</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formattendedTo && touched.formattendedTo && errors.formattendedTo}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
 
-                                                        }} />
+
+
+
+
                                                     </div>
                                                     <div className="education-modal-input-group">
                                                         <label>Area of Study</label>

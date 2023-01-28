@@ -15,8 +15,7 @@ const titleSchema = Yup.object().shape({
 })
 const TitleModal = ({ profileinfo }) => {
     const dispatch = useDispatch()
-    const [title, settitle] = useState(profileinfo.title)
-    const [description, setdescription] = useState(profileinfo.description)
+    const [buttonloading, setbuttonloading] = useState(false)
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -39,39 +38,15 @@ const TitleModal = ({ profileinfo }) => {
             display: "none"
         })
     }
-    let handleSubmit = (event) => {
-        let body = {
-            title: title,
-            titleOverview: description
-        }
-        body = JSON.stringify(body)
-        console.log(body)
-        let userid = JSON.parse(localStorage.getItem('user')).id
-        // fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/descriptionInfo/${userid}`, {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: body
-        // })
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         console.log(data)
-        //         successModal()
-        //     })
-        //     .catch((error) => {
-        //         console.log(error)
-        //         console.error('Error:', error);
-        //     });
-    }
+
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <Formik
                     initialValues={{
-                        formtitle: title
+                        formtitle: profileinfo.title
                         ,
-                        formdescription: description
+                        formdescription: profileinfo.description
                     }}
                     validateOnBlur={false}
                     validationSchema={titleSchema}
@@ -81,7 +56,8 @@ const TitleModal = ({ profileinfo }) => {
                             titleOverview: values.formdescription
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
+                        setbuttonloading(true)
+
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/descriptionInfo/${userid}`, {
                             method: 'PATCH',
@@ -92,12 +68,9 @@ const TitleModal = ({ profileinfo }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
-
-                                console.log(error)
                                 errorModal()
                             });
 
@@ -159,7 +132,10 @@ const TitleModal = ({ profileinfo }) => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeTitleModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        Loading...
+                                    </button> : <button type="submit" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>
                             </div>
                         </form>

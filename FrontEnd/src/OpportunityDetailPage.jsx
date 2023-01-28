@@ -10,6 +10,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setModal } from './redux/profilemodal'
 import SuccessModal from './components/SuccessModal'
 import ErrorModal from './components/ErrorModal'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faIdCard } from '@fortawesome/free-solid-svg-icons'
+
 const OpportunityDetailPage = () => {
     const [opportunity, setopportunity] = useState({})
     const [error, seterror] = useState()
@@ -28,7 +31,6 @@ const OpportunityDetailPage = () => {
 
         )
         );
-        console.log(submittedproposal)
     }
     const sendpropsal = () => {
 
@@ -47,7 +49,6 @@ const OpportunityDetailPage = () => {
             .then((response) => response.json())
             .then((data) => {
                 dispatch(setModal("success"))
-                console.log('Success:', data);
             })
             .catch((error) => {
                 dispatch(setModal("error"))
@@ -60,11 +61,9 @@ const OpportunityDetailPage = () => {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let paramsid = params.id
-            console.log(paramsid)
             let userid = JSON.parse(localStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
                 const found = result
-                console.log(found)
                 let skillsarray = found.requiredSkill.split(",")
                 setopportunity(found)
                 setsubmittedproposal({
@@ -76,14 +75,12 @@ const OpportunityDetailPage = () => {
                     "status": ""
 
                 })
-                console.log(skillsarray)
                 setrequiredskill(skillsarray)
                 setloading(false)
 
                 // opportunity.requiredSkill.map((element) => {
-                //     console.log(element)
                 // })
-            }).catch((error) => { console.log(error) });
+            }).catch((error) => { });
         }
 
 
@@ -108,7 +105,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Status</span>
@@ -119,7 +116,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Company Name</span>
@@ -130,7 +127,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Location</span>
@@ -141,7 +138,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Type</span>
@@ -152,7 +149,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Duration</span>
@@ -164,7 +161,7 @@ const OpportunityDetailPage = () => {
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
                                             <div className="my-auto">
-                                                <i className="fa fa-id-card"></i>
+                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
                                             </div>
                                             <div className="my-auto">
                                                 <span>Seller type</span>
@@ -181,8 +178,6 @@ const OpportunityDetailPage = () => {
                                     <h2 className="mb-4">Skills Required</h2>
                                     <div>
                                         {
-                                            // console.log(opportunity.requiredSkill)
-                                            // console.log(requiredSkill)
                                             // opportunity.requiredSkill
                                             requiredSkill.map((element) => {
                                                 return (<div className="skills">

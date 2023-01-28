@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CountryDropdown } from 'react-country-region-selector';
+import { useGoogleLogin } from '@react-oauth/google';
 import './css/authentication.css'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -30,7 +31,86 @@ const Signup = () => {
         state: Yup.string()
             .required('Required'),
         email: Yup.string().email('Invalid email').required('Required')
+            .test('Invalid Email', "Invalid Email or Password", // <- key, message
+                function (value) {
+                    let body = {
+                        email: value
+                    }
+                    body = JSON.stringify(body)
+                    return new Promise((resolve, reject) => {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: body
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (!data.success) {
+                                    resolve(this.createError({ message: data.message }));
+
+                                } else {
+                                    resolve(true)
+                                }
+                            })
+                            .catch((error) => {
+                            });
+                    })
+                })
     })
+    const [googleerror, setgoogleerror] = useState("")
+    const loginusingGoogle =
+        useGoogleLogin({
+            onSuccess: async response => {
+                let body = {
+                    access_token: response.access_token
+                }
+                body = JSON.stringify(body)
+                // fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+                //     method: "GET",
+                //     headers: {
+                //         "Authorization": `Bearer ${response.access_token}`
+                //     }
+                // }).then(response => response.json()).then((data) => {
+                // })
+                try {
+                    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: body
+                    }).then(response => response.json()).then((data) => {
+                        if (data.success) {
+                            if (data.exist) {
+                                if (data.info == "User signed up with different method") {
+                                    setgoogleerror("User Signed In Using Other Methods.")
+                                } else {
+                                    // redirect to home page
+                                    if (data.info.accessToken) {
+                                        localStorage.setItem("user", JSON.stringify(data.info));
+                                    }
+                                    window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`
+                                }
+                            } else {
+                                // redirect to extra detail page
+                                if (data.accessToken) {
+                                    localStorage.setItem("user", JSON.stringify(data.info));
+                                }
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
+                            }
+                        } else {
+                            setgoogleerror("Google Authenticaion Failed! Please Try Again")
+                        }
+                    })
+                } catch (err) {
+
+                }
+
+            }
+        })
+
     return (
         <div className="main-container">
             <Formik
@@ -68,14 +148,16 @@ const Signup = () => {
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            console.log(data)
-                            if (data.accessToken) {
-                                localStorage.setItem("user", JSON.stringify(data));
+                            if (data.success) {
+
+                            } else {
                             }
-                            window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
+                            // if (data.accessToken) {
+                            //     localStorage.setItem("user", JSON.stringify(data));
+                            // }
+                            // window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
                         })
                         .catch((error) => {
-                            console.log(error)
                             console.error('Error:', error);
                         });
                 }}
@@ -150,9 +232,12 @@ const Signup = () => {
                             <button type='submit' onClick={handleSubmit} className="sign-in">
                                 Sign Up
                             </button>
-                            <button type="button" className="login-with-google-btn" >
+                            <button type="button" onClick={loginusingGoogle} className="login-with-google-btn" >
                                 Sign up with Google
                             </button>
+                            <div style={{ textAlign: "center", color: "red" }}>
+                                {googleerror}
+                            </div>
                             <div className='register-container' >
                                 Already Have an Account? <a href='/signin'> Login</a>
                             </div>

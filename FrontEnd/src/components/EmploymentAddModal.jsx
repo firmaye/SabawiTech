@@ -3,8 +3,7 @@ import { useState } from 'react'
 import "../css/employmentaddmodal.css"
 import { useDispatch } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import Datetime from "react-datetime"
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { CountryDropdown } from 'react-country-region-selector';
@@ -26,13 +25,6 @@ const EmploymentSchema = Yup.object().shape({
 })
 const EmploymentModal = () => {
     const dispatch = useDispatch()
-    const [country, setcountry] = useState()
-    const [description, setdescription] = useState()
-    const [companyName, setcompanyName] = useState()
-    const [city, setcity] = useState()
-    const [title, settitle] = useState()
-    const [periodfrom, setperiodfrom] = useState(new Date())
-    const [periodto, setperiodto] = useState(new Date())
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -57,40 +49,6 @@ const EmploymentModal = () => {
             display: "none"
         })
     }
-    let handleSubmit = (event) => {
-        let body = {
-            empAt: companyName,
-            empCountry: country,
-            empState: city,
-            empRole: title,
-            empFrom: periodfrom,
-            empTo: periodto,
-            empDescription: description
-        }
-        body = JSON.stringify(body)
-        console.log(body)
-        event.preventDefault()
-        let userid = JSON.parse(localStorage.getItem('user')).id
-        setbuttonloading(true)
-
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/employmentHistory/${userid}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: body
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log(data)
-                successModal()
-            })
-            .catch((error) => {
-                errorModal()
-                // console.log(error)
-                console.error('Error:', error);
-            });
-    }
     return (
         <div style={modalstyle} className="modal show fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
@@ -108,7 +66,6 @@ const EmploymentModal = () => {
                     validateOnBlur={false}
                     validationSchema={EmploymentSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             empAt: values.formcompanyname,
                             empCountry: values.formcountry,
@@ -119,8 +76,8 @@ const EmploymentModal = () => {
                             empDescription: values.formdescription,
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
+                        setbuttonloading(true)
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/employmentHistory/${userid}`, {
                             method: 'POST',
                             headers: {
@@ -130,12 +87,10 @@ const EmploymentModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                // console.log(error)
                                 console.error('Error:', error);
                             });
                     }}
@@ -217,32 +172,24 @@ const EmploymentModal = () => {
                                                     </div>
                                                     <div className="employment-modal-period-container">
 
-                                                        <Datetime initialValue={values.formperiodFrom} onChange={(event) => { setFieldValue("formperiodFrom", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                        <div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Period From</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                            <div className="education-modal-input-group">
+                                                                <label>Period From</label>
+                                                                <DatePicker onChange={(date) => { setFieldValue("formperiodFrom", date.$d.toString()); }} />
 
-                                                        }} />
-                                                        <Datetime initialValue={values.formperiodTo} onChange={(event) => { setFieldValue("formperiodTo", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
+                                                            </div>
+                                                        </div>
+                                                        <div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Period To</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                            <div className="education-modal-input-group">
+                                                                <label>Period To</label>
+                                                                <DatePicker onChange={(date) => { setFieldValue("formperiodTo", date.$d.toString()); }} />
 
-                                                        }} />
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="employment-modal-period-container employment-textarea-container">
 
@@ -265,8 +212,8 @@ const EmploymentModal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeEmploymentModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         Loading...
                                     </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>

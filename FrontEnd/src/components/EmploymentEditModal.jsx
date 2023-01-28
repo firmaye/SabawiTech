@@ -3,10 +3,12 @@ import { useState } from 'react'
 import "../css/employmenteditmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import Datetime from "react-datetime"
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup'; import { CountryDropdown } from 'react-country-region-selector';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+dayjs.extend(customParseFormat);
 const EmploymentSchema = Yup.object().shape({
     formcompanyname: Yup.string()
         .required('Required'),
@@ -25,14 +27,6 @@ const EmploymentSchema = Yup.object().shape({
 })
 const EmploymentEditModal = ({ selected }) => {
     const dispatch = useDispatch()
-    console.log(selected)
-    const [country, setcountry] = useState(selected.empCountry)
-    const [description, setdescription] = useState(selected.empDescription)
-    const [companyName, setcompanyName] = useState(selected.empAt)
-    const [city, setcity] = useState(selected.empState)
-    const [title, settitle] = useState(selected.empRole)
-    const [periodfrom, setperiodfrom] = useState(new Date(selected.empFrom))
-    const [periodto, setperiodto] = useState(new Date(selected.empTo))
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
         backgroundColor: "rgba(0,0,0,0.8)"
@@ -75,7 +69,6 @@ const EmploymentEditModal = ({ selected }) => {
                     validateOnBlur={false}
                     validationSchema={EmploymentSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             empAt: values.formcompanyname,
                             empCountry: values.formcountry,
@@ -86,7 +79,6 @@ const EmploymentEditModal = ({ selected }) => {
                             empDescription: values.formdescription,
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -99,12 +91,10 @@ const EmploymentEditModal = ({ selected }) => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                // console.log(error)
                                 console.error('Error:', error);
                             });
                     }}
@@ -186,32 +176,25 @@ const EmploymentEditModal = ({ selected }) => {
                                                     </div>
                                                     <div className="employment-modal-period-container">
 
-                                                        <Datetime initialValue={values.formperiodFrom} onChange={(event) => { setFieldValue("formperiodFrom", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                        <div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Period From</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                            <div className="education-modal-input-group">
+                                                                <label>Period From</label>
+                                                                <DatePicker defaultValue={dayjs(values.formperiodFrom)} onChange={(date) => { setFieldValue("formperiodFrom", date.$d.toString()); }} />
 
-                                                        }} />
-                                                        <Datetime initialValue={values.formperiodTo} onChange={(event) => { setFieldValue("formperiodTo", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodFrom && touched.formperiodFrom && errors.formperiodFrom}</div>
+                                                            </div>
+                                                        </div>
 
-                                                                    <div className="education-modal-input-group">
-                                                                        <label>Period To</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                        <div>
 
-                                                        }} />
+                                                            <div className="education-modal-input-group">
+                                                                <label>Period To</label>
+                                                                <DatePicker defaultValue={dayjs(values.formperiodTo)} onChange={(date) => { setFieldValue("formperiodTo", date.$d.toString()); }} />
+
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.formperiodTo && touched.formperiodTo && errors.formperiodTo}</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div className="employment-modal-period-container employment-textarea-container">
 

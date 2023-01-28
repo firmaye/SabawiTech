@@ -3,8 +3,9 @@ import { useState } from 'react'
 import "../css/certificationaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
-import Datetime from "react-datetime"
-import "react-datepicker/dist/react-datepicker.css";
+import { DatePicker } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 const CertificationSchema = Yup.object().shape({
@@ -21,11 +22,6 @@ const CertificationSchema = Yup.object().shape({
 const CertificationModal = () => {
     const dispatch = useDispatch()
     const [buttonloading, setbuttonloading] = useState(false)
-
-    const [dateissued, setdateissued] = useState(new Date())
-    const [certificatetitle, setcertificatetitle] = useState("")
-    const [certificateprovider, setcertificateprovider] = useState("")
-    const [certificatelink, setcertificatelink] = useState("")
 
     const [modalstyle, setmodalstyle] = useState({
         display: "block",
@@ -64,7 +60,6 @@ const CertificationModal = () => {
                     validateOnBlur={false}
                     validationSchema={CertificationSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
-                        console.log(values)
                         let body = {
                             certTitle: values.formtitle,
                             certProvider: values.formprovider,
@@ -72,7 +67,6 @@ const CertificationModal = () => {
                             dateIssued: values.fromdateissued
                         }
                         body = JSON.stringify(body)
-                        console.log(body)
                         let userid = JSON.parse(localStorage.getItem('user')).id
                         setbuttonloading(true)
 
@@ -85,12 +79,10 @@ const CertificationModal = () => {
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                console.log(data)
                                 successModal()
                             })
                             .catch((error) => {
                                 errorModal()
-                                console.log(error)
                                 console.error('Error:', error);
                             });
 
@@ -149,19 +141,16 @@ const CertificationModal = () => {
                                                     </div>
                                                     <div className="certification-modal-period-container">
 
-                                                        <Datetime initialValue={values.fromdateissued} onChange={(event) => { setFieldValue("fromdateissued", event._d.toString()) }} timeFormat={false} renderInput={(props, openCalender) => {
-                                                            return (
-                                                                <div>
+                                                        <div>
 
-                                                                    <div className="certification-modal-input-group">
-                                                                        <label>Date Issued</label>
-                                                                        <input {...props} />
-                                                                        <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
-                                                                    </div>
-                                                                </div>
-                                                            )
+                                                            <div className="certification-modal-input-group">
+                                                                <label>Date Issued</label>
+                                                                <DatePicker onChange={(date) => { setFieldValue("fromdateissued", date.$d.toString()); }} />
 
-                                                        }} />
+                                                                <div className='input-error-display' style={{ position: "absolute" }} >{errors.fromdateissued && touched.fromdateissued && errors.fromdateissued}</div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
 
 
@@ -174,8 +163,8 @@ const CertificationModal = () => {
                                 </div>
                                 <div className="modal-footer">
                                     <button type="button" onClick={closeCertificationModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                                        <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         Loading...
                                     </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                                 </div>

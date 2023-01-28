@@ -4,6 +4,9 @@ import "../css/languageaddmodal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { setModal } from '../redux/profilemodal';
 import uuid from 'react-uuid';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
 const LanguageModal = ({ language }) => {
     const dispatch = useDispatch()
 
@@ -39,10 +42,7 @@ const LanguageModal = ({ language }) => {
     }
     let handleSubmit = (event) => {
         let error = false
-        console.log(languagelistmodal)
         languagelistmodal.map((element) => {
-
-            console.log("executed")
             if (element.languageName == "") {
                 error = true
             }
@@ -57,8 +57,6 @@ const LanguageModal = ({ language }) => {
                 return false
             } else { return true }
         })
-        console.log(languageedited)
-        console.log(error)
         if (!error) {
 
             let languageedited = languagelistmodal.map((element) => {
@@ -66,10 +64,8 @@ const LanguageModal = ({ language }) => {
                 return element
             })
             let language = JSON.stringify({ language: languageedited })
-            console.log(language)
             event.preventDefault()
             let userid = JSON.parse(localStorage.getItem('user')).id
-            console.log(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`)
             setbuttonloading(true)
 
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`, {
@@ -81,12 +77,10 @@ const LanguageModal = ({ language }) => {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     successModal()
                 })
                 .catch((error) => {
                     errorModal()
-                    console.log(error)
                     console.error('Error:', error);
                 });
         }
@@ -132,7 +126,8 @@ const LanguageModal = ({ language }) => {
 
                                                         </div>
                                                         <div className="col-5 language-modal-existing-input-group">
-                                                            <input className="" type="text" onChange={(event) => {
+                                                            {/* <input className="" type="text" placeholder="Please Set Proficiency" name="" /> */}
+                                                            <select value={element.languageProficiency} onChange={(event) => {
 
                                                                 setlanguagelistmodal((oldlist) => {
                                                                     const found = oldlist.find(childelement => childelement._id == element._id);
@@ -147,7 +142,13 @@ const LanguageModal = ({ language }) => {
                                                                     return result;
                                                                     ;
                                                                 })
-                                                            }} value={element.languageProficiency} placeholder="Please Set Proficiency" name="" />
+                                                            }} className="" selected={""} name="" id="">
+                                                                <option value={""}></option>
+                                                                <option value={"Basic"} >Basic</option>
+                                                                <option value={"Converstational"} >Converstational</option>
+                                                                <option value={"Fluent"} >Fluent</option>
+                                                                <option value={"Native"} >Native/Bilingual</option>
+                                                            </select>
                                                         </div>
                                                         <button onClick={(event) => {
                                                             event.preventDefault()
@@ -156,21 +157,20 @@ const LanguageModal = ({ language }) => {
 
                                                             setlanguagelistmodal((oldlist) => {
                                                                 const found = oldlist.filter(childelement => childelement._id != element._id);
-                                                                console.log(found)
-                                                                    // found.languageName = event.target.value
-                                                                    // const result = oldlist.map(oldelement => {
-                                                                    //     if (oldelement._id == element._id) {
-                                                                    //         return found
-                                                                    //     } else {
-                                                                    //         return oldelement
-                                                                    //     }
-                                                                    // });
-                                                                    // return result;
-                                                                    ;
+                                                                // found.languageName = event.target.value
+                                                                // const result = oldlist.map(oldelement => {
+                                                                //     if (oldelement._id == element._id) {
+                                                                //         return found
+                                                                //     } else {
+                                                                //         return oldelement
+                                                                //     }
+                                                                // });
+                                                                // return result;
+                                                                ;
                                                                 return found
                                                             })
                                                         }} className="language-edit-btn">
-                                                            <i className="fa fa-trash" aria-hidden="true"></i>
+                                                            <FontAwesomeIcon icon={faTrash} />
                                                         </button>
                                                     </div>
                                                 )
@@ -178,12 +178,21 @@ const LanguageModal = ({ language }) => {
                                             <div className="language-modal-location-container d-flex align-items-center">
 
                                                 <div className="language-modal-input-group">
+                                                    <label htmlFor="">Language Name</label>
                                                     <input value={langtobeadded} className="" onChange={(event) => { setlangtobeadded(event.target.value) }} type="text" placeholder="Language Name" name="" />
                                                     <div style={{ position: "absolute" }} className='input-error-display' >{langerror}</div>
 
                                                 </div>
                                                 <div className="language-modal-input-group">
-                                                    <input value={proficiencytobeadded} className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} type="text" placeholder="Proficiency" name="" />
+                                                    <label htmlFor="">Proficiency</label>
+                                                    {/* <input type="text" placeholder="Proficiency" name="" /> */}
+                                                    <select value={proficiencytobeadded} className="" onChange={(event) => { setproficiencytobeadded(event.target.value) }} selected={""} name="" id="">
+                                                        <option value={""}></option>
+                                                        <option value={"Basic"} >Basic</option>
+                                                        <option value={"Converstational"} >Converstational</option>
+                                                        <option value={"Fluent"} >Fluent</option>
+                                                        <option value={"Native"} >Native/Bilingual</option>
+                                                    </select>
                                                     <div style={{ position: "absolute" }} className='input-error-display' >{proficiencyerror}</div>
                                                 </div>
                                                 <div className="">
@@ -205,7 +214,6 @@ const LanguageModal = ({ language }) => {
                                                         }
                                                         if (langtobeadded != "" &&
                                                             proficiencytobeadded != "") {
-                                                            console.log("execute")
                                                             setlanguagelistmodal((oldstate) => {
                                                                 let newstate = [...oldstate, {
                                                                     "_id": uuid(),
@@ -218,7 +226,7 @@ const LanguageModal = ({ language }) => {
                                                             setproficiencytobeadded("")
                                                         }
                                                     }} className="language-edit-btn">
-                                                        <i className="fa fa-plus" aria-hidden="true"></i>
+                                                        <FontAwesomeIcon icon={faPlus} />
                                                     </button>
                                                 </div>
                                             </div>
@@ -232,8 +240,8 @@ const LanguageModal = ({ language }) => {
                     </div>
                     <div className="modal-footer">
                         <button type="button" onClick={closeLanguageModal} className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        {buttonloading ? <button class="btn btn-primary" type="button" disabled>
-                            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        {buttonloading ? <button className="btn btn-primary" type="button" disabled>
+                            <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                             Loading...
                         </button> : <button type="button" onClick={handleSubmit} className="btn btn-primary">Save changes</button>}
                     </div>
