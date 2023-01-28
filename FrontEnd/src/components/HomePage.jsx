@@ -72,7 +72,7 @@ const HomePage = () => {
                     <div className="col-md-4 bottomresponsive">
                         <div className="card popularcardmodify">
                             <div className="card-body popularcardbody">
-                                <img src="./translate-600x399.jpg" alt="" />
+                                <img src="./Images/seo2-600x399.jpg" alt="" />
                                 <div className="profilecont">
                                     <img className="profile" src="./Images/profile.jpg" alt="" />
                                     <h5>Bayley Robertson</h5>
@@ -90,7 +90,7 @@ const HomePage = () => {
                     <div className="col-md-4 bottomresponsive">
                         <div className="card popularcardmodify">
                             <div className="card-body popularcardbody">
-                                <img src="./translate-600x399.jpg" alt="" />
+                                <img src="./Images/translate-600x399.jpg" alt="" />
                                 <div className="profilecont">
                                     <img className="profile" src="./Images/profile.jpg" alt="" />
                                     <h5>Bayley Robertson</h5>
@@ -107,6 +107,87 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            
+
+
+
+
+            <section className="latestblog popular">
+                <div className="populartext">
+                    <h1>Latest from Blog</h1>
+                    <p>uniqely promote adaptive quality vectors rather than stand-alone e-markets
+                        Pontifilcate alternative architectures where as iterate.
+                    </p>
+                </div>
+                <div className="row">
+                    <div style={{"padding": 0}}className="col-md-4 bottomresponsive">
+                        <div className="latestblogcont">
+                            <div className="latestblogimgcont">
+                                <img src="./Images/post1.jpg" alt="" />
+                            </div>
+                            <div className="latestblogprofile">
+                                <img src="./Images/profile.jpg" alt="" />
+                                
+                                <p><span> - Beyle Robetson </span>  |  Interview</p>
+                            </div>
+                            <div className="latestblogdesc">
+                                <h5>What are the advantages of being a freelancer...</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 bottomresponsive">
+                        <div className="latestblogcont">
+                            <div className="latestblogimgcont">
+                                <img src="./Images/post3.jpg" alt="" />
+                            </div>
+                            <div className="latestblogprofile">
+                                <img src="./Images/profile.jpg" alt="" />
+                                
+                                <p><span> - Beyle Robetson </span>  |  Interview</p>
+                            </div>
+                            <div className="latestblogdesc">
+                                <h5>What are the advantages of being a freelancer...</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-md-4 bottomresponsive">
+                        <div className="latestblogcont">
+                            <div className="latestblogimgcont">
+                                <img src="./Images/post2.jpg" alt="" />
+                            </div>
+                            <div className="latestblogprofile">
+                                <img src="./Images/profile.jpg" alt="" />
+                                
+                                <p><span> - Beyle Robetson </span>  |  Interview</p>
+                            </div>
+                            <div className="latestblogdesc">
+                                <h5>What are the advantages of being a freelancer...</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+            <div className="grayscaleimgs">
+                <div className="row grayimgcont">
+                    <div className="col-md-2">
+                        <img src="./Images/growth.jpg" alt="" />
+                    </div>
+                    <div className="col-md-2">
+                        <img src="./Images/zuper.jpg" alt="" />
+                    </div>
+                    <div className="col-md-2">
+                        <img src="./Images/gamexo.jpg" alt="" />
+                    </div>
+                    <div className="col-md-2">
+                        <img src="./Images/talkshow.jpg" alt="" />
+                    </div>
+                    <div className="col-md-2">
+                        <img src="./Images/tireproject.jpg" alt="" />
+                    </div>
+                </div>
+            </div>
+
             <div className="cardview">
                 <div className="cardviewtext">
                     <h1>Find the talent needed to get your business growing.</h1>

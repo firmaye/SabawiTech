@@ -9,10 +9,10 @@ const Navbar = () => {
         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     return (
-        <nav className="navbar navbar-dark navbar-expand-sm bg-dark fixed-top">
+        <nav className="navbar navbar-light navbar-expand-sm bg-light fixed-top">
             <div className="container">
                 <a href="/" className="navbar-brand">
-                    ProTalent
+                    Intract
                 </a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
