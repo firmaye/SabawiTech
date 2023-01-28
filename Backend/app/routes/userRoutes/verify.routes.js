@@ -2,6 +2,7 @@ module.exports = app => {
   var router = require("express").Router();
   const db = require("../../models");
   const User = db.users;
+  const CoverLetter=db.coverLetters
   const Token=db.tokens
   const EmailSender = require("../../helpers/emailVerification");
   // ======================= User ==================================
@@ -22,6 +23,21 @@ module.exports = app => {
 	return;
   })
 
+  router.post('/check/proposal',async(req,res) => {
+
+	const proposalWritten=await CoverLetter.findOne({ sender:req.body.sender,intPostId:req.body.intPostId});
+
+	if (!proposalWritten){
+		res.status(200).send({
+				sent:false,
+			});
+		return;
+	}
+	res.status(200).send({
+				sent:true,
+			});
+		return;
+  })
 
 
 
