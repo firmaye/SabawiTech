@@ -33,13 +33,21 @@ exports.signup =async (req, res) => {
         verified:false,
     })
     const existedUser=await User.findOne({ email:req.body.email});    
-    if (existedUser){
+    if (existedUser && existedUser.verified===false){
+
+        await User.findByIdAndRemove(existedUser._id).then((data)=>{
+            console.log("user deleted sucessfully")
+            }).catch(err=>console.log(err))
+    }
+    const existUser=await User.findOne({ email:req.body.email});
+
+    if (existUser){
         res.status(400).send({
             success:false, 
             error: "Failed! email is already in use!" });
         return;
     }
-
+    
 
     const {valid} = await Validator.isEmailValid(req.body.email);
 
@@ -111,6 +119,11 @@ exports.signin = (req, res) => {
             return res.status(404).send({ 
                 success:false,
                 message: "User is not Registered" });
+        }
+        if (user.verified===false) {
+            return res.status(400).send({ 
+                success:false,
+                message: "User is not verified to access the pages" });
         }
          if (user.source==='google') {
             return res.status(404).send({ 

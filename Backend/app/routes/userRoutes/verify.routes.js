@@ -3,10 +3,57 @@ module.exports = app => {
   const db = require("../../models");
   const User = db.users;
   const Token=db.tokens
+  const EmailSender = require("../../helpers/emailVerification");
   // ======================= User ==================================
-  router.get('/sifan',(req,res) => {
-	res.send("Here We are in verify routes ")
+  
+  router.get('/check/email/:id',async(req,res) => {
+	const existedUser=await User.findOne({ email:req.params.id});
+	if (!existedUser){
+		res.status(200).send({
+				exist:false,
+				message:"email does not exist"
+			});
+		return;
+	}
+	res.status(400).send({
+				exist:true,
+				message:"email exists"
+			});
+	return;
   })
+
+
+
+
+  router.post("/resendlink", async (req, res) => {
+		// res.send('here I am')
+		
+			const user = await User.findOne({ _id: req.body.id });
+
+			if (!user) return res.status(400).send({
+				success:false,
+				message:"There is no such user"
+			});
+
+			const token = await Token.findOne({userId: user._id});
+			if (!token) return res.status(400).send({
+				success:false,
+				message:"There no token for such User"
+			});
+
+			const message =`${process.env.BASE_URL}/user/verify/${user._id}/${token.token}`;
+			console.log(message)
+			EmailSender ({email:user.email, subject:"Verify Email", message});
+
+			res.status(200).send({
+				success:true,
+				message:"email Sent sucessfully"
+			});
+			return;
+		
+	});
+
+
   router.get("/verify/:id/:token", async (req, res) => {
 		// res.send('here I am')
 		
