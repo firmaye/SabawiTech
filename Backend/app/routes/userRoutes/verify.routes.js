@@ -12,12 +12,14 @@ module.exports = app => {
 	if (!existedUser){
 		res.status(200).send({
 				exist:false,
+				verified:false,
 				message:"email does not exist"
 			});
 		return;
 	}
 	res.status(400).send({
 				exist:true,
+				verified:existedUser.verified,
 				message:"email exists"
 			});
 	return;
