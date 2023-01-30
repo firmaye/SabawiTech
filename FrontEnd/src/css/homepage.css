@@ -2,11 +2,10 @@
     overflow: hidden;
 }
 nav{
-    height: 90px;
-    opacity:.9;
+    margin-top:6px;
+    height:70px;
 }
 .navbar .container{
-    height: 104px;
     margin-top: -12px;
     margin-right: 18px;
     margin-left: 30px;
@@ -21,7 +20,7 @@ nav{
     margin-top: 24px;
 }
 .show{
-    background-color: whitesmoke;
+    background-color: white;
 }
 .navbar-toggle{
     margin-right: 25px;
