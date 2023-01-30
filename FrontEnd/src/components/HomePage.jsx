@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import '../css/homepage.css'
 import Footer from './footer';
 const HomePage = () => {
+    const [recent, setRecent] = useState([])
+     useEffect(() => {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
+      .then(
+        result => {
+          setRecent(result)
+        }
+      )
+  }, [])
     return (
         <div className="flex-container maincont">
             <div className="content">
@@ -120,7 +129,26 @@ const HomePage = () => {
                     </p>
                 </div>
                 <div className="row">
-                    <div style={{"padding": 0}}className="col-md-4 bottomresponsive">
+                    {recent.map((latestBlog)=>{
+                        return(
+                            <div className="col-md-4 bottomresponsive">
+                                <div className="latestblogcont">
+                                    <div className="latestblogimgcont">
+                                        <img src={latestBlog.blogImage} alt="" />
+                                    </div>
+                                    <div className="latestblogprofile">
+                                        <img src="./Images/profile.jpg" alt="" />
+                                        
+                                        <p><span> - {latestBlog.author} </span>  |  Interview</p>
+                                    </div>
+                                    <div className="latestblogdesc">
+                                        <h5><a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogDescription.substring(0, 50) + ' . . .'}</a></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                    <div className="col-md-4 bottomresponsive">
                         <div className="latestblogcont">
                             <div className="latestblogimgcont">
                                 <img src="./Images/post1.jpg" alt="" />
@@ -131,37 +159,7 @@ const HomePage = () => {
                                 <p><span> - Beyle Robetson </span>  |  Interview</p>
                             </div>
                             <div className="latestblogdesc">
-                                <h5>What are the advantages of being a freelancer...</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4 bottomresponsive">
-                        <div className="latestblogcont">
-                            <div className="latestblogimgcont">
-                                <img src="./Images/post3.jpg" alt="" />
-                            </div>
-                            <div className="latestblogprofile">
-                                <img src="./Images/profile.jpg" alt="" />
-                                
-                                <p><span> - Beyle Robetson </span>  |  Interview</p>
-                            </div>
-                            <div className="latestblogdesc">
-                                <h5>What are the advantages of being a freelancer...</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="col-md-4 bottomresponsive">
-                        <div className="latestblogcont">
-                            <div className="latestblogimgcont">
-                                <img src="./Images/post2.jpg" alt="" />
-                            </div>
-                            <div className="latestblogprofile">
-                                <img src="./Images/profile.jpg" alt="" />
-                                
-                                <p><span> - Beyle Robetson </span>  |  Interview</p>
-                            </div>
-                            <div className="latestblogdesc">
-                                <h5>What are the advantages of being a freelancer...</h5>
+                                <h5><a>What are the advantages of being a freelancer...</a></h5>
                             </div>
                         </div>
                     </div>

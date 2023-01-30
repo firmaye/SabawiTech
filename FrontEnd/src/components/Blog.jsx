@@ -71,7 +71,7 @@ const Blog = ({ catagory }) => {
                     </li>
                   </ul>
                 </div>
-                <a className="blog_title" href={`blogdetails/${blog.id}`} rel="bookmark">{blog.blogTitle}</a>
+                <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
                 <p className="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
 
                 <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
