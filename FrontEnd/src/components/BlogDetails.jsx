@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import data from './jsonapi/data.json'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useParams } from 'react-router-dom';
 import '../css/blog.css'
 const BlogDetails = ({ authenticated }) => {
@@ -30,15 +31,15 @@ const BlogDetails = ({ authenticated }) => {
                 <div className="entry-meta detail-meta">
                     <ul className="list-inline">
                         <li className="list-inline-item detail_list_inine">
-                            <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
+                            <i className="fa fa-user"></i> by <a href="javascript:void(0)">{documentToReactComponents(blog.author)}</a>
                         </li>
                         <li className="list-inline-item detail_list_inine">
                             <i className="fa fa-comment"></i> <a href="">0 Comments</a>
                         </li>
                     </ul>
                 </div>
-                <h3 className="secondTitle">{blog.blogTitle}</h3>
-                <p className="card-text">{blog.blogDescription}</p>
+                <h3 className="secondTitle">{documentToReactComponents(blog.blogTitle)}</h3>
+                <p className="card-text">{documentToReactComponents(blog.blogDescription)}</p>
                 <div className="tags">
                     <div>
                         {splittag(blog.blogTag).map((tag) => {
