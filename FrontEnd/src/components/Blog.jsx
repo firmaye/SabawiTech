@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import '../css/blog.css';
 import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
@@ -64,14 +64,14 @@ const Blog = ({ catagory }) => {
                 <div className="entry-meta">
                   <ul className="list-inline">
                     <li className="list-inline-item">
-                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
+                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{documentToReactComponents(blog.author)}</a>
                     </li>
                     <li className="list-inline-item">
                       <i className="fa fa-comment"></i> <a href="">0 Comments</a>
                     </li>
                   </ul>
                 </div>
-                <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
+                <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{documentToReactComponents(blog.blogTitle)}</a>
                 <p className="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
 
                 <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
