@@ -48,19 +48,36 @@ const Profile = () => {
     const [education, seteducation] = useState([])
     const [loading, setloading] = useState(true)
     useEffect(() => {
+
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let userid = JSON.parse(localStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
-                setprofileinfo(result)
-                setlanguage(result.language)
-                setskilllist(result.skill)
-                setpreviouswork(result.previousWork)
-                setemploymenthistory(result.employmentHistory)
-                setcertification(result.certification)
-                seteducation(result.education)
-                setloading(false)
+                if (result.profilePhoto == undefined || result.profilePhoto == "") {
+                    if (result.verified) {
+                        let direction = 0
+                        if (result.source == "google") {
+                            direction = 1
+                        } else {
+                            direction = 0
+                        }
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/${direction}`
+
+                    } else {
+
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+                    }
+                } else {
+                    setprofileinfo(result)
+                    setlanguage(result.language)
+                    setskilllist(result.skill)
+                    setpreviouswork(result.previousWork)
+                    setemploymenthistory(result.employmentHistory)
+                    setcertification(result.certification)
+                    seteducation(result.education)
+                    setloading(false)
+                }
             }).catch((error) => { });
         }
     }, [])

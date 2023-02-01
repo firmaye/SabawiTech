@@ -1,16 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/homepage.css'
 import Footer from './footer';
 const HomePage = () => {
     const [recent, setRecent] = useState([])
-     useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
-      .then(
-        result => {
-          setRecent(result)
-        }
-      )
-  }, [])
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
+            .then(
+                result => {
+                    setRecent(result)
+                }
+            )
+    }, [])
     return (
         <div className="flex-container maincont">
             <div className="content">
@@ -116,7 +116,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
-            
+
 
 
 
@@ -129,8 +129,8 @@ const HomePage = () => {
                     </p>
                 </div>
                 <div className="row">
-                    {recent.map((latestBlog)=>{
-                        return(
+                    {recent.map((latestBlog) => {
+                        return (
                             <div className="col-md-4 bottomresponsive">
                                 <div className="latestblogcont">
                                     <div className="latestblogimgcont">
@@ -138,7 +138,7 @@ const HomePage = () => {
                                     </div>
                                     <div className="latestblogprofile">
                                         <img src="./Images/profile.jpg" alt="" />
-                                        
+
                                         <p><span> - {latestBlog.author} </span>  |  Interview</p>
                                     </div>
                                     <div className="latestblogdesc">
@@ -155,7 +155,7 @@ const HomePage = () => {
                             </div>
                             <div className="latestblogprofile">
                                 <img src="./Images/profile.jpg" alt="" />
-                                
+
                                 <p><span> - Beyle Robetson </span>  |  Interview</p>
                             </div>
                             <div className="latestblogdesc">
@@ -164,7 +164,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                
+
             </section>
             <div className="grayscaleimgs">
                 <div className="row grayimgcont">
@@ -195,7 +195,7 @@ const HomePage = () => {
                     <img src="./Images/provider error.png" alt="" />
                 </div>
             </div>
-    </div>
+        </div>
 
     );
 }

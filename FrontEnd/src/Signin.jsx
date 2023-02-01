@@ -8,7 +8,7 @@ const Signin = () => {
     const [password, setpassword] = useState("")
     const [emailerror, setemailerror] = useState("")
     const SigninSchema = Yup.object().shape({
-        email: Yup.string().email('Invalid email').required({})
+        email: Yup.string().email('Invalid email').required("Required")
             .test('Invalid Email', "Invalid Email or Password", // <- key, message
                 function (value) {
                     let body = {
@@ -16,36 +16,42 @@ const Signin = () => {
                         password: password
                     }
                     body = JSON.stringify(body)
+
                     return new Promise((resolve, reject) => {
-                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: body
-                        })
-                            .then((response) => response.json())
-                            .then((data) => {
-                                if (!data.success) {
-                                    resolve(this.createError({ message: data.message }));
-                                    // if (data.message == "User Not found.") {
-                                    //     resolve(false);
-                                    // }
-                                    // if (data.message == "Invalid Password!") {
-                                    //     resolve(false);
-                                    // }
-                                    // if (data.message == "User is not Registered") {
-                                    //     resolve(false);
-                                    // }
-                                } else {
-                                    resolve(true)
-                                }
-                                // successModal()
+                        if (password == "") {
+                            resolve(true);
+                        } else {
+                            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: body
                             })
-                            .catch((error) => {
-                                // errorModal()
-                                console.error('Error:', error);
-                            });
+                                .then((response) => response.json())
+                                .then((data) => {
+                                    console.log(data)
+                                    if (!data.success) {
+                                        resolve(this.createError({ message: data.message }));
+                                        // if (data.message == "User Not found.") {
+                                        //     resolve(false);
+                                        // }
+                                        // if (data.message == "Invalid Password!") {
+                                        //     resolve(false);
+                                        // }
+                                        // if (data.message == "User is not Registered") {
+                                        //     resolve(false);
+                                        // }
+                                    } else {
+                                        resolve(true)
+                                    }
+                                    // successModal()
+                                })
+                                .catch((error) => {
+                                    // errorModal()
+                                    console.error('Error:', error);
+                                });
+                        }
                     })
                 })
         , password: Yup.string()
@@ -91,7 +97,7 @@ const Signin = () => {
                                 if (data.accessToken) {
                                     localStorage.setItem("user", JSON.stringify(data.info));
                                 }
-                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/1`
                             }
                         } else {
                             setgoogleerror(data.info)

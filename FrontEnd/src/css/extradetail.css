@@ -238,7 +238,8 @@
     margin: 0 !important;
 }
 
-.extra-detail-label-input-container input {
+.extra-detail-label-input-container input,
+.extra-detail-label-input-container select {
     border: 1px solid #ccc;
     width: 100%;
     padding: 10px 10px;

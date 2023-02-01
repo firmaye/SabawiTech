@@ -13,6 +13,7 @@ import Profile from "./Profile";
 import AddPortifolio from "./AddPortifolio";
 import BlogContainer from "./components/BlogContainer";
 import BlogdetailsContainer from "./components/BlogdetailsContainer";
+import EmailVerified from "./components/EmailVerified";
 import EditPortifolio from "./EditPortifolio";
 import { store } from './redux/store'
 import { Provider } from 'react-redux'
@@ -22,6 +23,7 @@ import Signin from "./Signin";
 import Signup from "./Signup";
 import NotFoundPageProfile from "./components/NotFoundPageProfile";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import CheckEmail from "./components/CheckEmail";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <Profile />,
-    // errorElement: <NotFoundPageProfile />
+    errorElement: <NotFoundPageProfile />
   },
   {
     path: "/addportifolio",
@@ -58,9 +60,19 @@ const router = createBrowserRouter([
     element: <BlogContainer />,
   },
   {
-    path: "/extradetail",
+    path: "/extradetail/:type",
 
     element: <ExtraDetail />,
+  },
+  {
+    path: "/emailverification/:type",
+
+    element: <CheckEmail />,
+  },
+  {
+    path: "/emailverified/:id/:token",
+
+    element: <EmailVerified />,
   },
   {
     path: "/blogdetails/:id",
@@ -82,9 +94,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <GoogleOAuthProvider clientId={import.meta.env.VITE_CLIENT_ID}>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
+      {/* <React.StrictMode> */}
+      <RouterProvider router={router} />
+      {/* </React.StrictMode> */}
     </GoogleOAuthProvider>;
   </Provider>,
 );
