@@ -39,10 +39,11 @@
 
 .intro-img {
     color: white;
-    height: 265px;
+    height: auto;
     background: url("../assets/breadcrumb-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    padding-bottom:60px;
 
 }
 
