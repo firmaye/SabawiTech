@@ -56,30 +56,51 @@ const OpportunityDetailPage = () => {
             });
     }
     const params = useParams()
+
     useEffect(() => {
         if (JSON.parse(localStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let paramsid = params.id
             let userid = JSON.parse(localStorage.getItem('user')).id
-            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
-                const found = result
-                let skillsarray = found.requiredSkill.split(",")
-                setopportunity(found)
-                setsubmittedproposal({
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
+                if (result.profilePhoto == undefined || result.profilePhoto == "") {
+                    if (result.verified) {
+                        let direction = 0
+                        if (result.source == "google") {
+                            direction = 1
+                        } else {
+                            direction = 0
+                        }
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/${direction}`
 
-                    "sender": userid,
-                    "receiverCompany": found.companyName,
-                    "letterDescription": "",
-                    "intPostId": found._id,
-                    "status": ""
+                    } else {
 
-                })
-                setrequiredskill(skillsarray)
-                setloading(false)
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+                    }
+                } else {
 
-                // opportunity.requiredSkill.map((element) => {
-                // })
+
+                    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
+                        const found = result
+                        let skillsarray = found.requiredSkill.split(",")
+                        setopportunity(found)
+                        setsubmittedproposal({
+
+                            "sender": userid,
+                            "receiverCompany": found.companyName,
+                            "letterDescription": "",
+                            "intPostId": found._id,
+                            "status": ""
+
+                        })
+                        setrequiredskill(skillsarray)
+                        setloading(false)
+
+                        // opportunity.requiredSkill.map((element) => {
+                        // })
+                    }).catch((error) => { });
+                }
             }).catch((error) => { });
         }
 

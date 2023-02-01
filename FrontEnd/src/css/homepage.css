@@ -1,18 +1,22 @@
-.body{
+.body {
     overflow: hidden;
 }
-nav{
+
+nav {
     height: 90px;
-    opacity:.9;
+    opacity: .9;
 }
-.navbar .container{
+
+.navbar .container {
     height: 104px;
     margin-top: -12px;
     margin-right: 18px;
     margin-left: 30px;
-    
+
 }
-.navbar .collapse{
+
+
+.navbar .collapse {
     padding-left: 34px;
     padding-top: 20px;
     padding-bottom: 43px;
@@ -20,31 +24,38 @@ nav{
     border-bottom-right-radius: 15px;
     margin-top: 24px;
 }
-.show{
+
+
+.show {
     background-color: whitesmoke;
 }
-.navbar-toggle{
+
+.navbar-toggle {
     margin-right: 25px;
 }
-.collapse a:hover{
+
+.collapse a:hover {
     text-decoration: underline;
 }
-.content{
-    display:flex;
-    width:100%;
-    background-image: linear-gradient( rgb(10, 66, 135), rgb(74, 120, 234));
-    color:white;
+
+.content {
+    display: flex;
+    width: 100%;
+    background-image: linear-gradient(rgb(10, 66, 135), rgb(74, 120, 234));
+    color: white;
     padding: 0 29px;
 }
-.banner_content{
-    width:50%;
-    display:flex;
+
+.banner_content {
+    width: 50%;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-left:177px;
+    padding-left: 177px;
 }
-.banner_content h1{
+
+.banner_content h1 {
     font-size: 58px;
     font-weight: 700;
     margin-bottom: 40px;
@@ -53,63 +64,75 @@ nav{
     line-height: 1.2;
     margin-top: -66px;
 }
-.banner_content p{
+
+.banner_content p {
     font-size: 24px;
     line-height: 34px;
     margin-bottom: 0;
     font-weight: 300;
     font-family: Rubik;
     font-style: normal;
-    margin-top:-10px;
-    color:white;
+    margin-top: -10px;
+    color: white;
 }
-.landingillustration{
-    width:50%;
+
+.landingillustration {
+    width: 50%;
 }
-.landingillustration img{
+
+.landingillustration img {
     width: 83%;
     padding: 69px;
     padding-top: 139px;
     padding-left: 0px;
 }
-.cardmodifytext{
+
+.cardmodifytext {
     text-align: center;
 }
-.cardmodify{
-    border:none;
+
+.cardmodify {
+    border: none;
     display: flex;
 }
-.card-body h3{
+
+.card-body h3 {
     text-align: center;
 }
-.cardbodymodify img{
+
+.cardbodymodify img {
     width: 53%;
 }
-.providecont{
+
+.providecont {
     height: 52vh;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 116px;
 }
-.providecont h1{
+
+.providecont h1 {
     text-align: center;
     margin-bottom: -40px;
     margin-top: 39px;
     font-weight: 700;
-    font-family: 'Poppins Bold';
+    font-family: 'Poppins';
 }
-.populartext{
+
+.populartext {
     text-align: center;
     margin-bottom: 62px;
     margin-top: 69px;
 }
-.populartext h1{
+
+.populartext h1 {
     font-weight: 700;
-    font-family: 'Poppins Bold';
-    margin-bottom:30px;
+    font-family: 'Poppins';
+    margin-bottom: 30px;
 }
-.profilecont img{
+
+.profilecont img {
     width: 63px;
     height: 63px;
     border-radius: 50%;
@@ -117,125 +140,151 @@ nav{
     padding: 5px;
     background-color: white;
 }
-.profilecont{
-    margin-left:20px;
+
+.profilecont {
+    margin-left: 20px;
 }
-.profilecont p{
+
+.profilecont p {
     margin-top: -7px;
 }
-.profile h5{
+
+.profile h5 {
     margin-top: 12px;
     font-family: rubik;
     font-weight: 700;
 }
-.poptitle{
+
+.poptitle {
     margin-left: 23px;
     font-size: 23px;
-    font-family: 'Poppins Bold';
+    font-family: 'Poppins';
     margin-right: 23px;
 }
-.popular{
+
+.popular {
     background-color: aliceblue;
     display: flex;
-    width:100%;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-left: 80px;
-    padding-right: 80px; 
-    padding-bottom: 100px;  
+    padding-right: 80px;
+    padding-bottom: 100px;
 }
-.popularcardmodify{
+
+.popularcardmodify {
     border-radius: 16px;
 }
-.popularcardbody{
-    padding: 0 !important;;
+
+.popularcardbody {
+    padding: 0 !important;
+    ;
     border-radius: 10px;
-    margin-left:0px !important;
+    margin-left: 0px !important;
 }
-.service{
-    display:flex;
+
+.service {
+    display: flex;
     justify-content: space-around;
 }
-.service p{
-    color:rgb(97, 97, 97)
+
+.service p {
+    color: rgb(97, 97, 97)
 }
-.blogcardmodify{
+
+.blogcardmodify {
     border: none;
 }
-.latestblogcont{
-    width:100%;
+
+.latestblogcont {
+    width: 100%;
 }
-.latestblogcont img{
-    width:100%;
+
+.latestblogcont img {
+    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     transition: all .5s ease-in;
     cursor: pointer;
 }
-.latestblogcont img:hover{
-    width:110%;
-    margin-left:-5%;
+
+.latestblogcont img:hover {
+    width: 110%;
+    margin-left: -5%;
 }
-.latestblogimgcont{
-    width:100%;
-    height:100%;
+
+.latestblogimgcont {
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
 }
-.latestblogprofile{
-    display:flex;
+
+.latestblogprofile {
+    display: flex;
     align-items: center;
     margin-top: 40px;
     margin-bottom: 16px;
 }
-.latestblogprofile img{
-    width:60px;
-    height:60px;
+
+.latestblogprofile img {
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
 }
-.latestblogdesc{
+
+.latestblogdesc {
     padding: 0 16px;
     padding-bottom: 52px;
 }
-.blogpopularcardbody{
-    border:none;
+
+.blogpopularcardbody {
+    border: none;
 }
-.latestblogmaincont{
+
+.latestblogmaincont {
     padding: 0;
     box-shadow: 5px 5px 33px #dcdcdc;
     border-radius: 12px;
 }
 
-.latestblog{
+.latestblog {
     background-color: white;
 }
-.latestblog .card-body img{
+
+.latestblog .card-body img {
     height: auto;
     border-radius: 20px;
 }
-.latestblogprofile{
-    display:flex;
+
+.latestblogprofile {
+    display: flex;
     margin-left: 24px;
 }
-.latestblogprofile img{
-    margin-right:14px;
+
+.latestblogprofile img {
+    margin-right: 14px;
     width: 40px;
-    height:40px;
+    height: 40px;
 }
-.latestblogprofile p{
+
+.latestblogprofile p {
     font-family: Poppins;
     text-transform: capitalize;
     font-size: 14px;
     font-weight: 400;
     padding-right: 10px;
-    margin-top:19px;
+    margin-top: 19px;
 }
-.latestblogprofile p span{
+
+.latestblogprofile p span {
     color: #6787FE;
 }
-.latestblogdesc h5{
+
+.latestblogdesc h5 {
     cursor: pointer;
     font-weight: 600;
     font-size: 22px;
@@ -243,47 +292,54 @@ nav{
     font-family: Poppins;
     font-style: normal;
 }
-.latestblogdesc:hover{
-    color:rgb(96, 96, 154);
-    
+
+.latestblogdesc:hover {
+    color: rgb(96, 96, 154);
+
 }
-.latestblogdesc:hover .latestblogcont img{
-    width:110%;
-    margin-left:-5%;
+
+.latestblogdesc:hover .latestblogcont img {
+    width: 110%;
+    margin-left: -5%;
 }
 
 
 .service p:nth-child(2) {
-    background-color: rgb(237, 237, 237);  
-    padding:2px 13px;
-    border-radius:15px;  
-    color:blue;
+    background-color: rgb(237, 237, 237);
+    padding: 2px 13px;
+    border-radius: 15px;
+    color: blue;
     font-size: 20px;
 }
-hr{
+
+hr {
     margin-top: 30px;
     margin-bottom: 21px;
     padding-right: 5px;
     padding-left: 5px;
 }
-.popularcardbody>img{
-    width:100%;
+
+.popularcardbody>img {
+    width: 100%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
-.maincont{
-    display:flex;
+
+.maincont {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.cardbodymodify{
+
+.cardbodymodify {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.cardview{
+
+.cardview {
     display: flex;
     width: 80%;
     background-color: rgb(214, 232, 237);
@@ -294,64 +350,77 @@ hr{
     align-items: center;
     padding-left: 59px;
     padding-right: 20px;
-    margin-bottom:100px;
-}
-.cardmodify{
-    border: none !important;;
-}
-.cardviewtext{
-    width:60%;
-    padding-right: 54px;
-}
-.cardviewtext h1{
-    font-family: 'Poppins Bold';
-    font-weight: 700;
-}
-.cardviewillustration{
-    width:34%;
-}
-.cardviewillustration img{
-    width:100%
+    margin-bottom: 100px;
 }
 
-.grayscaleimgs img{
+.cardmodify {
+    border: none !important;
+    ;
+}
+
+.cardviewtext {
+    width: 60%;
+    padding-right: 54px;
+}
+
+.cardviewtext h1 {
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+
+.cardviewillustration {
+    width: 34%;
+}
+
+.cardviewillustration img {
+    width: 100%
+}
+
+.grayscaleimgs img {
     filter: grayscale(100%);
     transition: all .3s ease-in;
     cursor: pointer;
     width: 100%;
 }
-.grayscaleimgs img:hover{
+
+.grayscaleimgs img:hover {
     filter: grayscale(4%)
 }
-.grayscaleimgs{
-    display:flex;
-    width:100%;
-    padding-left:20px;
-    padding-right:20px;
+
+.grayscaleimgs {
+    display: flex;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
-.grayimgcont{
-    width:100%;
+
+.grayimgcont {
+    width: 100%;
     justify-content: center;
     overflow-x: hidden;
 }
-footer hr{
-    width:80vw;
+
+footer hr {
+    width: 80vw;
 }
-footer{
+
+footer {
     width: 90vw;
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom:20px;
-    font-family: 'poppins Bold';
+    margin-bottom: 20px;
+    font-family: 'Poppins';
 }
-@media (max-width: 1200px){
-    .landingillustration{
-        display:none;
+
+@media (max-width: 1200px) {
+    .landingillustration {
+        display: none;
     }
-    .banner_content{
+
+    .banner_content {
         width: 100%;
         margin-top: 275px;
         justify-content: center;
@@ -360,46 +429,50 @@ footer{
         padding-bottom: 129px;
         text-align: center;
     }
-    .providecont{
-        height:auto;
+
+    .providecont {
+        height: auto;
     }
-    .providecont h1{
-        margin-bottom:64px;
+
+    .providecont h1 {
+        margin-bottom: 64px;
     }
-    .bottomresponsive{
-        width:100%;
+
+    .bottomresponsive {
+        width: 100%;
         margin-bottom: 90px;
     }
 }
 
-@media (max-width:770px){
-    .cardview{
+@media (max-width:770px) {
+    .cardview {
         flex-direction: column-reverse;
-        height:auto;
-        padding-top:20px;
-        padding-bottom:40px;
-        width:92%;
+        height: auto;
+        padding-top: 20px;
+        padding-bottom: 40px;
+        width: 92%;
     }
-    .cardviewtext{
-        width:80%;
+
+    .cardviewtext {
+        width: 80%;
         text-align: center;
-        margin-top:50px;
+        margin-top: 50px;
     }
 }
 
-@media (min-width:573px){
-    .populartext{
+@media (min-width:573px) {
+    .populartext {
         width: 573px;
     }
 }
-@media (max-width:573px){
-    .popular{
-        padding-left:14px;
-        padding-right:14px;
+
+@media (max-width:573px) {
+    .popular {
+        padding-left: 14px;
+        padding-right: 14px;
     }
+
     .cardviewtext {
         width: 113%;
     }
 }
-
-

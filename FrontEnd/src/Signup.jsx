@@ -38,16 +38,15 @@ const Signup = () => {
                     }
                     body = JSON.stringify(body)
                     return new Promise((resolve, reject) => {
-                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signin`, {
-                            method: 'POST',
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/check/email/${value}`, {
+                            method: 'GET',
                             headers: {
                                 'Content-Type': 'application/json',
-                            },
-                            body: body
+                            }
                         })
                             .then((response) => response.json())
                             .then((data) => {
-                                if (!data.success) {
+                                if (data.exist) {
                                     resolve(this.createError({ message: data.message }));
 
                                 } else {
@@ -88,17 +87,15 @@ const Signup = () => {
                                     setgoogleerror("User Signed In Using Other Methods.")
                                 } else {
                                     // redirect to home page
-                                    if (data.info.accessToken) {
-                                        localStorage.setItem("user", JSON.stringify(data.info));
-                                    }
+                                    localStorage.setItem("user", JSON.stringify(data.info));
+
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`
                                 }
                             } else {
                                 // redirect to extra detail page
-                                if (data.accessToken) {
-                                    localStorage.setItem("user", JSON.stringify(data.info));
-                                }
-                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
+                                localStorage.setItem("user", JSON.stringify(data.info));
+
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/1`
                             }
                         } else {
                             setgoogleerror("Google Authenticaion Failed! Please Try Again")
@@ -148,14 +145,12 @@ const Signup = () => {
                     })
                         .then((response) => response.json())
                         .then((data) => {
+                            console.log(data)
                             if (data.success) {
-
+                                localStorage.setItem("user", JSON.stringify(data.info));
+                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/emailverification/0`
                             } else {
                             }
-                            // if (data.accessToken) {
-                            //     localStorage.setItem("user", JSON.stringify(data));
-                            // }
-                            // window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail`
                         })
                         .catch((error) => {
                             console.error('Error:', error);

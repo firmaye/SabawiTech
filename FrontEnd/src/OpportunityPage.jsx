@@ -34,8 +34,33 @@ const OpportunityPage = () => {
         // } else {
 
         // }
-        getFetchUsers()
+        if (JSON.parse(localStorage.getItem('user')) != null) {
+            let userid = JSON.parse(localStorage.getItem('user')).id
+            fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
+                if (result.profilePhoto == undefined || result.profilePhoto == "") {
+                    if (result.verified) {
+                        let direction = 0
+                        if (result.source == "google") {
+                            direction = 1
+                        } else {
+                            direction = 0
+                        }
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/${direction}`
+                    } else {
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
+                    }
+                } else {
+                    getFetchUsers()
+
+                }
+            }).catch((error) => { });
+        } else {
+            getFetchUsers()
+
+        }
     }, [])
+
+
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
     let sublist = opportunitylist.filter((elt) => {

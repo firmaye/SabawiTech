@@ -107,7 +107,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
-            
+
 
 
 
@@ -120,14 +120,14 @@ const HomePage = () => {
                     </p>
                 </div>
                 <div className="row">
-                    <div style={{"padding": 0}}className="col-md-4 bottomresponsive">
+                    <div style={{ "padding": 0 }} className="col-md-4 bottomresponsive">
                         <div className="latestblogcont">
                             <div className="latestblogimgcont">
                                 <img src="./Images/post1.jpg" alt="" />
                             </div>
                             <div className="latestblogprofile">
                                 <img src="./Images/profile.jpg" alt="" />
-                                
+
                                 <p><span> - Beyle Robetson </span>  |  Interview</p>
                             </div>
                             <div className="latestblogdesc">
@@ -142,7 +142,7 @@ const HomePage = () => {
                             </div>
                             <div className="latestblogprofile">
                                 <img src="./Images/profile.jpg" alt="" />
-                                
+
                                 <p><span> - Beyle Robetson </span>  |  Interview</p>
                             </div>
                             <div className="latestblogdesc">
@@ -157,7 +157,7 @@ const HomePage = () => {
                             </div>
                             <div className="latestblogprofile">
                                 <img src="./Images/profile.jpg" alt="" />
-                                
+
                                 <p><span> - Beyle Robetson </span>  |  Interview</p>
                             </div>
                             <div className="latestblogdesc">
@@ -166,7 +166,7 @@ const HomePage = () => {
                         </div>
                     </div>
                 </div>
-                
+
             </section>
             <div className="grayscaleimgs">
                 <div className="row grayimgcont">
@@ -197,7 +197,7 @@ const HomePage = () => {
                     <img src="./Images/provider error.png" alt="" />
                 </div>
             </div>
-    </div>
+        </div>
 
     );
 }
