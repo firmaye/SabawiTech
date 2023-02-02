@@ -389,6 +389,18 @@ p{
 .noresultscont img{
   width:50%;
 }
+.recentcard-body a{
+    color: #4a6375;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+.recentcard-body a:hover{
+  color:#6787FE;
+}
 @media(max-width:991px){
   .blogcontainer{
     width:100%;

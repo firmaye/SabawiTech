@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/blog.css'
 const Blogsidebar = ({ catagoryFiletering, display }) => {
+  const navigate = useNavigate();
   const [catagory, setCatagory] = useState("")
+  const [search, setSearch] = useState("")
   const [recent, setRecent] = useState([])
   useEffect(() => {
     fetch("http://localhost:8080/api/blogs/recent").then(resp => resp.json())
       .then(
         result => {
           setRecent(result)
+          console.log(result);
         }
       )
   }, [])
@@ -16,6 +20,7 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
       <div className="wrapper recentPostCont">
         <div id="sidebar">
           <div className="recentbox widget">
+            
             <h4>Recent Posts</h4>
             {
               recent.map((recentPost) => {
@@ -24,8 +29,8 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
                     <div className="recentthumbcontainer">
                       <img className="card-img-left recentimagemodification"src={`https://napi.sabawitech.com${recentPost.blogImage}`} alt="Card" />
                     </div>
-                    <div className="card-body">
-                      <p className="card-title">{recentPost.blogTitle.substring(0,24)+". . ."}</p>
+                    <div className="recentcard-body card-body">
+                      <a href={`blogdetails/${recentPost._id}`} className="card-title">{recentPost.blogTitle.substring(0,24)+". . ."}</a>
                     </div>
                   </div>
                 )

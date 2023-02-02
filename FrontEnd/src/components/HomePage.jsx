@@ -4,7 +4,7 @@ import Footer from './footer';
 const HomePage = () => {
     const [recent, setRecent] = useState([])
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
+        fetch(`http://localhost:8080/api/blogs/recent`).then(resp => resp.json())
             .then(
                 result => {
                     setRecent(result)
@@ -134,7 +134,7 @@ const HomePage = () => {
                             <div className="col-md-4 bottomresponsive">
                                 <div className="latestblogcont">
                                     <div className="latestblogimgcont">
-                                        <img src={latestBlog.blogImage} alt="" />
+                                        <img src={`https://napi.sabawitech.com${latestBlog.blogImage}`} alt="" />
                                     </div>
                                     <div className="latestblogprofile">
                                         <img src="./Images/profile.jpg" alt="" />
@@ -142,7 +142,7 @@ const HomePage = () => {
                                         <p><span> - {latestBlog.author} </span>  |  Interview</p>
                                     </div>
                                     <div className="latestblogdesc">
-                                        <h5><a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogDescription.substring(0, 50) + ' . . .'}</a></h5>
+                                        <a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogTitle+ ' . . .'}</a>
                                     </div>
                                 </div>
                             </div>

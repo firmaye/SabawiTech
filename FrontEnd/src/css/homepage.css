@@ -280,21 +280,22 @@ nav {
     color: #6787FE;
 }
 
-.latestblogdesc h5 {
+.latestblogdesc a{
+    text-decoration: none;
     cursor: pointer;
     font-weight: 600;
     font-size: 22px;
     line-height: 32px;
     font-family: Poppins;
     font-style: normal;
+    color:#212529;
+}
+.latestblogdesc a:hover{
+    color: #6787FE;
+    cursor: pointer;
 }
 
-.latestblogdesc:hover {
-    color: rgb(96, 96, 154);
-
-}
-
-.latestblogdesc h5:hover img {
+.latestblogdesc a:hover .latestblogimgcont img{
     width: 110%;
     margin-left: -5%;
 }

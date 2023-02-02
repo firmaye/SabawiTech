@@ -217,7 +217,10 @@
 .profile-personal-description-container-parent {
     margin: 0 !important;
 }
-
+.card-title p :hover{
+    color:#6787FE;
+    cursor: pointer;    
+}
 @media (max-width: 992px) {
 
     .profile-buttons {
