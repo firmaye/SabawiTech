@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import Trunc from 'trunc-html'
+import createDOMPurify from 'dompurify'
+
+
 import '../css/blog.css';
 import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
@@ -7,11 +11,15 @@ const Blog = ({ catagory }) => {
   const [startPage, setStartPage] = useState(1);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
+    fetch(`http://localhost:8080/api/blogs/`).then(res => res.json()).then(result => {
       console.log(result)
       setBlog(result)
     }).catch((error) => { console.log(error) });
   }, [])
+  
+// const window = (new JSDOM('')).window
+const DOMPurify = createDOMPurify(window)
+
 
   // useEffect(async ()=>{
   //   const response = await api.get("/api/blogs");
@@ -64,15 +72,17 @@ const Blog = ({ catagory }) => {
                 <div className="entry-meta">
                   <ul className="list-inline">
                     <li className="list-inline-item">
-                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{documentToReactComponents(blog.author)}</a>
+                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
                     </li>
                     <li className="list-inline-item">
                       <i className="fa fa-comment"></i> <a href="">0 Comments</a>
                     </li>
                   </ul>
                 </div>
-                <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{documentToReactComponents(blog.blogTitle)}</a>
-                <p className="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
+                <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
+                <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0,200) + '. . . ') }} />
+                {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
+                
 
                 <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
               </div>
