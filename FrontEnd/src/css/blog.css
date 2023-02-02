@@ -29,6 +29,8 @@ p{
     height: auto;
     overflow-clip-margin: content-box;
     overflow: clip;
+    max-height: 412px;
+    object-fit: cover;
 }
 .the_excerpt_content {
     padding: 40px;
@@ -241,6 +243,10 @@ p{
   margin-top:10px;
   padding-left:0px;
   padding-top:0px;
+  overflow-x:none;
+}
+.detail_excerpt_content img{
+  width: 100%;
 }
 .detail_list_inine{
   padding-right: 32px;

@@ -66,8 +66,10 @@ const DOMPurify = createDOMPurify(window)
         selectedbloglist.map((blog) => {
           return (
             <div className="col-lg-12 the_excerpt">
-              <img className="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
+              <img className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='' />
               {/* style="margin-top: 55px;" */}
+              {/* {`http://localhost:8080/api/blogs ${blog.blogImage}`} */}
+              {/* https://napi.sabawitech.com */}
               <div className="card-body the_excerpt_content" >
                 <div className="entry-meta">
                   <ul className="list-inline">
