@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import createDOMPurify from 'dompurify'
+
 
 import '../css/blog.css';
 import data from './jsonapi/data.json'
@@ -7,11 +10,15 @@ const Blog = ({ catagory }) => {
   const [startPage, setStartPage] = useState(1);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
+    fetch(`http://localhost:8080/api/blogs/`).then(res => res.json()).then(result => {
       console.log(result)
       setBlog(result)
     }).catch((error) => { console.log(error) });
   }, [])
+  
+// const window = (new JSDOM('')).window
+const DOMPurify = createDOMPurify(window)
+
 
   // useEffect(async ()=>{
   //   const response = await api.get("/api/blogs");
@@ -58,8 +65,7 @@ const Blog = ({ catagory }) => {
         selectedbloglist.map((blog) => {
           return (
             <div className="col-lg-12 the_excerpt">
-              <img className="card-img-top img-responsive blogimage" src={blog.blogImage} alt='' />
-              {/* style="margin-top: 55px;" */}
+              <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='image not loading...' />
               <div className="card-body the_excerpt_content" >
                 <div className="entry-meta">
                   <ul className="list-inline">
@@ -72,7 +78,9 @@ const Blog = ({ catagory }) => {
                   </ul>
                 </div>
                 <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
-                <p className="card-text">{blog.blogDescription.substring(0, 200) + ' . . .'}</p>
+                <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0,200) + '. . . ') }} />
+                {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
+                
 
                 <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
               </div>
@@ -89,7 +97,7 @@ const Blog = ({ catagory }) => {
           )
         })
         }
-        {startPage == 2 ?
+        {startPage >= 1 ?
           <a className="next page-numbers" href="javascript:void(0)"
             onClick={() => {
               if (startPage < pagination) {

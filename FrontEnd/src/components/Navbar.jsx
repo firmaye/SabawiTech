@@ -9,7 +9,7 @@ const Navbar = () => {
         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light">
+        <nav className="navbar navbar-expand-md navbar-light bg-light" style={{marginBottom:"0px"}}>
             <div className="container">
                 <a href="/" className="navbar-brand">
                     Intract

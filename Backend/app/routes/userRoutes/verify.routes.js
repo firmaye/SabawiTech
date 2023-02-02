@@ -17,7 +17,7 @@ module.exports = app => {
 			});
 		return;
 	}
-	res.status(400).send({
+	res.status(200).send({
 				exist:true,
 				verified:existedUser.verified,
 				message:"email exists"
@@ -32,11 +32,13 @@ module.exports = app => {
 	if (!proposalWritten){
 		res.status(200).send({
 				sent:false,
+				content:'empty'
 			});
 		return;
 	}
 	res.status(200).send({
 				sent:true,
+				content:proposalWritten
 			});
 		return;
   })
@@ -48,13 +50,13 @@ module.exports = app => {
 		
 			const user = await User.findOne({ _id: req.body.id });
 
-			if (!user) return res.status(400).send({
+			if (!user) return res.status(200).send({
 				success:false,
 				message:"There is no such user"
 			});
 
 			const token = await Token.findOne({userId: user._id});
-			if (!token) return res.status(400).send({
+			if (!token) return res.status(200).send({
 				success:false,
 				message:"There no token for such User"
 			});
@@ -76,7 +78,7 @@ module.exports = app => {
 		// res.send('here I am')
 		
 			const user = await User.findOne({ _id: req.params.id });
-			if (!user) return res.status(400).send({
+			if (!user) return res.status(200).send({
 				success:false,
 				message:"Invalid link"
 			});
@@ -85,7 +87,7 @@ module.exports = app => {
 				userId: user._id,
 				token: req.params.token,
 			});
-			if (!token) return res.status(400).send({
+			if (!token) return res.status(200).send({
 				success:false,
 				message:"Invalid link"
 			});

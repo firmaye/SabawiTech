@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import data from './jsonapi/data.json'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 import { useParams } from 'react-router-dom';
+import createDOMPurify from 'dompurify'
 import '../css/blog.css'
 const BlogDetails = ({ authenticated }) => {
     const [blog, setblog] = useState([]);
     const params = useParams();
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/${params.id}`).then(res => res.json())
+        fetch(`http://localhost:8080/api/blogs/${params.id}`).then(res => res.json())
             .then(
                 result => {
                     setblog(result)
@@ -22,10 +24,11 @@ const BlogDetails = ({ authenticated }) => {
         return taglist
 
     }
+    const DOMPurify = createDOMPurify(window)
     return (
         <div className="detailblogcontianer">
 
-            <img className="card-img-top img-responsive blogimage blogimgdetail" src={blog.blogImage} alt="Card image cap" />
+            <img className="card-img-top img-responsive blogimage blogimgdetail blogimgdetailsss" src={`https://napi.sabawitech.com${blog.blogImage}`} alt="Card image cap" />
             <div className="card-body the_excerpt_content detail_excerpt_content">
                 <div className="entry-meta detail-meta">
                     <ul className="list-inline">
@@ -38,7 +41,7 @@ const BlogDetails = ({ authenticated }) => {
                     </ul>
                 </div>
                 <h3 className="secondTitle">{blog.blogTitle}</h3>
-                <p className="card-text">{blog.blogDescription}</p>
+                <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription) }} />
                 <div className="tags">
                     <div>
                         {splittag(blog.blogTag).map((tag) => {

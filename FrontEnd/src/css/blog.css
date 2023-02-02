@@ -25,10 +25,18 @@ p{
   width: 71%;
 }
 .blogimage{
-    max-width: 100%;
+    width: 60vw;
     height: auto;
     overflow-clip-margin: content-box;
     overflow: clip;
+    max-height: 412px;
+    object-fit: cover;
+}
+.blogimg img{
+  width:100%;
+}
+.blogimgdetailsss{
+  width:100%;
 }
 .the_excerpt_content {
     padding: 40px;
@@ -172,14 +180,16 @@ p{
   align-items: center;
 }
 .recentthumbcontainer{
-  width:100px;
+  width: 114px;
   height:40px;
-  border-radius: 16px;
+  border-radius: 8px;
   object-fit: cover;
 }
 .recentimagemodification{
-  width:100%;
-  height: auto;
+  width: 100%;
+  height: 54px;
+  border-radius: 13px;
+  object-fit: cover;
 }
 .recent_item_container{
   font-family: Rubik;
@@ -188,6 +198,9 @@ p{
   font-style: normal;
   color: #4A6375;
   font-size: 16px;
+  height: 70px;
+  overflow: hidden;
+  margin-bottom: 13px;
 }
 .widget li{
   margin-top: 10px;
@@ -241,6 +254,10 @@ p{
   margin-top:10px;
   padding-left:0px;
   padding-top:0px;
+  overflow-x:none;
+}
+.detail_excerpt_content img{
+  width: 100%;
 }
 .detail_list_inine{
   padding-right: 32px;
@@ -371,6 +388,18 @@ p{
 }
 .noresultscont img{
   width:50%;
+}
+.recentcard-body a{
+    color: #4a6375;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1.1rem;
+    text-decoration: none;
+}
+.recentcard-body a:hover{
+  color:#6787FE;
 }
 @media(max-width:991px){
   .blogcontainer{
