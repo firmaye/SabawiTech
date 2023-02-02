@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import Trunc from 'trunc-html'
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import createDOMPurify from 'dompurify'
 
 
@@ -66,7 +65,7 @@ const DOMPurify = createDOMPurify(window)
         selectedbloglist.map((blog) => {
           return (
             <div className="col-lg-12 the_excerpt">
-              <img className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='' />
+              <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='' />
               {/* style="margin-top: 55px;" */}
               {/* {`http://localhost:8080/api/blogs ${blog.blogImage}`} */}
               {/* https://napi.sabawitech.com */}
@@ -101,7 +100,7 @@ const DOMPurify = createDOMPurify(window)
           )
         })
         }
-        {startPage == 2 ?
+        {startPage >= 1 ?
           <a className="next page-numbers" href="javascript:void(0)"
             onClick={() => {
               if (startPage < pagination) {
