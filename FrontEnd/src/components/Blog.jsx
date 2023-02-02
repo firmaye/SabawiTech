@@ -65,7 +65,7 @@ const DOMPurify = createDOMPurify(window)
         selectedbloglist.map((blog) => {
           return (
             <div className="col-lg-12 the_excerpt">
-              <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='' />
+              <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='image not loading...' />
               <div className="card-body the_excerpt_content" >
                 <div className="entry-meta">
                   <ul className="list-inline">

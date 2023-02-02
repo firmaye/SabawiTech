@@ -134,7 +134,7 @@ const HomePage = () => {
                             <div className="col-md-4 bottomresponsive">
                                 <div className="latestblogcont">
                                     <div className="latestblogimgcont">
-                                        <img src={`https://napi.sabawitech.com${latestBlog.blogImage}`} alt="" />
+                                        <img src={`https://napi.sabawitech.com${latestBlog.blogImage}`} alt="image not loading..." />
                                     </div>
                                     <div className="latestblogprofile">
                                         <img src="./Images/profile.jpg" alt="" />
