@@ -451,6 +451,9 @@ footer {
         padding-bottom: 40px;
         width: 92%;
     }
+    .latestblogimgcont{
+        height:310px;
+    }
 
     .cardviewtext {
         width: 80%;
