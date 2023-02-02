@@ -85,10 +85,10 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  // {
-  //   path: "*",
-  //   element: <NotFoundPageProfile />,
-  // },
+  {
+    path: "*",
+    element: <NotFoundPageProfile />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

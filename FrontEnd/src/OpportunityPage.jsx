@@ -12,13 +12,21 @@ import NotAllowed from './components/NotAllowedModal'
 import Footer from './components/footer'
 
 
+import { MDBCol, MDBIcon } from "mdbreact";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+
 
 const OpportunityPage = () => {
     const [loading, setloading] = useState(true)
+    const [search, setsearch] = useState("")
     const [opportunitylist, setopportunitylist] = useState([])
+    const [startPage, setStartPage] = useState(1);
     let getFetchUsers = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
+            console.log(`${import.meta.env.VITE_BACKEND_URL}/api/internships`)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')
                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL} / signin`
@@ -113,6 +121,30 @@ const OpportunityPage = () => {
             }
         }
     })
+    sublist = sublist.filter((elt) => {
+
+        if (search == "") {
+            return elt
+        } else {
+            if (elt.intTitle.includes(search)) {
+                return elt
+            }
+        }
+    })
+    const opportunityPerPage = 1
+    const pagination = Math.ceil(sublist.length / opportunityPerPage);
+    const pageNumbers = []
+    for (var i = 1; i <= pagination; i++) {
+        pageNumbers.push(i)
+    }
+    var start = (startPage * opportunityPerPage) - opportunityPerPage
+    var end = startPage * opportunityPerPage
+    const selectedopportunitylist = sublist.slice(start, end);
+
+    console.log("startpage" + startPage)
+    console.log("pageNumber" + pageNumbers[pageNumbers.length - 1])
+    console.log(startPage != pageNumbers[pageNumbers.length - 1])
+    console.log(startPage == 1)
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (
@@ -131,17 +163,58 @@ const OpportunityPage = () => {
                         <div className="main-content-container-child row">
                             <OpportunityFilter />
                             {sublist.length == 0 ? <div className="opportunities-container  col-xl-8 noresultscont">
-                                <img src="./Images/searchnotfound.png" alt="" />
+                                <MDBCol >
+                                    <form className="form-inline mt-4 mb-4">
+                                        <FontAwesomeIcon icon={faSearch} />
+                                        <input onChange={(event) => { setsearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+                                    </form>
+                                </MDBCol>                                <img src="./Images/searchnotfound.png" alt="" />
                                 <h3>No results found on the section</h3>
                                 <p>Try again</p>
                             </div> : <div className="opportunities-container  col-xl-8">
-                                {sublist.map((opportunity) => {
+                                <MDBCol >
+                                    <form className="form-inline mt-4 mb-4">
+                                        <FontAwesomeIcon icon={faSearch} />
+                                        <input onChange={(event) => { setsearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+                                    </form>
+                                </MDBCol>                                {selectedopportunitylist.map((opportunity) => {
                                     return <Opportunity data={opportunity} />
                                 })}
                             </div>}
 
                         </div>
 
+                    </div>
+                    <div className="opportunity-pagination nav-links">
+                        {startPage != 1 ?
+                            <a className="back opportunity-page-numbers"
+                                onClick={() => {
+                                    setStartPage(startPage - 1)
+
+                                }}> Back </a>
+                            :
+                            ""
+                        }
+                        {pageNumbers.map((page) => {
+                            return (
+                                <div>
+                                    <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
+                                </div>
+                            )
+                        })
+                        }
+                        {startPage < pageNumbers[pageNumbers.length - 1] ?
+                            <a className="next opportunity-page-numbers"
+                                onClick={() => {
+                                    if (startPage < pagination) {
+                                        setStartPage(startPage + 1)
+                                    } else {
+                                        setStartPage(startPage)
+                                    }
+                                }}>Next </a>
+                            :
+                            ""
+                        }
                     </div>
                 </main>
                 <Footer />

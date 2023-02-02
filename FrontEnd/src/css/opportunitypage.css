@@ -43,7 +43,7 @@
     background: url("../assets/breadcrumb-bg.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    padding-bottom:60px;
+    padding-bottom: 60px;
 
 }
 
@@ -237,6 +237,37 @@
 .opportunity-button:hover {
     background: #6787FE;
     color: white;
+}
+
+.opportunity-pagination {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    display: flex;
+    justify-content: center;
+    line-height: 28px;
+    font-weight: normal;
+    font-style: normal;
+    color: #4A6375;
+    font-size: 19px;
+}
+
+.opportunity-page-numbers {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 50px;
+    color: #6787FE;
+    margin: 0 5px;
+    text-align: center !important;
+    line-height: 28px;
+    background: rgb(103 135 254 / 10%);
+    text-decoration: none;
+}
+
+.opportunity-page-numbers:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background-color: #6787FE;
 }
 
 @media (max-width: 1200px) {
