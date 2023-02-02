@@ -28,7 +28,7 @@ const BlogDetails = ({ authenticated }) => {
     return (
         <div className="detailblogcontianer">
 
-            <img className="card-img-top img-responsive blogimage blogimgdetail" src={`https://napi.sabawitech.com${blog.blogImage}`} alt="Card image cap" />
+            <img className="card-img-top img-responsive blogimage blogimgdetail blogimgdetailsss" src={`https://napi.sabawitech.com${blog.blogImage}`} alt="Card image cap" />
             <div className="card-body the_excerpt_content detail_excerpt_content">
                 <div className="entry-meta detail-meta">
                     <ul className="list-inline">

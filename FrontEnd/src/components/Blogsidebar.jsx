@@ -22,10 +22,10 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
                 return (
                   <div className="thumbnailbox recent_item_container">
                     <div className="recentthumbcontainer">
-                      <img className="card-img-left recentimagemodification" src={recentPost.blogImage} alt="Card" />
+                      <img className="card-img-left recentimagemodification"src={`https://napi.sabawitech.com${recentPost.blogImage}`} alt="Card" />
                     </div>
                     <div className="card-body">
-                      <p className="card-title">{recentPost.blogTitle}</p>
+                      <p className="card-title">{recentPost.blogTitle.substring(0,24)+". . ."}</p>
                     </div>
                   </div>
                 )
