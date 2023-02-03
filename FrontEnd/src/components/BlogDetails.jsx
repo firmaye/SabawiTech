@@ -122,7 +122,6 @@ const BlogDetails = ({ authenticated }) => {
                         </small></h3>
                     {authenticated ?
                         <div>
-                            disqus
                             <div id='metype-container' class='iframe-container' data-metype-account-id='1003342'
                                     data-metype-host='https://www.metype.com/' data-metype-primary-color='#0000ff' data-metype-bg-color='#ffffff'
                                     data-metype-font-color='#4a4a4a'>
