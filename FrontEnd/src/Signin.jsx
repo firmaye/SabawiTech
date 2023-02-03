@@ -30,7 +30,6 @@ const Signin = () => {
                             })
                                 .then((response) => response.json())
                                 .then((data) => {
-                                    console.log(data)
                                     if (!data.success) {
                                         resolve(this.createError({ message: data.message }));
                                         // if (data.message == "User Not found.") {

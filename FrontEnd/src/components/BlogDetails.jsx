@@ -13,8 +13,9 @@ const BlogDetails = ({ authenticated }) => {
                 result => {
                     setblog(result)
                 }
-            ).catch((error) => { console.log(error) });
-        console.log("params", params.id)
+            ).catch((error) => { 
+
+             });
     }, []);
     useEffect(()=>{
         const script = document.createElement('script');
@@ -29,8 +30,6 @@ const BlogDetails = ({ authenticated }) => {
             talktype.commentWidgetIframe(metypeContainer);
         });
     }, [])
-    console.log("blog detail page")
-    console.log(blog)
     const splittag = (tag) => {
         tag = String(blog.blogTag)
         var taglist = tag.split(',');
