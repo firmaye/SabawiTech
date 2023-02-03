@@ -17,7 +17,8 @@ const OpportunityDetailPage = () => {
     const [opportunity, setopportunity] = useState({})
     const [error, seterror] = useState()
     const [requiredSkill, setrequiredskill] = useState([])
-
+    const [sent, setsent] = useState()
+    const [sentproposal, setsentproposal] = useState()
     const [submittedproposal, setsubmittedproposal] = useState({
     })
     const [loading, setloading] = useState(true)
@@ -80,7 +81,6 @@ const OpportunityDetailPage = () => {
                     }
                 } else {
 
-
                     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
                         const found = result
                         let skillsarray = found.requiredSkill.split(",")
@@ -95,10 +95,27 @@ const OpportunityDetailPage = () => {
 
                         })
                         setrequiredskill(skillsarray)
-                        setloading(false)
+                        // setloading(false)
 
                         // opportunity.requiredSkill.map((element) => {
                         // })
+                    }).catch((error) => { });
+                    let body = {
+                        sender: userid,
+                        intPostId: paramsid
+                    }
+                    body = JSON.stringify(body)
+                    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/check/proposal`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: body
+                    }).then(res => res.json()).then(result => {
+                        console.log(result)
+                        setsent(result.sent)
+                        setsentproposal(result.content.letterDescription)
+                        setloading(false)
                     }).catch((error) => { });
                 }
             }).catch((error) => { });
@@ -211,22 +228,28 @@ const OpportunityDetailPage = () => {
 
                                     </div>
                                 </div>
-                                {opportunity.intStatus == "open" ?
+                                {opportunity.intStatus == "closed" ? <div className="single-opportunity-proposal-form">
+                                    <h2 className="mb-4">Send Proposal</h2>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <h3 className='ml-5' style={{ color: "#6366f1" }}>Internship Opportunity is Closed</h3>
+                                        </div>
+                                    </div>
+                                </div> : sent == true ? <div className="single-opportunity-proposal-form">
+                                    <h2 className="mb-4" style={{ color: "#6366f1" }} >Sent Proposal</h2>
+                                    <div className="row">
+                                        <div className="col-md-12">
+                                            <textarea disabled value={sentproposal} className="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                            {/* <input type="number" className="form-control">  */}
+                                        </div>
+                                        <div style={{ color: "red", textAlign: "center" }}>
+                                            {error}
+                                        </div>
+                                    </div>
+                                </div> :
                                     <div className="single-opportunity-proposal-form">
                                         <h2 className="mb-4">Send Proposal</h2>
                                         <div className="row">
-                                            {/* <div className="col-md-6">
-                                        <input type="number" className="form-control" />
-                                    </div> */}
-                                            {/* <div className="col-md-6">
-                                        <select className="form-control">
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                        </select>
-                                    </div> */}
                                             <div className="col-md-12">
                                                 <textarea onChange={(data) => { changepropsaltext(data.target.value) }} className="form-control" name="" id="" cols="30" rows="10"></textarea>
                                                 {/* <input type="number" className="form-control">  */}
@@ -239,27 +262,6 @@ const OpportunityDetailPage = () => {
                                                 <button onClick={() => { sendpropsal() }} className=" single-opportunity-submit-proposal">
                                                     Submit a Proposal
                                                 </button>
-                                            </div>
-                                        </div>
-                                    </div> : <div className="single-opportunity-proposal-form">
-                                        <h2 className="mb-4">Send Proposal</h2>
-                                        <div className="row">
-                                            {/* <div className="col-md-6">
-                                        <input type="number" className="form-control" />
-                                    </div> */}
-                                            {/* <div className="col-md-6">
-                                        <select className="form-control">
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                            <option value="">Options to select</option>
-                                        </select>
-                                    </div> */}
-                                            <div className="col-md-12">
-                                                <h3 className='ml-5' style={{ color: "#6366f1" }}>Internship Opportunity is Closed</h3>
-
-                                                {/* <input type="number" className="form-control">  */}
                                             </div>
                                         </div>
                                     </div>}

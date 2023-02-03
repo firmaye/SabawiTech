@@ -284,4 +284,15 @@
         width: 50%;
         margin: auto;
     }
+
+    .opportunity-title-detail {
+        display: flex;
+        justify-content: center;
+    }
+
+    .opportunity-title {
+        text-align: start;
+        display: flex;
+        justify-content: center;
+    }
 }

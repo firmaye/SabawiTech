@@ -131,7 +131,7 @@ const OpportunityPage = () => {
             }
         }
     })
-    const opportunityPerPage = 1
+    const opportunityPerPage = 5
     const pagination = Math.ceil(sublist.length / opportunityPerPage);
     const pageNumbers = []
     for (var i = 1; i <= pagination; i++) {

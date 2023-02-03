@@ -17,7 +17,6 @@ const EditPortifolio = () => {
     const params = useParams()
     const paramsid = params.id
     const [buttonloading, setbuttonloading] = useState(false)
-
     const [previouswork, setpreviouswork] = useState([])
     const [skills, setskills] = useState([])
     const [newskills, setnewskills] = useState("")

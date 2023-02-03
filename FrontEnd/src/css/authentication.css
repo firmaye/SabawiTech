@@ -181,11 +181,17 @@
   }
 
   .main-container {
-    width: 400px;
+    width: 85%;
   }
 
   .main-container .signup-form {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .main-container .signup-form input,
+  .main-container .signup-form select {
+    margin-left: 0;
   }
 }
 

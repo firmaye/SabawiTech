@@ -53,7 +53,10 @@ const Opportunity = ({ data }) => {
                     <h2>{data.intLocation.toUpperCase()}</h2>
                     {data.intType.toUpperCase()}
                 </div>
-                <div className="col-md-3 my-auto">
+                <div style={{
+                    display: "flex",
+                    justifyContent: "center"
+                }} className="col-md-3 my-auto">
                     <button onClick={buttonClick} className="opportunity-button">
                         Detail
                     </button>
