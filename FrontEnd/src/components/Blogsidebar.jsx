@@ -11,7 +11,6 @@ const Blogsidebar = ({ catagoryFiletering, display }) => {
       .then(
         result => {
           setRecent(result)
-          console.log(result);
         }
       )
   }, [])

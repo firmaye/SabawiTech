@@ -17,18 +17,15 @@ const CheckEmail = () => {
     const dispatch = useDispatch()
     const params = useParams()
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
-    console.log(params)
 
     const resendEmail = (event) => {
         event.preventDefault()
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${params.id}`).then(res => res.json()).then(result => {
-            console.log(result.email)
             if (result.email != undefined) {
                 let body = {
                     email: result.email
                 }
                 body = JSON.stringify(body)
-                console.log(body)
                 fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/resendlink`, {
                     method: 'POST',
                     headers: {
@@ -36,7 +33,6 @@ const CheckEmail = () => {
                     },
                     body: body
                 }).then(res => res.json()).then(result => {
-                    console.log(result)
                     if (result.success) {
                         dispatch(setModal("success"))
                     } else {
@@ -50,7 +46,6 @@ const CheckEmail = () => {
     useEffect(() => {
 
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/verify/${params.id}/${params.token}`).then(res => res.json()).then(result => {
-            console.log(result)
             setloading(false)
             setverified(result.success)
             if (!result.success) {

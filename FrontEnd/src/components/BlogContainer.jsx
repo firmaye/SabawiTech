@@ -9,40 +9,7 @@ const BlogContainer = () => {
     const catagoryFiletering = (catagory) => {
         setcatagories(catagory)
     }
-    // console.log("catagoryes of container", catagories)
-    // // pracitce
-    // const [isdivisible, setisdivisible] = useState(0);
-    // const [iseven, seteven] = useState(false);
-    // const list = [1,2,3,4,5,6,7,8,9,10]
-    // let sublist = list.filter((element)=>{
-    //     if(isdivisible != 0){
-    //         if(element % isdivisible ==0){
-    //             return element
-    //         }
-    //     }else{
-    //         return element
-
-    //     }
-    // })
-    // sublist = sublist.filter((element)=>{
-    //     if(iseven == true){
-    //         if(element % 2 ==0){
-    //             return element
-    //         }
-    //     }else{
-    //         return element
-
-    //     }
-    // })
-    // console.log(sublist)
     return (
-        // <div>
-        //     {sublist.map((element)=>{
-        //         return(<div>{element}</div>)
-        //     })}
-        //     <button onClick={()=>{setisdivisible(3)}}>adfas</button>
-        //     <button onClick={()=>{seteven(true)}}>adfas</button>
-        // </div>
         <div>
             <Navbar />
             <Header title={"Blog"} />

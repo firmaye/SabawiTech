@@ -7,7 +7,17 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Intrant</title>
+  <script type='text/javascript'>
+    window.talktype = window.talktype || function(f) {
+      if (talktype.loaded)
+        f();
+      else
+        (talktype.q = talktype.q || []).push(arguments);
+    };
+  </script>
+  <script src='https://www.metype.com/quintype-metype/assets/metype.js'></script>
 </head>
+
 
 <body>
   <div id="root"></div>
@@ -24,5 +34,21 @@
     crossorigin="anonymous"></script>
 
 </body>
-
+<div>
+  <div id='metype-container' class='iframe-container' data-metype-account-id='1003342'
+          data-metype-host='https://www.metype.com/' data-metype-primary-color='#0000ff' data-metype-bg-color='#ffffff'
+          data-metype-font-color='#4a4a4a'>
+  
+  </div>
+</div>
+<!-- <script type='text/javascript'>
+  var metypeContainer = document.getElementById("metype-container"),
+    page_url = metypeContainer.getAttribute("data-metype-page-url");
+    metypeContainer.setAttribute('data-metype-page-url', page_url || window.location.href);
+    metypeContainer.setAttribute('data-metype-window-height', window.innerHeight);
+    metypeContainer.setAttribute('data-metype-screen-width', window.screen.width);
+    talktype(function() {
+      talktype.commentWidgetIframe(metypeContainer);
+  });
+</script> -->
 </html>

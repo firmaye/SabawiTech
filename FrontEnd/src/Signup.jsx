@@ -145,7 +145,6 @@ const Signup = () => {
                     })
                         .then((response) => response.json())
                         .then((data) => {
-                            console.log(data)
                             if (data.success) {
                                 localStorage.setItem("user", JSON.stringify(data.info));
                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/emailverification/0`
