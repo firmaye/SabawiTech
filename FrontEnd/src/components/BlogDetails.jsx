@@ -16,6 +16,19 @@ const BlogDetails = ({ authenticated }) => {
             ).catch((error) => { console.log(error) });
         console.log("params", params.id)
     }, []);
+    useEffect(()=>{
+        const script = document.createElement('script');
+        script.async = true;
+        document.body.appendChild(script);
+        var metypeContainer = document.getElementById("metype-container"),
+        page_url = metypeContainer.getAttribute("data-metype-page-url");
+        metypeContainer.setAttribute('data-metype-page-url', page_url || window.location.href);
+        metypeContainer.setAttribute('data-metype-window-height', window.innerHeight);
+        metypeContainer.setAttribute('data-metype-screen-width', window.screen.width);
+        talktype(function() {
+            talktype.commentWidgetIframe(metypeContainer);
+        });
+    }, [])
     console.log("blog detail page")
     console.log(blog)
     const splittag = (tag) => {
@@ -109,8 +122,12 @@ const BlogDetails = ({ authenticated }) => {
                         </small></h3>
                     {authenticated ?
                         <div>
-
-                            <h4>disq</h4>
+                            disqus
+                            <div id='metype-container' class='iframe-container' data-metype-account-id='1003342'
+                                    data-metype-host='https://www.metype.com/' data-metype-primary-color='#0000ff' data-metype-bg-color='#ffffff'
+                                    data-metype-font-color='#4a4a4a'>
+                            
+                            </div>
                         </div>
                         :
                         <p className="must-log-in">You must be <a href="">logged in</a> to post a comment.</p>
