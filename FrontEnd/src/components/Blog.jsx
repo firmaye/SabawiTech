@@ -11,7 +11,6 @@ const Blog = ({ catagory }) => {
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
-      console.log(result)
       setBlog(result)
     }).catch((error) => { console.log(error) });
   }, [])
@@ -23,7 +22,6 @@ const Blog = ({ catagory }) => {
   // useEffect(async ()=>{
   //   const response = await api.get("/api/blogs");
   //   setBlog(response.data)
-  //   console.log(response.data)
   // },[])
   // useEffect(()=>{
   //     setBlog(data.blogdata)
@@ -42,17 +40,9 @@ const Blog = ({ catagory }) => {
   for (var i = 1; i <= pagination; i++) {
     pageNumbers.push(i)
   }
-  // console.log("pagenumber", pageNumbers)
   var start = (startPage * blogPerPage) - blogPerPage
   var end = startPage * blogPerPage
   const selectedbloglist = sublist.slice(start, end);
-
-  console.log("selected", selectedbloglist)
-  for (var i = 0; i <= blogPerPage; i++) {
-    console.log(i);
-  }
-  console.log("start page", startPage)
-  console.log(blog)
 
   return (
     <div className="blogcontainer">
