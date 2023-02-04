@@ -4,7 +4,7 @@ import Footer from './footer';
 const HomePage = () => {
     const [recent, setRecent] = useState([])
     useEffect(() => {
-        fetch(`http://localhost:8080/api/blogs/recent`).then(resp => resp.json())
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/recent`).then(resp => resp.json())
             .then(
                 result => {
                     setRecent(result)
@@ -142,7 +142,7 @@ const HomePage = () => {
                                         <p><span> - {latestBlog.author} </span>  |  Interview</p>
                                     </div>
                                     <div className="latestblogdesc">
-                                        <a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogTitle+ ' . . .'}</a>
+                                        <a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogTitle + ' . . .'}</a>
                                     </div>
                                 </div>
                             </div>

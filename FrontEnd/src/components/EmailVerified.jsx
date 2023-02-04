@@ -41,7 +41,6 @@ const CheckEmail = () => {
                 }).catch((error) => { setverified(false) });
             }
         }).catch((error) => { setverified(false) });
-        // http://localhost:8080/api/user/resendlink
     }
     useEffect(() => {
 

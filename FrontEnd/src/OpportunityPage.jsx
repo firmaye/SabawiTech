@@ -26,7 +26,6 @@ const OpportunityPage = () => {
     let getFetchUsers = () => {
         const user = JSON.parse(localStorage.getItem('user'));
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
-            console.log(`${import.meta.env.VITE_BACKEND_URL}/api/internships`)
             if (result.message == "Unauthorized!") {
                 window.localStorage.removeItem('user')
                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL} / signin`
@@ -141,10 +140,6 @@ const OpportunityPage = () => {
     var end = startPage * opportunityPerPage
     const selectedopportunitylist = sublist.slice(start, end);
 
-    console.log("startpage" + startPage)
-    console.log("pageNumber" + pageNumbers[pageNumbers.length - 1])
-    console.log(startPage != pageNumbers[pageNumbers.length - 1])
-    console.log(startPage == 1)
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (

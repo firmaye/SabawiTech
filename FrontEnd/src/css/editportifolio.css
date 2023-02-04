@@ -351,3 +351,11 @@
     }
 
 }
+
+@media (max-width: 582px) {
+
+    .edit-portifolio-personal-description {
+        max-width: 100%;
+    }
+
+}

@@ -45,6 +45,20 @@
 
 }
 
+.modalskill-list-modal-close {
+    border: 0;
+    background: transparent;
+
+}
+
+.modalskill-list-modal-close svg {
+    width:
+        35px;
+    height: auto;
+    color: white;
+    margin-left: 10px;
+}
+
 .skill-list-modal-close {
     border: 0;
     background: transparent;

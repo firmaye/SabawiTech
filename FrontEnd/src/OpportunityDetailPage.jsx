@@ -112,7 +112,6 @@ const OpportunityDetailPage = () => {
                         },
                         body: body
                     }).then(res => res.json()).then(result => {
-                        console.log(result)
                         setsent(result.sent)
                         setsentproposal(result.content.letterDescription)
                         setloading(false)

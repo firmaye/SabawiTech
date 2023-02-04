@@ -253,6 +253,8 @@
 
 .portifolio-image-container-icons {
     position: absolute;
+    display: flex;
+    flex-direction: row;
     top: 45%;
     left: 33%;
 }

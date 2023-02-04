@@ -10,14 +10,14 @@ const Blog = ({ catagory }) => {
   const [startPage, setStartPage] = useState(1);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/blogs/`).then(res => res.json()).then(result => {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
       console.log(result)
       setBlog(result)
     }).catch((error) => { console.log(error) });
   }, [])
-  
-// const window = (new JSDOM('')).window
-const DOMPurify = createDOMPurify(window)
+
+  // const window = (new JSDOM('')).window
+  const DOMPurify = createDOMPurify(window)
 
 
   // useEffect(async ()=>{
@@ -78,9 +78,9 @@ const DOMPurify = createDOMPurify(window)
                   </ul>
                 </div>
                 <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
-                <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0,200) + '. . . ') }} />
+                <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0, 200) + '. . . ') }} />
                 {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
-                
+
 
                 <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
               </div>

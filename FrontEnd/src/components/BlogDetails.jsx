@@ -8,25 +8,25 @@ const BlogDetails = ({ authenticated }) => {
     const [blog, setblog] = useState([]);
     const params = useParams();
     useEffect(() => {
-        fetch(`http://localhost:8080/api/blogs/${params.id}`).then(res => res.json())
+        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/${params.id}`).then(res => res.json())
             .then(
                 result => {
                     setblog(result)
                 }
-            ).catch((error) => { 
+            ).catch((error) => {
 
-             });
+            });
     }, []);
-    useEffect(()=>{
+    useEffect(() => {
         const script = document.createElement('script');
         script.async = true;
         document.body.appendChild(script);
         var metypeContainer = document.getElementById("metype-container"),
-        page_url = metypeContainer.getAttribute("data-metype-page-url");
+            page_url = metypeContainer.getAttribute("data-metype-page-url");
         metypeContainer.setAttribute('data-metype-page-url', page_url || window.location.href);
         metypeContainer.setAttribute('data-metype-window-height', window.innerHeight);
         metypeContainer.setAttribute('data-metype-screen-width', window.screen.width);
-        talktype(function() {
+        talktype(function () {
             talktype.commentWidgetIframe(metypeContainer);
         });
     }, [])
@@ -122,9 +122,9 @@ const BlogDetails = ({ authenticated }) => {
                     {authenticated ?
                         <div>
                             <div id='metype-container' class='iframe-container' data-metype-account-id='1003342'
-                                    data-metype-host='https://www.metype.com/' data-metype-primary-color='#0000ff' data-metype-bg-color='#ffffff'
-                                    data-metype-font-color='#4a4a4a'>
-                            
+                                data-metype-host='https://www.metype.com/' data-metype-primary-color='#0000ff' data-metype-bg-color='#ffffff'
+                                data-metype-font-color='#4a4a4a'>
+
                             </div>
                         </div>
                         :
