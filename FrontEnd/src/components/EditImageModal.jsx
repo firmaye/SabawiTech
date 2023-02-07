@@ -76,7 +76,7 @@ const NameModal = ({ image }) => {
         // let body = JSON.stringify({ profilePhoto: selectedImage })
         // event.preventDefault()
         setbuttonloading(true)
-        let userid = JSON.parse(localStorage.getItem('user')).id
+        let userid = JSON.parse(sessionStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/upload/${userid}`, {
             method: 'POST',
 

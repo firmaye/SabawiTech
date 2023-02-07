@@ -87,13 +87,13 @@ const Signup = () => {
                                     setgoogleerror("User Signed In Using Other Methods.")
                                 } else {
                                     // redirect to home page
-                                    localStorage.setItem("user", JSON.stringify(data.info));
+                                    sessionStorage.setItem("user", JSON.stringify(data.info));
 
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`
                                 }
                             } else {
                                 // redirect to extra detail page
-                                localStorage.setItem("user", JSON.stringify(data.info));
+                                sessionStorage.setItem("user", JSON.stringify(data.info));
 
                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/1`
                             }
@@ -146,7 +146,7 @@ const Signup = () => {
                         .then((response) => response.json())
                         .then((data) => {
                             if (data.success) {
-                                localStorage.setItem("user", JSON.stringify(data.info));
+                                sessionStorage.setItem("user", JSON.stringify(data.info));
                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/emailverification/0`
                             } else {
                             }

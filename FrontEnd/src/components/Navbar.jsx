@@ -2,14 +2,14 @@ import React from 'react'
 import "../css/opportunitypage.css"
 const Navbar = () => {
     let logout = () => {
-        window.localStorage.removeItem('user')
+        window.sessionStorage.removeItem('user')
         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     let login = () => {
         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
     }
     return (
-        <nav className="navbar navbar-expand-md navbar-light bg-light" style={{marginBottom:"0px"}}>
+        <nav className="navbar navbar-expand-md navbar-light bg-light" style={{ marginBottom: "0px" }}>
             <div className="container">
                 <a href="/" className="navbar-brand">
                     Intract
@@ -34,12 +34,12 @@ const Navbar = () => {
                         <li className="nav-item">
                             <a href={"/contact"} className="nav-link active">Contact</a>
                         </li>
-                        {JSON.parse(localStorage.getItem('user')) == null ?
+                        {JSON.parse(sessionStorage.getItem('user')) == null ?
                             <></>
                             : <li className="nav-item">
                                 <a href={"/profile"} className="nav-link active">Profile</a>
                             </li>}
-                        {JSON.parse(localStorage.getItem('user')) == null ?
+                        {JSON.parse(sessionStorage.getItem('user')) == null ?
                             <li className="nav-item">
                                 <div><button onClick={login} type="submit" className="btn btn-primary">Log In</button>
                                 </div>

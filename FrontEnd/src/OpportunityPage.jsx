@@ -24,11 +24,11 @@ const OpportunityPage = () => {
     const [opportunitylist, setopportunitylist] = useState([])
     const [startPage, setStartPage] = useState(1);
     let getFetchUsers = () => {
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(sessionStorage.getItem('user'));
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships`).then(res => res.json()).then(result => {
             if (result.message == "Unauthorized!") {
-                window.localStorage.removeItem('user')
-                window.location.href = `${import.meta.env.VITE_FRONTEND_URL} / signin`
+                window.sessionStorage.removeItem('user')
+                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
             } else {
                 setloading(false)
                 setopportunitylist(result)
@@ -36,13 +36,13 @@ const OpportunityPage = () => {
         }).catch((error) => { });
     }
     useEffect(() => {
-        // if (JSON.parse(localStorage.getItem('user')) == null) {
+        // if (JSON.parse(sessionStorage.getItem('user')) == null) {
         //     window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/signin"
         // } else {
 
         // }
-        if (JSON.parse(localStorage.getItem('user')) != null) {
-            let userid = JSON.parse(localStorage.getItem('user')).id
+        if (JSON.parse(sessionStorage.getItem('user')) != null) {
+            let userid = JSON.parse(sessionStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
                 if (result.profilePhoto == undefined || result.profilePhoto == "") {
                     if (result.verified) {

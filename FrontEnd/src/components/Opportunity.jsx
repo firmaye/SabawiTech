@@ -10,7 +10,7 @@ import { faClock, faSignal } from '@fortawesome/free-solid-svg-icons'
 const Opportunity = ({ data }) => {
     let dispatch = useDispatch()
     let buttonClick = () => {
-        if (JSON.parse(localStorage.getItem('user')) == null) {
+        if (JSON.parse(sessionStorage.getItem('user')) == null) {
             dispatch(setModal("notallowed"))
         } else {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/opportunitydetail/` + data._id

@@ -87,14 +87,14 @@ const Signin = () => {
                                 } else {
                                     // redirect to home page
                                     if (data.info.accessToken) {
-                                        localStorage.setItem("user", JSON.stringify(data.info));
+                                        sessionStorage.setItem("user", JSON.stringify(data.info));
                                     }
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/`
                                 }
                             } else {
                                 // redirect to extra detail page
                                 if (data.accessToken) {
-                                    localStorage.setItem("user", JSON.stringify(data.info));
+                                    sessionStorage.setItem("user", JSON.stringify(data.info));
                                 }
                                 window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/extradetail/1`
                             }
@@ -138,7 +138,7 @@ const Signin = () => {
                             .then((data) => {
                                 setSubmitting(false);
                                 if (data.success) {
-                                    localStorage.setItem("user", JSON.stringify(data.info));
+                                    sessionStorage.setItem("user", JSON.stringify(data.info));
                                     window.location.href = `${import.meta.env.VITE_FRONTEND_URL}`
                                 }
                                 // successModal()

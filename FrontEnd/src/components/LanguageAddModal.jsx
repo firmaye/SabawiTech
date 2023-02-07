@@ -65,7 +65,7 @@ const LanguageModal = ({ language }) => {
             })
             let language = JSON.stringify({ language: languageedited })
             event.preventDefault()
-            let userid = JSON.parse(localStorage.getItem('user')).id
+            let userid = JSON.parse(sessionStorage.getItem('user')).id
             setbuttonloading(true)
 
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/language/${userid}`, {

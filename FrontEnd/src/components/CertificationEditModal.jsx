@@ -68,7 +68,7 @@ const CertificationEditModal = ({ selected }) => {
                             dateIssued: values.fromdateissued
                         }
                         body = JSON.stringify(body)
-                        let userid = JSON.parse(localStorage.getItem('user')).id
+                        let userid = JSON.parse(sessionStorage.getItem('user')).id
                         setbuttonloading(true)
 
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/certification/${userid}/${selected._id}`, {

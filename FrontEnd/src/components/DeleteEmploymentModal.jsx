@@ -35,7 +35,7 @@ const DeleteEmploymentModal = ({ tobedeleted }) => {
         })
     }
     let handleSubmit = (event) => {
-        let userid = JSON.parse(localStorage.getItem('user')).id
+        let userid = JSON.parse(sessionStorage.getItem('user')).id
         event.preventDefault()
         setbuttonloading(true)
 

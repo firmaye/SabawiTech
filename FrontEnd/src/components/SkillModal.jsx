@@ -39,7 +39,7 @@ const SkillModal = ({ skilllist }) => {
         body = JSON.stringify(body)
         event.preventDefault()
         setbuttonloading(true)
-        let userid = JSON.parse(localStorage.getItem('user')).id
+        let userid = JSON.parse(sessionStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/skill/${userid}`, {
             method: 'PATCH',
             headers: {

@@ -58,7 +58,7 @@ const TitleModal = ({ profileinfo }) => {
                         body = JSON.stringify(body)
                         setbuttonloading(true)
 
-                        let userid = JSON.parse(localStorage.getItem('user')).id
+                        let userid = JSON.parse(sessionStorage.getItem('user')).id
                         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/descriptionInfo/${userid}`, {
                             method: 'PATCH',
                             headers: {

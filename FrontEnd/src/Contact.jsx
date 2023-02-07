@@ -22,7 +22,7 @@ const CertificationSchema = Yup.object().shape({
 
 })
 const Contact = () => {
-    // if (JSON.parse(localStorage.getItem('user')) == null) {
+    // if (JSON.parse(sessionStorage.getItem('user')) == null) {
     //     window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/signin"
     // }
     const dispatch = useDispatch()

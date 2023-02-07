@@ -96,7 +96,7 @@ const EditPortifolio = () => {
                 'workSkill',
                 skills
             );
-            let userid = JSON.parse(localStorage.getItem('user')).id
+            let userid = JSON.parse(sessionStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}/${paramsid}`, {
                 method: 'PATCH',
 
@@ -143,10 +143,10 @@ const EditPortifolio = () => {
     }
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user')) == null) {
+        if (JSON.parse(sessionStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         }
-        let userid = JSON.parse(localStorage.getItem('user')).id
+        let userid = JSON.parse(sessionStorage.getItem('user')).id
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/previousWork/${userid}`).then(res => res.json()).then(result => {
             const found = result.previousWork.find(element => element._id == paramsid);
             let skillsString = found.workSkill[0].split(",")

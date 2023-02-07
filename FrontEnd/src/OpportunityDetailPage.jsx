@@ -59,11 +59,11 @@ const OpportunityDetailPage = () => {
     const params = useParams()
 
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user')) == null) {
+        if (JSON.parse(sessionStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
             let paramsid = params.id
-            let userid = JSON.parse(localStorage.getItem('user')).id
+            let userid = JSON.parse(sessionStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
                 if (result.profilePhoto == undefined || result.profilePhoto == "") {
                     if (result.verified) {

@@ -82,7 +82,7 @@ const ExtraDetail = () => {
             'skill',
             skills
         );
-        let userid = JSON.parse(localStorage.getItem('user')).id
+        let userid = JSON.parse(sessionStorage.getItem('user')).id
         setbuttonloading(true)
 
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/register/${userid}`, {
@@ -138,8 +138,8 @@ const ExtraDetail = () => {
 
     // useEffect(() => {
 
-    //     if (JSON.parse(localStorage.getItem('user')) != null) {
-    //         let userid = JSON.parse(localStorage.getItem('user')).id
+    //     if (JSON.parse(sessionStorage.getItem('user')) != null) {
+    //         let userid = JSON.parse(sessionStorage.getItem('user')).id
     //         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
 
     //         }).catch((error) => { });
@@ -149,10 +149,10 @@ const ExtraDetail = () => {
     // }, [])
 
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('user')) == null) {
+        if (JSON.parse(sessionStorage.getItem('user')) == null) {
             window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
         } else {
-            let userid = JSON.parse(localStorage.getItem('user')).id
+            let userid = JSON.parse(sessionStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
                 if (result.profilePhoto == undefined || result.profilePhoto == "") {
                     setloading(false)
