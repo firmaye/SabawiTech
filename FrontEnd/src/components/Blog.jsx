@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import createDOMPurify from 'dompurify'
-
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import '../css/blog.css';
 import data from './jsonapi/data.json'
 const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
+  const [search, setSearch] = useState("")
   const [startPage, setStartPage] = useState(1);
 
   useEffect(() => {
+    console.log(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`)
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
       setBlog(result)
-    }).catch((error) => { console.log(error) });
+    }).catch((error) => {
+      console.log(error) 
+      });
   }, [])
 
   // const window = (new JSDOM('')).window
@@ -27,12 +31,21 @@ const Blog = ({ catagory }) => {
   //     setBlog(data.blogdata)
   // }, [])
   let sublist = blog.filter((elt) => {
-    if (catagory == "all") {
-      return elt
+    if (search == "") {
+      if (catagory == "all") {
+        return elt
+      }
+      else if (elt.blogCategory == catagory) {
+        return elt
+      }
+    } else {
+        if (elt.blogTitle.toLowerCase().trim().includes(search.toLowerCase())) {
+            return elt
+        }else{
+          <h3>We cant find what you are searching for</h3>
+        }
     }
-    else if (elt.blogCategory == catagory) {
-      return elt
-    }
+    
   })
   const blogPerPage = 3
   const pagination = Math.ceil(sublist.length / blogPerPage);
@@ -45,7 +58,11 @@ const Blog = ({ catagory }) => {
   const selectedbloglist = sublist.slice(start, end);
 
   return (
-    <div className="blogcontainer">
+    <div className="blogcontainer" style={{"margin-bottom": "41px"}}>
+      <form className="form-inline mt-4 mb-4">
+          <FontAwesomeIcon icon={faSearch} />
+          <input onChange={(event) => { setSearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+      </form>
       {sublist.length == 0 ?
         <div className="noresultscont">
           <img src="./Images/searchnotfound.png" alt="" />
@@ -78,27 +95,36 @@ const Blog = ({ catagory }) => {
           )
         })}
 
-      <div className="pagination nav-links">
-        {pageNumbers.map((page) => {
-          return (
-            <div>
-              <a className="page-numbers" href="javascript:void(0)" onClick={() => { setStartPage(page) }}>{page}</a>
-            </div>
-          )
-        })
-        }
-        {startPage >= 1 ?
-          <a className="next page-numbers" href="javascript:void(0)"
-            onClick={() => {
-              if (startPage < pagination) {
-                setStartPage(startPage + 1)
-              } else {
-                setStartPage(startPage)
-              }
-            }}>Next {'❯'}</a>
-          :
-          ""
-        }
+        <div className="opportunity-pagination nav-links">
+          {startPage != 1 ?
+              <a className="back opportunity-page-numbers"
+                  onClick={() => {
+                      setStartPage(startPage - 1)
+
+                  }}> Back </a>
+              :
+              ""
+          }
+          {pageNumbers.map((page) => {
+              return (
+                  <div>
+                      <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
+                  </div>
+              )
+          })
+          }
+          {startPage < pageNumbers[pageNumbers.length - 1] ?
+              <a className="next opportunity-page-numbers"
+                  onClick={() => {
+                      if (startPage < pagination) {
+                          setStartPage(startPage + 1)
+                      } else {
+                          setStartPage(startPage)
+                      }
+                  }}>Next </a>
+              :
+              ""
+          }
       </div>
     </div>
   );

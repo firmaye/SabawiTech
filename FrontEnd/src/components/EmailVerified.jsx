@@ -43,7 +43,6 @@ const CheckEmail = () => {
         }).catch((error) => { setverified(false) });
     }
     useEffect(() => {
-
         fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/verify/${params.id}/${params.token}`).then(res => res.json()).then(result => {
             setloading(false)
             setverified(result.success)
