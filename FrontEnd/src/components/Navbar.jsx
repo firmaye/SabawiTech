@@ -12,7 +12,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-md navbar-light bg-light" style={{marginBottom:"0px"}}>
             <div className="container">
                 <a href="/" className="navbar-brand">
-                    Intract
+                    Intrant
                 </a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
