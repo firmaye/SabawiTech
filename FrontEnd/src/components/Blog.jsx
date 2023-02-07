@@ -41,6 +41,8 @@ const Blog = ({ catagory }) => {
     } else {
         if (elt.blogTitle.toLowerCase().trim().includes(search.toLowerCase())) {
             return elt
+        }else{
+          <h3>We cant find what you are searching for</h3>
         }
     }
     
