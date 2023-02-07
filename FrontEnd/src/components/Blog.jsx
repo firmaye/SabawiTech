@@ -62,9 +62,9 @@ const Blog = ({ catagory }) => {
                     <li className="list-inline-item">
                       <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
                     </li>
-                    <li className="list-inline-item">
+                    {/* <li className="list-inline-item">
                       <i className="fa fa-comment"></i> <a href="">0 Comments</a>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
