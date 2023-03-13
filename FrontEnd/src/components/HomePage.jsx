@@ -136,11 +136,11 @@ const HomePage = () => {
                                     <div className="latestblogimgcont">
                                         <img src={`https://napi.sabawitech.com${latestBlog.blogImage}`} alt="image not loading..." />
                                     </div>
-                                    <div className="latestblogprofile">
+                                    {/* <div className="latestblogprofile">
                                         <img src="./Images/profile.jpg" alt="" />
 
                                         <p><span> - {latestBlog.author} </span>  |  Interview</p>
-                                    </div>
+                                    </div> */}
                                     <div className="latestblogdesc">
                                         <a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogTitle + ' . . .'}</a>
                                     </div>
@@ -148,21 +148,7 @@ const HomePage = () => {
                             </div>
                         )
                     })}
-                    <div className="col-md-4 bottomresponsive">
-                        <div className="latestblogcont">
-                            <div className="latestblogimgcont">
-                                <img src="./Images/post1.jpg" alt="" />
-                            </div>
-                            <div className="latestblogprofile">
-                                <img src="./Images/profile.jpg" alt="" />
-
-                                <p><span> - Beyle Robetson </span>  |  Interview</p>
-                            </div>
-                            <div className="latestblogdesc">
-                                <h5><a>What are the advantages of being a freelancer...</a></h5>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
             </section>

@@ -74,16 +74,6 @@ const Blog = ({ catagory }) => {
             <div className="col-lg-12 the_excerpt">
               <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='image not loading...' />
               <div className="card-body the_excerpt_content" >
-                <div className="entry-meta">
-                  <ul className="list-inline">
-                    <li className="list-inline-item">
-                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
-                    </li>
-                    <li className="list-inline-item">
-                      <i className="fa fa-comment"></i> <a href="">0 Comments</a>
-                    </li>
-                  </ul>
-                </div>
                 <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
                 <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0, 200) + '. . . ') }} />
                 {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
