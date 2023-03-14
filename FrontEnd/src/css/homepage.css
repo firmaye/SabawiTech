@@ -461,7 +461,11 @@ footer {
         margin-top: 50px;
     }
 }
-
+@media (max-width: 450px){
+    .banner_content h1{
+        font-size: 12vw;
+    }
+}
 @media (min-width:573px) {
     .populartext {
         width: 573px;
