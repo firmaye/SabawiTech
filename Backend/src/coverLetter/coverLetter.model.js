@@ -12,11 +12,15 @@ const CoverLetterSchema =new mongoose.Schema(
 				type:String,
 				required:true
 			},
-			intPostId:{
+			intPostLink:{
 				type:String,
 				required:true
 			},
-			intPost:{
+			intPostName:{
+				type:String,
+				required:true
+			},
+			intPostId:{
 				type:String,
 				required:true
 			},

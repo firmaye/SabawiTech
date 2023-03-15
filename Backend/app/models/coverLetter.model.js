@@ -14,20 +14,20 @@ module.exports = mongoose => {
 				type:String,
 				required:true
 			},
-			intPostId:{
+			intPostLink:{
 				type:String,
 				required:true
 			},
-			intPost:{
+			intPostName:{
+				type:String,
+				required:true
+			},
+			intPostId:{
 				type:String,
 				required:true
 			},
 			status:{
 				type:String,
-			},
-			isDeleted:{
-				type: Number,
-				default:0
 			},
 			deletedAt:{
 				type:Date,
