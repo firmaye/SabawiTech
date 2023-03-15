@@ -9,6 +9,7 @@ const {
 
 
 const options = {
+    listProperties: ['blogTitle','blogTag','createdAt'],
     properties: {
         blogImage: {
             isVisible: false,

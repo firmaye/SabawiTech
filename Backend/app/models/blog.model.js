@@ -14,9 +14,6 @@ module.exports = mongoose => {
                 type: String,
                 required: true
             },
-            author: {
-                type: String,
-            },
             blogTag: {
                type: String,     
             }

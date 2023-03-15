@@ -18,6 +18,10 @@ module.exports = mongoose => {
 				type:String,
 				required:true
 			},
+			intPost:{
+				type:String,
+				required:true
+			},
 			status:{
 				type:String,
 			},

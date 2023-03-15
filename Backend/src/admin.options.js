@@ -15,6 +15,9 @@ const options = {
         companyName:"Intrant",
         logo: "https://sabawitech.com/assets/img/sabawi.png",
         softwareBrothers: false,
+        colors: {
+            primary: '#6B338B',
+        },
         },
         
         dashboard: {

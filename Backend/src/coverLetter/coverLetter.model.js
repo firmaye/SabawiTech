@@ -16,12 +16,12 @@ const CoverLetterSchema =new mongoose.Schema(
 				type:String,
 				required:true
 			},
+			intPost:{
+				type:String,
+				required:true
+			},
 			status:{
 				type:String,
-			},
-			isDeleted:{
-				type: Number,
-				default:0
 			},
 			deletedAt:{
 				type:Date,

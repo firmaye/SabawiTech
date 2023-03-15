@@ -20,7 +20,6 @@ exports.create = (req, res) => {
 			intDuration:req.body.intDuration,
 			requiredSkill:req.body.requiredSkill,
 			intStatus:req.body.intStatus,
-			attachment:req.body.attachment,
 			isDeleted:0,
 			deletedAt:req.body.deletedAt
     });

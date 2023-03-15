@@ -30,13 +30,6 @@ const InternshipSchema = new mongoose.Schema(
 			intStatus:{
 				type:String,
 			},
-			attachment:{
-				type:String,
-			},
-			isDeleted:{
-				type: Number,
-				default:0
-			},
 			deletedAt:{
 				type:Date,
 			}	

@@ -3,6 +3,7 @@ const { CoverLetter } = require('./coverLetter.model');
 
 
 const options = {
+	listProperties: ['sender', 'intPost','receiverCompany','createdAt'],
 	properties:{
 		isDeleted:{
 			isVisible:false

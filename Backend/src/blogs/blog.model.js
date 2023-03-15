@@ -11,15 +11,8 @@ const BlogSchema = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            author: {
-                type: String,
-            },
             blogTag: {
                 type: String,
-            },
-            isDeleted: {
-                type: Number,
-                default: 0
             },
             deletedAt: {
                 type: Date,

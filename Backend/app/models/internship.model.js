@@ -32,9 +32,6 @@ module.exports = mongoose => {
 			intStatus:{
 				type:String,
 			},
-			attachment:{
-				type:String,
-			},
 			isDeleted:{
 				type: Number,
 				default:0
