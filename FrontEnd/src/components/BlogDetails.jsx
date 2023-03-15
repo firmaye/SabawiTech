@@ -42,16 +42,6 @@ const BlogDetails = ({ authenticated }) => {
 
             <img className="card-img-top img-responsive blogimage blogimgdetail blogimgdetailsss" src={`https://napi.sabawitech.com${blog.blogImage}`} alt="Card image cap" />
             <div className="card-body the_excerpt_content detail_excerpt_content">
-                <div className="entry-meta detail-meta">
-                    <ul className="list-inline">
-                        <li className="list-inline-item detail_list_inine">
-                            <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
-                        </li>
-                        <li className="list-inline-item detail_list_inine">
-                            <i className="fa fa-comment"></i> <a href="">0 Comments</a>
-                        </li>
-                    </ul>
-                </div>
                 <h3 className="secondTitle">{blog.blogTitle}</h3>
                 <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription) }} />
                 <div className="tags">

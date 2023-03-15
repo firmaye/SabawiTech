@@ -15,8 +15,8 @@ const Blog = ({ catagory }) => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/blogs/`).then(res => res.json()).then(result => {
       setBlog(result)
     }).catch((error) => {
-      console.log(error) 
-      });
+      console.log(error)
+    });
   }, [])
 
   // const window = (new JSDOM('')).window
@@ -39,13 +39,13 @@ const Blog = ({ catagory }) => {
         return elt
       }
     } else {
-        if (elt.blogTitle.toLowerCase().trim().includes(search.toLowerCase())) {
-            return elt
-        }else{
-          <h3>We cant find what you are searching for</h3>
-        }
+      if (elt.blogTitle.toLowerCase().trim().includes(search.toLowerCase())) {
+        return elt
+      } else {
+        <h3>We cant find what you are searching for</h3>
+      }
     }
-    
+
   })
   const blogPerPage = 3
   const pagination = Math.ceil(sublist.length / blogPerPage);
@@ -58,10 +58,10 @@ const Blog = ({ catagory }) => {
   const selectedbloglist = sublist.slice(start, end);
 
   return (
-    <div className="blogcontainer" style={{"margin-bottom": "41px"}}>
+    <div className="blogcontainer" style={{ "margin-bottom": "41px" }}>
       <form className="form-inline mt-4 mb-4">
-          <FontAwesomeIcon icon={faSearch} />
-          <input onChange={(event) => { setSearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+        <FontAwesomeIcon icon={faSearch} />
+        <input onChange={(event) => { setSearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
       </form>
       {sublist.length == 0 ?
         <div className="noresultscont">
@@ -74,16 +74,6 @@ const Blog = ({ catagory }) => {
             <div className="col-lg-12 the_excerpt">
               <LazyLoadImage effect="blur" className="card-img-top img-responsive blogimage" src={`https://napi.sabawitech.com${blog.blogImage}`} alt='image not loading...' />
               <div className="card-body the_excerpt_content" >
-                <div className="entry-meta">
-                  <ul className="list-inline">
-                    <li className="list-inline-item">
-                      <i className="fa fa-user"></i> by <a href="javascript:void(0)">{blog.author}</a>
-                    </li>
-                    {/* <li className="list-inline-item">
-                      <i className="fa fa-comment"></i> <a href="">0 Comments</a>
-                    </li> */}
-                  </ul>
-                </div>
                 <a className="blog_title" href={`blogdetails/${blog._id}`} rel="bookmark">{blog.blogTitle}</a>
                 <p className="card-text" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogDescription.substring(0, 200) + '. . . ') }} />
                 {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
@@ -95,36 +85,36 @@ const Blog = ({ catagory }) => {
           )
         })}
 
-        <div className="opportunity-pagination nav-links">
-          {startPage != 1 ?
-              <a className="back opportunity-page-numbers"
-                  onClick={() => {
-                      setStartPage(startPage - 1)
+      <div className="opportunity-pagination nav-links">
+        {startPage != 1 ?
+          <a className="back opportunity-page-numbers"
+            onClick={() => {
+              setStartPage(startPage - 1)
 
-                  }}> Back </a>
-              :
-              ""
-          }
-          {pageNumbers.map((page) => {
-              return (
-                  <div>
-                      <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
-                  </div>
-              )
-          })
-          }
-          {startPage < pageNumbers[pageNumbers.length - 1] ?
-              <a className="next opportunity-page-numbers"
-                  onClick={() => {
-                      if (startPage < pagination) {
-                          setStartPage(startPage + 1)
-                      } else {
-                          setStartPage(startPage)
-                      }
-                  }}>Next </a>
-              :
-              ""
-          }
+            }}> Back </a>
+          :
+          ""
+        }
+        {pageNumbers.map((page) => {
+          return (
+            <div>
+              <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
+            </div>
+          )
+        })
+        }
+        {startPage < pageNumbers[pageNumbers.length - 1] ?
+          <a className="next opportunity-page-numbers"
+            onClick={() => {
+              if (startPage < pagination) {
+                setStartPage(startPage + 1)
+              } else {
+                setStartPage(startPage)
+              }
+            }}>Next </a>
+          :
+          ""
+        }
       </div>
     </div>
   );
