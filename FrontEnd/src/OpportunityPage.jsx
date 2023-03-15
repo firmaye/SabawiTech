@@ -66,21 +66,18 @@ const OpportunityPage = () => {
 
         }
     }, [])
-
-
-    const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
     let sublist = opportunitylist.filter((elt) => {
         if (currentFilter.location.length == 0) {
             return elt
         } else {
             if (currentFilter.location.includes("remote")) {
-                if (elt.intLocation == "remote") {
+                if (elt.intLocation.toLowerCase().trim() == "remote") {
                     return elt
                 }
             }
             if (currentFilter.location.includes("office")) {
-                if (elt.intLocation == "office") {
+                if (elt.intLocation.toLowerCase().trim() == "office") {
                     return elt
                 }
             }
@@ -92,12 +89,12 @@ const OpportunityPage = () => {
             return elt
         } else {
             if (currentFilter.status.includes("open")) {
-                if (elt.intStatus == "open") {
+                if (elt.intStatus.toLowerCase().trim() == "open") {
                     return elt
                 }
             }
             if (currentFilter.status.includes("closed")) {
-                if (elt.intStatus == "closed") {
+                if (elt.intStatus.toLowerCase().trim() == "closed") {
                     return elt
                 }
             }
@@ -109,12 +106,12 @@ const OpportunityPage = () => {
             return elt
         } else {
             if (currentFilter.type.includes("paid")) {
-                if (elt.intType == "paid") {
+                if (elt.intType.toLowerCase().trim() == "paid") {
                     return elt
                 }
             }
             if (currentFilter.type.includes("unpaid")) {
-                if (elt.intType == "unpaid") {
+                if (elt.intType.toLowerCase().trim() == "unpaid") {
                     return elt
                 }
             }
@@ -125,12 +122,12 @@ const OpportunityPage = () => {
         if (search == "") {
             return elt
         } else {
-            if (elt.intTitle.includes(search)) {
+            if (elt.intTitle.toLowerCase().trim().includes(search)) {
                 return elt
             }
         }
     })
-    const opportunityPerPage = 5
+    const opportunityPerPage = 1
     const pagination = Math.ceil(sublist.length / opportunityPerPage);
     const pageNumbers = []
     for (var i = 1; i <= pagination; i++) {
@@ -175,42 +172,43 @@ const OpportunityPage = () => {
                                 </MDBCol>                                {selectedopportunitylist.map((opportunity) => {
                                     return <Opportunity data={opportunity} />
                                 })}
+                                <div className="opportunity-pagination nav-links">
+                                    {startPage != 1 ?
+                                        <a className="back opportunity-page-numbers"
+                                            onClick={() => {
+                                                setStartPage(startPage - 1)
+
+                                            }}> Back </a>
+                                        :
+                                        ""
+                                    }
+                                    {pageNumbers.map((page) => {
+                                        return (
+                                            <div>
+                                                <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
+                                            </div>
+                                        )
+                                    })
+                                    }
+                                    {startPage < pageNumbers[pageNumbers.length - 1] ?
+                                        <a className="next opportunity-page-numbers"
+                                            onClick={() => {
+                                                if (startPage < pagination) {
+                                                    setStartPage(startPage + 1)
+                                                } else {
+                                                    setStartPage(startPage)
+                                                }
+                                            }}>Next </a>
+                                        :
+                                        ""
+                                    }
+                                </div>
                             </div>}
 
                         </div>
 
                     </div>
-                    <div className="opportunity-pagination nav-links">
-                        {startPage != 1 ?
-                            <a className="back opportunity-page-numbers"
-                                onClick={() => {
-                                    setStartPage(startPage - 1)
 
-                                }}> Back </a>
-                            :
-                            ""
-                        }
-                        {pageNumbers.map((page) => {
-                            return (
-                                <div>
-                                    <a className="opportunity-page-numbers" style={page == startPage ? { background: "#6787FE", color: "white" } : {}} onClick={() => { setStartPage(page) }}>{page}</a>
-                                </div>
-                            )
-                        })
-                        }
-                        {startPage < pageNumbers[pageNumbers.length - 1] ?
-                            <a className="next opportunity-page-numbers"
-                                onClick={() => {
-                                    if (startPage < pagination) {
-                                        setStartPage(startPage + 1)
-                                    } else {
-                                        setStartPage(startPage)
-                                    }
-                                }}>Next </a>
-                            :
-                            ""
-                        }
-                    </div>
                 </main>
                 <Footer />
             </FadeIn>

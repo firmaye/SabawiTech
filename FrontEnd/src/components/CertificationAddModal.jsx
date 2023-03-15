@@ -13,8 +13,6 @@ const CertificationSchema = Yup.object().shape({
         .required('Required'),
     formprovider: Yup.string()
         .required('Required'),
-    formlink: Yup.string()
-        .required('Required'),
     fromdateissued: Yup.string()
         .required('Required'),
 
@@ -132,7 +130,7 @@ const CertificationModal = () => {
 
                                                     </div>
                                                     <div className="certification-modal-input-group">
-                                                        <label>Certificate Link</label>
+                                                        <label>Certificate Link(optional)</label>
                                                         <input onChange={handleChange}
                                                             onBlur={handleBlur}
                                                             value={values.formlink} name='formlink' className="" type="text" placeholder="Certificate Link" />

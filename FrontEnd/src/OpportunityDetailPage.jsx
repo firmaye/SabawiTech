@@ -11,9 +11,43 @@ import { setModal } from './redux/profilemodal'
 import SuccessModal from './components/SuccessModal'
 import ErrorModal from './components/ErrorModal'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faIdCard } from '@fortawesome/free-solid-svg-icons'
+import { faCheck, faFlag, faIdCard } from '@fortawesome/free-solid-svg-icons'
+import InappropriateModal from './components/Inappropriate'
+// code used to create show more functionality once proposal is sent
+
+let showMoreUtils = (element, excerpt) => {
+
+    const linkText = element.textContent.toLowerCase();
+    console.log(linkText)
+    if (linkText == "show more") {
+        element.textContent = "Show less";
+        excerpt.classList.remove("excerpt-hidden");
+        excerpt.classList.add("excerpt-visible");
+    } else {
+        element.textContent = "Show more";
+        excerpt.classList.remove("excerpt-visible");
+        excerpt.classList.add("excerpt-hidden");
+    }
+
+}
+
+
+
+let showMoreExcerptWidget = (showMoreLinksTarget, excerptTarget) => {
+    const showMoreLinks = document.querySelectorAll(showMoreLinksTarget);
+    showMoreLinks.forEach(function (link) {
+        const excerpt = link.previousElementSibling.querySelector(excerptTarget);
+        showMoreUtils(link, excerpt);
+    });
+}
+//end of code used to create show more functionality once proposal is sent
+
 
 const OpportunityDetailPage = () => {
+    let openInappropriateModal = () => {
+        dispatch(setModal("inappropriate"))
+
+    }
     const [opportunity, setopportunity] = useState({})
     const [error, seterror] = useState()
     const [requiredSkill, setrequiredskill] = useState([])
@@ -80,7 +114,6 @@ const OpportunityDetailPage = () => {
                         window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/signin`
                     }
                 } else {
-
                     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/internships/${paramsid}`).then(res => res.json()).then(result => {
                         const found = result
                         let skillsarray = found.requiredSkill.split(",")
@@ -95,7 +128,7 @@ const OpportunityDetailPage = () => {
 
                         })
                         setrequiredskill(skillsarray)
-                        // setloading(false)
+                        setloading(false)
 
                         // opportunity.requiredSkill.map((element) => {
                         // })
@@ -130,7 +163,7 @@ const OpportunityDetailPage = () => {
     return (
         <FadeIn>
             {currentModal == "success" ? <SuccessModal />
-                : currentModal == "error" ? <ErrorModal /> : <></>}
+                : currentModal == "error" ? <ErrorModal /> : currentModal == "inappropriate" ? <InappropriateModal /> : <></>}
             <main style={{ marginBottom: "40px" }}>
                 <Navbar />
                 <Header title={"Project Detail"} />
@@ -138,6 +171,24 @@ const OpportunityDetailPage = () => {
                     <div className="container">
                         <div className="row justify-content-center">
                             <div className="col-lg-8 single-opportunity-detail">
+                                {sent ?
+                                    <div className="row" style={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
+                                        <div className="col-xl-8" >
+                                            <div className="single-opportunity-requirement"  >
+                                                <div className="my-auto">
+                                                    <FontAwesomeIcon icon={faCheck} size="2x" style={{ paddingRight: "10px" }} />
+                                                </div>
+                                                <div className="my-auto">
+                                                    <span style={{ fontSize: "25px" }}>Applied Successfully</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> : <></>}
+
+
+
+
                                 <div className="row">
                                     <div className="col-xl-4">
                                         <div className="single-opportunity-requirement">
@@ -195,17 +246,7 @@ const OpportunityDetailPage = () => {
                                         </div>
                                     </div>
 
-                                    <div className="col-xl-4">
-                                        <div className="single-opportunity-requirement">
-                                            <div className="my-auto">
-                                                <FontAwesomeIcon icon={faIdCard} size="2x" style={{ paddingRight: "10px" }} />
-                                            </div>
-                                            <div className="my-auto">
-                                                <span>Seller type</span>
-                                                <h6>Student</h6>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div className="single-opportunity-content">
                                     <h4>{opportunity.intTitle}</h4>
@@ -223,10 +264,14 @@ const OpportunityDetailPage = () => {
                                             })
 
                                         }
-
-
                                     </div>
                                 </div>
+                                <div className='inappropriate-button'
+                                    onClick={() => {
+                                        openInappropriateModal()
+                                    }} >
+                                    <FontAwesomeIcon icon={faFlag} size="1x" style={{ paddingRight: "10px" }} />
+                                    <div className='inappropriate-button-text'  >Flag As Inappropriate</div></div>
                                 {opportunity.intStatus == "closed" ? <div className="single-opportunity-proposal-form">
                                     <h2 className="mb-4">Send Proposal</h2>
                                     <div className="row">
@@ -235,10 +280,21 @@ const OpportunityDetailPage = () => {
                                         </div>
                                     </div>
                                 </div> : sent == true ? <div className="single-opportunity-proposal-form">
-                                    <h2 className="mb-4" style={{ color: "#6366f1" }} >Sent Proposal</h2>
+                                    <h2 className="mb-4" style={{ color: "#6366f1" }} >Proposal</h2>
                                     <div className="row">
                                         <div className="col-md-12">
-                                            <textarea disabled value={sentproposal} className="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                            <div className="sentproposal">
+                                                <div className="container">
+                                                    <div className="block">
+                                                        <div className="content">
+                                                            <p className="js-excerpt excerpt-hidden">
+                                                                {sentproposal}</p>
+                                                        </div>
+                                                        <a onClick={(event) => { event.preventDefault(); showMoreExcerptWidget('.js-show-more', '.js-excerpt'); }} role="button" href="#" className="js-show-more">Show more</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             {/* <input type="number" className="form-control">  */}
                                         </div>
                                         <div style={{ color: "red", textAlign: "center" }}>

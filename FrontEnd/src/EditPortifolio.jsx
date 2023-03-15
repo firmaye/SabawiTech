@@ -45,7 +45,8 @@ const EditPortifolio = () => {
         }
     }
     const blobUrlToFile = (blobUrl) => new Promise((resolve) => {
-        fetch(blobUrl, {
+        fetch(blobUrl + "?not-from-cache-please", {
+            method: 'GET',
             headers: {
                 'Access-Control-Allow-Origin': '*'
             }

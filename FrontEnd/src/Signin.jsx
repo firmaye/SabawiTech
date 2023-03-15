@@ -65,13 +65,6 @@ const Signin = () => {
                     access_token: response.access_token
                 }
                 body = JSON.stringify(body)
-                // fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
-                //     method: "GET",
-                //     headers: {
-                //         "Authorization": `Bearer ${response.access_token}`
-                //     }
-                // }).then(response => response.json()).then((data) => {
-                // })
                 try {
                     fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
                         method: 'POST',

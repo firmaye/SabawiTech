@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import '../css/footer.css'
 const Footer = () => {
     return (
@@ -96,7 +96,7 @@ const Footer = () => {
                 <a className="text-dark" href="https://mdbootstrap.com/">SabawiDevs</a>
             </div>
         </footer>
-    );
+    )
 }
 
-export default Footer;
+export default Footer

@@ -178,14 +178,14 @@ const Signup = () => {
                         <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.lastName} name='lastName' placeholder='last Name' className="" />
+                                value={values.lastName} name='lastName' placeholder='Last Name' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.lastName && touched.lastName && errors.lastName}</div>
 
                         </div>
                         <div className="input-container col-12 col-md-6">
                             <input type="text" onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.userName} name='userName' placeholder='user Name' className="" />
+                                value={values.userName} name='userName' placeholder='User Name' className="" />
                             <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.userName && touched.userName && errors.userName}</div>
 
                         </div>
@@ -212,7 +212,7 @@ const Signup = () => {
                         <div className="input-container col-12 col-md-6">
                             <input onChange={handleChange}
                                 onBlur={handleBlur}
-                                value={values.password} type="password" name='password' placeholder='password' className="" />
+                                value={values.password} type="password" name='password' placeholder='Password' className="" />
                             <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.password && touched.password && errors.password}</div>
                         </div>
                         <div className="input-container col-12 col-md-6">

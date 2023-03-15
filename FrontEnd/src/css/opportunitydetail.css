@@ -21,6 +21,11 @@
     margin-top: 40px
 }
 
+.single-opportunity-detail .col-xl-8:nth-child(1) .single-opportunity-requirement {
+    background: rgb(129 215 66 / 20%);
+
+}
+
 .single-opportunity-detail .col-xl-4:nth-child(1) .single-opportunity-requirement {
     background: rgb(103 135 254 / 20%);
 
@@ -229,4 +234,75 @@
     color: #4A6375;
     ;
 
+}
+
+.inappropriate-button {
+    color: red;
+    display: flex;
+    padding: 20px;
+}
+
+.inappropriate-button-text:hover {
+    text-decoration: underline;
+}
+
+.sentproposal .container {}
+
+.sentproposal .container .block {
+    padding: 1.5rem;
+    border-radius: 4px;
+    margin-bottom: 4rem;
+    box-shadow: 0 1px 6px rgba(97, 59, 31, 0.2);
+    background: white;
+}
+
+.sentproposal .container .content {
+    font-size: 1.1rem;
+    line-height: 1.5rem;
+    margin-bottom: 1rem;
+    background-image: none;
+}
+
+.sentproposal .container .content h2 {
+    margin: 0.5rem 0;
+}
+
+.sentproposal .container a {
+    appearance: none;
+    background: white;
+    color: #2779bd;
+    display: inline-flex;
+    align-items: center;
+    height: 26px;
+    text-decoration: none;
+    line-height: 26px;
+    padding: 0 14px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid #2779bd;
+}
+
+.sentproposal .container a:hover {
+    background: rgba(39, 121, 189, 0.1);
+}
+
+.sentproposal .excerpt-hidden {
+    height: 3.5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.sentproposal .excerpt-hidden:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 0%, white 100%);
+}
+
+.sentproposal .excerpt-visible {
+    height: auto;
+    overflow: auto;
 }
