@@ -6,11 +6,12 @@ AdminBro.registerAdapter(AdminBroMongoose);
 const AdminCompany = require('./companies/company.admin');
 const Blog = require('./blogs/blog.options')
 const User = require('./user/user.options')
+const Report=require('./report/report.options')
 
 const Internship  = require('./internship/internship.options')
 const CoverLetter  = require('./coverLetter/coverLetter.options')
 const options = { 
-    resources: [AdminCompany, User, Blog,Internship, CoverLetter ],
+    resources: [AdminCompany, User, Blog,Internship,Report, CoverLetter ],
     branding: {
         companyName:"Intrant",
         logo: "https://sabawitech.com/assets/img/sabawi.png",

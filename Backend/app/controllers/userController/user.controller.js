@@ -56,9 +56,23 @@ exports.create =async(req, res) => {
       otherExperience: req.body.otherExperience
   
     })
+
+    const existUser = await user.findOne({ userName: req.body.userName });
+
+    if (existUser) {
+        res.status(400).send({
+            success: false,
+            error: "Failed! User Name already in use!"
+        });
+        return;
+    }
+
     try{
       const newInstance = await newUser.save()
-      res.status(201).json(newUser)  
+      res.status(201).send({
+            success: true,
+            error: ""
+        });
     }catch(err){
       res.status(400).json({message: err.message})
     }

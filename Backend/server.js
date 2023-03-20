@@ -80,7 +80,7 @@ require("./app/routes/coverLetter.routes")(app);
 require("./app/routes/issue.routes")(app);
 app.use("/uploads/images", express.static('uploads/images'))
 require('./app/routes/auth.routes')(app);
-
+require("./app/routes/report.routes")(app);
 
 
 

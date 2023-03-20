@@ -9,4 +9,5 @@ db.blogs = require("./blog.model.js")(mongoose);
 db.internships=require("./internship.model")(mongoose);
 db.coverLetters=require("./coverLetter.model")(mongoose);
 db.tokens = require("./token.model")(mongoose);
+db.reports = require("./report.model")(mongoose);
 module.exports = db;
