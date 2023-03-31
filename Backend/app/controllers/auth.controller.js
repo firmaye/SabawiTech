@@ -39,15 +39,12 @@ exports.signup = async (req, res) => {
             console.log("user deleted sucessfully")
         }).catch(err => console.log(err))
     }
-    
-    const existemail = await User.findOne({ email: req.body.email });
-    const existusername = await User.findOne({ email: req.body.userName });
+    const existUser = await User.findOne({ email: req.body.email });
 
-
-    if (existemail || existusername) {
+    if (existUser) {
         res.status(400).send({
-            existemail: existemail?true:false,
-            existuserName : existusername?true:false,
+            success: false,
+            error: "Failed! email is already in use!"
         });
         return;
     }

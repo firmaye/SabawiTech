@@ -7,23 +7,32 @@ module.exports = app => {
 	const EmailSender = require("../../helpers/emailVerification");
 	// ======================= User ==================================
 
-	router.get('/check/email/:id', async (req, res) => {
-		const existedUser = await User.findOne({ email: req.params.id });
-		if (!existedUser) {
+	router.get('/check/username/:id', async (req, res) => {
+		const existusername = await User.findOne({ email: req.params.id });
+		if (!existusername) {
 			res.status(200).send({
 				exist: false,
-				verified: false,
-				message: "email does not exist"
+				message: "username does not exist"
 			});
 			return;
 		}
 		res.status(200).send({
 			exist: true,
-			verified: existedUser.verified,
-			message: "email exists"
+			message: "User Name exists"
 		});
 		return;
 	})
+
+	router.post('/check', async (req, res) => {
+		const existemail = await User.findOne({ email: req.body.email });
+		const existusername = await User.findOne({ email: req.body.userName });
+
+        res.status(400).send({
+            existemail: existemail?true:false,
+            existuserName : existusername?true:false,
+        });
+        return;
+    }	)
 
 	router.post('/check/proposal', async (req, res) => {
 		console.log(req.body)
