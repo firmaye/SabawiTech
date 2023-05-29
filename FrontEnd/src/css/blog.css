@@ -219,7 +219,6 @@ p{
 }
 .card-body{
   width: 100%;
-  margin-left: 15px;
 }
 .tagcont p{
   color: #4a6375;
@@ -413,6 +412,14 @@ p{
   }
   .detailblogcontianer{
     width:100%;
+  }
+}
+@media(max-width: 373px){
+  .intro-title{
+    padding: 79px 0 0 19%;
+  }
+  .intro-subtitle{
+    padding: 9px 0 0 19%;
   }
 }
 @media(max-width:770px){

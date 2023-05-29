@@ -74,7 +74,9 @@ nav {
     margin-top: -10px;
     color: white;
 }
-
+.card-title{
+    text-align: center;
+}
 .landingillustration {
     width: 50%;
 }
