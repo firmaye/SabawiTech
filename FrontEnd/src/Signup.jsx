@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { CountryDropdown } from 'react-country-region-selector';
 import { useGoogleLogin } from '@react-oauth/google';
 import './css/authentication.css'
-import { Formik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Signup = () => {
@@ -58,6 +58,92 @@ const Signup = () => {
                     })
                 })
     })
+    const validate = async (values) => {
+        const errors = {};
+
+        if (!values.password) {
+            errors.password = 'Required';
+        } else if (values.password.length > 15) {
+            errors.password = 'Too Long';
+        } else if (values.password.length < 2) {
+            errors.password = 'Too Short';
+        }
+
+        if (!values.confirmPassword) {
+            errors.confirmPassword = 'Required';
+        } else if (values.confirmPassword != values.password) {
+            errors.confirmPassword = 'Passwords must match';
+        }
+
+        if (!values.lastName) {
+            errors.lastName = 'Required';
+        } else if (values.lastName.length > 20) {
+            errors.lastName = 'Too Long!';
+        } else if (values.lastName.length < 2) {
+            errors.lastName = 'Too Short!';
+        }
+
+        if (!values.firstName) {
+            errors.firstName = 'Required';
+        } else if (values.firstName.length > 20) {
+            errors.firstName = 'Too Long!';
+        } else if (values.firstName.length < 2) {
+            errors.firstName = 'Too Short!';
+        }
+
+        if (!values.userName) {
+            errors.userName = 'Required';
+        } else if (values.userName.length > 20) {
+            errors.userName = 'Too Long!';
+        } else if (values.userName.length < 2) {
+            errors.userName = 'Too Short!';
+        }
+
+        if (!values.country) {
+            errors.country = 'Required';
+        }
+        if (!values.state) {
+            errors.state = 'Required';
+        }
+
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+            errors.email = 'Invalid email address';
+        }
+        if (!errors.email && !errors.userName) {
+            let body = {
+                email: values.email,
+                userName: values.userName
+            }
+            console.log(body)
+            body = JSON.stringify(body)
+            console.log(body)
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/check`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: body
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data.existemail)
+                    if (data.existemail) {
+                        errors.email = 'Email Exist!';
+                    }
+                    if (data.existuserName) {
+                        errors.userName = 'UserName Exist!';
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        } else {
+            console.log("error")
+        }
+        return errors;
+    };
     const [googleerror, setgoogleerror] = useState("")
     const loginusingGoogle =
         useGoogleLogin({
@@ -107,139 +193,128 @@ const Signup = () => {
 
             }
         })
-
+    const formik = useFormik({
+        initialValues: {
+            email: "",
+            password: "",
+            confirmPassword: "",
+            firstName: "",
+            lastName: "",
+            userName: "",
+            country: "",
+            state: ""
+        },
+        validate,
+        validateOnChange: false,
+        onSubmit: async (values) => {
+            let body = {
+                email: values.email,
+                password: values.password,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                userName: values.userName,
+                country: values.country,
+                state: values.state
+            }
+            body = JSON.stringify(body)
+            setSubmitting(false);
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: body
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        sessionStorage.setItem("user", JSON.stringify(data.info));
+                        window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/emailverification/0`
+                    } else {
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    })
     return (
         <div className="main-container">
-            <Formik
-                initialValues={{
-                    email: "",
-                    password: "",
-                    confirmPassword: "",
-                    firstName: "",
-                    lastName: "",
-                    userName: "",
-                    country: "",
-                    state: ""
-                }}
-                validateOnChange={false}
-                validateOnBlur={false}
-                validationSchema={SignupSchema}
-                onSubmit={async (values, { setSubmitting }, formik) => {
-                    let body = {
-                        email: values.email,
-                        password: values.password,
-                        firstName: values.firstName,
-                        lastName: values.lastName,
-                        userName: values.userName,
-                        country: values.country,
-                        state: values.state
-                    }
-                    body = JSON.stringify(body)
-                    setSubmitting(false);
-                    await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: body
-                    })
-                        .then((response) => response.json())
-                        .then((data) => {
-                            if (data.success) {
-                                sessionStorage.setItem("user", JSON.stringify(data.info));
-                                window.location.href = `${import.meta.env.VITE_FRONTEND_URL}/emailverification/0`
-                            } else {
-                            }
-                        })
-                        .catch((error) => {
-                            console.error('Error:', error);
-                        });
-                }}
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                    setFieldValue,
-                }) => (
-                    <form className='signup-form row justify-content-center'>
-                        <div className="form-title">
-                            Sign Up And Explore
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="text" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.firstName} name='firstName' placeholder='First Name' className="" />
-                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.firstName && touched.firstName && errors.firstName}</div>
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="text" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.lastName} name='lastName' placeholder='Last Name' className="" />
-                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.lastName && touched.lastName && errors.lastName}</div>
+            <form onSubmit={formik.handleSubmit} className='signup-form row justify-content-center'>
+                <div className="form-title">
+                    Sign Up And Explore
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="text" onChange={formik.handleChange}
 
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="text" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.userName} name='userName' placeholder='User Name' className="" />
-                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.userName && touched.userName && errors.userName}</div>
+                        value={formik.values.firstName} name='firstName' placeholder='First Name' className="" />
+                    <div className='input-error-display' style={{ marginLeft: "40px" }} >{formik.errors.firstName}</div>
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="text" onChange={formik.handleChange}
 
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="email" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.email} name='email' placeholder='Email' className="" />
-                            <div className='input-error-display' style={{ marginLeft: "40px" }} >{errors.email && touched.email && errors.email}</div>
+                        value={formik.values.lastName} name='lastName' placeholder='Last Name' className="" />
+                    <div className='input-error-display' style={{ marginLeft: "40px" }} >{formik.errors.lastName}</div>
 
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <CountryDropdown
-                                onChange={(val) => { setFieldValue("country", val) }}
-                                onBlur={handleBlur}
-                                value={values.country} />
-                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.country && touched.country && errors.country}</div>
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="text" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.state} name='state' placeholder='State' className="" />
-                            <div style={{ marginLeft: "40px" }} className='input-error-display'>{errors.state && touched.state && errors.state}</div>
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.password} type="password" name='password' placeholder='Password' className="" />
-                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.password && touched.password && errors.password}</div>
-                        </div>
-                        <div className="input-container col-12 col-md-6">
-                            <input type="password" onChange={handleChange}
-                                onBlur={handleBlur}
-                                value={values.confirmPassword} name='confirmPassword' placeholder='Confirm Password' className="" />
-                            <span className=''></span>
-                            <div style={{ marginLeft: "40px" }} className='input-error-display' >{errors.confirmPassword && touched.confirmPassword && errors.confirmPassword}</div>
-                        </div>
-                        <div className="input-button col-6">
-                            <button type='submit' onClick={handleSubmit} className="sign-in">
-                                Sign Up
-                            </button>
-                            <button type="button" onClick={loginusingGoogle} className="login-with-google-btn" >
-                                Sign up with Google
-                            </button>
-                            <div style={{ textAlign: "center", color: "red" }}>
-                                {googleerror}
-                            </div>
-                            <div className='register-container' >
-                                Already Have an Account? <a href='/signin'> Login</a>
-                            </div>
-                        </div>
-                    </form>
-                )}
-            </Formik>
-        </div>
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="text" onChange={formik.handleChange}
+
+                        value={formik.values.userName} name='userName' placeholder='User Name' className="" />
+                    <div className='input-error-display' style={{ marginLeft: "40px" }} >{formik.errors.userName}</div>
+
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="email" onChange={formik.handleChange}
+
+                        value={formik.values.email} name='email' placeholder='Email' className="" />
+                    <div className='input-error-display' style={{ marginLeft: "40px" }} >{formik.errors.email}</div>
+
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <CountryDropdown
+                        onChange={(val) => { formik.handleChange(val) }}
+
+                        value={formik.values.country} />
+                    <div style={{ marginLeft: "40px" }} className='input-error-display' >{formik.errors.country}</div>
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="text" onChange={formik.handleChange}
+
+                        value={formik.values.state} name='state' placeholder='State' className="" />
+                    <div style={{ marginLeft: "40px" }} className='input-error-display'>{formik.errors.state}</div>
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input onChange={formik.handleChange}
+
+                        value={formik.values.password} type="password" name='password' placeholder='Password' className="" />
+                    <div style={{ marginLeft: "40px" }} className='input-error-display' >{formik.errors.password}</div>
+                </div>
+                <div className="input-container col-12 col-md-6">
+                    <input type="password" onChange={formik.handleChange}
+
+                        value={formik.values.confirmPassword} name='confirmPassword' placeholder='Confirm Password' className="" />
+                    <span className=''></span>
+                    <div style={{ marginLeft: "40px" }} className='input-error-display' >{formik.errors.confirmPassword}</div>
+                </div>
+                <div className="input-button col-6">
+                    <button type='submit' onClick={formik.handleSubmit} className="sign-in">
+                        Sign Up
+                    </button>
+                    <button type="button" onClick={loginusingGoogle} className="login-with-google-btn" >
+                        Sign up with Google
+                    </button>
+                    <div style={{ textAlign: "center", color: "red" }}>
+                        {googleerror}
+                    </div>
+                    <div className='register-container' >
+                        Already Have an Account? <a href='/signin'> Login</a>
+                    </div>
+                </div>
+            </form>
+            {/* )}
+        </Formik> */}
+        </div >
     )
 }
 export default Signup

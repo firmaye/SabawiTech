@@ -7,6 +7,7 @@ import { DatePicker } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useParams } from 'react-router-dom';
 const InappropriateSchema = Yup.object().shape({
     formdescription: Yup.string()
         .required('Required'),
@@ -14,7 +15,7 @@ const InappropriateSchema = Yup.object().shape({
         .required('Required'),
 
 })
-const InappropriateModal = () => {
+const InappropriateModal = ({ postId, postName }) => {
     const dispatch = useDispatch()
     const [buttonloading, setbuttonloading] = useState(false)
 
@@ -54,29 +55,32 @@ const InappropriateModal = () => {
                     validationSchema={InappropriateSchema}
                     onSubmit={async (values, { setSubmitting }, formik) => {
                         let body = {
-                            description: values.formdescription,
-                            reason: values.formreason,
+                            postId: postId,
+                            postName: postName,
+                            reportDescription: values.formdescription,
+                            reportType: values.formreason,
                         }
                         body = JSON.stringify(body)
                         console.log(body)
                         // let userid = JSON.parse(sessionStorage.getItem('user')).id
                         // setbuttonloading(true)
 
-                        // fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/inappropriate/${userid}`, {
-                        //     method: 'POST',
-                        //     headers: {
-                        //         'Content-Type': 'application/json',
-                        //     },
-                        //     body: body
-                        // })
-                        //     .then((response) => response.json())
-                        //     .then((data) => {
-                        //         successModal()
-                        //     })
-                        //     .catch((error) => {
-                        //         errorModal()
-                        //         console.error('Error:', error);
-                        //     });
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/report`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: body
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log(data)
+                                successModal()
+                            })
+                            .catch((error) => {
+                                errorModal()
+                                console.error('Error:', error);
+                            });
 
                     }}
                 >

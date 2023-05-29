@@ -15,8 +15,9 @@ const HomePage = () => {
         <div className="flex-container maincont">
             <div className="content">
                 <div className="banner_content">
-                    <h1>The Easiest Way to Get Your New Job</h1>
-                    <p>Work with talented people at the most affordabale price to get the most out of your time and cost</p>
+                    <h1>Fast Track Your Way To Your New Job</h1>
+                    <p>
+                        Save time and money finding your perfect job through market-matching, skill evaluation, and intelligent interviewing.</p>
                 </div>
                 <div className="landingillustration">
                     <img src="./Images/provider error.png" alt="" />
@@ -28,8 +29,9 @@ const HomePage = () => {
                     <div className="card cardmodify">
                         <div className="card-body cardbodymodify">
                             <img src="./Images/datasecured.jpg" alt="" />
-                            <h3 className="card-title">Reliable Dealings</h3>
-                            <p className="card-text cardmodifytext">Consectetur adipisicing elit sed do eiusmod tempor incididunt utnale labore etdolore</p>
+                            <h3 className="card-title">Reliable </h3>
+                            <p className="card-text cardmodifytext">
+                                Secure and dependable online contracts that allow you to zero in on your next great work opportunity. Together we can find the job that best suits your talent set.</p>
                         </div>
                     </div>
                 </div>
@@ -37,17 +39,9 @@ const HomePage = () => {
                     <div className="card cardmodify">
                         <div className="card-body cardbodymodify">
                             <img src="./Images/livechat supprt.jpg" alt="" />
-                            <h3 className="card-title">Data Secured</h3>
-                            <p className="card-text cardmodifytext">Consectetur adipisicing elit sed do eiusmod tempor incididunt utnale labore etdolore</p>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-4">
-                    <div className="card cardmodify">
-                        <div className="card-body cardbodymodify">
-                            <img src="./Images/reliabledealings.jpg" alt="" />
-                            <h3 className="card-title">Live chat support</h3>
-                            <p className="card-text cardmodifytext">Consectetur adipisicing elit sed do eiusmod tempor incididunt utnale labore etdolore</p>
+                            <h3 className="card-title">Secure</h3>
+                            <p className="card-text cardmodifytext">
+                                At intrant, we take pleasure in offering a secure platform for our freelancers and interns. You can relax knowing that your sensitive data is securely kept and protected</p>
                         </div>
                     </div>
                 </div>
@@ -55,25 +49,22 @@ const HomePage = () => {
             <section className="popular">
                 <div className="populartext">
                     <h1>Most Popular services</h1>
-                    <p>uniqely promote adaptive quality vectors rather than stand-alone e-markets
-                        Pontifilcate alternative architectures where as iterate.
-                    </p>
+                    <p>Unlock your full potential: See our top-rated services and find the job opportunity that fits you best!</p>
                 </div>
                 <div className="row">
                     <div className="col-md-4 bottomresponsive">
                         <div className="card popularcardmodify">
                             <div className="card-body popularcardbody">
-                                <img src="./Images/translate-600x399.jpg" alt="" />
+                                <img src="./Images/flutter-app-developer.jpg" alt="" />
                                 <div className="profilecont">
-                                    <img className="profile" src="./Images/profile.jpg" alt="" />
-                                    <h5>Bayley Robertson</h5>
-                                    <p>Delivery: <span><b>1-3 Days</b></span></p>
+                                    <h5 style={{ paddingTop: "20px" }}>Kese Events</h5>
+                                    <p style={{ paddingRight: "20px" }} >Remote Flutter App And Web Developer<span><b></b></span></p>
                                 </div>
-                                <h5 className="card-title poptitle">I will translate english to japanese or japanese to ...</h5>
+                                <h5 className="card-title poptitle"> Kese Event is a start-up company that have event management, live streaming and ticketing services.</h5>
                                 <hr />
                                 <div className="service">
-                                    <p>Translation</p>
-                                    <p>$5</p>
+                                    <p>Paid</p>
+                                    <p>10,000</p>
                                 </div>
                             </div>
                         </div>
@@ -81,17 +72,16 @@ const HomePage = () => {
                     <div className="col-md-4 bottomresponsive">
                         <div className="card popularcardmodify">
                             <div className="card-body popularcardbody">
-                                <img src="./Images/seo2-600x399.jpg" alt="" />
+                                <img src="./Images/flutter-app-development.jpg" alt="" />
                                 <div className="profilecont">
-                                    <img className="profile" src="./Images/profile.jpg" alt="" />
-                                    <h5>Bayley Robertson</h5>
-                                    <p>Delivery: <span><b>1-3 Days</b></span></p>
+                                    <h5 style={{ paddingTop: "20px" }}>Tenkara Technologies</h5>
+                                    <p style={{ paddingRight: "20px" }} >Remote Flutter App Developer<span><b></b></span></p>
                                 </div>
-                                <h5 className="card-title poptitle">I will translate english to japanese or japanese to ...</h5>
+                                <h5 className="card-title poptitle"> Design and develop efficient, clean, maintainable, and testable code, following best practices and design patterns...</h5>
                                 <hr />
                                 <div className="service">
-                                    <p>Translation</p>
-                                    <p>$5</p>
+                                    <p>Paid</p>
+                                    {/* <p>10,000</p> */}
                                 </div>
                             </div>
                         </div>
@@ -99,83 +89,27 @@ const HomePage = () => {
                     <div className="col-md-4 bottomresponsive">
                         <div className="card popularcardmodify">
                             <div className="card-body popularcardbody">
-                                <img src="./Images/translate-600x399.jpg" alt="" />
+                                <img src="./Images/frontend.jpg" alt="" />
                                 <div className="profilecont">
-                                    <img className="profile" src="./Images/profile.jpg" alt="" />
-                                    <h5>Bayley Robertson</h5>
-                                    <p>Delivery: <span><b>1-3 Days</b></span></p>
+                                    <h5 style={{ paddingTop: "20px" }}>Adret</h5>
+                                    <p style={{ paddingRight: "20px" }} >Remote Front End Developer<span><b></b></span></p>
                                 </div>
-                                <h5 className="card-title poptitle">I will translate english to japanese or japanese to ...</h5>
+                                <h5 className="card-title poptitle"> Building websites using frameworks such as next.js
+                                    ,Updating existing website UI and some logic...</h5>
                                 <hr />
                                 <div className="service">
-                                    <p>Translation</p>
-                                    <p>$5</p>
-                                </div>
-                            </div>
+                                    <p>Paid</p>
+                                    {/* <p>10,000</p> */}
+                                </div></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-
-
-
-
-            <section className="latestblog popular">
-                <div className="populartext">
-                    <h1>Latest from Blog</h1>
-                    <p>uniqely promote adaptive quality vectors rather than stand-alone e-markets
-                        Pontifilcate alternative architectures where as iterate.
-                    </p>
-                </div>
-                <div className="row">
-                    {recent.map((latestBlog) => {
-                        return (
-                            <div className="col-md-4 bottomresponsive">
-                                <div className="latestblogcont">
-                                    <div className="latestblogimgcont">
-                                        <img src={`https://napi.sabawitech.com${latestBlog.blogImage}`} alt="image not loading..." />
-                                    </div>
-                                    {/* <div className="latestblogprofile">
-                                        <img src="./Images/profile.jpg" alt="" />
-
-                                        <p><span> - {latestBlog.author} </span>  |  Interview</p>
-                                    </div> */}
-                                    <div className="latestblogdesc">
-                                        <a href={`blogdetails/${latestBlog._id}`}> {latestBlog.blogTitle + ' . . .'}</a>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                    
-                </div>
-
-            </section>
-            <div className="grayscaleimgs">
-                <div className="row grayimgcont">
-                    <div className="col-md-2">
-                        <img src="./Images/growth.jpg" alt="" />
-                    </div>
-                    <div className="col-md-2">
-                        <img src="./Images/zuper.jpg" alt="" />
-                    </div>
-                    <div className="col-md-2">
-                        <img src="./Images/gamexo.jpg" alt="" />
-                    </div>
-                    <div className="col-md-2">
-                        <img src="./Images/talkshow.jpg" alt="" />
-                    </div>
-                    <div className="col-md-2">
-                        <img src="./Images/tireproject.jpg" alt="" />
-                    </div>
-                </div>
-            </div>
 
             <div className="cardview">
                 <div className="cardviewtext">
                     <h1>Find the talent needed to get your business growing.</h1>
-                    <p>Advertise your jobs to millions of monthly users and search 15.8 million CVs</p>
                 </div>
                 <div className="cardviewillustration">
                     <img src="./Images/provider error.png" alt="" />

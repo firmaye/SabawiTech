@@ -38,11 +38,32 @@ const ExtraDetail = () => {
             .required('Required')
     })
     const personalDetailSchema = Yup.object().shape({
-
         formuserName: Yup.string()
             .min(2, 'Too Short!')
             .max(20, 'Too Long!')
-            .required('Required'),
+            .required('Required')
+            .test('Taken UserName', "User Name Taken", // <- key, message
+                function (value) {
+                    return new Promise((resolve, reject) => {
+                        fetch(`${import.meta.env.VITE_BACKEND_URL}/api/user/check/username/${value}`, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            }
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.exist) {
+                                    resolve(this.createError({ message: data.message }));
+
+                                } else {
+                                    resolve(true)
+                                }
+                            })
+                            .catch((error) => {
+                            });
+                    })
+                }),
         formcountry: Yup.string()
             .required('Required'),
         formstate: Yup.string()

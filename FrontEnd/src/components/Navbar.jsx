@@ -1,5 +1,7 @@
 import React from 'react'
 import "../css/opportunitypage.css"
+import Logo from "../assets/logo_intrant.png"
+
 const Navbar = () => {
     let logout = () => {
         window.sessionStorage.removeItem('user')
@@ -12,7 +14,7 @@ const Navbar = () => {
         <nav className="navbar navbar-expand-md navbar-light bg-light" style={{ marginBottom: "0px" }}>
             <div className="container">
                 <a href="/" className="navbar-brand">
-                    Intrant
+                    <img src={Logo} alt="" style={{ width: "90px" }} />
                 </a>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
@@ -26,7 +28,7 @@ const Navbar = () => {
                             <a href={"/"} className="nav-link active">Home</a>
                         </li>
                         <li className="nav-item">
-                            <a href={"/opportunity"} className="nav-link active">Browse Opportunities</a>
+                            <a href={"/opportunity"} className="nav-link active">Browse Internship</a>
                         </li>
                         <li className="nav-item">
                             <a href={"/blog"} className="nav-link active">Blog</a>

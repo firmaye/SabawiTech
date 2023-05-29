@@ -127,7 +127,7 @@ const OpportunityPage = () => {
             }
         }
     })
-    const opportunityPerPage = 1
+    const opportunityPerPage = 5
     const pagination = Math.ceil(sublist.length / opportunityPerPage);
     const pageNumbers = []
     for (var i = 1; i <= pagination; i++) {
@@ -150,7 +150,7 @@ const OpportunityPage = () => {
                         : <></>}
 
                     <Navbar />
-                    <Header title={"Projects"} />
+                    <Header title={"Internship"} />
                     <div className="main-content-container container">
                         <div className="main-content-container-child row">
                             <OpportunityFilter />

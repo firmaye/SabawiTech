@@ -89,11 +89,10 @@ const Contact = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-content-title">
-                                        Address
+                                        Support
                                     </div>
                                     <div className="card-content-description">
-                                        328 Queensberry Street, North Melbourne VIC 3051
-                                    </div>
+                                        support@sabawitech.com                                    </div>
 
                                 </div>
                             </div>
@@ -110,11 +109,10 @@ const Contact = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-content-title">
-                                        Address
+                                        Email
                                     </div>
                                     <div className="card-content-description">
-                                        328 Queensberry Street, North Melbourne VIC 3051
-                                    </div>
+                                        sabawitech@gmail.com                                 </div>
 
                                 </div>
                             </div>
@@ -129,11 +127,10 @@ const Contact = () => {
                                 </div>
                                 <div className="card-content">
                                     <div className="card-content-title">
-                                        Address
+                                        Phone
                                     </div>
                                     <div className="card-content-description">
-                                        328 Queensberry Street, North Melbourne VIC 3051
-                                    </div>
+                                        +251 954842979                                </div>
 
                                 </div>
                             </div>
@@ -152,8 +149,7 @@ const Contact = () => {
                                         Address
                                     </div>
                                     <div className="card-content-description">
-                                        328 Queensberry Street, North Melbourne VIC 3051
-                                    </div>
+                                        Mexico, KKare Building, Addis Ababa                                    </div>
 
                                 </div>
                             </div>

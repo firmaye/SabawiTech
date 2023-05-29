@@ -163,7 +163,7 @@ const OpportunityDetailPage = () => {
     return (
         <FadeIn>
             {currentModal == "success" ? <SuccessModal />
-                : currentModal == "error" ? <ErrorModal /> : currentModal == "inappropriate" ? <InappropriateModal /> : <></>}
+                : currentModal == "error" ? <ErrorModal /> : currentModal == "inappropriate" ? <InappropriateModal postId={params.id} postName={opportunity.intTitle} /> : <></>}
             <main style={{ marginBottom: "40px" }}>
                 <Navbar />
                 <Header title={"Project Detail"} />
