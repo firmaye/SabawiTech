@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { removeFilterLocation, removeFilterType, removeFilterStatus, setFilterLocation, setFilterType, setFilterStatus } from '../redux/filter'
 
-const OpportunityFilter = () => {
+const OpportunityFilter = ({ styleatscreen }) => {
     const dispatch = useDispatch()
     const currentFilter = useSelector((state) => state.filter.filterState)
 
     return (
-        <div className="filter-container col-xl-4">
+        <div className={"filter-container col-xl-4 " + styleatscreen}>
             <div className="filter-box">
                 <h4 className="filter-title">
                     Filter by Attribute

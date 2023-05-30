@@ -6,7 +6,7 @@ import Opportunity from './components/Opportunity'
 import Header from './components/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from './components/Loading';
-
+import { v4 } from 'uuid'
 import FadeIn from "react-fade-in";
 import NotAllowed from './components/NotAllowedModal'
 import Footer from './components/footer'
@@ -14,13 +14,14 @@ import Footer from './components/footer'
 
 import { MDBCol, MDBIcon } from "mdbreact";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faFilter, faSearch } from '@fortawesome/free-solid-svg-icons'
 
 
 
 const OpportunityPage = () => {
     const [loading, setloading] = useState(true)
     const [search, setsearch] = useState("")
+    const [hideFilter, sethideFilter] = useState(false)
     const [opportunitylist, setopportunitylist] = useState([])
     const [startPage, setStartPage] = useState(1);
     let getFetchUsers = () => {
@@ -36,11 +37,6 @@ const OpportunityPage = () => {
         }).catch((error) => { });
     }
     useEffect(() => {
-        // if (JSON.parse(sessionStorage.getItem('user')) == null) {
-        //     window.location.href = "${import.meta.env.VITE_FRONTEND_URL}/signin"
-        // } else {
-
-        // }
         if (JSON.parse(sessionStorage.getItem('user')) != null) {
             let userid = JSON.parse(sessionStorage.getItem('user')).id
             fetch(`${import.meta.env.VITE_BACKEND_URL}/api/users/${userid}`).then(res => res.json()).then(result => {
@@ -136,7 +132,7 @@ const OpportunityPage = () => {
     var start = (startPage * opportunityPerPage) - opportunityPerPage
     var end = startPage * opportunityPerPage
     const selectedopportunitylist = sublist.slice(start, end);
-
+    let counter = 0
     const currentModal = useSelector((state) => state.profileModal.openedmodal)
     if (loading) {
         return (
@@ -153,25 +149,38 @@ const OpportunityPage = () => {
                     <Header title={"Internship"} />
                     <div className="main-content-container container">
                         <div className="main-content-container-child row">
-                            <OpportunityFilter />
+                            {hideFilter ? <></> : <OpportunityFilter styleatscreen="d-none d-xl-block" />}
+
+
                             {sublist.length == 0 ? <div className="opportunities-container  col-xl-8 noresultscont">
                                 <MDBCol >
-                                    <form className="form-inline mt-4 mb-4">
+                                    <form className="form-inline mt-4 mb-4" id="searchform">
                                         <FontAwesomeIcon icon={faSearch} />
                                         <input onChange={(event) => { setsearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
                                     </form>
-                                </MDBCol>                                <img src="./Images/searchnotfound.png" alt="" />
+                                </MDBCol>
+                                {hideFilter ? <></> : <OpportunityFilter styleatscreen="d-block d-xl-none" />}
+                                <img src="./Images/searchnotfound.png" alt="" />
                                 <h3>No results found on the section</h3>
                                 <p>Try again</p>
                             </div> : <div className="opportunities-container  col-xl-8">
                                 <MDBCol >
-                                    <form className="form-inline mt-4 mb-4">
+                                    <form className="form-inline mt-4 mb-4" id="searchform">
                                         <FontAwesomeIcon icon={faSearch} />
                                         <input onChange={(event) => { setsearch(event.target.value) }} className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" />
+                                        <div className='m-2 d-block d-xl-none' >
+                                            <FontAwesomeIcon icon={faFilter} onClick={() => {
+                                                sethideFilter(!hideFilter)
+
+                                            }} />
+                                        </div>
                                     </form>
-                                </MDBCol>                                {selectedopportunitylist.map((opportunity) => {
-                                    return <Opportunity data={opportunity} />
+                                </MDBCol>
+                                {hideFilter ? <></> : <OpportunityFilter styleatscreen="d-block d-xl-none" />}
+                                {selectedopportunitylist.map((opportunity) => {
+                                    return <Opportunity key={v4()} data={opportunity} />
                                 })}
+
                                 <div className="opportunity-pagination nav-links">
                                     {startPage != 1 ?
                                         <a className="back opportunity-page-numbers"

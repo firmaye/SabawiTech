@@ -282,7 +282,7 @@ nav {
     color: #6787FE;
 }
 
-.latestblogdesc a{
+.latestblogdesc a {
     text-decoration: none;
     cursor: pointer;
     font-weight: 600;
@@ -290,14 +290,15 @@ nav {
     line-height: 32px;
     font-family: Poppins;
     font-style: normal;
-    color:#212529;
+    color: #212529;
 }
-.latestblogdesc a:hover{
+
+.latestblogdesc a:hover {
     color: #6787FE;
     cursor: pointer;
 }
 
-.latestblogdesc a:hover .latestblogimgcont img{
+.latestblogdesc a:hover .latestblogimgcont img {
     width: 110%;
     margin-left: -5%;
 }
@@ -410,7 +411,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
     font-family: 'Poppins';
 }
 
@@ -451,8 +452,9 @@ footer {
         padding-bottom: 40px;
         width: 92%;
     }
-    .latestblogimgcont{
-        height:310px;
+
+    .latestblogimgcont {
+        height: 310px;
     }
 
     .cardviewtext {
@@ -461,11 +463,13 @@ footer {
         margin-top: 50px;
     }
 }
-@media (max-width: 450px){
-    .banner_content h1{
+
+@media (max-width: 450px) {
+    .banner_content h1 {
         font-size: 12vw;
     }
 }
+
 @media (min-width:573px) {
     .populartext {
         width: 573px;

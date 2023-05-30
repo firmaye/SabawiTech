@@ -19,6 +19,7 @@ const Opportunity = ({ data }) => {
     }
     return (
         <div className="opportunities">
+
             {data.intStatus.toLowerCase() == "open" ?
                 <div className="opportunity-featured">
                     Open

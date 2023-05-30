@@ -42,6 +42,7 @@
     "react-router-dom": "^6.5.0",
     "react-uuid": "^2.0.0",
     "trunc-html": "^1.1.2",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
