@@ -74,7 +74,9 @@ nav {
     margin-top: -10px;
     color: white;
 }
-
+.card-title{
+    text-align: center;
+}
 .landingillustration {
     width: 50%;
 }
@@ -111,7 +113,6 @@ nav {
 
 .providecont h1 {
     text-align: center;
-    margin-bottom: -40px;
     margin-top: 39px;
     font-weight: 700;
     font-family: 'Poppins';
