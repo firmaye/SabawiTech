@@ -4,6 +4,8 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { useParams } from 'react-router-dom';
 import createDOMPurify from 'dompurify'
 import '../css/blog.css'
+import Header from './Header';
+import BlogdetailsContainer from './BlogdetailsContainer';
 const BlogDetails = ({ authenticated }) => {
     const [blog, setblog] = useState([]);
     const params = useParams();

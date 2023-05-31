@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import '../css/blog.css';
 import data from './jsonapi/data.json'
+import BlogDetails from './BlogDetails';
+import BlogdetailsContainer from './BlogdetailsContainer';
 const Blog = ({ catagory }) => {
   const [blog, setBlog] = useState([]);
   const [search, setSearch] = useState("")
@@ -79,7 +81,9 @@ const Blog = ({ catagory }) => {
                 {/* {blog.blogDescription.substring(0, 200) + ' . . .'}</p> */}
 
 
-                <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`}>Read More</a>
+                <a className="prolancer-rgb-btn" href={`blogdetails/${blog._id}`} onClick={
+                  <BlogdetailsContainer name="texst" />
+                }>Read More</a>
               </div>
             </div>
           )
